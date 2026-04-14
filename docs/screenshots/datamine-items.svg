@@ -1,0 +1,154 @@
+<svg width="1496" height="823" viewBox="0 0 1496 823" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1496" y2="823" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1D1D25"/>
+      <stop offset="1" stop-color="#101117"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="8" y1="8" x2="1488" y2="815" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E1E25"/>
+      <stop offset="1" stop-color="#14151B"/>
+    </linearGradient>
+    <linearGradient id="header" x1="8" y1="76" x2="1488" y2="114" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#15161D"/>
+      <stop offset="1" stop-color="#12131A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1496" height="823" fill="url(#bg)"/>
+  <rect x="8" y="8" width="1480" height="807" rx="18" fill="url(#panel)" stroke="#30313C"/>
+
+  <text x="29" y="46" fill="#D6D8E1" font-family="Segoe UI, Arial, sans-serif" font-size="14">12,754 rows</text>
+
+  <rect x="948" y="26" width="380" height="34" rx="10" fill="#1F2027" stroke="#474958"/>
+  <text x="960" y="47" fill="#8C8E9B" font-family="Segoe UI, Arial, sans-serif" font-size="12">Search name / original / rename</text>
+  <rect x="1338" y="28" width="43" height="30" rx="15" fill="#342E17" stroke="#A08B33"/>
+  <text x="1353" y="47" fill="#F2EBC9" font-family="Segoe UI, Arial, sans-serif" font-size="13">All</text>
+  <rect x="1391" y="28" width="74" height="30" rx="15" fill="#1F2027" stroke="#474958"/>
+  <text x="1405" y="47" fill="#D1D2DB" font-family="Segoe UI, Arial, sans-serif" font-size="13">Renamed</text>
+
+  <rect x="8" y="77" width="1480" height="36" fill="url(#header)"/>
+  <text x="21" y="99" fill="#ECE2A5" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">NUM</text>
+  <text x="92" y="99" fill="#ECE2A5" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">ID</text>
+  <text x="353" y="99" fill="#ECE2A5" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">NAME</text>
+  <text x="701" y="99" fill="#ECE2A5" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">ORIGINAL</text>
+  <text x="975" y="99" fill="#ECE2A5" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">RENAME</text>
+
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#F1F1F4">
+    <rect x="8" y="113" width="1480" height="52" fill="#14151B"/>
+    <text x="20" y="146">5786</text>
+    <rect x="93" y="136" width="146" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="151" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">WeaponFragment_UP100</text>
+    <text x="353" y="146">Tempered gold</text>
+    <text x="701" y="146">回火铸金</text>
+
+    <rect x="8" y="165" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="192">5787</text>
+    <rect x="93" y="178" width="137" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="193" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">choose_matrix_SSR37</text>
+    <text x="353" y="192">Ling Han's Will Selection Box</text>
+    <text x="701" y="192">凌寒意志自选箱</text>
+
+    <rect x="8" y="208" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="235">5788</text>
+    <rect x="93" y="221" width="168" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="236" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">item_ticket_Linghan_ice</text>
+    <text x="353" y="235">Special Certificate-Ten Thousand Swords in One</text>
+    <text x="701" y="235">特种凭证:万剑合一</text>
+
+    <rect x="8" y="251" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="278">5789</text>
+    <rect x="93" y="264" width="132" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="279" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">fashion_dress_56_4</text>
+    <text x="353" y="278">Play with time and space</text>
+    <text x="701" y="278">玩转时空</text>
+
+    <rect x="8" y="294" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="321">5790</text>
+    <rect x="93" y="307" width="89" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="322" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">Hat_70_4_4</text>
+    <text x="353" y="321">edelweiss flower</text>
+    <text x="701" y="321">雪绒的花</text>
+
+    <rect x="8" y="337" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="364">5791</text>
+    <rect x="93" y="350" width="161" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="365" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">fashion_decoration_88_4</text>
+    <text x="353" y="364">Ring of Enlightenment</text>
+    <text x="701" y="364">启明之环</text>
+
+    <rect x="8" y="380" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="407">5792</text>
+    <rect x="93" y="393" width="141" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="408" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">Item_Gem_Linghan_ice</text>
+    <text x="353" y="407">Red Core-Ten Thousand Swords Unite</text>
+    <text x="701" y="407">赤核万剑合一</text>
+
+    <rect x="8" y="423" width="1480" height="48" fill="#25231B"/>
+    <text x="20" y="452">5793</text>
+    <rect x="93" y="436" width="150" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="451" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">imitation_fashion_43</text>
+    <text x="353" y="451">frost flower midsummer</text>
+    <text x="701" y="451">霜花盛夏</text>
+    <text x="975" y="451">Ling Han Summer skin</text>
+
+    <rect x="8" y="471" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="498">5794</text>
+    <rect x="93" y="484" width="161" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="499" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">imitation_fashion_43_w</text>
+    <text x="353" y="498">Huajian</text>
+    <text x="701" y="498">花涧</text>
+    <text x="975" y="498">Ling Han Summer weapon skin</text>
+
+    <rect x="8" y="514" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="541">5795</text>
+    <rect x="93" y="527" width="105" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="542" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">Title_1_9_0_1</text>
+    <text x="353" y="541">Junior Tutor</text>
+    <text x="701" y="541">初级导师</text>
+
+    <rect x="8" y="557" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="584">5796</text>
+    <rect x="93" y="570" width="60" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="585" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">linghan</text>
+    <text x="353" y="584">Ling Han</text>
+    <text x="701" y="584">凌寒</text>
+
+    <rect x="8" y="600" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="627">5797</text>
+    <rect x="93" y="613" width="112" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="628" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">animated_qipao_1</text>
+    <text x="353" y="627">Poetry and joy</text>
+    <text x="701" y="627">诗怀逸兴</text>
+
+    <rect x="8" y="643" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="670">5798</text>
+    <rect x="93" y="656" width="117" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="671" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">Mount025_skin_02</text>
+    <text x="353" y="670">Gu carving</text>
+    <text x="701" y="670">画雕</text>
+
+    <rect x="8" y="686" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="713">5799</text>
+    <rect x="93" y="699" width="117" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="714" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">Mount025_skin_03</text>
+    <text x="353" y="713">Gu DiaoYing</text>
+    <text x="701" y="713">画雕英</text>
+
+    <rect x="8" y="729" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="756">5800</text>
+    <rect x="93" y="742" width="117" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="757" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">Mount025_skin_04</text>
+    <text x="353" y="756">Rang Yi</text>
+    <text x="701" y="756">鞿翼</text>
+
+    <rect x="8" y="772" width="1480" height="43" fill="#14151B"/>
+    <text x="20" y="799">5801</text>
+    <rect x="93" y="785" width="117" height="22" rx="11" fill="#1E2028" stroke="#4A4C5A"/>
+    <text x="99" y="800" fill="#D7DFEC" font-family="Consolas, monospace" font-size="12">Mount025_skin_05</text>
+    <text x="353" y="799">Rangyi-Fei</text>
+    <text x="701" y="799">鞿翼绯</text>
+  </g>
+
+  <rect x="1475" y="81" width="8" height="734" rx="4" fill="#D8D8D8"/>
+  <rect x="1475" y="405" width="8" height="17" rx="4" fill="#868686"/>
+</svg>

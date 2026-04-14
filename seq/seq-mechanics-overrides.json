@@ -1,0 +1,24 @@
+{
+  "stages": {
+    "6": {
+      "effectiveHp": 803800000,
+      "note": "Includes mechanics-adjusted HP formula."
+    },
+    "8": {
+      "effectiveHp": 1095610000,
+      "note": "Includes mechanics-adjusted HP formula."
+    },
+    "10": {
+      "effectiveHp": 2761910000,
+      "note": "Includes mechanics-adjusted HP formula."
+    },
+    "11": {
+      "effectiveHp": 2085750000,
+      "note": "Includes mechanics-adjusted HP formula."
+    },
+    "14": {
+      "effectiveHp": 4091380000,
+      "note": "Includes mechanics-adjusted HP formula."
+    }
+  }
+}

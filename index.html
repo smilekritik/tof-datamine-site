@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="A Tower of Fantasy datamine hub built by Kritik, a miserable slave of the system. Explore boss mechanics cards, Sequential floor damage charts, Multype buff categories, and item id tables with original Chinese names."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="TOF Datamine Hub" />
+  <meta
+    property="og:description"
+    content="A Tower of Fantasy datamine hub built by Kritik, a miserable slave of the system. Explore boss mechanics cards, Sequential floor damage charts, Multype buff categories, and item id tables with original Chinese names."
+  />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="TOF Datamine Hub" />
+  <meta
+    name="twitter:description"
+    content="A Tower of Fantasy datamine hub built by Kritik, a miserable slave of the system. Explore boss mechanics cards, Sequential floor damage charts, Multype buff categories, and item id tables with original Chinese names."
+  />
+  <title>TOF Datamine Hub</title>
+  <link rel="stylesheet" href="./main.css" />
+  <link rel="stylesheet" href="./components.css" />
+  <link rel="stylesheet" href="./index.css" />
+</head>
+<body class="page page--datamine-hub">
+  <div class="noise-bg"></div>
+
+  <main class="layout datamine-hub-layout">
+    <section class="hero datamine-hub-hero" id="overview">
+      <div class="datamine-hub-hero__copy">
+        <p class="hero__eyebrow">Datamine / Hub</p>
+        <h1 class="hero__title">Simple hub for pages</h1>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section__inner section__inner--datamine-hub">
+        <div class="section__header">
+          <div>
+            <h2 class="section__title">Projects</h2>
+            <p class="section__body">
+              Each page focuses on a sertain info.
+            </p>
+          </div>
+        </div>
+
+        <div class="datamine-hub-grid">
+          <article class="datamine-card datamine-card--fce">
+            <div class="datamine-card__topline">
+              <span class="datamine-card__eyebrow">FCE</span>
+              <span class="datamine-card__meta" data-datamine-meta="fce">32 bosses</span>
+            </div>
+            <h3 class="datamine-card__title">Boss mechanics cards</h3>
+            <p class="datamine-card__body">
+              Visual boss cards with condensed mechanic notes, highlighted damage
+              reduction, PNG export for
+              sharing.
+            </p>
+            <ul class="datamine-card__list">
+              <li>Switcher between all available bosses</li>
+              <li>English and Russian text sets</li>
+              <li>Direct card download as image</li>
+            </ul>
+            <div class="datamine-card__actions">
+              <a class="datamine-hub-button" href="./fce/">Open page</a>
+            </div>
+          </article>
+
+          <article class="datamine-card datamine-card--seq">
+            <div class="datamine-card__topline">
+              <span class="datamine-card__eyebrow">Sequential</span>
+              <span class="datamine-card__meta" data-datamine-meta="seq">Floor 30</span>
+            </div>
+            <h3 class="datamine-card__title">Boss scaling charts</h3>
+            <p class="datamine-card__body">
+              Charts and table views built from datamined monster stats. The page
+              compares pure HP, approximated effective HP, and stage-to-stage
+              powercreep.
+            </p>
+            <ul class="datamine-card__list">
+              <li>Interactive chart zoom and export buttons</li>
+              <li>Direct link to the raw monster data file</li>
+              <li>Table preview for loaded stage values</li>
+            </ul>
+            <div class="datamine-card__actions">
+              <a class="datamine-hub-button" href="./seq/">Open page</a>
+            </div>
+          </article>
+
+          <article class="datamine-card datamine-card--multype">
+            <div class="datamine-card__topline">
+              <span class="datamine-card__eyebrow">Multype</span>
+              <span class="datamine-card__meta" data-datamine-meta="multype">8,176 buffs</span>
+            </div>
+            <h3 class="datamine-card__title">Renamed datamine viewer</h3>
+            <p class="datamine-card__body">
+              The public page shows the datamine with ready-made renames. Total:
+              <span data-datamine-total="multype">8,176 buffs</span>.
+            </p>
+            <ul class="datamine-card__list">
+              <li>Buffs from the game split into categories</li>
+              <li>Ready-made renames on the public page</li>
+              <li>Fast search across original keys and renamed labels</li>
+            </ul>
+            <div class="datamine-card__actions">
+              <a class="datamine-hub-button" href="./multype/">Open page</a>
+            </div>
+          </article>
+
+          <article class="datamine-card datamine-card--items">
+            <div class="datamine-card__topline">
+              <span class="datamine-card__eyebrow">Items</span>
+              <span class="datamine-card__meta" data-datamine-meta="items">12,754 items</span>
+            </div>
+            <h3 class="datamine-card__title">Item id and name table</h3>
+            <p class="datamine-card__body">
+              Public table of Tower of Fantasy item ids with original Chinese developer names
+              and rename fields for translated labels.
+            </p>
+            <ul class="datamine-card__list">
+              <li>Fast filter across name, original, and rename</li>
+              <li>Click any id to copy it instantly</li>
+            </ul>
+            <div class="datamine-card__actions">
+              <a class="datamine-hub-button" href="./items/">Open page</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span class="site-footer__note">TOF leaks, insane suffer with datamine</span>
+      <a
+        class="site-footer__github"
+        href="https://github.com/smilekritik/tof-datamine-site"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Open GitHub repository"
+        title="Open GitHub repository"
+      >
+        <svg class="site-footer__github-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56l-.02-2.15c-3.2.7-3.88-1.54-3.88-1.54-.52-1.32-1.28-1.67-1.28-1.67-1.04-.72.08-.71.08-.71 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.53-2.55-.29-5.23-1.27-5.23-5.68 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.17a10.96 10.96 0 0 1 5.78 0c2.2-1.48 3.17-1.17 3.17-1.17.62 1.58.23 2.75.11 3.04.73.8 1.18 1.82 1.18 3.07 0 4.42-2.69 5.38-5.25 5.67.41.35.78 1.04.78 2.1l-.01 3.12c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
+          />
+        </svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </footer>
+
+  <script src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Tower of Fantasy Sequential clear requirements with charts by floor. Track boss HP, estimated effective HP, and damage thresholds needed for a clear."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="TOF Sequential Damage Charts" />
+  <meta
+    property="og:description"
+    content="Tower of Fantasy Sequential clear requirements with charts by floor. Track boss HP, estimated effective HP, and damage thresholds needed for a clear."
+  />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="TOF Sequential Damage Charts" />
+  <meta
+    name="twitter:description"
+    content="Tower of Fantasy Sequential clear requirements with charts by floor. Track boss HP, estimated effective HP, and damage thresholds needed for a clear."
+  />
+  <title>TOF Sequential Damage Charts</title>
+  <link rel="stylesheet" href="./styles/main.css" />
+  <link rel="stylesheet" href="./styles/components.css" />
+  <link rel="stylesheet" href="./styles/datamine-seq.css" />
+</head>
+<body class="page page--datamine-seq">
+  <div class="noise-bg"></div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <nav class="site-header__nav">
+        <a href="#overview" class="site-header__link">Overview</a>
+        <a href="#charts" class="site-header__link">Charts</a>
+        <a href="#data" class="site-header__link">Data</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="hero" id="overview">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Datamine / Sequential</p>
+        <h1 class="hero__title">Sequential boss scaling from datamined data</h1>
+      </div>
+    </section>
+
+    <section class="section section--notes">
+      <div class="section__inner">
+        <div class="notes notes--single">
+          <article class="note note--primary" data-note>
+            <h3 class="note__title">Datamined source only</h3>
+            <p class="note__body">
+              The values on this page are extracted from datamined game data in
+              <a class="seq-inline-link" href="./DT_MonsterStaticData_Overseas.json">
+                <code>DT_MonsterStaticData_Overseas.json</code>
+              </a>.
+              For the follow-up calculations, the page applies the sequential
+              base resist of <code>7500</code>, which is treated here as
+              <code>34.71%</code>. So for everyone who want to understand how much dmg needed - imagine u add resist ignore, but boss stay invulnerable first 3s (-100% dmg dealt during it), then boss set 1-2 shields (-50% dmg dealt during it), then ur build can miss compare to cactus gameplay (1-3% miss) = total result with 50% ignore same number dmg needed.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="charts">
+      <div class="section__inner">
+        <div class="section__header">
+          <h2 class="section__title">Charts</h2>
+        </div>
+
+        <article class="seq-chart-card">
+          <div class="seq-chart-card__header">
+            <div>
+              <h3 class="seq-chart-card__title">
+                Approximated total DMG was needed in 150s without ALL mechs in sequential
+              </h3>
+            </div>
+            <div class="seq-action-group">
+              <button class="seq-button" type="button" data-action="download-chart-png" data-chart-key="effective">
+                Download PNG
+              </button>
+              <button class="seq-button seq-button--subtle" type="button" data-action="download-chart-csv" data-chart-key="effective">
+                Download CSV
+              </button>
+            </div>
+          </div>
+          <div class="seq-chart-frame" data-chart="effective"></div>
+        </article>
+
+        <div class="seq-chart-stack">
+          <article class="seq-chart-card">
+            <div class="seq-chart-card__header">
+              <div>
+                <h3 class="seq-chart-card__title">
+                  Amount of boss HP in sequential (pure HP, no resists)
+                </h3>
+              </div>
+              <div class="seq-action-group">
+                <button class="seq-button" type="button" data-action="download-chart-png" data-chart-key="pure">
+                  Download PNG
+                </button>
+                <button class="seq-button seq-button--subtle" type="button" data-action="download-chart-csv" data-chart-key="pure">
+                  Download CSV
+                </button>
+              </div>
+            </div>
+            <div class="seq-chart-frame" data-chart="pure"></div>
+          </article>
+
+          
+          <article class="seq-chart-card">
+            <div class="seq-chart-card__header">
+              <div>
+                <h3 class="seq-chart-card__title">
+                  Approximated total powercreep from previous stage
+                </h3>
+              </div>
+              <div class="seq-action-group">
+                <button class="seq-button" type="button" data-action="download-chart-png" data-chart-key="powercreep">
+                  Download PNG
+                </button>
+                <button class="seq-button seq-button--subtle" type="button" data-action="download-chart-csv" data-chart-key="powercreep">
+                  Download CSV
+                </button>
+              </div>
+            </div>
+            <div class="seq-chart-frame" data-chart="powercreep"></div>
+          </article>
+
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="data">
+      <div class="section__inner">
+        <div class="section__header">
+          <h2 class="section__title">Loaded values</h2>
+          <p class="section__body">
+            Preview of the current rows and calculated values. Export buttons
+            above save CSV files that open directly in Excel.
+          </p>
+        </div>
+
+        <div class="seq-table-wrap">
+          <table class="seq-table">
+            <thead>
+              <tr>
+                <th>Stage</th>
+                <th>Row</th>
+                <th>MaxHealth</th>
+                <th>Effective HP</th>
+                <th>Powercreep</th>
+              </tr>
+            </thead>
+            <tbody data-table-body>
+              <tr>
+                <td colspan="5">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span class="site-footer__note">
+        TOF leaks, insane suffer with datamine
+      </span>
+    </div>
+  </footer>
+
+  <div class="seq-zoom-modal" data-zoom-modal hidden>
+    <div class="seq-zoom-modal__backdrop" data-action="close-zoom"></div>
+    <div class="seq-zoom-modal__dialog" role="dialog" aria-modal="true" aria-label="Chart zoom">
+      <div class="seq-zoom-modal__header">
+        <div>
+          <p class="seq-zoom-modal__eyebrow">Chart zoom</p>
+          <h3 class="seq-zoom-modal__title" data-zoom-title>Chart</h3>
+        </div>
+        <div class="seq-action-group">
+          <button class="seq-button seq-button--subtle" type="button" data-action="zoom-out">-</button>
+          <button class="seq-button seq-button--subtle" type="button" data-action="zoom-reset">100%</button>
+          <button class="seq-button seq-button--subtle" type="button" data-action="zoom-in">+</button>
+          <button class="seq-button" type="button" data-action="close-zoom">Close</button>
+        </div>
+      </div>
+      <div class="seq-zoom-modal__hint">
+        Click a chart to open zoom. In zoom view use mouse wheel to scale and drag to pan.
+      </div>
+      <div class="seq-zoom-modal__viewport" data-zoom-viewport>
+        <div class="seq-zoom-modal__canvas" data-zoom-canvas></div>
+        <div class="seq-chart-tooltip seq-chart-tooltip--zoom" data-chart-tooltip hidden></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seq-chart-tooltip" data-page-chart-tooltip hidden></div>
+
+  <script src="./js/main.js"></script>
+  <script src="./js/datamine-seq.js"></script>
+</body>
+</html>

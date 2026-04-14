@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Tower of Fantasy bosses with all mechanics explained in clear visual cards. Browse every available boss, switch between English and Russian, and export cards as PNG."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="TOF FCE Boss Mechanics" />
+  <meta
+    property="og:description"
+    content="Tower of Fantasy bosses with all mechanics explained in clear visual cards. Browse every available boss, switch between English and Russian, and export cards as PNG."
+  />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="TOF FCE Boss Mechanics" />
+  <meta
+    name="twitter:description"
+    content="Tower of Fantasy bosses with all mechanics explained in clear visual cards. Browse every available boss, switch between English and Russian, and export cards as PNG."
+  />
+  <title>TOF FCE Boss Mechanics</title>
+  <link rel="stylesheet" href="./styles/main.css" />
+  <link rel="stylesheet" href="./styles/components.css" />
+  <link rel="stylesheet" href="./styles/datamine-fce.css" />
+</head>
+<body class="page page--datamine-fce">
+  <div class="noise-bg"></div>
+  <div class="fce-lang-toggle" data-fce-lang-toggle aria-label="Language switcher">
+    <button class="fce-lang-toggle__button" type="button" data-fce-lang="en">ENG</button>
+    <button class="fce-lang-toggle__button" type="button" data-fce-lang="ru">RUS</button>
+  </div>
+
+  <main class="layout">
+    <section class="hero" id="overview">
+      <div class="hero__content">
+        <p class="hero__eyebrow" data-fce-eyebrow>Datamine / FCE</p>
+        <h1 class="hero__title" data-fce-title>Boss mechanics</h1>
+      </div>
+    </section>
+
+    <section class="section section--boss-switcher" id="bosses">
+      <div class="section__inner">
+        <div class="fce-switcher" data-boss-switcher></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__inner section__inner--fce-card">
+        <div class="fce-card-shell" data-boss-card-shell>
+          <div class="fce-card-loader">Loading boss card...</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="fce-download-button" type="button" data-fce-download aria-label="Download current boss card">
+    <span class="fce-download-button__icon">⭳</span>
+    <span class="fce-download-button__label" data-fce-download-label>Download</span>
+  </button>
+
+  <script src="./js/main.js"></script>
+  <script src="./js/html2canvas.min.js"></script>
+  <script src="./js/datamine-fce.js"></script>
+</body>
+</html>

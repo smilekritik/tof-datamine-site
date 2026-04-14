@@ -1,0 +1,172 @@
+.page--datamine-hub {
+  --hub-fce: #ffb45b;
+  --hub-seq: #78d9ff;
+  --hub-multype: #9cf179;
+  --hub-items: #ffb7d6;
+  --hub-rose: #ff8a68;
+}
+
+.datamine-hub-layout {
+  max-width: 1560px;
+  padding-top: 40px;
+}
+
+.datamine-hub-hero {
+  display: block;
+  margin-bottom: 34px;
+}
+
+.datamine-hub-hero__copy {
+  min-width: 0;
+}
+
+.datamine-hub-hero__copy .hero__title {
+  max-width: 12ch;
+}
+.datamine-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.datamine-hub-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 224, 107, 0.42);
+  background: radial-gradient(circle at 0 0, rgba(245, 224, 107, 0.2), rgba(11, 11, 18, 0.94));
+  color: #fff8d6;
+  text-decoration: none;
+  font-size: 14px;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.datamine-hub-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(245, 224, 107, 0.75);
+  background: radial-gradient(circle at 0 0, rgba(245, 224, 107, 0.28), rgba(11, 11, 18, 0.98));
+}
+
+
+.section__inner--datamine-hub {
+  padding: 24px;
+}
+
+.datamine-hub-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.datamine-card {
+  display: grid;
+  flex: 1 1 340px;
+  max-width: 360px;
+  gap: 14px;
+  min-width: 0;
+  padding: 20px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+}
+
+.datamine-card--fce {
+  background:
+    radial-gradient(circle at 0 0, rgba(255, 180, 91, 0.16), transparent 42%),
+    rgba(10, 9, 14, 0.98);
+}
+
+.datamine-card--seq {
+  background:
+    radial-gradient(circle at 0 0, rgba(120, 217, 255, 0.16), transparent 42%),
+    rgba(8, 13, 16, 0.98);
+}
+
+.datamine-card--multype {
+  background:
+    radial-gradient(circle at 0 0, rgba(156, 241, 121, 0.14), transparent 42%),
+    rgba(8, 14, 10, 0.98);
+}
+
+.datamine-card--items {
+  background:
+    radial-gradient(circle at 0 0, rgba(255, 183, 214, 0.16), transparent 42%),
+    rgba(16, 9, 16, 0.98);
+}
+
+.datamine-card__topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.datamine-card__eyebrow,
+.datamine-card__meta {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.datamine-card__eyebrow {
+  color: var(--accent-strong);
+}
+
+.datamine-card__meta {
+  color: var(--text-soft);
+}
+
+.datamine-card__title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.datamine-card__body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-soft);
+}
+
+.datamine-card__list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.datamine-card__list li + li {
+  margin-top: 4px;
+}
+
+@media (max-width: 1100px) {
+  .datamine-card {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 780px) {
+  .datamine-hub-layout {
+    padding-top: 32px;
+  }
+
+  .section__inner--datamine-hub {
+    padding: 18px 16px;
+  }
+
+  .datamine-card {
+    flex-basis: 100%;
+    max-width: none;
+  }
+}

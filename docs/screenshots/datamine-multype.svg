@@ -1,0 +1,116 @@
+<svg width="1683" height="827" viewBox="0 0 1683 827" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1683" y2="827" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111119"/>
+      <stop offset="1" stop-color="#08080D"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="24" y1="37" x2="1659" y2="790" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D0D14"/>
+      <stop offset="1" stop-color="#0A0A11"/>
+    </linearGradient>
+    <linearGradient id="cardRed" x1="390" y1="258" x2="711" y2="490" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F58588"/>
+      <stop offset="1" stop-color="#F09598"/>
+    </linearGradient>
+    <linearGradient id="cardPink" x1="721" y1="258" x2="1043" y2="490" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6B3B3"/>
+      <stop offset="1" stop-color="#EFBDBD"/>
+    </linearGradient>
+    <linearGradient id="cardBlue" x1="1054" y1="258" x2="1375" y2="490" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#BAD7E6"/>
+      <stop offset="1" stop-color="#D3E5EE"/>
+    </linearGradient>
+    <linearGradient id="cardWhite" x1="58" y1="258" x2="379" y2="539" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4F2F0"/>
+      <stop offset="1" stop-color="#E6E6E6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1683" height="827" rx="0" fill="url(#bg)"/>
+  <rect x="7" y="37" width="1669" height="783" rx="22" fill="url(#frame)" stroke="#2D2E37"/>
+
+  <rect x="25" y="58" width="93" height="41" rx="20.5" fill="#2F2A15" stroke="#A48E2A"/>
+  <text x="38" y="84" fill="#F7F1D1" font-family="Segoe UI, Arial, sans-serif" font-size="14">Renamed</text>
+  <rect x="132" y="58" width="103" height="41" rx="20.5" fill="#11111A" stroke="#323443"/>
+  <text x="146" y="84" fill="#CFD0DC" font-family="Segoe UI, Arial, sans-serif" font-size="14">Combined</text>
+  <rect x="247" y="58" width="103" height="41" rx="20.5" fill="#11111A" stroke="#323443"/>
+  <text x="261" y="84" fill="#CFD0DC" font-family="Segoe UI, Arial, sans-serif" font-size="14">Datamined</text>
+
+  <text x="25" y="124" fill="#CACBD4" font-family="Consolas, monospace" font-size="10" letter-spacing="1.8">SEARCH</text>
+  <rect x="25" y="142" width="612" height="43" rx="14" fill="#11111A" stroke="#333443"/>
+  <text x="38" y="169" fill="#8B8D99" font-family="Segoe UI, Arial, sans-serif" font-size="13">Search original keys or renamed labels...</text>
+
+  <text x="648" y="124" fill="#CACBD4" font-family="Consolas, monospace" font-size="10" letter-spacing="1.8">MAIN</text>
+  <rect x="648" y="142" width="321" height="43" rx="14" fill="#11111A" stroke="#333443"/>
+  <text x="665" y="169" fill="#F4F4F7" font-family="Segoe UI, Arial, sans-serif" font-size="13">Relics</text>
+  <path d="M953 160L959 166L965 160" stroke="#ECECF2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="980" y="124" fill="#CACBD4" font-family="Consolas, monospace" font-size="10" letter-spacing="1.8">SUB</text>
+  <rect x="980" y="142" width="321" height="43" rx="14" fill="#11111A" stroke="#333443"/>
+  <text x="998" y="169" fill="#F4F4F7" font-family="Segoe UI, Arial, sans-serif" font-size="13">All Sub</text>
+  <path d="M1285 160L1291 166L1297 160" stroke="#ECECF2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="1313" y="144" width="48" height="41" rx="20.5" fill="#2F2A15" stroke="#A48E2A"/>
+  <text x="1330" y="169" fill="#F7F1D1" font-family="Segoe UI, Arial, sans-serif" font-size="14">All</text>
+  <rect x="1372" y="144" width="108" height="41" rx="20.5" fill="#11111A" stroke="#333443"/>
+  <text x="1390" y="169" fill="#CFD0DC" font-family="Segoe UI, Arial, sans-serif" font-size="14">Renamed only</text>
+  <rect x="1492" y="144" width="137" height="41" rx="20.5" fill="#11111A" stroke="#333443"/>
+  <text x="1514" y="169" fill="#CFD0DC" font-family="Segoe UI, Arial, sans-serif" font-size="14">Unrenamed only</text>
+
+  <rect x="25" y="199" width="1633" height="595" rx="18" fill="#0D0D14" stroke="#343540"/>
+  <rect x="44" y="171" width="1614" height="5" rx="2.5" fill="#71F100"/>
+  <text x="61" y="206" fill="#F2F2F5" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Relics</text>
+  <text x="61" y="226" fill="#C7C8D2" font-family="Consolas, monospace" font-size="11" letter-spacing="1.6">9 SUB COLUMNS</text>
+  <rect x="44" y="243" width="1614" height="1" fill="#20232A"/>
+
+  <rect x="58" y="258" width="320" height="281" fill="url(#cardWhite)"/>
+  <text x="76" y="290" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="14">FinalDamageExtraUpMult</text>
+  <text x="76" y="313" fill="#4B4C55" font-family="Consolas, monospace" font-size="10" letter-spacing="1.6">4 FILES</text>
+  <rect x="69" y="339" width="298" height="40" rx="14" fill="#EFEFEF" stroke="#D0D0D0"/>
+  <text x="81" y="363" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Overdrive shot</text>
+  <rect x="69" y="389" width="298" height="40" rx="14" fill="#EFEFEF" stroke="#D0D0D0"/>
+  <text x="81" y="413" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Buble gun</text>
+  <rect x="69" y="439" width="298" height="40" rx="14" fill="#EFEFEF" stroke="#D0D0D0"/>
+  <text x="81" y="463" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Bioelectric control riffle</text>
+  <rect x="69" y="489" width="298" height="40" rx="14" fill="#EFEFEF" stroke="#D0D0D0"/>
+  <text x="81" y="513" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Battle eye</text>
+
+  <rect x="390" y="258" width="322" height="183" fill="url(#cardRed)"/>
+  <text x="407" y="290" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="14">FireAtkBeExtraDownMult</text>
+  <text x="407" y="313" fill="#4B4C55" font-family="Consolas, monospace" font-size="10" letter-spacing="1.6">2 FILES</text>
+  <rect x="401" y="339" width="298" height="40" rx="14" fill="#F2B4B6" stroke="#D79B9D"/>
+  <text x="413" y="363" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Relics -1.5% dmg taken</text>
+  <rect x="401" y="389" width="298" height="40" rx="14" fill="#F2B4B6" stroke="#D79B9D"/>
+  <text x="413" y="413" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Relics -2% dmg taken</text>
+
+  <rect x="722" y="258" width="321" height="232" fill="url(#cardPink)"/>
+  <text x="739" y="290" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="14">FireAtkExtraUpMult</text>
+  <text x="739" y="313" fill="#4B4C55" font-family="Consolas, monospace" font-size="10" letter-spacing="1.6">3 FILES</text>
+  <rect x="733" y="339" width="298" height="40" rx="14" fill="#F4CCCC" stroke="#D7B3B3"/>
+  <text x="745" y="363" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Relics +1.5% dmg</text>
+  <rect x="733" y="389" width="298" height="40" rx="14" fill="#F4CCCC" stroke="#D7B3B3"/>
+  <text x="745" y="413" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Relics +2% dmg</text>
+  <rect x="733" y="439" width="298" height="40" rx="14" fill="#F4CCCC" stroke="#D7B3B3"/>
+  <text x="745" y="463" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Triple mask</text>
+
+  <rect x="1054" y="258" width="321" height="183" fill="url(#cardBlue)"/>
+  <text x="1071" y="290" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="14">IceAtkBeExtraDownMult</text>
+  <text x="1071" y="313" fill="#4B4C55" font-family="Consolas, monospace" font-size="10" letter-spacing="1.6">2 FILES</text>
+  <rect x="1065" y="339" width="298" height="40" rx="14" fill="#D0E2EB" stroke="#B0C3CC"/>
+  <text x="1077" y="363" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Relics -1.5% dmg taken</text>
+  <rect x="1065" y="389" width="298" height="40" rx="14" fill="#D0E2EB" stroke="#B0C3CC"/>
+  <text x="1077" y="413" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Relics -2% dmg taken</text>
+
+  <rect x="1386" y="258" width="272" height="232" fill="#D9E9F2"/>
+  <text x="1403" y="290" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="14">IceAtkExtraUpMult</text>
+  <text x="1403" y="313" fill="#4B4C55" font-family="Consolas, monospace" font-size="10" letter-spacing="1.6">3 FILES</text>
+  <rect x="1397" y="339" width="239" height="40" rx="14" fill="#E4EFF5" stroke="#B0C3CC"/>
+  <text x="1409" y="363" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Relics +1.5% dmg</text>
+  <rect x="1397" y="389" width="239" height="40" rx="14" fill="#E4EFF5" stroke="#B0C3CC"/>
+  <text x="1409" y="413" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Relics +2% dmg</text>
+  <rect x="1397" y="439" width="239" height="40" rx="14" fill="#E4EFF5" stroke="#B0C3CC"/>
+  <text x="1409" y="463" fill="#30313A" font-family="Segoe UI, Arial, sans-serif" font-size="12">Triple mask</text>
+
+  <rect x="25" y="804" width="1658" height="16" fill="#F3F3F3"/>
+  <rect x="40" y="806" width="861" height="10" rx="5" fill="#A0A0A0"/>
+</svg>
