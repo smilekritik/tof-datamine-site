@@ -576,11 +576,14 @@
   .items-toolbar {
     flex-direction: column;
     align-items: stretch;
+    justify-content: flex-start;
+    gap: 10px;
   }
 
   .items-toolbar__main {
     align-items: flex-start;
     flex-direction: column;
+    flex: 0 0 auto;
     gap: 8px;
   }
 
@@ -604,6 +607,10 @@
     width: 100%;
   }
 
+  .items-search {
+    flex: 0 0 auto;
+  }
+
   .items-search__input {
     width: 100%;
     min-width: 0;
@@ -615,6 +622,28 @@
 
   .items-table-wrap {
     height: auto;
+  }
+
+  /* Tighten the table so it needs far less horizontal scrolling on phones */
+  .items-table {
+    min-width: 760px;
+  }
+
+  .items-col--num {
+    width: 40px;
+  }
+
+  .items-col--id {
+    width: 156px;
+  }
+
+  .items-table th,
+  .items-table td {
+    padding: 8px 8px;
+  }
+
+  .items-table td code {
+    font-size: 10.5px;
   }
 }
 

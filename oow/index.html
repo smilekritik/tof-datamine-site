@@ -25,6 +25,9 @@
 <meta name="twitter:image:alt" content="Origin of War seasonal enemy stats and floor data">
 <link rel="canonical" href="https://tof.smilekritik.beer/datamine/oow/">
 <title>TOF Origin of War Datamine</title>
+<link rel="stylesheet" href="../shared/fonts.css">
+<link rel="stylesheet" href="../shared/header.css">
+<link rel="stylesheet" href="./styles/oow.css">
 <script src="../vendor/react-18.3.1.production.min.js"></script>
 <script src="../vendor/react-dom-18.3.1.production.min.js"></script>
 <script src="./js/support.js"></script>
@@ -33,13 +36,10 @@
 <div data-datamine-header data-current="oow"></div>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="../shared/fonts.css">
-<link rel="stylesheet" href="../shared/header.css">
-<script src="../shared/header.js"></script>
-<link rel="stylesheet" href="./styles/oow.css">
+<script src="../shared/header.js?server-cache=1"></script>
 </helmet>
 
-<div style="min-height:100vh; position:relative; color:#cbc2de; background:radial-gradient(120% 80% at 82% -8%, rgba(181,123,255,.16), transparent 52%), radial-gradient(90% 70% at 8% 0%, rgba(245,217,122,.07), transparent 48%), #0c0812; padding-bottom:80px;">
+<div class="oow-page" style="min-height:100vh; position:relative; color:#cbc2de; background:radial-gradient(120% 80% at 82% -8%, rgba(181,123,255,.16), transparent 52%), radial-gradient(90% 70% at 8% 0%, rgba(245,217,122,.07), transparent 48%), #0c0812; padding-bottom:80px;">
 
   
   
@@ -327,6 +327,19 @@
             <sc-for list="{{ presets }}" as="p" hint-placeholder-count="4">
               <button type="button" onClick="{{ p.onClick }}" style="{{ p.style }}">{{ p.label }}</button>
             </sc-for>
+            <div class="oow-chart-theme-control">
+              <span class="oow-chart-theme-control__label">{{ chartPaletteLabel }}</span>
+              <div class="oow-chart-theme-switch" role="group" aria-label="{{ chartPaletteAria }}">
+                <button class="oow-chart-theme-switch__button" type="button" onClick="{{ chartThemeLight }}" aria-pressed="{{ chartThemeLightPressed }}" style="{{ chartThemeLightStyle }}">
+                  <svg class="oow-chart-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
+                  {{ lightLabel }}
+                </button>
+                <button class="oow-chart-theme-switch__button" type="button" onClick="{{ chartThemeDark }}" aria-pressed="{{ chartThemeDarkPressed }}" style="{{ chartThemeDarkStyle }}">
+                  <svg class="oow-chart-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+                  {{ darkLabel }}
+                </button>
+              </div>
+            </div>
           </div>
           <div>
             <div style="font:700 9px/1 'Manrope'; letter-spacing:.08em; text-transform:uppercase; color:#948aa8; margin-bottom:8px;">{{ seasonsOnChartLabel }}</div>
@@ -339,18 +352,26 @@
         </div>
 
         <!-- MAIN LINE CHART -->
-        <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:14px 18px;">
+        <div class="oow-main-chart-card" style="{{ mainChartCardStyle }}">
           <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:10px; flex-wrap:wrap;">
-            <h2 style="font:400 16px/1.15 'Spectral', serif; color:#f6f1fb; margin:0;">{{ mainChartTitle }}</h2>
-            <span style="font:700 10px/1 'Manrope'; color:#f5d97a; background:rgba(245,217,122,.12); border:1px solid rgba(245,217,122,.3); padding:6px 11px; border-radius:999px; white-space:nowrap;">{{ modeBadge }}</span>
+            <h2 style="{{ mainChartTitleStyle }}">{{ mainChartTitle }}</h2>
+            <div class="oow-chart-actions">
+              <button class="oow-chart-export-button oow-chart-export-button--primary" type="button" onClick="{{ downloadMainPng }}">{{ downloadPngLabel }}</button>
+              <button class="oow-chart-export-button" type="button" onClick="{{ downloadMainCsv }}" style="{{ exportCsvStyle }}">{{ downloadCsvLabel }}</button>
+              <span style="{{ modeBadgeStyle }}">{{ modeBadge }}</span>
+            </div>
           </div>
           <div style="position:relative;" onMouseMove="{{ onChartMove }}" onMouseLeave="{{ onChartLeave }}">
-            <svg viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;">
+            <svg data-oow-main-chart viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ mainChartTitle }}">
+              <rect x="0" y="0" width="920" height="300" rx="8" fill="{{ chartPlotBackground }}"/>
               <sc-for list="{{ mainYTicks }}" as="t" hint-placeholder-count="5">
-                <g><line x1="64" y1="{{ t.y }}" x2="896" y2="{{ t.y }}" stroke="rgba(255,255,255,.06)" stroke-width="1"/><text x="56" y="{{ t.ty }}" text-anchor="end" fill="#6b6480" font-family="JetBrains Mono" font-size="10">{{ t.label }}</text></g>
+                <g>
+                  <line x1="64" y1="{{ t.y }}" x2="896" y2="{{ t.y }}" stroke="{{ chartGridColor }}" stroke-width="1"/>
+                  <foreignObject class="oow-svg-axis-label" x="0" y="{{ t.fy }}" width="58" height="16"><div style="color:{{ chartAxisColor }}; text-align:right; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject>
+                </g>
               </sc-for>
               <sc-for list="{{ mainXTicks }}" as="t" hint-placeholder-count="8">
-                <text x="{{ t.x }}" y="292" text-anchor="middle" fill="#6b6480" font-family="JetBrains Mono" font-size="10">{{ t.label }}</text>
+                <foreignObject class="oow-svg-axis-label" x="{{ t.fx }}" y="278" width="50" height="16"><div style="color:{{ chartAxisColor }}; text-align:center; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject>
               </sc-for>
               <sc-if value="{{ showGuide }}" hint-placeholder-val="{{ false }}">
                 <line x1="{{ guideX }}" y1="16" x2="{{ guideX }}" y2="270" stroke="rgba(245,217,122,.5)" stroke-width="1" stroke-dasharray="4 4"/>
@@ -363,6 +384,9 @@
                     <circle cx="{{ p.cx }}" cy="{{ p.cy }}" r="{{ p.r }}" fill="{{ s.color }}"/>
                   </sc-for>
                 </g>
+              </sc-for>
+              <sc-for list="{{ mainLabels }}" as="p" hint-placeholder-count="24">
+                <foreignObject class="oow-svg-value-label" x="{{ p.lx }}" y="{{ p.fy }}" width="64" height="15" pointer-events="none"><div style="color:{{ p.color }}; text-align:center; font:700 9px/15px 'JetBrains Mono',monospace; white-space:nowrap; text-shadow:-1px -1px 0 {{ chartLabelHalo }},1px -1px 0 {{ chartLabelHalo }},-1px 1px 0 {{ chartLabelHalo }},1px 1px 0 {{ chartLabelHalo }};">{{ p.label }}</div></foreignObject>
               </sc-for>
               <rect x="0" y="0" width="920" height="300" fill="transparent" onMouseMove="{{ onChartMove }}" onMouseLeave="{{ onChartLeave }}" style="cursor:crosshair;"></rect>
             </svg>
@@ -383,20 +407,29 @@
         <!-- SUB CHARTS -->
         <div class="oow-chart-pair" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
           <!-- HISTORY -->
-          <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:16px; padding:20px 22px;">
-            <h3 style="font:400 17px/1.2 'Spectral', serif; color:#f6f1fb; margin:0 0 4px;">{{ historyChartTitle }}</h3>
-            <p style="font:500 12px/1.5 'Manrope'; color:#948aa8; margin:0 0 14px;">{{ historyChartDescription }}</p>
+          <div class="oow-subchart-card" style="{{ subChartCardStyle }}">
+            <div class="oow-subchart-header">
+              <div>
+                <h3 style="{{ subChartTitleStyle }}">{{ historyChartTitle }}</h3>
+                <p style="{{ subChartDescriptionStyle }}">{{ historyChartDescription }}</p>
+              </div>
+              <div class="oow-subchart-export-actions">
+                <button class="oow-chart-export-button oow-chart-export-button--primary oow-chart-export-button--compact" type="button" onClick="{{ downloadHistoryPng }}">PNG</button>
+                <button class="oow-chart-export-button oow-chart-export-button--compact" type="button" onClick="{{ downloadHistoryCsv }}" style="{{ exportCsvStyle }}">CSV</button>
+              </div>
+            </div>
             <div style="display:flex; gap:16px; margin-bottom:10px;">
               <span style="font:600 11px/1 'Manrope'; color:#f5d97a;"><span style="width:14px;height:3px;background:#f5d97a;display:inline-block;vertical-align:middle;margin-right:6px;border-radius:2px;"></span>{{ rawHpLabel }}</span>
               <span style="font:600 11px/1 'Manrope'; color:#c79dff;"><span style="width:14px;height:3px;background:#c79dff;display:inline-block;vertical-align:middle;margin-right:6px;border-radius:2px;"></span>{{ effectiveHpLabel }}</span>
             </div>
             <div style="position:relative;" onMouseMove="{{ onHistMove }}" onMouseLeave="{{ onHistLeave }}">
-              <svg viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;">
+              <svg data-oow-history-chart viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ historyChartTitle }}">
+                <rect x="0" y="0" width="920" height="300" rx="8" fill="{{ chartPlotBackground }}"/>
                 <sc-for list="{{ histYTicks }}" as="t" hint-placeholder-count="6">
-                  <g><line x1="58" y1="{{ t.y }}" x2="898" y2="{{ t.y }}" stroke="rgba(255,255,255,.06)"/><text x="50" y="{{ t.ty }}" text-anchor="end" fill="#6b6480" font-family="JetBrains Mono" font-size="11">{{ t.label }}</text></g>
+                  <g><line x1="58" y1="{{ t.y }}" x2="898" y2="{{ t.y }}" stroke="{{ chartGridColor }}"/><foreignObject class="oow-svg-axis-label" x="0" y="{{ t.fy }}" width="52" height="16"><div style="color:{{ chartAxisColor }}; text-align:right; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject></g>
                 </sc-for>
                 <sc-for list="{{ histXTicks }}" as="t" hint-placeholder-count="7">
-                  <text x="{{ t.x }}" y="286" text-anchor="middle" fill="#6b6480" font-family="JetBrains Mono" font-size="11">{{ t.label }}</text>
+                  <foreignObject class="oow-svg-axis-label" x="{{ t.fx }}" y="274" width="50" height="16"><div style="color:{{ chartAxisColor }}; text-align:center; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject>
                 </sc-for>
                 <sc-if value="{{ histGuide }}" hint-placeholder-val="{{ false }}"><line x1="{{ histGuideX }}" y1="14" x2="{{ histGuideX }}" y2="258" stroke="rgba(245,217,122,.5)" stroke-width="1" stroke-dasharray="4 4"/></sc-if>
                 <path d="{{ histEhpArea }}" fill="#c79dff" opacity="0.13"/>
@@ -405,9 +438,9 @@
                 <sc-for list="{{ histEhpDots }}" as="d" hint-placeholder-count="22"><circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="2.6" fill="#c79dff"/></sc-for>
                 <sc-for list="{{ histRawDots }}" as="d" hint-placeholder-count="22"><circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="2.6" fill="#f5d97a"/></sc-for>
                 <circle cx="{{ histLast.ehpX }}" cy="{{ histLast.ehpY }}" r="4.2" fill="#c79dff"/>
-                <text x="{{ histLast.ehpX }}" y="{{ histLast.ehpY }}" dx="-9" dy="-8" text-anchor="end" fill="#c79dff" font-family="JetBrains Mono" font-size="12" font-weight="700">{{ histLast.ehpVal }}</text>
+                <foreignObject class="oow-svg-value-label" x="{{ histLast.labelX }}" y="{{ histLast.ehpLabelY }}" width="68" height="18" pointer-events="none"><div style="color:#c79dff; text-align:right; font:700 11px/18px 'JetBrains Mono',monospace; white-space:nowrap;">{{ histLast.ehpVal }}</div></foreignObject>
                 <circle cx="{{ histLast.rawX }}" cy="{{ histLast.rawY }}" r="4.2" fill="#f5d97a"/>
-                <text x="{{ histLast.rawX }}" y="{{ histLast.rawY }}" dx="-9" dy="15" text-anchor="end" fill="#f5d97a" font-family="JetBrains Mono" font-size="12" font-weight="700">{{ histLast.rawVal }}</text>
+                <foreignObject class="oow-svg-value-label" x="{{ histLast.labelX }}" y="{{ histLast.rawLabelY }}" width="68" height="18" pointer-events="none"><div style="color:#f5d97a; text-align:right; font:700 11px/18px 'JetBrains Mono',monospace; white-space:nowrap;">{{ histLast.rawVal }}</div></foreignObject>
                 <rect x="0" y="0" width="920" height="300" fill="transparent" onMouseMove="{{ onHistMove }}" onMouseLeave="{{ onHistLeave }}" style="cursor:crosshair;"></rect>
               </svg>
               <sc-if value="{{ histGuide }}" hint-placeholder-val="{{ false }}">
@@ -425,24 +458,31 @@
             </div>
           </div>
           <!-- JUMP -->
-          <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:16px; padding:20px 22px;">
+          <div class="oow-subchart-card" style="{{ subChartCardStyle }}">
             <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:6px;">
               <div>
-                <h3 style="font:400 17px/1.2 'Spectral', serif; color:#f6f1fb; margin:0 0 4px;">{{ jumpTitle }}</h3>
-                <p style="font:500 12px/1.5 'Manrope'; color:#948aa8; margin:0;">{{ jumpSub }}</p>
+                <h3 style="{{ subChartTitleStyle }}">{{ jumpTitle }}</h3>
+                <p style="{{ subChartDescriptionStyle }}">{{ jumpSub }}</p>
               </div>
-              <div style="display:flex; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:9px; padding:2px; flex:none;">
-                <button type="button" onClick="{{ jumpSeason }}" style="{{ jumpSeasonStyle }}">{{ seasonToSeasonLabel }}</button>
-                <button type="button" onClick="{{ jumpFloor }}" style="{{ jumpFloorStyle }}">{{ floorToFloorLabel }}</button>
+              <div class="oow-subchart-tools">
+                <div class="oow-subchart-export-actions">
+                  <button class="oow-chart-export-button oow-chart-export-button--primary oow-chart-export-button--compact" type="button" onClick="{{ downloadJumpPng }}">PNG</button>
+                  <button class="oow-chart-export-button oow-chart-export-button--compact" type="button" onClick="{{ downloadJumpCsv }}" style="{{ exportCsvStyle }}">CSV</button>
+                </div>
+                <div style="display:flex; background:{{ subChartControlBackground }}; border:1px solid {{ subChartControlBorder }}; border-radius:9px; padding:2px; flex:none;">
+                  <button type="button" onClick="{{ jumpSeason }}" style="{{ jumpSeasonStyle }}">{{ seasonToSeasonLabel }}</button>
+                  <button type="button" onClick="{{ jumpFloor }}" style="{{ jumpFloorStyle }}">{{ floorToFloorLabel }}</button>
+                </div>
               </div>
             </div>
             <div style="position:relative;" onMouseMove="{{ onJumpMove }}" onMouseLeave="{{ onJumpLeave }}">
-              <svg viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;">
+              <svg data-oow-jump-chart viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ jumpTitle }}">
+                <rect x="0" y="0" width="920" height="300" rx="8" fill="{{ chartPlotBackground }}"/>
                 <sc-for list="{{ jumpYTicks }}" as="t" hint-placeholder-count="5">
-                  <g><line x1="56" y1="{{ t.y }}" x2="900" y2="{{ t.y }}" stroke="{{ t.stroke }}"/><text x="48" y="{{ t.ty }}" text-anchor="end" fill="#7d7690" font-family="JetBrains Mono" font-size="11">{{ t.label }}</text></g>
+                  <g><line x1="56" y1="{{ t.y }}" x2="900" y2="{{ t.y }}" stroke="{{ t.stroke }}"/><foreignObject class="oow-svg-axis-label" x="0" y="{{ t.fy }}" width="50" height="16"><div style="color:{{ chartAxisColor }}; text-align:right; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject></g>
                 </sc-for>
                 <sc-for list="{{ jumpXTicks }}" as="t" hint-placeholder-count="8">
-                  <text x="{{ t.x }}" y="290" text-anchor="middle" fill="#6b6480" font-family="JetBrains Mono" font-size="11">{{ t.label }}</text>
+                  <foreignObject class="oow-svg-axis-label" x="{{ t.fx }}" y="278" width="50" height="16"><div style="color:{{ chartAxisColor }}; text-align:center; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject>
                 </sc-for>
                 <sc-if value="{{ jumpGuide }}" hint-placeholder-val="{{ false }}"><line x1="{{ jumpGuideX }}" y1="14" x2="{{ jumpGuideX }}" y2="258" stroke="rgba(245,217,122,.5)" stroke-width="1" stroke-dasharray="4 4"/></sc-if>
                 <sc-for list="{{ jumpSeries }}" as="s" hint-placeholder-count="4">
@@ -567,8 +607,8 @@
   <!-- DEEP INTEL MODAL -->
   <sc-if value="{{ showModal }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeModal }}" style="position:fixed; inset:0; z-index:90; background:rgba(6,3,10,.7); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:24px; animation:oowfade .16s ease;">
-      <div onClick="{{ stop }}" style="width:640px; max-width:100%; max-height:88vh; overflow-y:auto; background:linear-gradient(180deg, rgba(24,16,34,.98), rgba(14,9,20,.98)); border:1px solid {{ modalBd }}; border-radius:18px; box-shadow:0 40px 100px rgba(0,0,0,.7); animation:oowmodal .2s cubic-bezier(.16,1,.3,1);">
-        <div style="display:flex; gap:18px; padding:22px 24px; border-bottom:1px solid rgba(255,255,255,.08); background:{{ modalHeaderBg }};">
+      <div onClick="{{ stop }}" class="oow-modal-card" style="width:640px; max-width:100%; max-height:88vh; overflow-y:auto; background:linear-gradient(180deg, rgba(24,16,34,.98), rgba(14,9,20,.98)); border:1px solid {{ modalBd }}; border-radius:18px; box-shadow:0 40px 100px rgba(0,0,0,.7); animation:oowmodal .2s cubic-bezier(.16,1,.3,1);">
+        <div class="oow-modal-header" style="display:flex; gap:18px; padding:22px 24px; border-bottom:1px solid rgba(255,255,255,.08); background:{{ modalHeaderBg }};">
           <div style="position:relative; flex:none; cursor:zoom-in;" onClick="{{ onZoomImg }}" title="{{ zoomImageTitle }}">
             <img data-src="{{ modalImg }}" alt="{{ modalName }}" style="width:96px; height:96px; object-fit:cover; object-position:center 30%; background:rgba(0,0,0,.4); border:1px solid rgba(255,255,255,.12); border-radius:14px; display:block; transition:transform .15s ease;" />
           </div>
@@ -587,10 +627,10 @@
           </div>
           <button type="button" onClick="{{ closeModal }}" title="{{ closeLabel }}" aria-label="{{ closeLabel }}" style="font:400 22px/1 'Manrope'; color:#948aa8; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); width:34px; height:34px; border-radius:9px; cursor:pointer; flex:none;">×</button>
         </div>
-        <div style="padding:20px 24px;">
+        <div class="oow-modal-body" style="padding:20px 24px;">
           <!-- Primary Combat Stats -->
           <div style="font:700 11px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#f5d97a; margin-bottom:12px;">{{ primaryStatsLabel }}</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px;">
+          <div class="oow-primary-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px;">
             <sc-for list="{{ modalPrimary }}" as="p" hint-placeholder-count="4">
               <div style="display:flex; align-items:center; gap:14px; background:{{ p.bg }}; border:1px solid {{ p.bd }}; border-radius:12px; padding:12px 14px;">
                 <div style="width:38px; height:38px; border-radius:10px; background:{{ p.iconBg }}; border:1px solid {{ p.bd }}; display:flex; align-items:center; justify-content:center; flex:none; padding:4px;">
@@ -671,11 +711,29 @@
 <script type="text/x-dc" data-dc-script>
 
 const DATA_SOURCES = Object.freeze({
-  current: ['./data/oow_current_seasons.json'],
+  current: ['./data/oow_current_seasons.json?schema=2'],
   standard: ['./data/oow_stats.json'],
   mmo: ['./data/oow_mmo_stats.json'],
   dates: ['./data/season_dates.json']
 });
+
+const OOW_CHART_THEME_COOKIE = 'tof-oow-chart-theme';
+const OOW_PREFERENCE_MAX_AGE = 60 * 60 * 24 * 365;
+
+function readOowCookie(name) {
+  const prefix = encodeURIComponent(name) + '=';
+  const entry = document.cookie.split(';').map((part) => part.trim()).find((part) => part.startsWith(prefix));
+  return entry ? decodeURIComponent(entry.slice(prefix.length)) : '';
+}
+
+function resolveOowChartTheme() {
+  return readOowCookie(OOW_CHART_THEME_COOKIE) === 'dark' ? 'dark' : 'light';
+}
+
+function writeOowCookie(name, value) {
+  const secure = location.protocol === 'https:' ? '; Secure' : '';
+  document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + '; Max-Age=' + OOW_PREFERENCE_MAX_AGE + '; Path=/datamine/oow/; SameSite=Lax' + secure;
+}
 
 class Component extends DCLogic {
   state = {
@@ -691,6 +749,7 @@ class Component extends DCLogic {
     chartMode: 'ehp',
     chartMetric: 'boss',
     chartRange: 'ramp',
+    chartTheme: resolveOowChartTheme(),
     active: [19, 20, 21, 22],
     chartHoverFloor: null,
     jumpMode: 'season',
@@ -842,9 +901,35 @@ class Component extends DCLogic {
       compareIdx: activeSeasonNum > 1 ? activeSeasonNum - 1 : activeSeasonNum
     }, () => {
       this._scrollRailToLatest();
-      this.loadFullDatamineData();
     });
     return true;
+  }
+
+  _mergeBootstrapDataset(indexDataset, currentDataset) {
+    const indexSeasons = Array.isArray(indexDataset?.seasons) ? indexDataset.seasons : [];
+    const currentSeasons = Array.isArray(currentDataset?.seasons) ? currentDataset.seasons : [];
+    const detailedBySeason = new Map(currentSeasons.map((season) => [Number(season.season), season]));
+    const seasons = indexSeasons.map((season) => detailedBySeason.get(Number(season.season)) || season);
+    currentSeasons.forEach((season) => {
+      if (!seasons.some((item) => Number(item.season) === Number(season.season))) seasons.push(season);
+    });
+    seasons.sort((a, b) => Number(a.season) - Number(b.season));
+    return {
+      meta: { ...(indexDataset?.meta || {}), ...(currentDataset?.meta || {}) },
+      seasons
+    };
+  }
+
+  selectSeason(seasonNumber) {
+    this.setState({
+      seasonIdx: seasonNumber,
+      expandedFloor: null,
+      search: null,
+      diffFloor: seasonNumber === this.state.seasonIdx ? this.state.diffFloor : null
+    });
+
+    const season = this._datasets?.[this.state.mode]?.seasons?.find((item) => Number(item.season) === Number(seasonNumber));
+    if (season?.cacheScope === 'season-index') this.loadFullDatamineData();
   }
 
   async loadFullDatamineData() {
@@ -880,10 +965,22 @@ class Component extends DCLogic {
   async loadDatamineData() {
     const current = await this.fetchFirstJson(DATA_SOURCES.current);
     if (this._unmounted) return;
-    const hasBootstrap = current && (current.standard?.seasons?.length || current.mmo?.seasons?.length);
+    const hasSeasonIndexes = Array.isArray(current?.standardIndex?.seasons)
+      && current.standardIndex.seasons.length > 1
+      && Array.isArray(current?.mmoIndex?.seasons)
+      && current.mmoIndex.seasons.length > 1;
+
+    if (!hasSeasonIndexes) {
+      this.loadFullDatamineData();
+      return;
+    }
+
+    const standard = this._mergeBootstrapDataset(current?.standardIndex, current?.standard);
+    const mmo = this._mergeBootstrapDataset(current?.mmoIndex, current?.mmo);
+    const hasBootstrap = standard.seasons.length || mmo.seasons.length;
     if (hasBootstrap && this._showInitialDatasets({
-      standard: current.standard || null,
-      mmo: current.mmo || null
+      standard,
+      mmo
     })) return;
     this.loadFullDatamineData();
   }
@@ -1423,6 +1520,12 @@ class Component extends DCLogic {
     this._tt = setTimeout(() => this.setState({ toast: null }), 1800);
   }
 
+  setChartTheme(theme) {
+    const normalized = theme === 'dark' ? 'dark' : 'light';
+    writeOowCookie(OOW_CHART_THEME_COOKIE, normalized);
+    this.setState({ chartTheme: normalized });
+  }
+
   // Builds the primary multi-season chart geometry.
   mainChart() {
     const seasons = this.buildSeasons(this.state.mode);
@@ -1444,22 +1547,237 @@ class Component extends DCLogic {
     const y = (v) => T + ph - (v / ymax) * ph;
     const series = act.map((s) => {
       const fls = s.floors.filter((fl) => fl.floor >= minF && fl.floor <= maxF);
-      const pts = fls.map((fl) => ({ cx: +x(fl.floor).toFixed(1), cy: +y(valOf(s, fl)).toFixed(1), floor: fl.floor, r: fl.ot ? 3.4 : 2.2 }));
+      const pts = fls.map((fl) => {
+        const value = valOf(s, fl);
+        return {
+          cx: +x(fl.floor).toFixed(1),
+          cy: +y(value).toFixed(1),
+          floor: fl.floor,
+          value,
+          label: this.fmt(value, 'G') + 'G',
+          r: fl.ot ? 3.4 : 2.2
+        };
+      });
       const path = pts.map((p, i) => (i ? 'L' : 'M') + p.cx + ' ' + p.cy).join(' ');
       const area = pts.length ? 'M' + pts[0].cx + ' ' + (T + ph) + ' ' + pts.map((p) => 'L' + p.cx + ' ' + p.cy).join(' ') + ' L' + pts[pts.length - 1].cx + ' ' + (T + ph) + ' Z' : '';
       return { color: s.color, fill: s.color, label: 'S' + s.season, path, area, pts, season: s.season };
     });
+    // One label per visible value. When seasons share a point, the newest
+    // season wins so the label uses the same color as the topmost series.
+    const labelByPoint = new Map();
+    series.forEach((s) => {
+      s.pts.forEach((p) => {
+        const key = p.floor + ':' + p.value.toPrecision(12);
+        labelByPoint.set(key, { ...p, color: s.color, season: s.season });
+      });
+    });
+    const labels = Array.from(labelByPoint.values()).map((p, index) => ({
+      ...p,
+      lx: +(p.cx - 32).toFixed(1),
+      fy: +Math.max(T, p.cy - (index % 2 ? 22 : 13)).toFixed(1)
+    }));
     const yticks = [];
     for (let i = 0; i <= 4; i++) {
       const v = ymax * i / 4;
       const yy = +y(v).toFixed(1);
-      yticks.push({ y: yy, ty: yy + 4, label: (v >= 100 ? Math.round(v) : v.toFixed(1)) + 'G' });
+      yticks.push({ y: yy, ty: yy + 4, fy: yy - 8, label: (v >= 100 ? Math.round(v) : v.toFixed(1)) + 'G' });
     }
     const step = Math.max(1, Math.round((maxF - minF) / 7));
     const xticks = [];
-    for (let f = minF; f <= maxF; f += step) xticks.push({ x: +x(f).toFixed(1), label: 'F' + f });
-    if (xticks.length && xticks[xticks.length - 1].label !== 'F' + maxF) xticks.push({ x: +x(maxF).toFixed(1), label: 'F' + maxF });
-    return { series, yticks, xticks, x, y, minF, maxF, W, L, R, pw, valOf, act };
+    for (let f = minF; f <= maxF; f += step) {
+      const xx = +x(f).toFixed(1);
+      xticks.push({ x: xx, fx: xx - 25, label: 'F' + f });
+    }
+    if (xticks.length && xticks[xticks.length - 1].label !== 'F' + maxF) {
+      const xx = +x(maxF).toFixed(1);
+      xticks.push({ x: xx, fx: xx - 25, label: 'F' + maxF });
+    }
+    return { series, labels, yticks, xticks, x, y, minF, maxF, W, H, L, R, pw, valOf, act };
+  }
+
+  downloadBlob(content, mimeType, fileName) {
+    const blob = content instanceof Blob ? content : new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  chartExportName(extension) {
+    const metric = this.state.chartMetric === 'boss' ? 'boss-hp' : 'total-floor-hp';
+    return 'oow-' + this.state.mode + '-' + metric + '-' + this.state.chartMode + '-' + this.state.chartRange + '.' + extension;
+  }
+
+  downloadMainChartCsv() {
+    const chart = this.mainChart();
+    const seasons = chart.act;
+    const rows = [['Floor', ...seasons.map((s) => 'S' + s.season + ' (G)')]];
+    for (let floor = chart.minF; floor <= chart.maxF; floor++) {
+      rows.push([
+        'F' + floor,
+        ...seasons.map((season) => {
+          const item = season.floors.find((entry) => entry.floor === floor);
+          return item ? String(chart.valOf(season, item)) : '';
+        })
+      ]);
+    }
+    const csv = '\uFEFF' + rows.map((row) => row.map((value) => {
+      const text = String(value);
+      return /[",\r\n]/.test(text) ? '"' + text.replace(/"/g, '""') + '"' : text;
+    }).join(',')).join('\r\n');
+    this.downloadBlob(csv, 'text/csv;charset=utf-8', this.chartExportName('csv'));
+  }
+
+  async downloadMainChartPng() {
+    const isRu = this.state.lang === 'ru';
+    const range = this.state.chartRange === 'all'
+      ? (isRu ? 'Все этажи' : 'All floors')
+      : (this.state.chartRange === 'overtime'
+        ? (this.state.mode === 'mmo' ? 'F33–F36' : 'F26–F28')
+        : (this.state.mode === 'mmo' ? 'F25–F36' : 'F17–F28'));
+    return this.downloadChartPng('[data-oow-main-chart]', this.chartExportName('png'), {
+      title: isRu ? 'HP босса по этажам — испытание OOW' : 'Boss HP across floors — OOW Challenge',
+      badges: [
+        {
+          label: (isRu ? 'Режим HP · ' : 'HP Mode · ') + (this.state.chartMode === 'ehp' ? (isRu ? 'Эффективное HP' : 'Effective HP') : (isRu ? 'Номинальное HP' : 'Raw HP')),
+          color: this.state.chartMode === 'ehp' ? '#2dbfa4' : '#d65b88'
+        },
+        {
+          label: (isRu ? 'Метрика · ' : 'Metric · ') + (this.state.chartMetric === 'boss' ? (isRu ? 'HP босса' : 'Boss HP') : (isRu ? 'Весь этаж' : 'Total Floor')),
+          color: '#c99d22'
+        },
+        { label: (isRu ? 'Диапазон · ' : 'Range · ') + range, color: '#8e62d4' }
+      ]
+    });
+  }
+
+  downloadCsvRows(rows, fileName) {
+    const csv = '\uFEFF' + rows.map((row) => row.map((value) => {
+      const text = String(value ?? '');
+      return /[",\r\n]/.test(text) ? '"' + text.replace(/"/g, '""') + '"' : text;
+    }).join(',')).join('\r\n');
+    this.downloadBlob(csv, 'text/csv;charset=utf-8', fileName);
+  }
+
+  async downloadChartPng(selector, fileName, exportMeta = {}) {
+    const source = document.querySelector(selector);
+    if (!source) return;
+    const clone = source.cloneNode(true);
+    const headerHeight = exportMeta.title ? 78 : 0;
+    const exportHeight = 300 + headerHeight;
+    clone.setAttribute('viewBox', '0 0 920 ' + exportHeight);
+    clone.setAttribute('width', '1840');
+    clone.setAttribute('height', String(exportHeight * 2));
+
+    if (headerHeight) {
+      const svgNs = 'http://www.w3.org/2000/svg';
+      const chartNodes = Array.from(clone.childNodes);
+      const chartGroup = document.createElementNS(svgNs, 'g');
+      chartGroup.setAttribute('transform', 'translate(0 ' + headerHeight + ')');
+      chartNodes.forEach((node) => chartGroup.appendChild(node));
+
+      const exportBackground = document.createElementNS(svgNs, 'rect');
+      exportBackground.setAttribute('x', '0');
+      exportBackground.setAttribute('y', '0');
+      exportBackground.setAttribute('width', '920');
+      exportBackground.setAttribute('height', String(exportHeight));
+      exportBackground.setAttribute('fill', this.state.chartTheme === 'dark' ? '#0f0b15' : '#ffffff');
+      clone.appendChild(exportBackground);
+
+      const title = document.createElementNS(svgNs, 'text');
+      title.setAttribute('x', '460');
+      title.setAttribute('y', '27');
+      title.setAttribute('text-anchor', 'middle');
+      title.setAttribute('fill', this.state.chartTheme === 'dark' ? '#f6f1fb' : '#17111f');
+      title.setAttribute('font-family', 'Spectral, Georgia, serif');
+      title.setAttribute('font-size', '17');
+      title.setAttribute('font-weight', '600');
+      title.textContent = exportMeta.title;
+      clone.appendChild(title);
+
+      const badges = Array.isArray(exportMeta.badges) ? exportMeta.badges : [];
+      const badgeWidths = badges.map((badge) => Math.max(82, Math.min(230, badge.label.length * 6.3 + 24)));
+      const badgeGap = 8;
+      const badgesWidth = badgeWidths.reduce((sum, width) => sum + width, 0) + Math.max(0, badges.length - 1) * badgeGap;
+      let badgeX = 460 - badgesWidth / 2;
+      badges.forEach((badge, index) => {
+        const width = badgeWidths[index];
+        const rect = document.createElementNS(svgNs, 'rect');
+        rect.setAttribute('x', String(badgeX));
+        rect.setAttribute('y', '40');
+        rect.setAttribute('width', String(width));
+        rect.setAttribute('height', '24');
+        rect.setAttribute('rx', '12');
+        rect.setAttribute('fill', this.state.chartTheme === 'dark' ? '#211827' : '#fffaf0');
+        rect.setAttribute('stroke', badge.color || '#c99d22');
+        rect.setAttribute('stroke-width', '1');
+        clone.appendChild(rect);
+
+        const badgeText = document.createElementNS(svgNs, 'text');
+        badgeText.setAttribute('x', String(badgeX + width / 2));
+        badgeText.setAttribute('y', '56');
+        badgeText.setAttribute('text-anchor', 'middle');
+        badgeText.setAttribute('fill', this.state.chartTheme === 'dark' ? '#f6f1fb' : '#302735');
+        badgeText.setAttribute('font-family', 'Manrope, Arial, sans-serif');
+        badgeText.setAttribute('font-size', '9');
+        badgeText.setAttribute('font-weight', '700');
+        badgeText.textContent = badge.label;
+        clone.appendChild(badgeText);
+        badgeX += width + badgeGap;
+      });
+      clone.appendChild(chartGroup);
+    }
+    // foreignObject is useful for live labels with this template runtime, but
+    // it taints a canvas. Convert labels to native SVG text in the export copy.
+    clone.querySelectorAll('foreignObject').forEach((label) => {
+      const isValue = label.classList.contains('oow-svg-value-label');
+      const x = Number(label.getAttribute('x') || 0);
+      const y = Number(label.getAttribute('y') || 0);
+      const width = Number(label.getAttribute('width') || 0);
+      const height = Number(label.getAttribute('height') || 0);
+      const content = label.textContent.trim();
+      const sourceText = label.querySelector('div');
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      const isXAxis = !isValue && y >= 270;
+      text.setAttribute('x', String(isValue || isXAxis ? x + width / 2 : x + width));
+      text.setAttribute('y', String(y + height * 0.76));
+      text.setAttribute('text-anchor', isValue || isXAxis ? 'middle' : 'end');
+      text.setAttribute('fill', sourceText?.style.color || (this.state.chartTheme === 'dark' ? '#6b6480' : '#665e6d'));
+      text.setAttribute('font-family', 'JetBrains Mono, monospace');
+      text.setAttribute('font-size', isValue ? '9' : '10');
+      if (isValue) {
+        text.setAttribute('font-weight', '700');
+        text.setAttribute('paint-order', 'stroke');
+        text.setAttribute('stroke', this.state.chartTheme === 'dark' ? '#0f0b15' : '#ffffff');
+        text.setAttribute('stroke-width', '2.6');
+        text.setAttribute('stroke-linejoin', 'round');
+      }
+      text.textContent = content;
+      label.replaceWith(text);
+    });
+    const markup = new XMLSerializer().serializeToString(clone);
+    const svgUrl = URL.createObjectURL(new Blob([markup], { type: 'image/svg+xml;charset=utf-8' }));
+    try {
+      const image = new Image();
+      await new Promise((resolve, reject) => {
+        image.onload = resolve;
+        image.onerror = reject;
+        image.src = svgUrl;
+      });
+      const canvas = document.createElement('canvas');
+      canvas.width = 1840;
+      canvas.height = exportHeight * 2;
+      const context = canvas.getContext('2d');
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+      if (blob) this.downloadBlob(blob, 'image/png', fileName);
+    } finally {
+      URL.revokeObjectURL(svgUrl);
+    }
   }
 
   render() {}
@@ -1525,7 +1843,13 @@ class Component extends DCLogic {
       zoomOutLabel: 'Уменьшить',
       zoomInLabel: 'Увеличить',
       resetZoomLabel: 'Сбросить масштаб',
-      resetLabel: 'Сбросить'
+      resetLabel: 'Сбросить',
+      chartPaletteLabel: 'Палитра графика',
+      chartPaletteAria: 'Цветовая тема графика',
+      lightLabel: 'Светлая',
+      darkLabel: 'Тёмная',
+      downloadPngLabel: 'Скачать PNG',
+      downloadCsvLabel: 'Скачать CSV'
     } : {
       gameModeLabel: 'Game Mode',
       originalModeLabel: 'Original OOW',
@@ -1584,7 +1908,13 @@ class Component extends DCLogic {
       zoomOutLabel: 'Zoom out',
       zoomInLabel: 'Zoom in',
       resetZoomLabel: 'Reset scale',
-      resetLabel: 'Reset'
+      resetLabel: 'Reset',
+      chartPaletteLabel: 'Chart palette',
+      chartPaletteAria: 'Chart color theme',
+      lightLabel: 'Light',
+      darkLabel: 'Dark',
+      downloadPngLabel: 'Download PNG',
+      downloadCsvLabel: 'Download CSV'
     };
     const seasons = this.buildSeasons(st.mode);
     const sea = seasons.find((s) => s.season === st.seasonIdx) || seasons[seasons.length - 1];
@@ -1619,7 +1949,7 @@ class Component extends DCLogic {
         railStyle: 'cursor:pointer; border-radius:11px; padding:10px 12px; transition:background .12s; ' + (activeSel
           ? 'background:linear-gradient(135deg, rgba(245,217,122,.15), rgba(181,123,255,.07)); border:1px solid rgba(245,217,122,.5);'
           : 'background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07);'),
-        onSelect: () => this.setState({ seasonIdx: s.season, expandedFloor: null, search: null, diffFloor: s.season === st.seasonIdx ? st.diffFloor : null }),
+        onSelect: () => this.selectSeason(s.season),
       };
     });
 
@@ -1806,6 +2136,10 @@ class Component extends DCLogic {
     const tabStyle = (on) => 'cursor:pointer; font:' + (on ? '700' : '600') + ' 12px/1 "Manrope"; padding:8px 14px; border-radius:9px; border:1px solid ' + (on ? 'transparent' : 'rgba(255,255,255,.09)') + '; ' + (on ? 'color:#17111f; background:linear-gradient(135deg,#f5d97a,#f0b94e);' : 'color:#cbc2de; background:rgba(255,255,255,.05);');
     const modePill = (on) => 'cursor:pointer; font:700 13px/1 "Manrope"; padding:9px 18px; border-radius:999px; border:none; transition:all .15s; ' + (on ? 'background:linear-gradient(135deg,#f5d97a,#f0b94e); color:#17111f;' : 'background:transparent; color:#7a7290;');
 
+    const chartIsLight = st.chartTheme !== 'dark';
+    const chartThemeButton = (active) => 'border:0; border-radius:6px; background:' + (active ? (chartIsLight ? '#f5d97a' : '#6f537f') : 'transparent') + '; color:' + (active ? (chartIsLight ? '#17101e' : '#fff9ff') : '#948aa8') + ';';
+    const subctl = (on, col) => 'flex:1; text-align:center; cursor:pointer; font:600 10px/1.1 "Manrope"; padding:7px 8px; border-radius:7px; border:1px solid ' + (on ? col : 'transparent') + '; ' + (on ? 'color:#17111f; background:' + col + ';' : 'color:' + (chartIsLight ? '#514958' : '#b9b0cc') + '; background:transparent;');
+
     // charts
     const mc = this.mainChart();
     const hoverF = st.chartHoverFloor;
@@ -1836,12 +2170,18 @@ class Component extends DCLogic {
     const histEhpArea = 'M' + ehpPts[0].x + ' ' + hBase + ' ' + ehpPts.map((p) => 'L' + p.x + ' ' + p.y).join(' ') + ' L' + ehpPts[ehpPts.length - 1].x + ' ' + hBase + ' Z';
     const histYTicks = [0.01, 0.1, 1, 10, 100, 1000].map((v) => {
       const yy = +hy(v).toFixed(1);
-      return { y: yy, ty: yy + 3, label: v >= 1000 ? ((v / 1000) + 'KG') : (v + 'G') };
+      return { y: yy, ty: yy + 3, fy: yy - 8, label: v >= 1000 ? ((v / 1000) + 'KG') : (v + 'G') };
     });
     const histTickStep = Math.max(1, Math.round((NS - 1) / 6));
     const histXTicks = [];
-    for (let s = 1; s <= NS; s += histTickStep) histXTicks.push({ x: +hx(s).toFixed(1), label: 'S' + s });
-    if (histXTicks.length && histXTicks[histXTicks.length - 1].label !== 'S' + NS) histXTicks.push({ x: +hx(NS).toFixed(1), label: 'S' + NS });
+    for (let s = 1; s <= NS; s += histTickStep) {
+      const xx = +hx(s).toFixed(1);
+      histXTicks.push({ x: xx, fx: xx - 25, label: 'S' + s });
+    }
+    if (histXTicks.length && histXTicks[histXTicks.length - 1].label !== 'S' + NS) {
+      const xx = +hx(NS).toFixed(1);
+      histXTicks.push({ x: xx, fx: xx - 25, label: 'S' + NS });
+    }
     const histRawDots = rawPts.map((p) => ({ cx: p.x, cy: p.y }));
     const histEhpDots = ehpPts.map((p) => ({ cx: p.x, cy: p.y }));
     const hLastRaw = lastSeason ? (lastSeason.floors[lastSeason.floors.length - 1]?.bossG || 0) : 0;
@@ -1850,6 +2190,9 @@ class Component extends DCLogic {
       rawY: rawPts[LI] ? rawPts[LI].y : 0,
       ehpX: ehpPts[LI] ? ehpPts[LI].x : 0,
       ehpY: ehpPts[LI] ? ehpPts[LI].y : 0,
+      labelX: Math.max(0, (rawPts[LI] ? rawPts[LI].x : 0) - 76),
+      ehpLabelY: Math.max(0, (ehpPts[LI] ? ehpPts[LI].y : 0) - 22),
+      rawLabelY: Math.min(280, (rawPts[LI] ? rawPts[LI].y : 0) + 4),
       rawVal: this.fmt(hLastRaw, 'G') + 'G',
       ehpVal: this.fmt(hLastRaw * (lastSeason ? lastSeason.ehpMult : 1), 'G') + 'G'
     };
@@ -1915,11 +2258,14 @@ class Component extends DCLogic {
     const jumpYTicks = [];
     for (let v = Math.ceil(jMinV / jStepV) * jStepV; v <= jMaxV; v += jStepV) {
       const yy = +jy(v).toFixed(1);
-      jumpYTicks.push({ y: yy, ty: yy + 3, label: (v > 0 ? '+' : '') + Math.round(v) + '%', stroke: v === 0 ? 'rgba(255,255,255,.24)' : 'rgba(255,255,255,.06)' });
+      jumpYTicks.push({ y: yy, ty: yy + 3, fy: yy - 8, label: (v > 0 ? '+' : '') + Math.round(v) + '%', stroke: v === 0 ? (chartIsLight ? '#b8b1bf' : 'rgba(255,255,255,.24)') : (chartIsLight ? '#e8e5eb' : 'rgba(255,255,255,.06)') });
     }
     const jStepX = Math.max(1, Math.round((jMaxF - jMinF) / 7));
     const jumpXTicks = [];
-    for (let f = jMinF; f <= jMaxF; f += jStepX) jumpXTicks.push({ x: +jx(f).toFixed(1), label: 'F' + f });
+    for (let f = jMinF; f <= jMaxF; f += jStepX) {
+      const xx = +jx(f).toFixed(1);
+      jumpXTicks.push({ x: xx, fx: xx - 25, label: 'F' + f });
+    }
 
     const jhf = st.jumpHoverFloor;
     let jumpGuide = false, jumpGuideX = 0, jumpGuidePct = 0, jumpGuideShift = '-50%', jumpGuideRows = [], jumpGuideLabel = '';
@@ -2147,8 +2493,62 @@ class Component extends DCLogic {
       presets,
       seasonChips,
       mainSeries: mc.series,
+      mainLabels: mc.labels,
       mainYTicks: mc.yticks,
       mainXTicks: mc.xticks,
+      chartThemeLight: () => this.setChartTheme('light'),
+      chartThemeDark: () => this.setChartTheme('dark'),
+      chartThemeLightPressed: chartIsLight ? 'true' : 'false',
+      chartThemeDarkPressed: chartIsLight ? 'false' : 'true',
+      chartThemeLightStyle: chartThemeButton(chartIsLight),
+      chartThemeDarkStyle: chartThemeButton(!chartIsLight),
+      mainChartCardStyle: 'border-radius:14px; padding:14px 18px; transition:background-color .18s ease,border-color .18s ease; background:' + (chartIsLight ? '#ffffff' : 'rgba(255,255,255,.02)') + '; border:1px solid ' + (chartIsLight ? '#dedbe3' : 'rgba(255,255,255,.07)') + ';',
+      subChartCardStyle: 'border-radius:16px; padding:20px 22px; transition:background-color .18s ease,border-color .18s ease; background:' + (chartIsLight ? '#ffffff' : 'rgba(255,255,255,.02)') + '; border:1px solid ' + (chartIsLight ? '#dedbe3' : 'rgba(255,255,255,.07)') + ';',
+      mainChartTitleStyle: 'font:400 16px/1.15 "Spectral", serif; margin:0; color:' + (chartIsLight ? '#17111f' : '#f6f1fb') + ';',
+      subChartTitleStyle: 'font:400 17px/1.2 "Spectral", serif; margin:0 0 4px; color:' + (chartIsLight ? '#17111f' : '#f6f1fb') + ';',
+      subChartDescriptionStyle: 'font:500 12px/1.5 "Manrope"; margin:0; color:' + (chartIsLight ? '#665e6d' : '#948aa8') + ';',
+      subChartControlBackground: chartIsLight ? '#f3f0f5' : 'rgba(255,255,255,.05)',
+      subChartControlBorder: chartIsLight ? '#d9d4de' : 'rgba(255,255,255,.08)',
+      modeBadgeStyle: 'font:700 10px/1 "Manrope"; color:' + (chartIsLight ? '#6f5312' : '#f5d97a') + '; background:' + (chartIsLight ? '#fff8dd' : 'rgba(245,217,122,.12)') + '; border:1px solid ' + (chartIsLight ? '#e8d38a' : 'rgba(245,217,122,.3)') + '; padding:6px 11px; border-radius:999px; white-space:nowrap;',
+      exportCsvStyle: 'color:' + (chartIsLight ? '#403849' : '#cbc2de') + '; border-color:' + (chartIsLight ? '#d7d2dc' : 'rgba(255,255,255,.12)') + '; background:' + (chartIsLight ? '#f7f5f8' : 'rgba(255,255,255,.05)') + ';',
+      chartPlotBackground: chartIsLight ? '#ffffff' : '#0f0b15',
+      chartGridColor: chartIsLight ? '#e8e5eb' : 'rgba(255,255,255,.06)',
+      chartAxisColor: chartIsLight ? '#665e6d' : '#6b6480',
+      chartLabelHalo: chartIsLight ? '#ffffff' : '#0f0b15',
+      downloadMainPng: () => this.downloadMainChartPng(),
+      downloadMainCsv: () => this.downloadMainChartCsv(),
+      downloadHistoryPng: () => this.downloadChartPng('[data-oow-history-chart]', 'oow-' + st.mode + '-final-floor-history.png', {
+        title: copy.historyChartTitle,
+        badges: [
+          { label: copy.rawHpLabel, color: '#c99d22' },
+          { label: copy.effectiveHpLabel, color: '#9e6ae2' }
+        ]
+      }),
+      downloadHistoryCsv: () => this.downloadCsvRows([
+        ['Season', 'Final floor', 'Raw HP (G)', 'Effective HP (G)', 'Resistance'],
+        ...seasons.map((season) => {
+          const finalFloor = season.floors[season.floors.length - 1];
+          const raw = finalFloor?.bossG || 0;
+          return ['S' + season.season, 'F' + season.floorCount, raw, raw * season.ehpMult, season.resist];
+        })
+      ], 'oow-' + st.mode + '-final-floor-history.csv'),
+      downloadJumpPng: () => this.downloadChartPng('[data-oow-jump-chart]', 'oow-' + st.mode + '-' + jMode + '-growth.png', {
+        title: jMode === 'floor' ? (isRu ? 'Рост HP от этажа к этажу' : 'Floor-over-floor HP jump') : (isRu ? 'Инфляция HP между сезонами' : 'Season-over-season HP growth (per floor)'),
+        badges: [{
+          label: jMode === 'floor' ? copy.floorToFloorLabel : copy.seasonToSeasonLabel,
+          color: jMode === 'floor' ? '#c99d22' : '#9e6ae2'
+        }]
+      }),
+      downloadJumpCsv: () => {
+        const floorsOnChart = Array.from(new Set(jumpSeries.flatMap((series) => series.pts.map((point) => point.floor)))).sort((a, b) => a - b);
+        this.downloadCsvRows([
+          ['Floor', ...jumpSeries.map((series) => 'S' + series.season + ' (%)')],
+          ...floorsOnChart.map((floor) => [
+            'F' + floor,
+            ...jumpSeries.map((series) => series.pts.find((point) => point.floor === floor)?.pct ?? '')
+          ])
+        ], 'oow-' + st.mode + '-' + jMode + '-growth.csv');
+      },
       modeBadge: st.chartMode === 'ehp' ? (isRu ? '🛡 Эффективное HP (EHP)' : '🛡 Effective HP (EHP)') : (isRu ? '❤ Номинальное HP' : '❤ Raw HP'),
       showGuide,
       guideX,
@@ -2192,8 +2592,8 @@ class Component extends DCLogic {
       onHistLeave: () => this.setState({ histHoverSeason: null }),
       jumpFloor: () => this.setState({ jumpMode: 'floor' }),
       jumpSeason: () => this.setState({ jumpMode: 'season' }),
-      jumpFloorStyle: cctl(jMode === 'floor', '#f5d97a'),
-      jumpSeasonStyle: cctl(jMode === 'season', '#c79dff'),
+      jumpFloorStyle: subctl(jMode === 'floor', '#f5d97a'),
+      jumpSeasonStyle: subctl(jMode === 'season', '#c79dff'),
       jumpGuide,
       jumpGuideX,
       jumpGuidePct,

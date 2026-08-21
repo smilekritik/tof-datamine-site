@@ -46,6 +46,119 @@ a:hover { color: #ffe9a8; }
   overflow: hidden;
 }
 
+.oow-chart-theme-control {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-left: auto;
+}
+
+.oow-chart-theme-control__label {
+  color: #948aa8;
+  font: 700 9px/1 "Manrope", sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.oow-chart-theme-switch {
+  display: flex;
+  gap: 3px;
+  height: 34px;
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 9px;
+  background: rgba(7,5,11,.72);
+}
+
+.oow-chart-theme-switch__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 74px;
+  padding: 0 10px;
+  font: 700 10px/1 "Manrope", sans-serif;
+  cursor: pointer;
+  transition: background-color .16s ease, color .16s ease, box-shadow .16s ease;
+}
+
+.oow-chart-theme-switch__button:hover {
+  color: #f6f1fb !important;
+}
+
+.oow-chart-theme-switch__button[aria-pressed="true"] {
+  box-shadow: 0 3px 12px rgba(245,217,122,.16);
+}
+
+.oow-chart-theme-switch__icon {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.oow-chart-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.oow-chart-export-button {
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,.05);
+  color: #cbc2de;
+  font: 700 10px/1 "Manrope", sans-serif;
+  cursor: pointer;
+  transition: transform .15s ease, filter .15s ease, background-color .15s ease;
+}
+
+.oow-chart-export-button--primary {
+  border-color: #f5d97a;
+  background: #f5d97a;
+  color: #17111f;
+}
+
+.oow-chart-export-button--compact {
+  min-width: 48px;
+  min-height: 29px;
+  padding: 0 9px;
+}
+
+.oow-subchart-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.oow-subchart-export-actions,
+.oow-subchart-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+}
+
+.oow-subchart-tools {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.oow-chart-export-button:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
 #oow-boss-floating-art {
   position: absolute;
   left: calc(50vw + 735px);
@@ -73,7 +186,8 @@ a:hover { color: #ffe9a8; }
 }
 
 @media (max-width: 900px) {
-  .oow-main-layout { flex-direction: column !important; gap: 14px !important; }
+  .oow-main-layout { flex-direction: column !important; align-items: stretch !important; gap: 14px !important; }
+  .oow-main-layout > * { min-width: 0 !important; max-width: 100% !important; }
   .oow-season-aside { width: 100% !important; max-height: 240px !important; position: static !important; }
   .oow-season-aside > div:last-child { max-height: 190px !important; }
   #oow-boss-floating-art { display: none !important; }
@@ -85,18 +199,31 @@ a:hover { color: #ffe9a8; }
   .oow-mob-ehp-val { font-size: 16px !important; }
   .oow-affixes-grid { grid-template-columns: 1fr !important; }
   .oow-chart-controls, .oow-chart-pair { grid-template-columns: 1fr !important; }
-  .oow-table-panel { overflow-x: auto !important; }
+  .oow-table-panel { width: 100% !important; max-width: 100% !important; min-width: 0 !important; overflow-x: auto !important; }
   .oow-floor-grid { min-width: 760px; }
   .oow-diff-grid { min-width: 780px; }
   .oow-element-grid { grid-template-columns: repeat(3, 1fr) !important; }
+  .oow-chart-theme-control { width: 100%; margin-left: 0; justify-content: space-between; }
 }
 
 @media (max-width: 600px) {
   .oow-header-nav { display: none !important; }
+  .oow-mob-card { flex: 1 1 100% !important; min-width: 0 !important; }
   .oow-mob-hp-col { min-width: 82px !important; }
   .oow-mob-hp-val { font-size: 18px !important; }
   .oow-mob-ehp-val { font-size: 15px !important; }
   .oow-element-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .oow-chart-actions { justify-content: flex-start; }
+  .oow-chart-export-button { flex: 1; }
+  .oow-chart-actions > span { width: 100%; text-align: center; }
+  .oow-subchart-header { flex-direction: column; }
+  .oow-subchart-export-actions { width: 100%; }
+  .oow-subchart-tools { width: 100%; justify-content: flex-start; }
+  /* Deep-intel modal: stack stat cards and tighten padding so nothing scrolls sideways */
+  .oow-primary-grid { grid-template-columns: 1fr !important; }
+  .oow-modal-header { padding: 16px 16px !important; gap: 12px !important; }
+  .oow-modal-header img { width: 64px !important; height: 64px !important; }
+  .oow-modal-body { padding: 16px !important; }
 }
 
 .oow-header-brand,

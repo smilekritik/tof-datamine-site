@@ -1,5 +1,44 @@
 (function () {
+  const SERVER_CACHE_RECOVERY_KEY = "tof-datamine-server-cache-recovery-v1";
+  const SERVER_CACHE_RECOVERY_RELOAD_KEY = "tof-datamine-server-cache-recovery-reload-v1";
+
+  async function removeLegacyServerWorkerCache() {
+    if (location.hostname !== "tof.smilekritik.beer" || !("serviceWorker" in navigator)) return;
+    try {
+      if (localStorage.getItem(SERVER_CACHE_RECOVERY_KEY) === "done") return;
+
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      const datamineRegistrations = registrations.filter((registration) => {
+        try {
+          return new URL(registration.scope).pathname.startsWith("/datamine/");
+        } catch (error) {
+          return false;
+        }
+      });
+      const cacheNames = "caches" in window ? await caches.keys() : [];
+      const legacyCacheNames = cacheNames.filter((name) => name.startsWith("tof-datamine-"));
+
+      await Promise.all([
+        ...datamineRegistrations.map((registration) => registration.unregister()),
+        ...legacyCacheNames.map((name) => caches.delete(name))
+      ]);
+      localStorage.setItem(SERVER_CACHE_RECOVERY_KEY, "done");
+
+      const hadLegacyCache = datamineRegistrations.length > 0 || legacyCacheNames.length > 0;
+      if (hadLegacyCache && sessionStorage.getItem(SERVER_CACHE_RECOVERY_RELOAD_KEY) !== "done") {
+        sessionStorage.setItem(SERVER_CACHE_RECOVERY_RELOAD_KEY, "done");
+        location.reload();
+      }
+    } catch (error) {
+      // Cache recovery is best-effort; normal server-rendered pages still work.
+    }
+  }
+
+  removeLegacyServerWorkerCache();
+
   const STORAGE_KEY = "tof-datamine-language";
+  const LANGUAGE_COOKIE = "tof-datamine-language";
+  const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
   const LEGACY_STORAGE_KEYS = ["fce-language", "seq-language", "items-language"];
   const SECTIONS = [
     { id: "oow", href: "oow/", label: { en: "Origin of War", ru: "Истоки войны" } },
@@ -33,14 +72,35 @@
   };
   let hasFetchedExportMeta = false;
 
+  function readCookie(name) {
+    const prefix = encodeURIComponent(name) + "=";
+    const entry = document.cookie.split(";").map((part) => part.trim()).find((part) => part.startsWith(prefix));
+    return entry ? decodeURIComponent(entry.slice(prefix.length)) : "";
+  }
+
+  function writeLanguageCookie(value) {
+    const secure = location.protocol === "https:" ? "; Secure" : "";
+    document.cookie = `${encodeURIComponent(LANGUAGE_COOKIE)}=${encodeURIComponent(value)}; Max-Age=${COOKIE_MAX_AGE}; Path=/datamine/; SameSite=Lax${secure}`;
+  }
+
   function resolveInitialLanguage() {
+    const cookieLanguage = readCookie(LANGUAGE_COOKIE);
+    if (cookieLanguage === "ru" || cookieLanguage === "en") {
+      localStorage.setItem(STORAGE_KEY, cookieLanguage);
+      return cookieLanguage;
+    }
+
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === "ru" || stored === "en") return stored;
+    if (stored === "ru" || stored === "en") {
+      writeLanguageCookie(stored);
+      return stored;
+    }
 
     for (const key of LEGACY_STORAGE_KEYS) {
       const legacy = localStorage.getItem(key);
       if (legacy === "ru" || legacy === "en") {
         localStorage.setItem(STORAGE_KEY, legacy);
+        writeLanguageCookie(legacy);
         return legacy;
       }
     }
@@ -139,6 +199,7 @@
     const changed = normalized !== language;
     language = normalized;
     localStorage.setItem(STORAGE_KEY, language);
+    writeLanguageCookie(language);
     renderAll();
     if (notify && changed) {
       window.dispatchEvent(new CustomEvent("datamine:language-change", { detail: { language } }));

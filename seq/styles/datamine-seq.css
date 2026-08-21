@@ -254,6 +254,7 @@
 
 .seq-chart-stack {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
 }
 
@@ -607,9 +608,66 @@
     padding: 14px;
   }
 
+  /* Scale the chart to fit the viewport (via its viewBox) instead of forcing a
+     wide horizontal scroll — matches the OOW charts. Tap the chart to open the
+     zoom modal for a detailed, pannable read. */
+  .seq-chart-frame {
+    cursor: zoom-in;
+  }
+
   .seq-chart-svg {
-    min-width: 1120px;
-    width: auto;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+  }
+
+  /* Fit the "Loaded values" table to the viewport: fixed layout with more room
+     for the Row id and tighter number columns. */
+  .seq-table {
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .seq-table th,
+  .seq-table td {
+    padding: 7px 5px;
+    font-size: 10.5px;
+  }
+
+  .seq-table th:nth-child(1),
+  .seq-table td:nth-child(1) {
+    width: 8%;
+  }
+
+  .seq-table th:nth-child(2),
+  .seq-table td:nth-child(2) {
+    width: 34%;
+  }
+
+  .seq-table th:nth-child(3),
+  .seq-table td:nth-child(3) {
+    width: 25%;
+  }
+
+  .seq-table th:nth-child(4),
+  .seq-table td:nth-child(4) {
+    width: 17%;
+  }
+
+  .seq-table th:nth-child(5),
+  .seq-table td:nth-child(5) {
+    width: 16%;
+  }
+
+  .seq-table td,
+  .seq-table th {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .seq-table td code {
+    padding: 2px 4px;
+    font-size: 10px;
   }
 }
 

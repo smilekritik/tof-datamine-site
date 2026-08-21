@@ -90,21 +90,66 @@
       window.addEventListener("resize", handleResize);
       window.addEventListener("load", updateSceneScale);
     } catch (error) {
+      console.error("[FCE] Failed to initialise boss data:", error);
       renderError(getUiText("loadError"));
     }
   }
 
   async function loadJson(url, required) {
-    const response = await fetch(url);
+    // Slow/flaky mobile connections drop the odd request; retry transient
+    // failures (network errors, 5xx, truncated bodies) with a short backoff so a
+    // single dropped fetch doesn't wedge the whole page. Genuine client errors
+    // (4xx) are not transient, so they stop immediately.
+    const maxAttempts = 3;
+    const backoff = (attempt) =>
+      new Promise((resolve) => setTimeout(resolve, 600 * attempt));
+    let lastError = null;
 
-    if (!response.ok) {
-      if (required) {
-        throw new Error(`HTTP ${response.status}`);
+    for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+      let response;
+      try {
+        // Bypass any stale/heuristically-cached copy (the server sends no
+        // Cache-Control) so a bad cached entry can't wedge the page permanently.
+        response = await fetch(url, { cache: "reload" });
+      } catch (error) {
+        lastError = error;
+        if (attempt < maxAttempts) {
+          await backoff(attempt);
+        }
+        continue;
       }
-      return null;
+
+      if (response.ok) {
+        try {
+          return await response.json();
+        } catch (error) {
+          lastError = error;
+          if (attempt < maxAttempts) {
+            await backoff(attempt);
+          }
+          continue;
+        }
+      }
+
+      if (response.status >= 400 && response.status < 500) {
+        // Client error — retrying will not help.
+        if (required) {
+          throw new Error(`HTTP ${response.status} for ${url}`);
+        }
+        return null;
+      }
+
+      // 5xx / opaque — treat as transient.
+      lastError = new Error(`HTTP ${response.status} for ${url}`);
+      if (attempt < maxAttempts) {
+        await backoff(attempt);
+      }
     }
 
-    return response.json();
+    if (required) {
+      throw lastError || new Error(`Failed to load ${url}`);
+    }
+    return null;
   }
 
   function createBossTranslationMap(json) {

@@ -960,7 +960,7 @@ html[data-multype-theme="dark"] .page--datamine-multype .multype-value--renamed 
     max-height: none;
   }
 
-  .multype-toolbar__row--filters {
+  .page--datamine-multype .multype-toolbar__row--filters {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
   }
