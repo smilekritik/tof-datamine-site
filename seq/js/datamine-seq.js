@@ -1,10 +1,79 @@
 (function () {
   const BASE_RESIST_RATE = 0.3471;
-  const DATA_FILE = "./DT_MonsterStaticData_Overseas.json";
-  const CACHE_FILE = "./seq-boss-cache.json";
-  const CACHE_REFRESH_API = "/api/seq-cache/refresh";
-  const STAGE_LIMIT_FILE = "./seq-stage-limit.txt";
-  const MECHANICS_FILE = "./seq-mechanics-overrides.json";
+  const CACHE_FILE = "./data/seq-boss-cache.json";
+  const STAGE_LIMIT_FILE = "./data/seq-stage-limit.txt";
+  const MECHANICS_FILE = "./data/seq-mechanics-overrides.json";
+  const LANG_STORAGE_KEY = "tof-datamine-language";
+  const UI_TEXT = {
+    en: {
+      pageTitle: "TOF Sequential Damage Charts",
+      brand: "Sequential Analysis",
+      navItems: "Items",
+      navSequential: "Sequential",
+      navOow: "Origin of War",
+      navAria: "Datamine sections",
+      eyebrow: "DATAMINE · SEQUENTIAL",
+      title: "Sequential boss scaling from datamined data",
+      sourceTitle: "Datamined source only",
+      sourceBody: `The values on this page are extracted from datamined game data in <a class="seq-inline-link" href="./data/DT_MonsterStaticData_Overseas.json"><code>DT_MonsterStaticData_Overseas.json</code></a>. For the follow-up calculations, the page applies the sequential base resist of <code>7500</code>, which is treated here as <code>34.71%</code>. To estimate the required damage, account for resistance ignore, the boss being invulnerable for the first 3 seconds, one or two shields that reduce damage by 50%, and a 1–3% difference from cactus testing. With 50% resistance ignore, the resulting value is the estimated damage required.`,
+      chartsTitle: "Charts",
+      chartEffective: "Approximated total DMG needed in 150s without all Sequential mechanics",
+      chartPure: "Boss HP in Sequential (pure HP, without resistances)",
+      chartPowercreep: "Approximated powercreep from the previous stage",
+      downloadPng: "Download PNG",
+      downloadCsv: "Download CSV",
+      loadedTitle: "Loaded values",
+      loadedDescription: "Preview of the current rows and calculated values. The export buttons above save CSV files that open directly in Excel.",
+      stage: "Stage",
+      row: "Row",
+      effectiveHp: "Effective HP",
+      powercreep: "Powercreep",
+      loading: "Loading...",
+      noRows: "No rows loaded.",
+      noChart: "No valid rows are available for this chart.",
+      axisStage: "Sequential stage",
+      mechanicsNote: "Includes a mechanics-adjusted HP formula.",
+      footer: "TOF leaks, insane suffer with datamine",
+      zoomEyebrow: "Chart zoom",
+      zoomHint: "Click a chart to open zoom. In zoom view, use the mouse wheel to scale and drag to pan.",
+      zoomAria: "Chart zoom",
+      close: "Close"
+    },
+    ru: {
+      pageTitle: "TOF — графики Последовательности",
+      brand: "Анализ этапов",
+      navItems: "Предметы",
+      navSequential: "Последовательность",
+      navOow: "Исток войны",
+      navAria: "Разделы датамайна",
+      eyebrow: "ДАТАМАЙН · ПОСЛЕДОВАТЕЛЬНОСТЬ",
+      title: "Рост характеристик боссов по данным датамайна",
+      sourceTitle: "Только данные датамайна",
+      sourceBody: `Значения на этой странице извлечены из игровых данных в файле <a class="seq-inline-link" href="./data/DT_MonsterStaticData_Overseas.json"><code>DT_MonsterStaticData_Overseas.json</code></a>. В дальнейших расчётах используется базовое сопротивление Последовательности <code>7500</code>, принятое за <code>34,71%</code>. При оценке необходимого урона учитываются игнорирование сопротивления, неуязвимость босса в первые 3 секунды, один или два щита со снижением урона на 50% и отклонение на 1–3% относительно теста на кактусе. При 50% игнорирования сопротивления итоговое значение показывает примерный необходимый урон.`,
+      chartsTitle: "Графики",
+      chartEffective: "Примерный общий урон за 150 секунд без учёта всех механик Последовательности",
+      chartPure: "HP босса в Последовательности (чистое HP без сопротивлений)",
+      chartPowercreep: "Примерный рост относительно предыдущего этапа",
+      downloadPng: "Скачать PNG",
+      downloadCsv: "Скачать CSV",
+      loadedTitle: "Загруженные значения",
+      loadedDescription: "Предпросмотр текущих строк и рассчитанных значений. Кнопки выше сохраняют CSV-файлы, которые можно открыть напрямую в Excel.",
+      stage: "Этап",
+      row: "Строка",
+      effectiveHp: "Эффективное HP",
+      powercreep: "Рост",
+      loading: "Загрузка...",
+      noRows: "Данные не загружены.",
+      noChart: "Для этого графика нет корректных данных.",
+      axisStage: "Этап Последовательности",
+      mechanicsNote: "Используется формула HP с учётом механик.",
+      footer: "TOF leaks — безумные страдания с датамайном",
+      zoomEyebrow: "Масштабирование графика",
+      zoomHint: "Нажмите на график, чтобы открыть его крупнее. Используйте колесо мыши для масштаба и перетаскивание для перемещения.",
+      zoomAria: "Увеличенный график",
+      close: "Закрыть"
+    }
+  };
 
   const FALLBACK_ROWS = [
     { stage: 1, rowId: "endless_special_boss_1", maxHealth: 266444540 },
@@ -69,6 +138,7 @@
     stageLimit: 0,
     mechanicsOverrides: DEFAULT_MECHANICS_OVERRIDES,
     chartExports: {},
+    language: resolveInitialLanguage(),
     zoom: {
       chartKey: "",
       title: "",
@@ -106,11 +176,57 @@
   };
 
   window.addEventListener("DOMContentLoaded", () => {
+    window.DatamineHeader?.setLanguage(state.language, false);
+    window.addEventListener("datamine:language-change", handleLanguageChange);
+    renderStaticUi();
     bindActions();
     bindChartFrames();
     bindZoomInteractions();
     loadAndRender();
   });
+
+  function handleLanguageChange(event) {
+    const nextLanguage = event.detail?.language === "ru" ? "ru" : "en";
+    if (nextLanguage === state.language) return;
+    state.language = nextLanguage;
+    renderStaticUi();
+    renderTable();
+    renderCharts();
+  }
+
+  function renderStaticUi() {
+    document.documentElement.lang = state.language;
+    document.title = getUiText("pageTitle");
+
+    document.querySelectorAll("[data-seq-ui]").forEach((element) => {
+      element.textContent = getUiText(element.getAttribute("data-seq-ui"));
+    });
+    document.querySelectorAll("[data-seq-ui-html]").forEach((element) => {
+      element.innerHTML = getUiText(element.getAttribute("data-seq-ui-html"));
+    });
+    const zoomDialog = document.querySelector("[data-seq-zoom-dialog]");
+    zoomDialog?.setAttribute("aria-label", getUiText("zoomAria"));
+  }
+
+  function resolveInitialLanguage() {
+    const fromSearch = new URLSearchParams(window.location.search).get("lang");
+    if (fromSearch === "ru" || fromSearch === "en") {
+      return fromSearch;
+    }
+    const stored = localStorage.getItem(LANG_STORAGE_KEY);
+    return stored === "ru" || stored === "en" ? stored : "en";
+  }
+
+  function getUiText(key) {
+    return UI_TEXT[state.language]?.[key] || UI_TEXT.en[key] || "";
+  }
+
+  function getMechanicsNote(entry) {
+    if (!entry?.isMechanicsAdjusted) {
+      return "";
+    }
+    return state.language === "ru" ? getUiText("mechanicsNote") : (entry.mechanicsNote || getUiText("mechanicsNote"));
+  }
 
   function bindActions() {
     document.querySelectorAll("[data-action]").forEach((button) => {
@@ -271,9 +387,7 @@
 
   async function loadStageLimit(warnings) {
     try {
-      const response = await fetch(`${STAGE_LIMIT_FILE}?t=${Date.now()}`, {
-        cache: "no-store"
-      });
+      const response = await fetch(STAGE_LIMIT_FILE);
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
@@ -301,14 +415,15 @@
       return cachedRows;
     }
 
-    return loadLiveDatamineRows(warnings);
+    warnings.push(
+      `Could not use ${CACHE_FILE}. The page is using bundled sample values until the background cache is refreshed.`
+    );
+    return buildFallbackRows();
   }
 
   async function loadCachedDatamineRows(stageLimit, warnings) {
     try {
-      const response = await fetch(`${CACHE_FILE}?t=${Date.now()}`, {
-        cache: "no-store"
-      });
+      const response = await fetch(CACHE_FILE);
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
@@ -329,99 +444,30 @@
         };
       }
 
-      const refreshedRows = await refreshCachedDatamineRows(stageLimit, warnings);
-      if (refreshedRows) {
-        return refreshedRows;
-      }
+      throw new Error(`Cache stops at stage ${cachedStageLimit}.`);
     } catch (error) {
       warnings.push(
-        `Could not read ${CACHE_FILE}. Falling back to the live sequential file.`
+        `Could not read a complete ${CACHE_FILE}: ${error.message}`
       );
     }
 
     return null;
   }
 
-  async function refreshCachedDatamineRows(stageLimit, warnings) {
-    try {
-      const response = await fetch(
-        `${CACHE_REFRESH_API}?stageLimit=${encodeURIComponent(stageLimit)}&t=${Date.now()}`,
-        {
-          cache: "no-store"
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const json = await response.json();
-      const rows = extractRows(json);
-      const cachedStageLimit = resolveCachedStageLimit(json, rows);
-
-      if (rows.size === 0) {
-        throw new Error("No valid rows were returned after refresh.");
-      }
-
-      if (cachedStageLimit < stageLimit || !hasRowsForStageLimit(rows, stageLimit)) {
-        throw new Error(`Cache refresh stopped at stage ${cachedStageLimit}.`);
-      }
-
-      return {
-        rows,
-        sourceLabel: `${CACHE_FILE} (refreshed to stage ${cachedStageLimit})`
-      };
-    } catch (error) {
-      warnings.push(
-        `Could not refresh ${CACHE_FILE} for stage ${stageLimit}. The page will read the full live file instead.`
-      );
-      return null;
-    }
-  }
-
-  async function loadLiveDatamineRows(warnings) {
-    try {
-      const response = await fetch(`${DATA_FILE}?t=${Date.now()}`, {
-        cache: "no-store"
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const json = await response.json();
-      const rows = extractRows(json);
-
-      if (rows.size === 0) {
-        throw new Error("No valid rows were found.");
-      }
-
-      return {
-        rows,
-        sourceLabel: `${DATA_FILE} (live file)`
-      };
-    } catch (error) {
-      warnings.push(
-        `Could not read ${DATA_FILE}. The page is using bundled sample values until a live file is placed next to this page.`
-      );
-
-      const fallbackMap = new Map();
-      FALLBACK_ROWS.forEach((entry) => {
-        fallbackMap.set(entry.rowId, entry.maxHealth);
-      });
-
-      return {
-        rows: fallbackMap,
-        sourceLabel: "Bundled fallback sample"
-      };
-    }
+  function buildFallbackRows() {
+    const rows = new Map();
+    FALLBACK_ROWS.forEach((entry) => {
+      rows.set(entry.rowId, entry.maxHealth);
+    });
+    return {
+      rows,
+      sourceLabel: "Bundled fallback sample"
+    };
   }
 
   async function loadMechanicsOverrides(warnings) {
     try {
-      const response = await fetch(`${MECHANICS_FILE}?t=${Date.now()}`, {
-        cache: "no-store"
-      });
+      const response = await fetch(MECHANICS_FILE);
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
@@ -570,7 +616,7 @@
     }
 
     if (state.dataset.length === 0) {
-      tableBody.innerHTML = "<tr><td colspan=\"5\">No rows loaded.</td></tr>";
+      tableBody.innerHTML = `<tr><td colspan="5">${escapeHtml(getUiText("noRows"))}</td></tr>`;
       return;
     }
 
@@ -595,7 +641,7 @@
         const root = document.querySelector(`[data-chart="${key}"]`);
         if (root) {
           root.innerHTML =
-            '<p style="padding: 24px; margin: 0; color: #444444; font: 14px sans-serif;">No valid rows are available for this chart.</p>';
+            `<p style="padding: 24px; margin: 0; color: #444444; font: 14px sans-serif;">${escapeHtml(getUiText("noChart"))}</p>`;
         }
         state.chartExports[key] = "";
       });
@@ -604,49 +650,49 @@
 
     const chartConfigs = {
       pure: {
-        title: "Amount of boss HP in sequential (pure HP, no resists)",
+        title: getUiText("chartPure"),
         width: CHART_DIMENSIONS.width,
         height: CHART_DIMENSIONS.height,
-        color: "#6aa84f",
+        color: "#f5d97a",
         mode: "linear",
         forceZero: true,
         tickFormatter: (value) => formatAxisCompact(value),
         values: state.dataset.map((entry) => ({
           stage: entry.stage,
           value: entry.maxHealth,
-          tooltip: `Stage ${entry.stage}: ${formatInteger(entry.maxHealth)}`,
+          tooltip: `${getUiText("stage")} ${entry.stage}: ${formatInteger(entry.maxHealth)}`,
           isMechanicsAdjusted: false,
           label: formatCompact(entry.maxHealth)
         }))
       },
       powercreep: {
-        title: "Approximated total powercreep from previous stage",
+        title: getUiText("chartPowercreep"),
         width: CHART_DIMENSIONS.width,
         height: CHART_DIMENSIONS.height,
-        color: "#e69138",
+        color: "#ff9bb2",
         mode: "linear",
         forceZero: false,
         tickFormatter: (value) => `${value.toFixed(0)}%`,
         values: state.dataset.map((entry) => ({
           stage: entry.stage,
           value: entry.powercreep,
-          tooltip: `Stage ${entry.stage}${entry.isMechanicsAdjusted ? "*" : ""}: ${formatPercent(entry.powercreep)}${entry.isMechanicsAdjusted ? ` (${entry.mechanicsNote})` : ""}`,
+          tooltip: `${getUiText("stage")} ${entry.stage}${entry.isMechanicsAdjusted ? "*" : ""}: ${formatPercent(entry.powercreep)}${entry.isMechanicsAdjusted ? ` (${getMechanicsNote(entry)})` : ""}`,
           isMechanicsAdjusted: entry.isMechanicsAdjusted,
           label: `${formatPercent(entry.powercreep)}${entry.isMechanicsAdjusted ? "*" : ""}`
         }))
       },
       effective: {
-        title: "Approximated total DMG was needed in 150s without ALL mechs in sequential",
+        title: getUiText("chartEffective"),
         width: CHART_DIMENSIONS.width,
         height: CHART_DIMENSIONS.height,
-        color: "#a64d79",
+        color: "#b57bff",
         mode: "linear",
         forceZero: true,
         tickFormatter: (value) => formatAxisCompact(value),
         values: state.dataset.map((entry) => ({
           stage: entry.stage,
           value: entry.effectiveHp,
-          tooltip: `Stage ${entry.stage}${entry.isMechanicsAdjusted ? "*" : ""}: ${formatCompact(entry.effectiveHp)}${entry.isMechanicsAdjusted ? ` (${entry.mechanicsNote})` : ""}`,
+          tooltip: `${getUiText("stage")} ${entry.stage}${entry.isMechanicsAdjusted ? "*" : ""}: ${formatCompact(entry.effectiveHp)}${entry.isMechanicsAdjusted ? ` (${getMechanicsNote(entry)})` : ""}`,
           isMechanicsAdjusted: entry.isMechanicsAdjusted,
           label: `${formatCompact(entry.effectiveHp)}${entry.isMechanicsAdjusted ? "*" : ""}`
         }))
@@ -784,7 +830,7 @@
         ${points}
         ${labels}
         ${xAxisLabels}
-        <text x="${width / 2}" y="${height - 22}" text-anchor="middle" font-size="${CHART_TEXT.axisLabel}" fill="#555555">Sequential stage</text>
+        <text x="${width / 2}" y="${height - 22}" text-anchor="middle" font-size="${CHART_TEXT.axisLabel}" fill="#555555">${escapeHtml(getUiText("axisStage"))}</text>
       </svg>
     `.trim();
   }
@@ -956,16 +1002,18 @@
       : Math.min(0, minValue - padding);
     const maxBound = maxValue + padding;
     const ticks = buildLinearTicks(minBound, maxBound, 8);
-    const range = maxBound - minBound || 1;
+    const scaleMin = Math.min(minBound, ticks[0] ?? minBound);
+    const scaleMax = Math.max(maxBound, ticks[ticks.length - 1] ?? maxBound);
+    const range = scaleMax - scaleMin || 1;
 
     return {
       ticks: ticks.map((tickValue) => ({
         value: tickValue,
         label: options.tickFormatter ? options.tickFormatter(tickValue) : String(tickValue),
-        major: Math.abs(tickValue) < 0.0001 || tickValue === minBound
+        major: Math.abs(tickValue) < 0.0001 || tickValue === scaleMin
       })),
       toY(value) {
-        const position = (value - minBound) / range;
+        const position = (value - scaleMin) / range;
         return topOffset + chartHeight - position * chartHeight;
       }
     };
@@ -1253,7 +1301,7 @@
       return label;
     }
 
-    return `${label}<span class="seq-footnote" title="${escapeHtml(entry.mechanicsNote)}">*</span>`;
+    return `${label}<span class="seq-footnote" title="${escapeHtml(getMechanicsNote(entry))}">*</span>`;
   }
 
   function clamp(value, min, max) {
@@ -1281,7 +1329,7 @@
     const value = target.getAttribute("data-value") || "";
     const note = target.getAttribute("data-note") || "";
     tooltip.innerHTML = `
-      <span class="seq-chart-tooltip__stage">Stage ${escapeHtml(stage)}</span>
+      <span class="seq-chart-tooltip__stage">${escapeHtml(getUiText("stage"))} ${escapeHtml(stage)}</span>
       <span class="seq-chart-tooltip__value">${escapeHtml(value)}</span>
       ${note ? `<span class="seq-chart-tooltip__note">${escapeHtml(note)}</span>` : ""}
     `;

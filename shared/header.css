@@ -1,0 +1,219 @@
+.datamine-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(12, 8, 18, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.datamine-header__inner {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 64px;
+  margin: 0;
+  padding: 10px 36px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: 28px;
+}
+
+.datamine-header__nav,
+.datamine-header__language,
+.datamine-header__right-area {
+  display: flex;
+  align-items: center;
+}
+
+.datamine-header__brand {
+  min-width: 0;
+  max-width: 100%;
+  justify-self: start;
+  overflow: hidden;
+  color: #f5d97a;
+  font: 400 19px/1 "Spectral", serif;
+  letter-spacing: 0.05em;
+  text-align: left;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.datamine-header__nav {
+  justify-self: center;
+  gap: 20px;
+}
+
+.datamine-header__link {
+  color: #7a7290;
+  font: 600 12.5px/1 "Manrope", sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.datamine-header__link:hover,
+.datamine-header__link.is-active {
+  color: #f5d97a;
+}
+
+.datamine-header__right-area {
+  justify-self: end;
+  gap: 16px;
+}
+
+/* Language Switcher */
+.datamine-header__language {
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.datamine-header__language-button {
+  min-width: 38px;
+  min-height: 26px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #7a7290;
+  font: 700 10px/1 "Manrope", sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.datamine-header__language-button.is-active {
+  background: #f5d97a;
+  color: #17101e;
+}
+
+/* Export Version Widget (Far Right) */
+.datamine-header__export-info {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 10px 4px 11px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+}
+
+.datamine-header__export-info:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(245, 224, 107, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.datamine-header__export-label {
+  font: 700 10.5px/1.2 "Manrope", sans-serif;
+  color: #a49cb8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding-right: 9px;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.datamine-header__export-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.datamine-header__export-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font: 500 11px/1.2 "Manrope", sans-serif;
+  color: #cfc8de;
+  white-space: nowrap;
+}
+
+.datamine-header__export-key {
+  color: #7e7694;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.datamine-header__export-client-name {
+  font-weight: 700;
+  color: #eee9f7;
+}
+
+/* Version Badge (Leaks Style) */
+.datamine-header__version-badge {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #f5e06b;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(245, 224, 107, 0.14);
+  border: 1px solid rgba(245, 224, 107, 0.32);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  line-height: 1.25;
+}
+
+.datamine-header__export-info:hover .datamine-header__version-badge {
+  background: rgba(245, 224, 107, 0.24);
+  border-color: rgba(245, 224, 107, 0.55);
+  color: #fff4a3;
+  box-shadow: 0 0 8px rgba(245, 224, 107, 0.2);
+}
+
+.datamine-header__brand:focus-visible,
+.datamine-header__link:focus-visible,
+.datamine-header__language-button:focus-visible {
+  outline: 2px solid rgba(245, 217, 122, 0.68);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1080px) {
+  .datamine-header__inner {
+    padding-inline: 18px;
+    column-gap: 16px;
+  }
+
+  .datamine-header__nav {
+    gap: 12px;
+  }
+
+  .datamine-header__export-label {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .datamine-header__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-inline: 14px;
+  }
+
+  .datamine-header__brand {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .datamine-header__nav {
+    display: none;
+  }
+
+  .datamine-header__export-info {
+    padding: 3px 8px;
+    gap: 6px;
+  }
+}

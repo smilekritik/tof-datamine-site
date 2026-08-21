@@ -1,0 +1,120 @@
+{
+  "generatedAt": "2026-08-21T08:38:23.897Z",
+  "catalogSource": "Hotta/Content/ResourcesOverSea/CoreBlueprints/DataTable/Dungeon/VoidCloneBossConfigDataTable_Overseas.json",
+  "description": "Bosses missing from the curated FCE list, ordered by the in-game boss catalog.",
+  "bosses": [
+    {
+      "order": 2,
+      "configId": "void_boss_2",
+      "bossId": "Boss_hum_006",
+      "bossNum": 6,
+      "sourceName": "罗贝拉格",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss001.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss001.png",
+      "mechanicsCount": 4,
+      "mechanics": [
+        {
+          "index": "1",
+          "key": "Boss_hum_006_1_des",
+          "en": "Robarg loses no more than 3.5% Max HP per second.",
+          "ru": "Робарг теряет не более 3,5% от максимального запаса здоровья в секунду."
+        },
+        {
+          "index": "2",
+          "key": "Buff_boss_006_02_NeuralToxin_des",
+          "en": "Stuns for 15s upon reaching 15 Neural Toxin stacks. Collect randomly spawned antidotes to remove all stacks.",
+          "ru": "При достижении 15 зарядов нейронного токсина эффект оглушает на 15 секунд. Собирайте случайно появляющиеся противоядия, чтобы снять все заряды."
+        },
+        {
+          "index": "3",
+          "key": "Boss_hum_006_3_des",
+          "en": "Increases Robarg's movement speed.",
+          "ru": "Увеличивает скорость передвижения Робарга."
+        },
+        {
+          "index": "4",
+          "key": "Boss_hum_006_4_des",
+          "en": "Robarg becomes Invincible every time he loses 25% Max HP and generates 3 purple areas nearby. His Invincibility breaks when players stand in all 3 areas simultaneously.",
+          "ru": "Робарг становится неуязвимым каждый раз, когда теряет 25% от максимального запаса здоровья и рядом с ним появляются 3 фиолетовые зоны. Его неуязвимость исчезает, когда игроки одновременно находятся во всех 3 зонах."
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "configId": "void_boss_4",
+      "bossId": "Boss_hum_008",
+      "bossNum": 8,
+      "sourceName": "伏尔甘",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss006.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss006.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 8,
+      "configId": "void_boss_10",
+      "bossId": "Boss_hum_022",
+      "bossNum": 22,
+      "sourceName": "伊希斯",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss010.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss010.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 9,
+      "configId": "void_boss_11",
+      "bossId": "Boss_hum_026",
+      "bossNum": 26,
+      "sourceName": "希尔",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss009.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss009.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 16,
+      "configId": "SY_boss_BZZ_LV4",
+      "bossId": "Boss_hum_072",
+      "bossNum": 72,
+      "sourceName": "编织者",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_04.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_04.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 18,
+      "configId": "SY_boss_SLZ",
+      "bossId": "Boss_hum_038",
+      "bossNum": 38,
+      "sourceName": "撕裂者G-042",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_07.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_07.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 30,
+      "configId": "SY_boss_XR_01",
+      "bossId": "BB91C1AE4398DE8458D238B03813381A",
+      "bossNum": null,
+      "sourceName": "希尔",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss009.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss009.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 35,
+      "configId": "SY_boss_tt_01",
+      "bossId": "boss_hum_055",
+      "bossNum": 55,
+      "sourceName": "晦暝·饕餮",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss024.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss024.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    }
+  ]
+}

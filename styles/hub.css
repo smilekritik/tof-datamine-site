@@ -1,0 +1,329 @@
+.page--datamine-hub {
+  --hub-bg: #0c0812;
+  --hub-surface: rgba(20, 15, 25, 0.88);
+  --hub-surface-raised: rgba(28, 21, 33, 0.94);
+  --hub-border: rgba(255, 255, 255, 0.09);
+  --hub-text: #d3cadf;
+  --hub-strong: #faf6fc;
+  --hub-muted: #9f95b0;
+  --hub-gold: #f5d97a;
+  --hub-violet: #b57bff;
+  --hub-mint: #4fe3c1;
+  --hub-rose: #ff9bb2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--hub-text);
+  font-family: "Manrope", sans-serif;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    radial-gradient(circle at 82% 3%, rgba(181, 123, 255, 0.11), transparent 30rem),
+    var(--hub-bg);
+  background-size: 48px 48px, 48px 48px, auto, auto;
+}
+
+.page--datamine-hub .noise-bg { opacity: 0.12; }
+
+.datamine-hub-layout {
+  width: 100%;
+  max-width: 1440px;
+  flex: 1 0 auto;
+  margin: 0 auto;
+  padding: 20px 28px 26px;
+}
+
+.datamine-hub-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+  align-items: end;
+  gap: 12px 40px;
+  margin-bottom: 18px;
+}
+
+.datamine-hub-hero__eyebrow {
+  grid-column: 1 / -1;
+  margin: 0 0 -4px;
+  color: var(--hub-violet);
+  font: 700 10px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: 0.16em;
+}
+
+.datamine-hub-hero__title {
+  margin: 0;
+  color: var(--hub-strong);
+  font: 500 clamp(30px, 3vw, 40px)/1.05 "Spectral", serif;
+  letter-spacing: -0.02em;
+}
+
+.datamine-hub-hero__subtitle {
+  max-width: 560px;
+  margin: 0 0 2px;
+  color: var(--hub-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.datamine-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.datamine-card {
+  --card-accent: var(--hub-gold);
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 208px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 17px 18px 16px;
+  overflow: hidden;
+  border: 1px solid var(--hub-border);
+  border-radius: 14px;
+  background: linear-gradient(145deg, var(--hub-surface-raised), var(--hub-surface));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.datamine-card::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--card-accent);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--card-accent) 35%, transparent);
+  content: "";
+}
+
+.datamine-card::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, color-mix(in srgb, var(--card-accent) 7%, transparent), transparent 38%);
+  content: "";
+}
+
+.datamine-card:hover {
+  border-color: color-mix(in srgb, var(--card-accent) 32%, var(--hub-border));
+  background: linear-gradient(145deg, rgba(34, 26, 40, 0.98), rgba(20, 15, 25, 0.94));
+  transform: translateY(-2px);
+}
+
+.datamine-card > * { position: relative; z-index: 1; }
+
+.datamine-card--oow {
+  grid-column: 1 / -1;
+  min-height: 218px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(520px, 0.95fr);
+  grid-template-areas:
+    "top top"
+    "heading seasons"
+    "body seasons"
+    "summary seasons"
+    "action seasons";
+  gap: 9px 32px;
+  --card-accent: var(--hub-gold);
+  background:
+    radial-gradient(circle at 92% 25%, rgba(245, 217, 122, 0.07), transparent 26rem),
+    linear-gradient(120deg, rgba(245, 217, 122, 0.055), rgba(181, 123, 255, 0.035)),
+    var(--hub-surface);
+}
+
+.datamine-card--fce { --card-accent: var(--hub-rose); }
+.datamine-card--seq { --card-accent: var(--hub-violet); }
+.datamine-card--multype { --card-accent: var(--hub-mint); }
+.datamine-card--items { --card-accent: var(--hub-gold); }
+
+.datamine-card--oow .datamine-card__topline { grid-area: top; }
+.datamine-card--oow .datamine-card__heading-row { grid-area: heading; }
+.datamine-card--oow .datamine-card__body { grid-area: body; }
+.datamine-card--oow .oow-season-summary { grid-area: summary; }
+.datamine-card--oow .oow-season-list { grid-area: seasons; align-self: stretch; }
+.datamine-card--oow .datamine-hub-button { grid-area: action; justify-self: start; }
+
+.datamine-card__topline {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.datamine-card__eyebrow,
+.datamine-card__index {
+  font: 700 9.5px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.datamine-card__eyebrow { color: var(--card-accent); }
+.datamine-card__index { color: #70677f; }
+
+.datamine-card__heading-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+}
+
+.datamine-card__title {
+  margin: 0;
+  color: var(--hub-strong);
+  font: 500 22px/1.08 "Spectral", serif;
+  letter-spacing: -0.015em;
+}
+
+.datamine-card--oow .datamine-card__title { font-size: clamp(25px, 2.1vw, 31px); }
+
+.datamine-card__metric {
+  min-width: 62px;
+  display: grid;
+  justify-items: end;
+  border-left: 1px solid color-mix(in srgb, var(--card-accent) 32%, transparent);
+  padding-left: 12px;
+}
+
+.datamine-card__metric strong {
+  color: var(--hub-strong);
+  font: 600 29px/0.9 "JetBrains Mono", monospace;
+  letter-spacing: -0.08em;
+}
+
+.datamine-card__metric span {
+  margin-top: 5px;
+  color: var(--card-accent);
+  font: 700 8.5px/1 "JetBrains Mono", monospace;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.datamine-card--oow .datamine-card__metric strong { font-size: 32px; }
+
+.datamine-card__body {
+  max-width: 760px;
+  margin: 0;
+  color: var(--hub-muted);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.datamine-hub-button {
+  display: inline-flex;
+  min-width: max-content;
+  min-height: 38px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: auto;
+  padding: 8px 13px;
+  border: 1px solid rgba(245, 217, 122, 0.35);
+  border-radius: 8px;
+  background: rgba(245, 217, 122, 0.075);
+  color: var(--hub-gold);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease, gap 160ms ease;
+}
+
+.datamine-hub-button::after { content: "→"; font: 600 14px/1 "JetBrains Mono", monospace; }
+.datamine-hub-button:hover { gap: 12px; border-color: var(--hub-gold); background: var(--hub-gold); color: #17101e; }
+
+.oow-season-summary { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.oow-stat {
+  min-width: 112px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 7px;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.028);
+}
+
+.oow-stat strong { color: var(--hub-strong); font: 600 16px/1 "JetBrains Mono", monospace; }
+.oow-stat span { color: var(--hub-muted); font-size: 10px; }
+
+.oow-season-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.oow-season {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+  padding: 10px;
+  border: 1px solid var(--hub-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.023);
+  color: var(--hub-text);
+}
+
+.oow-season:hover,
+.oow-season--current { border-color: rgba(245, 217, 122, 0.5); background: rgba(245, 217, 122, 0.075); }
+.oow-season--current { box-shadow: inset 0 -2px 0 rgba(245, 217, 122, 0.7); }
+.oow-season__code { color: var(--hub-gold); font: 700 15px/1 "JetBrains Mono", monospace; }
+.oow-season__dates { color: var(--hub-muted); font: 500 9px/1.45 "JetBrains Mono", monospace; }
+
+.hub-footer {
+  width: calc(100% - 56px);
+  max-width: 1384px;
+  flex: 0 0 auto;
+  margin: 0 auto;
+  padding: 15px 0 20px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--hub-border);
+  color: var(--hub-muted);
+  font-size: 10.5px;
+}
+
+.hub-footer a { color: var(--hub-gold); text-decoration: none; }
+
+.datamine-hub-button:focus-visible,
+.oow-season:focus-visible { outline: 2px solid rgba(245, 217, 122, 0.75); outline-offset: 3px; }
+
+@media (max-width: 1120px) {
+  .datamine-hub-hero { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .datamine-hub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .datamine-card--oow { grid-template-columns: minmax(0, 0.85fr) minmax(470px, 1.15fr); }
+}
+
+@media (max-width: 900px) {
+  .datamine-hub-layout { padding-inline: 14px; }
+  .hub-footer { width: calc(100% - 28px); }
+  .datamine-card--oow {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "top" "heading" "body" "summary" "seasons" "action";
+  }
+  .oow-season-list { min-height: 84px; }
+}
+
+@media (max-width: 640px) {
+  .datamine-hub-layout { padding-top: 16px; }
+  .datamine-hub-grid { grid-template-columns: minmax(0, 1fr); }
+  .datamine-card { min-height: 190px; }
+  .datamine-card--oow { grid-column: auto; }
+  .oow-season-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .oow-season:last-child { grid-column: 1 / -1; }
+  .hub-footer { gap: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .datamine-card,
+  .datamine-hub-button { transition: none; }
+  .datamine-card:hover { transform: none; }
+}

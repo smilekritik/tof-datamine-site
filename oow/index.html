@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Explore Origin of War seasons floor by floor: enemy HP, effective HP, waves, buffs, rewards, and difficulty schedules.">
+<meta name="theme-color" content="#0c0812">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TOF Datamine Archive">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://tof.smilekritik.beer/datamine/oow/">
+<meta property="og:title" content="TOF Origin of War Datamine">
+<meta property="og:description" content="Explore Origin of War seasons floor by floor: enemy HP, effective HP, waves, buffs, rewards, and difficulty schedules.">
+<meta property="og:image" content="https://tof.smilekritik.beer/datamine/social/oow.png">
+<meta property="og:image:secure_url" content="https://tof.smilekritik.beer/datamine/social/oow.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Origin of War seasonal enemy stats and floor data">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TOF Origin of War Datamine">
+<meta name="twitter:description" content="Explore Origin of War seasons floor by floor: enemy HP, effective HP, waves, buffs, rewards, and difficulty schedules.">
+<meta name="twitter:image" content="https://tof.smilekritik.beer/datamine/social/oow.png">
+<meta name="twitter:image:alt" content="Origin of War seasonal enemy stats and floor data">
+<link rel="canonical" href="https://tof.smilekritik.beer/datamine/oow/">
+<title>TOF Origin of War Datamine</title>
+<script src="../vendor/react-18.3.1.production.min.js"></script>
+<script src="../vendor/react-dom-18.3.1.production.min.js"></script>
+<script src="./js/support.js"></script>
+</head>
+<body>
+<div data-datamine-header data-current="oow"></div>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="../shared/fonts.css">
+<link rel="stylesheet" href="../shared/header.css">
+<script src="../shared/header.js"></script>
+<link rel="stylesheet" href="./styles/oow.css">
+</helmet>
+
+<div style="min-height:100vh; position:relative; color:#cbc2de; background:radial-gradient(120% 80% at 82% -8%, rgba(181,123,255,.16), transparent 52%), radial-gradient(90% 70% at 8% 0%, rgba(245,217,122,.07), transparent 48%), #0c0812; padding-bottom:80px;">
+
+  
+  
+
+  <!-- Static boss artwork in the right page margin. -->
+  <div id="oow-boss-floating-art">
+    <img src="{{ heroImg }}" data-src="{{ heroImg }}" alt="" />
+  </div>
+
+  <!-- 
+  ========================================================================
+  [FEATURE TOGGLE: DRAGGABLE / MOVEABLE BOSS ARTWORK]
+  To enable mouse dragging, uncomment the script below and set pointer-events:auto.
+  ========================================================================
+  <script>
+    (function initDraggableBoss() {
+      const el = document.getElementById('oow-boss-floating-art');
+      if (!el) return;
+      el.style.pointerEvents = 'auto';
+      el.style.cursor = 'grab';
+
+      let isDragging = false, startX, startY, initialLeft, initialTop;
+
+      el.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        el.style.cursor = 'grabbing';
+        const rect = el.getBoundingClientRect();
+        initialLeft = rect.left + window.scrollX;
+        initialTop = rect.top + window.scrollY;
+        startX = e.clientX;
+        startY = e.clientY;
+        el.style.right = 'auto';
+        el.style.left = initialLeft + 'px';
+        el.style.top = initialTop + 'px';
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        el.style.left = (initialLeft + dx) + 'px';
+        el.style.top = (initialTop + dy) + 'px';
+      });
+
+      window.addEventListener('mouseup', function() {
+        if (isDragging) {
+          isDragging = false;
+          el.style.cursor = 'grab';
+        }
+      });
+    })();
+  </script>
+  -->
+
+  <div class="oow-main-wrap" style="max-width:1440px; margin:0 auto; padding:14px 28px 0; position:relative;">
+
+    <!-- COMPACT HERO + TABS -->
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:14px;">
+      <div style="min-width:0;">
+        <div style="font:700 10px/1 'Manrope'; letter-spacing:.22em; text-transform:uppercase; color:#b57bff; margin-bottom:6px;">{{ heroSubtitle }}</div>
+        <h1 style="font:600 24px/1.1 'Spectral', serif; color:#f6f1fb; margin:0; letter-spacing:.01em;">{{ heroTitle }}</h1>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span style="font:700 11px/1 'Manrope'; letter-spacing:.14em; text-transform:uppercase; color:#948aa8;">{{ gameModeLabel }}</span>
+        <div style="display:flex; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:999px; padding:4px;">
+          <button type="button" onClick="{{ modeStd }}" style="{{ modeStdStyle }}">{{ originalModeLabel }}</button>
+          <button type="button" onClick="{{ modeMmo }}" style="{{ modeMmoStyle }}">MMO</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN TABS -->
+    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
+      <button type="button" onClick="{{ goTable }}" style="{{ tabTableStyle }}">{{ tableTabLabel }}</button>
+      <button type="button" onClick="{{ goCharts }}" style="{{ tabChartsStyle }}">{{ chartsTabLabel }}</button>
+      <button type="button" onClick="{{ goDiff }}" style="{{ tabDiffStyle }}">{{ difficultyTabLabel }}</button>
+    </div>
+
+    <div class="oow-main-layout" style="display:flex; gap:22px; align-items:flex-start;">
+
+      <!-- STICKY SEASON RAIL (EXPANDED) -->
+      <sc-if value="{{ showRailExpanded }}" hint-placeholder-val="{{ true }}">
+        <aside class="oow-season-aside" style="position:sticky; top:78px; width:216px; flex:none; align-self:flex-start; max-height:calc(100vh - 96px); display:flex; flex-direction:column;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:11px;">
+            <button type="button" onClick="{{ toggleRail }}" title="{{ collapseSeasonsTitle }}" style="display:inline-flex; align-items:center; gap:5px; font:700 10px/1 'Manrope'; letter-spacing:.14em; color:#17111f; background:linear-gradient(135deg,#f5d97a,#f0b94e); padding:5px 9px; border-radius:5px; border:none; cursor:pointer; box-shadow:0 2px 8px rgba(245,217,122,.25);" style-hover="transform:scale(1.04); opacity:.9;">
+              {{ seasonsLabel }} <span style="font-size:8px; opacity:.8;">◀</span>
+            </button>
+            <span style="font:700 10px/1 'Manrope'; color:#8fe6d4;">{{ seasonCountLabel }}</span>
+          </div>
+          <div ref="{{ railRef }}" style="overflow-y:auto; display:flex; flex-direction:column; gap:6px; padding-right:6px; padding-bottom:10px; max-height:calc(100vh - 130px);">
+            <sc-for list="{{ seasonPills }}" as="s" hint-placeholder-count="12">
+              <div onClick="{{ s.onSelect }}" data-active-pill="{{ s.activeFlag }}" style="{{ s.railStyle }}">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+                  <span style="display:flex; align-items:center; gap:7px; font:700 14px/1 'Manrope'; color:{{ s.titleCol }};"><span style="width:9px;height:9px;border-radius:3px;background:{{ s.color }};flex:none;"></span>{{ s.label }}</span>
+                  <span style="font:700 11px/1 'JetBrains Mono'; color:{{ s.metaCol }};">{{ s.boss }}</span>
+                </div>
+                <div style="font:500 10px/1.4 'JetBrains Mono'; color:{{ s.metaCol }}; margin-top:6px;">{{ s.dates }} · {{ s.floors }}F</div>
+              </div>
+            </sc-for>
+          </div>
+        </aside>
+      </sc-if>
+
+
+
+      <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:20px;">
+
+    <!-- ================= TAB 1: TABLE ================= -->
+    <sc-if value="{{ isTable }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; flex-direction:column; gap:20px;">
+
+        <!-- TOOLBAR -->
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <sc-if value="{{ showRailCollapsed }}" hint-placeholder-val="{{ false }}">
+              <button type="button" onClick="{{ toggleRail }}" title="{{ expandSeasonsTitle }}" style="display:inline-flex; align-items:center; gap:6px; font:700 10px/1 'Manrope'; letter-spacing:.14em; color:#17111f; background:linear-gradient(135deg,#f5d97a,#f0b94e); padding:6px 11px; border-radius:999px; border:none; cursor:pointer; box-shadow:0 2px 8px rgba(245,217,122,.25);" style-hover="transform:scale(1.04);">
+                <span style="font-size:8px;">▶</span> {{ seasonsLabel }}
+              </button>
+            </sc-if>
+            <div style="display:flex; align-items:center; gap:7px; font:700 12px/1 'Manrope'; color:#4fe3c1; background:rgba(79,227,193,.1); border:1px solid rgba(79,227,193,.25); padding:6px 12px; border-radius:999px;"><span style="width:7px;height:7px;border-radius:50%;background:#4fe3c1;box-shadow:0 0 8px #4fe3c1;animation:oowpulse 1.8s infinite;"></span>{{ activeSeasonLabel }}</div>
+            <div style="display:flex; gap:6px;">
+              <button type="button" onClick="{{ filterAll }}" style="{{ chipAll }}">{{ allFloorsLabel }}</button>
+              <button type="button" onClick="{{ filterRamp }}" style="{{ chipRamp }}">{{ rampLabel }}</button>
+              <button type="button" onClick="{{ filterBoss }}" style="{{ chipBoss }}">{{ challengeLabel }}</button>
+            </div>
+            <input type="text" placeholder="{{ searchPlaceholder }}" onInput="{{ onSearch }}" style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:9px; color:#f6f1fb; padding:7px 12px; font:500 13px/1 'Manrope'; width:220px; outline:none;" />
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <div style="display:flex; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:999px; padding:2px;">
+              <button type="button" onClick="{{ unitG }}" style="{{ unitGStyle }}">G</button>
+              <button type="button" onClick="{{ unitM }}" style="{{ unitMStyle }}">M</button>
+              <button type="button" onClick="{{ unitRaw }}" style="{{ unitRawStyle }}">{{ exactLabel }}</button>
+            </div>
+            <button type="button" onClick="{{ toggleCompare }}" style="{{ compareBtnStyle }}">⇆ {{ compareLabelText }}</button>
+            <button type="button" onClick="{{ copyJson }}" style="font:600 12px/1 'Manrope'; color:#cbc2de; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); padding:8px 13px; border-radius:999px; cursor:pointer;">{{ copyJsonLabel }}</button>
+          </div>
+        </div>
+
+        <!-- COMPARE PANEL -->
+        <sc-if value="{{ showCompare }}" hint-placeholder-val="{{ false }}">
+          <div style="background:rgba(181,123,255,.06); border:1px solid rgba(181,123,255,.3); border-radius:14px; padding:16px 18px; animation:oowdrawer .22s ease;">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:14px;">
+              <h3 style="font:400 16px/1 'Spectral', serif; color:#c79dff; margin:0;">{{ compareTitle }} — {{ activeSeasonLabel }} {{ versusLabel }} {{ compareLabel }}</h3>
+              <div style="display:flex; align-items:center; gap:10px; font:600 12px/1 'Manrope'; color:#948aa8;">{{ compareWithLabel }}
+                <select onChange="{{ onCompareChange }}" style="background:#1a1226; border:1px solid rgba(255,255,255,.14); color:#f6f1fb; padding:6px 12px; border-radius:8px; outline:none; font:600 12px/1 'Manrope'; cursor:pointer;">
+                  <sc-for list="{{ compareOptions }}" as="o" hint-placeholder-count="12">
+                    <option value="{{ o.value }}" selected="{{ o.selected }}" style="background:#1a1226; color:#f6f1fb;">{{ o.label }}</option>
+                  </sc-for>
+                </select>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
+              <sc-for list="{{ compareStats }}" as="c" hint-placeholder-count="3">
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:12px 14px;">
+                  <div><div style="font:600 11px/1 'Manrope'; color:#948aa8; text-transform:uppercase; letter-spacing:.05em;">{{ c.label }}</div><div style="font:800 17px/1.2 'Manrope'; color:#f6f1fb; margin-top:5px;">{{ c.value }}</div></div>
+                  <span style="font:700 12px/1 'Manrope'; padding:4px 10px; border-radius:999px; color:{{ c.deltaCol }}; background:{{ c.deltaBg }};">{{ c.delta }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- FLOOR TABLE -->
+        <div class="oow-table-panel" style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:16px; overflow:hidden;">
+          <div class="oow-floor-grid" style="display:grid; grid-template-columns:96px 150px 140px 70px 1fr 66px; background:rgba(255,255,255,.03); border-bottom:1px solid rgba(255,255,255,.07);">
+            <div style="font:700 11px/1 'Manrope'; letter-spacing:.05em; text-transform:uppercase; color:#7a7290; padding:14px 18px;">{{ floorLabel }}</div>
+            <div style="font:700 11px/1 'Manrope'; letter-spacing:.05em; text-transform:uppercase; color:#7a7290; padding:14px 18px;">{{ totalHpLabel }}</div>
+            <div style="font:700 11px/1 'Manrope'; letter-spacing:.05em; text-transform:uppercase; color:#7a7290; padding:14px 18px;">{{ maxMobLabel }}</div>
+            <div style="font:700 11px/1 'Manrope'; letter-spacing:.05em; text-transform:uppercase; color:#7a7290; padding:14px 18px;">{{ mobsLabel }}</div>
+            <div style="font:700 11px/1 'Manrope'; letter-spacing:.05em; text-transform:uppercase; color:#7a7290; padding:14px 18px;">{{ waveDistributionLabel }}</div>
+            <div style="padding:14px 18px;"></div>
+          </div>
+          <sc-for list="{{ rows }}" as="f" hint-placeholder-count="8">
+            <div>
+              <div onClick="{{ f.onToggle }}" class="oow-floor-grid" style="display:grid; grid-template-columns:96px 150px 140px 70px 1fr 66px; align-items:center; border-bottom:1px solid rgba(255,255,255,.05); background:{{ f.rowBg }}; cursor:pointer;">
+                <div style="padding:13px 18px;"><span style="font:800 12px/1 'Manrope'; color:{{ f.floorCol }}; background:{{ f.floorBg }}; border:1px solid {{ f.floorBd }}; padding:6px 12px; border-radius:8px;">{{ f.n }}</span></div>
+                <div style="padding:13px 18px; font:800 16px/1 'JetBrains Mono'; color:#f5d97a;">{{ f.hp }}<span style="font-size:10px; color:#8f7a3f;"> {{ f.unit }}</span></div>
+                <div style="padding:13px 18px; font:700 14px/1 'JetBrains Mono'; color:#f6f1fb;">{{ f.max }}<span style="font-size:9px; color:#5b5470;"> {{ f.unit }}</span></div>
+                <div style="padding:13px 18px; font:600 13px/1 'JetBrains Mono'; color:#948aa8;">{{ f.mobs }}</div>
+                <div style="padding:13px 18px;">
+                  <div style="display:flex; height:10px; gap:3px; width:250px; border-radius:999px; overflow:hidden;">
+                    <sc-for list="{{ f.segs }}" as="sg" hint-placeholder-count="3">
+                      <div onMouseMove="{{ sg.onHover }}" onMouseLeave="{{ clearTip }}" style="width:{{ sg.pct }}%; background:{{ sg.grad }}; cursor:help;" style-hover="filter:brightness(1.35);"></div>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="padding:13px 18px; text-align:right; font:700 15px/1 'Manrope'; color:{{ f.chevCol }};">{{ f.chev }}</div>
+              </div>
+              <sc-if value="{{ f.expanded }}" hint-placeholder-val="{{ false }}">
+                <div data-oow-floor-details="{{ f.floorNum }}" class="oow-floor-drawer">
+                  <div class="oow-floor-drawer__clip">
+                    <div style="background:linear-gradient(180deg, rgba(181,123,255,.05), rgba(0,0,0,.16)); border-bottom:1px solid rgba(255,255,255,.06); padding:20px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.06);">
+                    <div style="font:400 16px/1 'Spectral', serif; color:#f6f1fb;">{{ f.n }} · {{ f.lineupTitle }}</div>
+                    <div style="display:flex; align-items:center; gap:11px; background:linear-gradient(135deg, rgba(79,227,193,.18), rgba(79,227,193,.04)); border:1px solid rgba(79,227,193,.45); padding:8px 15px; border-radius:12px;">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="#4fe3c1"><path d="M12 2l8 3.2V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.2z"/><path d="M10.2 12.1l-1.6-1.6-1.15 1.15 2.75 2.75 4.5-4.5-1.15-1.15z" fill="#0c0812"/></svg>
+                      <div><div style="font:700 8px/1 'Manrope'; letter-spacing:.12em; text-transform:uppercase; color:#8fe6d4;">{{ resistsLabel }}</div><div style="font:800 18px/1 'JetBrains Mono'; color:#4fe3c1; margin-top:4px;">{{ f.resistStr }}</div></div>
+                    </div>
+                  </div>
+                  <sc-for list="{{ f.lineup }}" as="wv" hint-placeholder-count="3">
+                    <div style="margin-bottom:16px;">
+                      <div style="font:700 11px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#b57bff; margin-bottom:10px;">{{ wv.label }} · {{ wv.tag }}</div>
+                      <div style="display:flex; flex-wrap:wrap; gap:12px;">
+                        <sc-for list="{{ wv.mobs }}" as="m" hint-placeholder-count="2">
+                          <div onClick="{{ m.onOpen }}" class="oow-mob-card" style="display:flex; align-items:center; gap:12px; background:{{ m.bg }}; border:1px solid {{ m.bd }}; border-radius:12px; padding:11px 13px; cursor:pointer; flex:{{ m.flex }}; min-width:0; box-sizing:border-box; overflow:hidden;" style-hover="border-color:{{ m.bdHover }}; transform:translateY(-2px);">
+                            <img data-src="{{ m.img }}" alt="" class="oow-mob-avatar" style="width:48px; height:48px; object-fit:cover; object-position:center 30%; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.1); border-radius:10px; flex:none;" />
+                            <div style="min-width:0; flex:1; overflow:hidden;">
+                              <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                                <span style="font:700 13px/1.2 'Manrope'; color:#f6f1fb; word-break:break-word;">{{ m.name }}</span>
+                                <span style="font:700 8px/1 'Manrope'; letter-spacing:.06em; text-transform:uppercase; color:{{ m.tagCol }}; background:{{ m.tagBg }}; padding:2px 5px; border-radius:4px; flex:none;">{{ m.cls }}</span>
+                              </div>
+                              <div style="font:500 10px/1.3 'Manrope'; color:#948aa8; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ m.sub }}</div>
+                            </div>
+                            <div class="oow-mob-hp-col" style="text-align:right; flex:none; min-width:92px; margin-left:auto;">
+                              <div style="font:600 8px/1 'Manrope'; color:#6b6480; text-transform:uppercase; letter-spacing:.08em;">HP</div>
+                              <div class="oow-mob-hp-val" style="font:800 22px/1 'JetBrains Mono'; color:{{ m.hpCol }}; margin-top:3px; white-space:nowrap;">{{ m.hp }}<span style="font:600 12px/1 'Manrope'; color:#8a8398; margin-left:2px;">{{ m.unit }}</span></div>
+                              <div style="font:600 8px/1 'Manrope'; color:#3f7d6f; text-transform:uppercase; letter-spacing:.08em; margin-top:6px;">{{ effectiveHpLabel }}</div>
+                              <div class="oow-mob-ehp-val" style="font:800 17px/1 'JetBrains Mono'; color:#4fe3c1; margin-top:3px; white-space:nowrap;">{{ m.ehpNum }}<span style="font:600 10px/1 'Manrope'; color:#2f7d6e; margin-left:2px;">{{ m.unit }}</span></div>
+                            </div>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-for>
+                  <!-- MUTATORS & AFFIXES -->
+                  <div style="padding-top:12px; border-top:1px solid rgba(255,255,255,.06);">
+                    <div style="display:flex; align-items:center; gap:8px; font:700 11px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#f5d97a; margin-bottom:12px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>{{ affixesLabel }}</div>
+                    <div class="oow-affixes-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:10px;">
+                      <sc-for list="{{ f.affixes }}" as="a" hint-placeholder-count="6">
+                        <div style="background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.07); border-left:3px solid {{ a.accent }}; border-radius:10px; padding:11px 13px;">
+                          <div style="display:flex; align-items:center; gap:10px; margin-bottom:7px;">
+                            <img data-src="{{ a.icon }}" alt="" style="width:30px; height:30px; border-radius:7px; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.1); flex:none;" />
+                            <div style="min-width:0; flex:1;">
+                              <div style="font:700 12px/1.2 'Manrope'; color:#f6f1fb; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ a.name }}</div>
+                              <span style="display:inline-block; margin-top:4px; font:800 9px/1 'Manrope'; letter-spacing:.06em; padding:3px 7px; border-radius:4px; color:{{ a.badgeCol }}; background:{{ a.badgeBg }}; border:1px solid {{ a.badgeBd }};">{{ a.badge }}</span>
+                            </div>
+                          </div>
+                          <div style="font:500 11px/1.45 'Manrope'; color:#948aa8;">{{ a.desc }}</div>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= TAB 2: CHARTS ================= -->
+    <sc-if value="{{ isCharts }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <!-- CONTROLS -->
+        <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:12px 14px;">
+          <div class="oow-chart-controls" style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:11px;">
+            <div style="background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:9px 11px;">
+              <div style="font:700 9px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#8fe6d4; margin-bottom:7px;">{{ hpModeLabel }}</div>
+              <div style="display:flex; gap:5px;">
+                <button type="button" onClick="{{ modeEhp }}" style="{{ modeEhpStyle }}">{{ effectiveHpLabel }}</button>
+                <button type="button" onClick="{{ modeRaw }}" style="{{ modeRawStyle }}">{{ rawHpLabel }}</button>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:9px 11px;">
+              <div style="font:700 9px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#e9c96f; margin-bottom:7px;">{{ metricLabel }}</div>
+              <div style="display:flex; gap:5px;">
+                <button type="button" onClick="{{ metricBoss }}" style="{{ metricBossStyle }}">{{ bossHpLabel }}</button>
+                <button type="button" onClick="{{ metricTotal }}" style="{{ metricTotalStyle }}">{{ totalFloorLabel }}</button>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:9px 11px;">
+              <div style="font:700 9px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#c79dff; margin-bottom:7px;">{{ floorRangeLabel }}</div>
+              <div style="display:flex; gap:5px;">
+                <button type="button" onClick="{{ rangeRamp }}" style="{{ rangeRampStyle }}">{{ chartRampLabel }}</button>
+                <button type="button" onClick="{{ rangeOvertime }}" style="{{ rangeOtStyle }}">{{ chartChallengeLabel }}</button>
+                <button type="button" onClick="{{ rangeAll }}" style="{{ rangeAllStyle }}">{{ allLabel }}</button>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:9px 0; border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06); margin-bottom:10px;">
+            <span style="font:700 9px/1 'Manrope'; letter-spacing:.08em; text-transform:uppercase; color:#948aa8;">{{ presetsLabel }}</span>
+            <sc-for list="{{ presets }}" as="p" hint-placeholder-count="4">
+              <button type="button" onClick="{{ p.onClick }}" style="{{ p.style }}">{{ p.label }}</button>
+            </sc-for>
+          </div>
+          <div>
+            <div style="font:700 9px/1 'Manrope'; letter-spacing:.08em; text-transform:uppercase; color:#948aa8; margin-bottom:8px;">{{ seasonsOnChartLabel }}</div>
+            <div style="display:flex; gap:5px; flex-wrap:wrap;">
+              <sc-for list="{{ seasonChips }}" as="c" hint-placeholder-count="22">
+                <button type="button" onClick="{{ c.onClick }}" style="{{ c.style }}"><span style="width:8px;height:8px;border-radius:2px;background:{{ c.color }};display:inline-block;margin-right:6px;vertical-align:middle;"></span>{{ c.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN LINE CHART -->
+        <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:14px 18px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:10px; flex-wrap:wrap;">
+            <h2 style="font:400 16px/1.15 'Spectral', serif; color:#f6f1fb; margin:0;">{{ mainChartTitle }}</h2>
+            <span style="font:700 10px/1 'Manrope'; color:#f5d97a; background:rgba(245,217,122,.12); border:1px solid rgba(245,217,122,.3); padding:6px 11px; border-radius:999px; white-space:nowrap;">{{ modeBadge }}</span>
+          </div>
+          <div style="position:relative;" onMouseMove="{{ onChartMove }}" onMouseLeave="{{ onChartLeave }}">
+            <svg viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;">
+              <sc-for list="{{ mainYTicks }}" as="t" hint-placeholder-count="5">
+                <g><line x1="64" y1="{{ t.y }}" x2="896" y2="{{ t.y }}" stroke="rgba(255,255,255,.06)" stroke-width="1"/><text x="56" y="{{ t.ty }}" text-anchor="end" fill="#6b6480" font-family="JetBrains Mono" font-size="10">{{ t.label }}</text></g>
+              </sc-for>
+              <sc-for list="{{ mainXTicks }}" as="t" hint-placeholder-count="8">
+                <text x="{{ t.x }}" y="292" text-anchor="middle" fill="#6b6480" font-family="JetBrains Mono" font-size="10">{{ t.label }}</text>
+              </sc-for>
+              <sc-if value="{{ showGuide }}" hint-placeholder-val="{{ false }}">
+                <line x1="{{ guideX }}" y1="16" x2="{{ guideX }}" y2="270" stroke="rgba(245,217,122,.5)" stroke-width="1" stroke-dasharray="4 4"/>
+              </sc-if>
+              <sc-for list="{{ mainSeries }}" as="s" hint-placeholder-count="4">
+                <g>
+                  <path d="{{ s.area }}" fill="{{ s.fill }}" opacity="0.12"/>
+                  <path d="{{ s.path }}" fill="none" stroke="{{ s.color }}" stroke-width="2.2" stroke-linejoin="round"/>
+                  <sc-for list="{{ s.pts }}" as="p" hint-placeholder-count="15">
+                    <circle cx="{{ p.cx }}" cy="{{ p.cy }}" r="{{ p.r }}" fill="{{ s.color }}"/>
+                  </sc-for>
+                </g>
+              </sc-for>
+              <rect x="0" y="0" width="920" height="300" fill="transparent" onMouseMove="{{ onChartMove }}" onMouseLeave="{{ onChartLeave }}" style="cursor:crosshair;"></rect>
+            </svg>
+            <sc-if value="{{ showGuide }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; top:8px; left:{{ guideLeftPct }}%; transform:translateX({{ guideShift }}); background:rgba(18,10,26,.96); border:1px solid rgba(255,255,255,.14); border-radius:10px; padding:10px 12px; pointer-events:none; min-width:150px; box-shadow:0 10px 30px rgba(0,0,0,.5);">
+                <div style="font:700 11px/1 'JetBrains Mono'; color:#f5d97a; margin-bottom:8px;">{{ guideFloorLabel }}</div>
+                <sc-for list="{{ guideRows }}" as="g" hint-placeholder-count="4">
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:5px;">
+                    <span style="font:600 11px/1 'Manrope'; color:#cbc2de;"><span style="width:8px;height:8px;border-radius:2px;background:{{ g.color }};display:inline-block;margin-right:6px;"></span>{{ g.label }}</span>
+                    <span style="font:700 11px/1 'JetBrains Mono'; color:#f6f1fb;">{{ g.val }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+
+        <!-- SUB CHARTS -->
+        <div class="oow-chart-pair" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+          <!-- HISTORY -->
+          <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:16px; padding:20px 22px;">
+            <h3 style="font:400 17px/1.2 'Spectral', serif; color:#f6f1fb; margin:0 0 4px;">{{ historyChartTitle }}</h3>
+            <p style="font:500 12px/1.5 'Manrope'; color:#948aa8; margin:0 0 14px;">{{ historyChartDescription }}</p>
+            <div style="display:flex; gap:16px; margin-bottom:10px;">
+              <span style="font:600 11px/1 'Manrope'; color:#f5d97a;"><span style="width:14px;height:3px;background:#f5d97a;display:inline-block;vertical-align:middle;margin-right:6px;border-radius:2px;"></span>{{ rawHpLabel }}</span>
+              <span style="font:600 11px/1 'Manrope'; color:#c79dff;"><span style="width:14px;height:3px;background:#c79dff;display:inline-block;vertical-align:middle;margin-right:6px;border-radius:2px;"></span>{{ effectiveHpLabel }}</span>
+            </div>
+            <div style="position:relative;" onMouseMove="{{ onHistMove }}" onMouseLeave="{{ onHistLeave }}">
+              <svg viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;">
+                <sc-for list="{{ histYTicks }}" as="t" hint-placeholder-count="6">
+                  <g><line x1="58" y1="{{ t.y }}" x2="898" y2="{{ t.y }}" stroke="rgba(255,255,255,.06)"/><text x="50" y="{{ t.ty }}" text-anchor="end" fill="#6b6480" font-family="JetBrains Mono" font-size="11">{{ t.label }}</text></g>
+                </sc-for>
+                <sc-for list="{{ histXTicks }}" as="t" hint-placeholder-count="7">
+                  <text x="{{ t.x }}" y="286" text-anchor="middle" fill="#6b6480" font-family="JetBrains Mono" font-size="11">{{ t.label }}</text>
+                </sc-for>
+                <sc-if value="{{ histGuide }}" hint-placeholder-val="{{ false }}"><line x1="{{ histGuideX }}" y1="14" x2="{{ histGuideX }}" y2="258" stroke="rgba(245,217,122,.5)" stroke-width="1" stroke-dasharray="4 4"/></sc-if>
+                <path d="{{ histEhpArea }}" fill="#c79dff" opacity="0.13"/>
+                <path d="{{ histEhpPath }}" fill="none" stroke="#c79dff" stroke-width="2.4" stroke-linejoin="round"/>
+                <path d="{{ histRawPath }}" fill="none" stroke="#f5d97a" stroke-width="2.4" stroke-linejoin="round"/>
+                <sc-for list="{{ histEhpDots }}" as="d" hint-placeholder-count="22"><circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="2.6" fill="#c79dff"/></sc-for>
+                <sc-for list="{{ histRawDots }}" as="d" hint-placeholder-count="22"><circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="2.6" fill="#f5d97a"/></sc-for>
+                <circle cx="{{ histLast.ehpX }}" cy="{{ histLast.ehpY }}" r="4.2" fill="#c79dff"/>
+                <text x="{{ histLast.ehpX }}" y="{{ histLast.ehpY }}" dx="-9" dy="-8" text-anchor="end" fill="#c79dff" font-family="JetBrains Mono" font-size="12" font-weight="700">{{ histLast.ehpVal }}</text>
+                <circle cx="{{ histLast.rawX }}" cy="{{ histLast.rawY }}" r="4.2" fill="#f5d97a"/>
+                <text x="{{ histLast.rawX }}" y="{{ histLast.rawY }}" dx="-9" dy="15" text-anchor="end" fill="#f5d97a" font-family="JetBrains Mono" font-size="12" font-weight="700">{{ histLast.rawVal }}</text>
+                <rect x="0" y="0" width="920" height="300" fill="transparent" onMouseMove="{{ onHistMove }}" onMouseLeave="{{ onHistLeave }}" style="cursor:crosshair;"></rect>
+              </svg>
+              <sc-if value="{{ histGuide }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute; top:6px; left:{{ histGuidePct }}%; transform:translateX({{ histGuideShift }}); background:rgba(18,10,26,.96); border:1px solid rgba(255,255,255,.14); border-radius:12px; padding:10px 14px; pointer-events:none; width:max-content; min-width:180px; max-width:280px; box-shadow:0 12px 36px rgba(0,0,0,.6); z-index:20;">
+                  <div style="font:700 12px/1 'JetBrains Mono'; color:#f5d97a; margin-bottom:3px; white-space:nowrap;">{{ histGuideLabel }}</div>
+                  <div style="font:500 11px/1.2 'Manrope'; color:#948aa8; margin-bottom:8px; white-space:nowrap;">{{ histGuideSub }}</div>
+                  <sc-for list="{{ histGuideRows }}" as="g" hint-placeholder-count="3">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:5px; white-space:nowrap;">
+                      <span style="font:600 11px/1 'Manrope'; color:#cbc2de; white-space:nowrap; display:inline-flex; align-items:center;"><span style="width:8px;height:8px;border-radius:2px;background:{{ g.color }};display:inline-block;margin-right:6px;flex:none;"></span>{{ g.label }}</span>
+                      <span style="font:700 12px/1 'JetBrains Mono'; color:#f6f1fb; white-space:nowrap; margin-left:12px;">{{ g.val }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+          <!-- JUMP -->
+          <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:16px; padding:20px 22px;">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:6px;">
+              <div>
+                <h3 style="font:400 17px/1.2 'Spectral', serif; color:#f6f1fb; margin:0 0 4px;">{{ jumpTitle }}</h3>
+                <p style="font:500 12px/1.5 'Manrope'; color:#948aa8; margin:0;">{{ jumpSub }}</p>
+              </div>
+              <div style="display:flex; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:9px; padding:2px; flex:none;">
+                <button type="button" onClick="{{ jumpSeason }}" style="{{ jumpSeasonStyle }}">{{ seasonToSeasonLabel }}</button>
+                <button type="button" onClick="{{ jumpFloor }}" style="{{ jumpFloorStyle }}">{{ floorToFloorLabel }}</button>
+              </div>
+            </div>
+            <div style="position:relative;" onMouseMove="{{ onJumpMove }}" onMouseLeave="{{ onJumpLeave }}">
+              <svg viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;">
+                <sc-for list="{{ jumpYTicks }}" as="t" hint-placeholder-count="5">
+                  <g><line x1="56" y1="{{ t.y }}" x2="900" y2="{{ t.y }}" stroke="{{ t.stroke }}"/><text x="48" y="{{ t.ty }}" text-anchor="end" fill="#7d7690" font-family="JetBrains Mono" font-size="11">{{ t.label }}</text></g>
+                </sc-for>
+                <sc-for list="{{ jumpXTicks }}" as="t" hint-placeholder-count="8">
+                  <text x="{{ t.x }}" y="290" text-anchor="middle" fill="#6b6480" font-family="JetBrains Mono" font-size="11">{{ t.label }}</text>
+                </sc-for>
+                <sc-if value="{{ jumpGuide }}" hint-placeholder-val="{{ false }}"><line x1="{{ jumpGuideX }}" y1="14" x2="{{ jumpGuideX }}" y2="258" stroke="rgba(245,217,122,.5)" stroke-width="1" stroke-dasharray="4 4"/></sc-if>
+                <sc-for list="{{ jumpSeries }}" as="s" hint-placeholder-count="4">
+                  <g>
+                    <path d="{{ s.path }}" fill="none" stroke="{{ s.color }}" stroke-width="2.2" stroke-linejoin="round"/>
+                    <sc-for list="{{ s.pts }}" as="p" hint-placeholder-count="15"><circle cx="{{ p.cx }}" cy="{{ p.cy }}" r="2.4" fill="{{ s.color }}"/></sc-for>
+                  </g>
+                </sc-for>
+                <rect x="0" y="0" width="920" height="300" fill="transparent" onMouseMove="{{ onJumpMove }}" onMouseLeave="{{ onJumpLeave }}" style="cursor:crosshair;"></rect>
+              </svg>
+              <sc-if value="{{ jumpGuide }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute; top:6px; left:{{ jumpGuidePct }}%; transform:translateX({{ jumpGuideShift }}); background:rgba(18,10,26,.96); border:1px solid rgba(255,255,255,.14); border-radius:12px; padding:10px 14px; pointer-events:none; width:max-content; min-width:160px; max-width:280px; box-shadow:0 12px 36px rgba(0,0,0,.6); z-index:20;">
+                  <div style="font:700 11px/1 'JetBrains Mono'; color:#f5d97a; margin-bottom:7px;">{{ jumpGuideLabel }}</div>
+                  <sc-for list="{{ jumpGuideRows }}" as="g" hint-placeholder-count="4">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:4px;">
+                      <span style="font:600 11px/1 'Manrope'; color:#cbc2de;"><span style="width:8px;height:8px;border-radius:2px;background:{{ g.color }};display:inline-block;margin-right:6px;"></span>{{ g.label }}</span>
+                      <span style="font:700 11px/1 'JetBrains Mono'; color:{{ g.valCol }};">{{ g.val }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= TAB 3: DIFFICULTY ================= -->
+    <sc-if value="{{ isDiff }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+          <h2 style="font:400 16px/1 'Spectral', serif; color:#f6f1fb; margin:0;">{{ activeSeasonLabel }} · {{ difficultyTabLabel }}</h2>
+        </div>
+
+        <!-- TOOLBAR -->
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <sc-if value="{{ showRailCollapsed }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ toggleRail }}" title="{{ expandSeasonsTitle }}" style="display:inline-flex; align-items:center; gap:6px; font:700 10px/1 'Manrope'; letter-spacing:.14em; color:#17111f; background:linear-gradient(135deg,#f5d97a,#f0b94e); padding:6px 11px; border-radius:999px; border:none; cursor:pointer; box-shadow:0 2px 8px rgba(245,217,122,.25);" style-hover="transform:scale(1.04);">
+              <span style="font-size:8px;">▶</span> {{ seasonsLabel }}
+            </button>
+          </sc-if>
+          <div style="display:flex; gap:6px;">
+            <button type="button" onClick="{{ diffFilterAll }}" style="{{ diffChipAll }}">{{ allFloorsLabel }}</button>
+            <button type="button" onClick="{{ diffFilterRamp }}" style="{{ diffChipRamp }}">{{ rampLabel }}</button>
+            <button type="button" onClick="{{ diffFilterBoss }}" style="{{ diffChipBoss }}">{{ challengeLabel }}</button>
+          </div>
+          <input type="number" placeholder="{{ goToFloorPlaceholder }}" onInput="{{ onDiffSearch }}" style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:9px; color:#f6f1fb; padding:7px 12px; font:500 13px/1 'Manrope'; width:130px; outline:none;" />
+        </div>
+
+        <!-- STEP PROGRESSION -->
+        <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:16px; padding:20px 22px;">
+          <h3 style="font:500 17px/1.2 'Spectral', serif; color:#e9e3f2; margin:0 0 4px;">{{ diffFloorTitle }}</h3>
+          <p style="font:500 12px/1.5 'Manrope'; color:#8a8398; margin:0 0 16px;">{{ difficultyDescription }}</p>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(186px,1fr)); gap:11px;">
+            <sc-for list="{{ diffSteps }}" as="s" hint-placeholder-count="5">
+              <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.08); border-radius:11px; padding:13px 14px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px;">
+                  <span style="font:700 12px/1 'Manrope'; color:#cbc2de;">{{ s.dayLabel }}</span>
+                  <span style="font:700 12px/1 'JetBrains Mono'; color:#f5d97a; background:rgba(245,217,122,.12); border:1px solid rgba(245,217,122,.28); padding:3px 8px; border-radius:6px; letter-spacing:.02em;">{{ s.dur }}</span>
+                </div>
+                <div style="font:700 24px/1 'JetBrains Mono'; color:{{ s.col }};">{{ s.pct }}</div>
+                <div style="height:5px; background:rgba(255,255,255,.05); border-radius:999px; overflow:hidden; margin:10px 0 9px;">
+                  <div style="height:100%; width:{{ s.barW }}%; background:{{ s.barCol }};"></div>
+                </div>
+                <div style="font:500 10px/1.4 'JetBrains Mono'; color:#7c7690;">{{ s.date }}</div>
+                <sc-if value="{{ s.liveShow }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:inline-block; margin-top:9px; font:700 8px/1 'Manrope'; letter-spacing:.08em; text-transform:uppercase; color:#8fe6d4; background:rgba(79,227,193,.1); border:1px solid rgba(79,227,193,.25); padding:4px 8px; border-radius:999px;">● {{ liveNowLabel }}</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- ALL FLOORS TABLE -->
+        <div class="oow-table-panel" style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:16px; overflow:hidden;">
+          <div style="padding:16px 20px 12px;"><h3 style="font:400 17px/1.2 'Spectral', serif; color:#f6f1fb; margin:0;">{{ allFloorsDifficultyTitle }}</h3></div>
+          <div class="oow-diff-grid" style="display:grid; grid-template-columns:70px 90px 150px 130px 60px 1fr; background:rgba(255,255,255,.03); border-top:1px solid rgba(255,255,255,.07); border-bottom:1px solid rgba(255,255,255,.07);">
+            <div style="font:700 10px/1 'Manrope'; letter-spacing:.05em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ floorLabel }}</div>
+            <div style="font:700 10px/1 'Manrope'; letter-spacing:.05em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ peakLabel }}</div>
+            <div style="font:700 10px/1 'Manrope'; letter-spacing:.05em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ peakWindowLabel }}</div>
+            <div style="font:700 10px/1 'Manrope'; letter-spacing:.05em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ baselineFromLabel }}</div>
+            <div style="font:700 10px/1 'Manrope'; letter-spacing:.05em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ stepsLabel }}</div>
+            <div style="font:700 10px/1 'Manrope'; letter-spacing:.05em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ timelineLabel }}</div>
+          </div>
+          <sc-for list="{{ diffRows }}" as="r" hint-placeholder-count="12">
+            <div onClick="{{ r.onClick }}" class="oow-diff-grid" style="display:grid; grid-template-columns:70px 90px 150px 130px 60px 1fr; align-items:center; border-bottom:1px solid rgba(255,255,255,.05); background:{{ r.rowBg }}; cursor:pointer;">
+              <div style="padding:11px 16px;"><span style="font:800 12px/1 'Manrope'; color:{{ r.floorCol }}; background:{{ r.floorBg }}; border:1px solid {{ r.floorBd }}; padding:5px 10px; border-radius:8px;">{{ r.n }}</span></div>
+              <div style="padding:11px 16px; font:800 14px/1 'JetBrains Mono'; color:{{ r.initialCol }};">{{ r.initial }}</div>
+              <div style="padding:11px 16px;"><div style="font:700 12px/1 'JetBrains Mono'; color:#f6f1fb;">{{ r.peakDur }}</div><div style="font:500 10px/1.4 'JetBrains Mono'; color:#7c7690; margin-top:3px;">{{ r.peakDate }}</div></div>
+              <div style="padding:11px 16px;"><div style="font:700 12px/1 'JetBrains Mono'; color:#8fbdb2;">{{ r.baseDate }}</div><div style="font:500 10px/1.4 'JetBrains Mono'; color:#6b6480; margin-top:3px;">{{ r.baseDay }}</div></div>
+              <div style="padding:11px 16px; font:600 12px/1 'JetBrains Mono'; color:#948aa8;">{{ r.stepsN }}</div>
+              <div style="padding:11px 16px; align-self:stretch;">
+                <div style="display:flex; gap:4px; flex-wrap:wrap; align-content:flex-start;">
+                  <sc-for list="{{ r.pills }}" as="p" hint-placeholder-count="4">
+                    <span style="font:600 9px/1.4 'JetBrains Mono'; color:{{ p.col }}; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:4px 7px; border-radius:5px; white-space:nowrap;">{{ p.txt }}</span>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SCROLL TO TOP -->
+  <sc-if value="{{ showScrollTop }}" hint-placeholder-val="{{ false }}">
+    <button type="button" onClick="{{ scrollTop }}" title="{{ scrollTopTitle }}" aria-label="{{ scrollTopTitle }}" style="position:fixed; right:28px; bottom:28px; z-index:70; width:46px; height:46px; border-radius:13px; border:1px solid rgba(245,217,122,.4); background:rgba(18,10,26,.92); color:#f5d97a; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 12px 34px rgba(0,0,0,.5); backdrop-filter:blur(8px);" style-hover="background:rgba(245,217,122,.16);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>
+  </sc-if>
+
+  <!-- HOVER TIP (distribution) -->
+  <sc-if value="{{ showTip }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; left:{{ tipX }}px; top:{{ tipY }}px; transform:translate(-50%,-130%); z-index:80; pointer-events:none; background:rgba(18,10,26,.97); border:1px solid rgba(255,255,255,.16); border-radius:9px; padding:8px 11px; box-shadow:0 10px 28px rgba(0,0,0,.55); animation:oowfade .1s ease;">
+      <div style="font:700 10px/1 'Manrope'; letter-spacing:.06em; color:{{ tipCol }}; text-transform:uppercase;">{{ tipLabel }}</div>
+      <div style="font:800 15px/1.1 'JetBrains Mono'; color:#f6f1fb; margin-top:4px;">{{ tipHp }}</div>
+    </div>
+  </sc-if>
+
+  <!-- DEEP INTEL MODAL -->
+  <sc-if value="{{ showModal }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed; inset:0; z-index:90; background:rgba(6,3,10,.7); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:24px; animation:oowfade .16s ease;">
+      <div onClick="{{ stop }}" style="width:640px; max-width:100%; max-height:88vh; overflow-y:auto; background:linear-gradient(180deg, rgba(24,16,34,.98), rgba(14,9,20,.98)); border:1px solid {{ modalBd }}; border-radius:18px; box-shadow:0 40px 100px rgba(0,0,0,.7); animation:oowmodal .2s cubic-bezier(.16,1,.3,1);">
+        <div style="display:flex; gap:18px; padding:22px 24px; border-bottom:1px solid rgba(255,255,255,.08); background:{{ modalHeaderBg }};">
+          <div style="position:relative; flex:none; cursor:zoom-in;" onClick="{{ onZoomImg }}" title="{{ zoomImageTitle }}">
+            <img data-src="{{ modalImg }}" alt="{{ modalName }}" style="width:96px; height:96px; object-fit:cover; object-position:center 30%; background:rgba(0,0,0,.4); border:1px solid rgba(255,255,255,.12); border-radius:14px; display:block; transition:transform .15s ease;" />
+          </div>
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <h2 style="font:400 26px/1.1 'Spectral', serif; color:#f6f1fb; margin:0;">{{ modalName }}</h2>
+              <span style="font:800 10px/1 'Manrope'; letter-spacing:.06em; text-transform:uppercase; color:{{ modalTagCol }}; background:{{ modalTagBg }}; padding:4px 8px; border-radius:5px;">{{ modalCls }}</span>
+            </div>
+            <div style="font:500 11px/1 'JetBrains Mono'; color:#6b6480; margin-top:8px;">{{ blueprintIdLabel }} · {{ modalId }} · S{{ modalSeason }} / F{{ modalFloor }}</div>
+            <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+              <div style="background:rgba(245,217,122,.1); border:1px solid rgba(245,217,122,.25); border-radius:9px; padding:8px 12px;"><div style="font:600 9px/1 'Manrope'; color:#948aa8; text-transform:uppercase; letter-spacing:.05em;">HP</div><div style="font:800 15px/1 'JetBrains Mono'; color:#f5d97a; margin-top:4px;">{{ modalHp }}</div></div>
+              <div style="background:rgba(79,227,193,.1); border:1px solid rgba(79,227,193,.25); border-radius:9px; padding:8px 12px;"><div style="font:600 9px/1 'Manrope'; color:#948aa8; text-transform:uppercase; letter-spacing:.05em;">{{ effectiveHpLabel }}</div><div style="font:800 15px/1 'JetBrains Mono'; color:#4fe3c1; margin-top:4px;">{{ modalEhp }}</div></div>
+              <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:9px; padding:8px 12px;"><div style="font:600 9px/1 'Manrope'; color:#948aa8; text-transform:uppercase; letter-spacing:.05em;">ATK</div><div style="font:800 15px/1 'JetBrains Mono'; color:#f6f1fb; margin-top:4px;">{{ modalAtk }}</div></div>
+              <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:9px; padding:8px 12px;"><div style="font:600 9px/1 'Manrope'; color:#948aa8; text-transform:uppercase; letter-spacing:.05em;">{{ resistLabel }}</div><div style="font:800 15px/1 'JetBrains Mono'; color:#4fe3c1; margin-top:4px;">{{ modalDef }}</div></div>
+            </div>
+          </div>
+          <button type="button" onClick="{{ closeModal }}" title="{{ closeLabel }}" aria-label="{{ closeLabel }}" style="font:400 22px/1 'Manrope'; color:#948aa8; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); width:34px; height:34px; border-radius:9px; cursor:pointer; flex:none;">×</button>
+        </div>
+        <div style="padding:20px 24px;">
+          <!-- Primary Combat Stats -->
+          <div style="font:700 11px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#f5d97a; margin-bottom:12px;">{{ primaryStatsLabel }}</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px;">
+            <sc-for list="{{ modalPrimary }}" as="p" hint-placeholder-count="4">
+              <div style="display:flex; align-items:center; gap:14px; background:{{ p.bg }}; border:1px solid {{ p.bd }}; border-radius:12px; padding:12px 14px;">
+                <div style="width:38px; height:38px; border-radius:10px; background:{{ p.iconBg }}; border:1px solid {{ p.bd }}; display:flex; align-items:center; justify-content:center; flex:none; padding:4px;">
+                  <img data-src="{{ p.icon }}" alt="" style="width:24px; height:24px; object-fit:contain;" />
+                </div>
+                <div style="min-width:0;">
+                  <div style="font:600 10px/1.3 'Manrope'; color:#948aa8; text-transform:uppercase; letter-spacing:.04em;">{{ p.label }}</div>
+                  <div style="font:800 18px/1.1 'JetBrains Mono'; color:{{ p.valColor }}; margin-top:4px;">{{ p.value }}</div>
+                  <div style="font:500 10px/1.3 'JetBrains Mono'; color:#7a7290; margin-top:3px;">{{ p.sub }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <!-- Elemental Resistances -->
+          <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:12px;">
+            <span style="font:700 11px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#4fe3c1;">{{ elementalResistancesLabel }}</span>
+            <span style="font:500 10px/1 'Manrope'; color:#6b6480;">{{ difficultyContextLabel }}</span>
+          </div>
+          <div class="oow-element-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:24px;">
+            <sc-for list="{{ modalElems }}" as="e" hint-placeholder-count="5">
+              <div style="background:rgba(79,227,193,.05); border:1px solid rgba(79,227,193,.2); border-radius:10px; padding:11px 8px; text-align:center;">
+                <img data-src="{{ e.icon }}" alt="" style="width:22px; height:22px; object-fit:contain;" />
+                <div style="font:600 10px/1 'Manrope'; color:#9fd8cd; margin-top:7px;">{{ e.name }}</div>
+                <div style="font:800 14px/1 'JetBrains Mono'; color:#4fe3c1; margin-top:6px;">{{ e.res }}</div>
+                <div style="font:500 9px/1 'JetBrains Mono'; color:#6b6480; margin-top:5px;">{{ e.def }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <!-- Notable overrides -->
+          <sc-if value="{{ modalHasOverrides }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-bottom:12px;">
+              <span style="font:700 11px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#ff9bb2;">{{ overridesLabel }}</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <sc-for list="{{ modalOverrides }}" as="o" hint-placeholder-count="4">
+                <div style="background:rgba(255,107,139,.06); border:1px solid rgba(255,107,139,.4); border-radius:10px; padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                  <div style="min-width:0;">
+                    <span style="font:700 12px/1.2 'JetBrains Mono'; color:#ff9bb2;">{{ o.key }}</span>
+                    <span style="font:500 11px/1.2 'Manrope'; color:#cbc2de; margin-left:8px;">{{ o.label }}</span>
+                  </div>
+                  <div style="font:800 15px/1 'JetBrains Mono'; color:#ff6b8b; flex:none;">{{ o.val }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  
+  <!-- IMAGE ZOOM LIGHTBOX WITH WHEEL & TOUCH PINCH ZOOM -->
+  <sc-if value="{{ showZoomImg }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeZoomImg }}" onWheel="{{ onZoomWheel }}" onTouchStart="{{ onZoomTouchStart }}" onTouchMove="{{ onZoomTouchMove }}" onTouchEnd="{{ onZoomTouchEnd }}" style="position:fixed; inset:0; z-index:100; background:rgba(4,2,8,.92); backdrop-filter:blur(12px); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; animation:oowfade .15s ease; user-select:none; touch-action:none; overflow:hidden;">
+      <div onClick="{{ stop }}" onMouseDown="{{ onZoomMouseDown }}" onMouseMove="{{ onZoomMouseMove }}" onMouseUp="{{ onZoomMouseUp }}" onDoubleClick="{{ onZoomToggleScale }}" style="position:relative; max-width:90vw; max-height:80vh; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <img data-src="{{ zoomImgSrc }}" alt="" style="max-width:85vw; max-height:75vh; object-fit:contain; border-radius:18px; filter:drop-shadow(0 20px 50px rgba(0,0,0,.8)); border:1px solid rgba(255,255,255,.15); background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.08), rgba(0,0,0,.6)); padding:16px; transform:translate({{ zoomPanX }}px, {{ zoomPanY }}px) scale({{ zoomScale }}); transform-origin:center center; cursor:grab; pointer-events:auto;" />
+      </div>
+      <!-- Controls Toolbar -->
+      <div onClick="{{ stop }}" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); font:700 13px/1 'Manrope'; color:#f6f1fb; background:rgba(18,10,26,.94); border:1px solid rgba(255,255,255,.16); border-radius:999px; padding:6px 14px; display:flex; align-items:center; gap:12px; box-shadow:0 12px 36px rgba(0,0,0,.65); backdrop-filter:blur(10px); z-index:101;">
+        <span style="font:600 13px/1 'Manrope'; color:#cbc2de; padding-right:4px;">{{ zoomImgName }}</span>
+        <div style="display:flex; align-items:center; gap:6px; border-left:1px solid rgba(255,255,255,.15); padding-left:10px;">
+          <button type="button" onClick="{{ onZoomOut }}" style="background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); color:#f6f1fb; width:28px; height:28px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1;" title="{{ zoomOutLabel }}" aria-label="{{ zoomOutLabel }}">−</button>
+          <span style="font:700 11px/1 'JetBrains Mono'; color:#f5d97a; min-width:38px; text-align:center;">{{ zoomPct }}%</span>
+          <button type="button" onClick="{{ onZoomIn }}" style="background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); color:#f6f1fb; width:28px; height:28px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1;" title="{{ zoomInLabel }}" aria-label="{{ zoomInLabel }}">+</button>
+          <button type="button" onClick="{{ onZoomReset }}" style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); color:#948aa8; font:600 11px/1 'Manrope'; padding:6px 10px; border-radius:8px; cursor:pointer; margin-left:4px;" title="{{ resetZoomLabel }}">{{ resetLabel }}</button>
+        </div>
+        <button type="button" onClick="{{ closeZoomImg }}" style="background:rgba(255,107,139,.15); border:1px solid rgba(255,107,139,.3); color:#ff9bb2; width:28px; height:28px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; margin-left:4px;" title="{{ closeLabel }}" aria-label="{{ closeLabel }}">×</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- TOAST -->
+  <sc-if value="{{ showToast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; bottom:28px; left:50%; transform:translateX(-50%); z-index:95; background:rgba(18,10,26,.97); border:1px solid rgba(245,217,122,.4); color:#f5d97a; font:700 13px/1 'Manrope'; padding:13px 20px; border-radius:11px; box-shadow:0 14px 40px rgba(0,0,0,.6); animation:oowfade .18s ease;">{{ toastMsg }}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+const DATA_SOURCES = Object.freeze({
+  current: ['./data/oow_current_seasons.json'],
+  standard: ['./data/oow_stats.json'],
+  mmo: ['./data/oow_mmo_stats.json'],
+  dates: ['./data/season_dates.json']
+});
+
+class Component extends DCLogic {
+  state = {
+    mode: 'standard',
+    tab: 'table',
+    lang: window.DatamineHeader?.getLanguage() === 'ru' ? 'ru' : 'en',
+    seasonIdx: 22,
+    filter: 'ramp',
+    unit: 'G',
+    expandedFloor: null,
+    search: null,
+    modal: null,
+    chartMode: 'ehp',
+    chartMetric: 'boss',
+    chartRange: 'ramp',
+    active: [19, 20, 21, 22],
+    chartHoverFloor: null,
+    jumpMode: 'season',
+    jumpHoverFloor: null,
+    histHoverSeason: null,
+    diffFloor: null,
+    diffFilter: 'ramp',
+    scrolled: false,
+    zoomImg: null,
+    zoomScale: 1,
+    zoomPan: { x: 0, y: 0 },
+    railCollapsed: false,
+    tip: null,
+    compareOpen: false,
+    compareIdx: 21,
+    toast: null
+  };
+
+  constructor(props) {
+    super(props);
+    this.railRef = React.createRef();
+    this._datasets = null;
+    this._datesMap = {};
+  }
+
+  _hydrateImgs() {
+    try {
+      const root = (this._el && this._el.ownerDocument) || document;
+      root.querySelectorAll('img[data-src]').forEach((im) => {
+        const v = im.getAttribute('data-src');
+        if (v && v.indexOf('{{') === -1 && im.getAttribute('src') !== v) im.setAttribute('src', v);
+      });
+    } catch (e) {}
+  }
+
+  _fitSeasonRail() {
+    try {
+      const el = this.railRef.current;
+      if (!el) return;
+      const bottomGap = 18;
+      const availableHeight = window.innerHeight - el.getBoundingClientRect().top - bottomGap;
+      el.style.maxHeight = Math.max(190, Math.floor(availableHeight)) + 'px';
+    } catch (e) {}
+  }
+
+  _scrollRailToLatest() {
+    try {
+      const run = () => {
+        const el = this.railRef.current;
+        if (!el) return;
+        this._fitSeasonRail();
+        el.scrollTop = Math.max(0, el.scrollHeight - el.clientHeight);
+      };
+      requestAnimationFrame(() => requestAnimationFrame(run));
+    } catch (e) {}
+  }
+
+  _scrollExpandedFloorIntoView(floor) {
+    try {
+      const run = () => {
+        const drawer = document.querySelector('[data-oow-floor-details="' + floor + '"]');
+        if (!drawer) return;
+
+        const clip = drawer.querySelector('.oow-floor-drawer__clip');
+        const header = document.querySelector('.datamine-header');
+        const viewportTop = 0;
+        const viewportBottom = window.innerHeight;
+        const topEdge = Math.max(12, header ? header.getBoundingClientRect().bottom + 12 : 12);
+        const bottomEdge = viewportBottom - 12;
+        const availableHeight = bottomEdge - topEdge;
+        const liveRect = drawer.getBoundingClientRect();
+        const height = Math.max(liveRect.height, clip ? clip.scrollHeight : 0);
+        const rect = { top: liveRect.top, bottom: liveRect.top + height, height };
+        let delta = 0;
+
+        // Do not move the page when the fully opened drawer is already visible.
+        if (rect.top >= viewportTop && rect.bottom <= viewportBottom) return;
+
+        if (rect.height > availableHeight) {
+          if (rect.top < topEdge || rect.bottom > bottomEdge) delta = rect.top - topEdge;
+        } else if (rect.bottom > bottomEdge) {
+          delta = rect.bottom - bottomEdge;
+        } else if (rect.top < topEdge) {
+          delta = rect.top - topEdge;
+        }
+
+        if (Math.abs(delta) > 1) {
+          const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.scrollBy({ top: delta, left: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+      };
+      requestAnimationFrame(() => requestAnimationFrame(run));
+    } catch (e) {}
+  }
+
+  getActiveSeasonNumber(seasons) {
+    if (!seasons || !seasons.length) return 1;
+    const now = new Date();
+    // Prefer the season whose calendar window contains today.
+    const active = seasons.find((s) => {
+      if (!s.startISO || !s.endISO) return false;
+      const start = new Date(s.startISO.replace(/-/g, '/'));
+      const end = new Date(s.endISO.replace(/-/g, '/') + ' 23:59:59');
+      return now >= start && now <= end;
+    });
+    if (active) return active.season;
+
+    // Otherwise use the latest season that has already started.
+    const started = seasons.filter((s) => {
+      if (!s.startISO) return false;
+      const start = new Date(s.startISO.replace(/-/g, '/'));
+      return now >= start;
+    });
+    if (started.length) return started[started.length - 1].season;
+
+    // Future-only data falls back to the latest available season.
+    return seasons[seasons.length - 1].season;
+  }
+
+  async fetchFirstJson(urls) {
+    for (const url of urls) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) return await response.json();
+      } catch (error) {
+        // A later source may still be available in exported or preview layouts.
+      }
+    }
+    return null;
+  }
+
+  _showInitialDatasets(datasets) {
+    this._datasets = datasets;
+    this._datesMap = {};
+    this._sc = {};
+    const mode = this.state.mode;
+    const ss = this.buildSeasons(mode);
+    const activeSeasonNum = this.getActiveSeasonNumber(ss);
+    const curSea = ss.find((s) => s.season === activeSeasonNum) || ss[ss.length - 1];
+    if (!curSea) return false;
+
+    this.setState({
+      seasonIdx: activeSeasonNum,
+      expandedFloor: null,
+      diffFloor: curSea.floorCount,
+      filter: 'ramp',
+      diffFilter: 'ramp',
+      active: ss.map((x) => x.season).slice(-4),
+      compareIdx: activeSeasonNum > 1 ? activeSeasonNum - 1 : activeSeasonNum
+    }, () => {
+      this._scrollRailToLatest();
+      this.loadFullDatamineData();
+    });
+    return true;
+  }
+
+  async loadFullDatamineData() {
+    const [stdData, mmoData, datesData] = await Promise.all([
+      this.fetchFirstJson(DATA_SOURCES.standard),
+      this.fetchFirstJson(DATA_SOURCES.mmo),
+      this.fetchFirstJson(DATA_SOURCES.dates)
+    ]);
+
+    if ((stdData || mmoData) && !this._unmounted) {
+      this._datasets = {
+        standard: stdData || this._datasets?.standard || null,
+        mmo: mmoData || this._datasets?.mmo || null
+      };
+      this._datesMap = datesData || {};
+      this._sc = {};
+      const mode = this.state.mode;
+      const ss = this.buildSeasons(mode);
+      const activeSeasonNum = this.getActiveSeasonNumber(ss);
+      const selectedSeasonNum = ss.some((s) => s.season === this.state.seasonIdx)
+        ? this.state.seasonIdx
+        : activeSeasonNum;
+      const curSea = ss.find((s) => s.season === selectedSeasonNum) || ss[ss.length - 1];
+      if (curSea) {
+        this.setState({
+          seasonIdx: selectedSeasonNum,
+          active: ss.map((x) => x.season).slice(-4)
+        }, () => this._scrollRailToLatest());
+      }
+    }
+  }
+
+  async loadDatamineData() {
+    const current = await this.fetchFirstJson(DATA_SOURCES.current);
+    if (this._unmounted) return;
+    const hasBootstrap = current && (current.standard?.seasons?.length || current.mmo?.seasons?.length);
+    if (hasBootstrap && this._showInitialDatasets({
+      standard: current.standard || null,
+      mmo: current.mmo || null
+    })) return;
+    this.loadFullDatamineData();
+  }
+
+  componentDidMount() {
+    this._hydrateImgs();
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    document.documentElement.lang = this.state.lang;
+    this._prevLang = this.state.lang;
+    this._prevMode = this.state.mode;
+    this._scrollRailToLatest();
+    this._onScroll = () => {
+      this._fitSeasonRail();
+      const s = (window.scrollY || 0) > 420;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    };
+    this._onResize = () => this._fitSeasonRail();
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    window.addEventListener('resize', this._onResize, { passive: true });
+    this._onLanguageChange = (event) => {
+      const lang = event.detail?.language === 'ru' ? 'ru' : 'en';
+      if (lang !== this.state.lang) this.setState({ lang });
+    };
+    window.addEventListener('datamine:language-change', this._onLanguageChange);
+    this.loadDatamineData();
+  }
+
+  componentDidUpdate() {
+    this._hydrateImgs();
+    if (this._prevLang !== this.state.lang) {
+      this._prevLang = this.state.lang;
+      document.documentElement.lang = this.state.lang;
+    }
+    if (this._prevMode !== this.state.mode) {
+      this._prevMode = this.state.mode;
+      this._scrollRailToLatest();
+    }
+  }
+
+  componentWillUnmount() {
+    this._unmounted = true;
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._onLanguageChange) window.removeEventListener('datamine:language-change', this._onLanguageChange);
+    clearTimeout(this._tt);
+  }
+
+  seasonColor(s) {
+    return 'hsl(' + ((s * 47 + 18) % 360) + ' 68% 64%)';
+  }
+
+  setMode(m) {
+    const ss = this.buildSeasons(m);
+    const activeSeasonNum = this.getActiveSeasonNumber(ss);
+    const curSea = ss.find((s) => s.season === activeSeasonNum) || ss[ss.length - 1];
+    this.setState({
+      mode: m,
+      seasonIdx: activeSeasonNum,
+      expandedFloor: null,
+      diffFloor: curSea ? curSea.floorCount : 28,
+      filter: 'ramp',
+      diffFilter: 'ramp',
+      search: null,
+      chartRange: 'ramp',
+      active: ss.map((x) => x.season).slice(-4),
+      compareIdx: activeSeasonNum > 1 ? activeSeasonNum - 1 : activeSeasonNum
+    });
+  }
+
+  buildSeasons(mode) {
+    mode = mode || 'standard';
+    this._sc = this._sc || {};
+    if (this._sc[mode]) return this._sc[mode];
+
+    const isMmo = mode === 'mmo';
+    const rawData = (this._datasets && this._datasets[mode]) || null;
+
+    if (rawData && rawData.seasons && rawData.seasons.length > 0) {
+      const otStart = isMmo ? 33 : 26;
+      const datesMap = this._datesMap || {};
+
+      const list = rawData.seasons.map((s) => {
+        const sNum = s.season;
+        const dateInfo = datesMap[String(sNum)] || {};
+        const startISO = s.startDate || dateInfo.startDate || (isMmo ? '2025-01-15' : '2023-01-15');
+        const endISO = s.endDate || dateInfo.endDate || (isMmo ? '2025-02-14' : '2023-02-14');
+        const sDate = new Date(startISO.replace(/-/g, '/'));
+        const eDate = new Date(endISO.replace(/-/g, '/'));
+        const pad = (n) => String(n).padStart(2, '0');
+        const dates = pad(sDate.getDate()) + '.' + pad(sDate.getMonth() + 1) + ' ~ ' + pad(eDate.getDate()) + '.' + pad(eDate.getMonth() + 1);
+        const ver = s.title || dateInfo.version || (isMmo ? ('MMO S' + sNum) : ('v' + (2.2 + (sNum - 1) * 0.1).toFixed(1)));
+        const floorCount = s.floors ? s.floors.length : (isMmo ? 36 : (sNum >= 12 ? 28 : 25));
+
+        let resist = 0.8501;
+        if (!isMmo) {
+          if (sNum <= 11) resist = 0.40 + (sNum - 1) * 0.006;
+          else if (sNum === 12) resist = 0.7185;
+          else if (sNum === 13) resist = 0.7393;
+          else resist = 0.8501;
+        }
+        const ehpMult = 1 / (1 - resist);
+
+        const f25 = s.floors ? s.floors.find((f) => f.floor === 25) : null;
+        const f28 = s.floors ? s.floors.find((f) => f.floor === (isMmo ? 36 : 28)) : null;
+        const f25Hp = f25 ? (f25.maxHp || f25.totalHp || 1) : 1;
+        const f28Hp = f28 ? (f28.maxHp || f28.totalHp || 1) : 1;
+        const f28mult = f28Hp > 0 && f25Hp > 0 ? Number((f28Hp / f25Hp).toFixed(2)) : (isMmo ? 3.6 : 2.5);
+
+        const floors = (s.floors || []).map((fl) => {
+          const isOt = fl.floor >= otStart;
+          const bossHp = fl.maxHp || fl.totalHp || 0;
+          const totalHp = fl.totalHp || bossHp || 0;
+          const bossG = bossHp / 1e9;
+          const totalG = totalHp / 1e9;
+          const mobs = fl.mobCount || (fl.enemies ? fl.enemies.length : 1);
+          const waveN = Math.max(1, ...(fl.enemies || []).map((e) => e.wave || 1));
+
+          return {
+            floor: fl.floor,
+            bossG,
+            totalG,
+            bossHp,
+            totalHp,
+            mobs,
+            ot: isOt,
+            waveN,
+            f28mult,
+            unlockDay: fl.unlockDay || 1,
+            difficultySchedule: fl.difficultySchedule || { initialPct: isOt ? 2000 : 100, daysToMin: 1, steps: [] },
+            enemies: fl.enemies || [],
+            stageMutators: fl.stageMutators || [],
+            dropBuffs: fl.dropBuffs || []
+          };
+        });
+
+        const peak = Math.max(...floors.map((f) => f.difficultySchedule.initialPct || 100), 100);
+
+        return {
+          season: sNum,
+          ver,
+          dates,
+          startISO,
+          endISO,
+          floorCount,
+          otStart,
+          resist,
+          ehpMult,
+          f28mult,
+          floors,
+          color: this.seasonColor(sNum),
+          maxDifficulty: peak
+        };
+      });
+
+      this._sc[mode] = list;
+      return list;
+    }
+
+    // Fallback formula generator if dataset not yet loaded
+    const vers = ['2.2','2.3','2.4','2.5','2.6','3.0','3.1','3.2','3.3','3.4','3.5','3.6','3.7','3.8','3.9','4.0','4.1','4.2','4.3','4.4','4.5','4.6'];
+    const pad = (n) => String(n).padStart(2, '0');
+    const seasonCount = isMmo ? 4 : 22;
+    const otStart = isMmo ? 33 : 26;
+    const list = [];
+    for (let s = 1; s <= seasonCount; s++) {
+      const y = isMmo ? 2025 : 2023;
+      const start = new Date(y, s - 1, 15), end = new Date(y, s, 14);
+      const dates = pad(start.getDate()) + '.' + pad(start.getMonth() + 1) + ' ~ ' + pad(end.getDate()) + '.' + pad(end.getMonth() + 1);
+      const startISO = start.getFullYear() + '-' + pad(start.getMonth() + 1) + '-' + pad(start.getDate());
+      const endISO = end.getFullYear() + '-' + pad(end.getMonth() + 1) + '-' + pad(end.getDate());
+      const floorCount = isMmo ? 36 : (s >= 12 ? 28 : 25);
+      const rampTop = isMmo ? 32 : 25;
+      const resist = isMmo ? 0.8501 : (s <= 11 ? (0.40 + (s - 1) * 0.006) : s === 12 ? 0.7185 : s === 13 ? 0.7393 : 0.8501);
+      const ehpMult = 1 / (1 - resist);
+      const base = isMmo ? 0.6 * Math.pow(1.42, s - 1) : 0.32 * Math.pow(1.38, s - 1);
+      const f28mult = isMmo ? 3.6 : 2.5;
+      const floors = [];
+      for (let f = 1; f <= floorCount; f++) {
+        const ot = f >= otStart;
+        let boss;
+        if (f <= rampTop) boss = base * Math.pow(0.86, rampTop - f);
+        else { const k = (f - rampTop) / (floorCount - rampTop); boss = base * (1 + (f28mult - 1) * Math.pow(k, 1.4)); }
+        floors.push({ floor: f, bossG: boss, totalG: boss * 2.12, bossHp: boss * 1e9, totalHp: boss * 2.12 * 1e9, mobs: 3, ot, waveN: ot ? 3 : 2, f28mult, difficultySchedule: { initialPct: ot ? 2000 : 100, daysToMin: 30, steps: [{ startDay: 1, endDay: 30, durationDays: 30, pct: ot ? 2000 : 100, multiplier: 20 }] }, enemies: [], stageMutators: [], dropBuffs: [] });
+      }
+      const peak = Math.max(...floors.map((f) => f.difficultySchedule.initialPct));
+      list.push({ season: s, ver: vers[(s - 1) % vers.length], dates, startISO, endISO, floorCount, otStart, resist, ehpMult, f28mult, floors, color: this.seasonColor(s), maxDifficulty: peak });
+    }
+    this._sc[mode] = list;
+    return list;
+  }
+
+  fmt(v, unit) {
+    if (v == null || isNaN(v)) return '0';
+    if (unit === 'RAW') {
+      return Math.round(v * 1e9).toLocaleString('en-US');
+    }
+    if (unit === 'M') {
+      const m = v * 1000;
+      return m >= 100 ? (m >= 1000 ? Math.round(m).toLocaleString('en-US') : m.toFixed(1)) : m.toFixed(2);
+    }
+    // Billions mode.
+    if (v >= 10) return v.toFixed(1);
+    if (v >= 1) return v.toFixed(2);
+    return v.toFixed(2);
+  }
+
+  unitLabel(u) {
+    if (u === 'RAW') return '';
+    if (u === 'M') return 'M';
+    return 'G';
+  }
+
+  pluralRu(count, one, few, many) {
+    const mod100 = Math.abs(count) % 100;
+    const mod10 = mod100 % 10;
+    if (mod100 > 10 && mod100 < 20) return many;
+    if (mod10 === 1) return one;
+    if (mod10 >= 2 && mod10 <= 4) return few;
+    return many;
+  }
+
+  mobStyle(type) {
+    if (type === 'boss') return { bg: 'radial-gradient(120% 130% at 12% 0%, rgba(255,107,139,.22), transparent 56%), rgba(255,107,139,.05)', bd: 'rgba(255,107,139,.4)', bdHover: 'rgba(255,107,139,.7)', hpCol: '#ff9bb2', tagCol: '#ff9bb2', tagBg: 'rgba(255,107,139,.16)' };
+    if (type === 'elite') return { bg: 'radial-gradient(120% 130% at 12% 0%, rgba(181,123,255,.22), transparent 56%), rgba(181,123,255,.04)', bd: 'rgba(181,123,255,.32)', bdHover: 'rgba(181,123,255,.6)', hpCol: '#c79dff', tagCol: '#c79dff', tagBg: 'rgba(181,123,255,.16)' };
+    return { bg: 'rgba(255,255,255,.03)', bd: 'rgba(255,255,255,.09)', bdHover: 'rgba(79,227,193,.5)', hpCol: '#f6f1fb', tagCol: '#8fe6d4', tagBg: 'rgba(79,227,193,.12)' };
+  }
+
+  modalStats(m, sea, isRu) {
+    const stats = (m && m.stats) || {};
+    const loc = (n) => (n || 0).toLocaleString('en-US');
+    const armor = stats.ArmorBase || 0;
+    const critDef = stats.FinalCritDef != null ? ((stats.FinalCritDef * 100).toFixed(1).replace(/\.0$/, '') + '%') : '0%';
+    const maxHp = stats.MaxHealth || m.hp || 0;
+    const hpG = maxHp / 1e9;
+    const hpM = maxHp / 1e6;
+    const atk = stats.CommonAtkBase || m.atk || 0;
+
+    const primary = [
+      {
+        icon: 'assets/icons/stat_hp.svg',
+        label: isRu ? 'Максимальное ОЗ' : 'Max Health',
+        value: loc(maxHp),
+        sub: (hpG >= 0.01 ? hpG.toFixed(2) + ' G · ' : '') + hpM.toFixed(1) + ' M',
+        color: '#ff6b8b',
+        valColor: '#ff8fa8',
+        bg: 'rgba(255,107,139,.06)',
+        bd: 'rgba(255,107,139,.25)',
+        iconBg: 'rgba(255,107,139,.14)'
+      },
+      {
+        icon: 'assets/icons/stat_atk.svg',
+        label: isRu ? 'Базовая Атака (ATK)' : 'Base Attack (ATK)',
+        value: loc(atk),
+        sub: (atk / 1e6).toFixed(2) + ' M',
+        color: '#f5d97a',
+        valColor: '#f6f1fb',
+        bg: 'rgba(245,217,122,.06)',
+        bd: 'rgba(245,217,122,.25)',
+        iconBg: 'rgba(245,217,122,.14)'
+      },
+      {
+        icon: 'assets/icons/stat_armor.svg',
+        label: isRu ? 'Прочность щита (Armor)' : 'Shield Points (Armor)',
+        value: loc(armor),
+        sub: isRu ? 'базовый щит' : 'shield points',
+        color: '#4fe3c1',
+        valColor: '#4fe3c1',
+        bg: 'rgba(79,227,193,.06)',
+        bd: 'rgba(79,227,193,.25)',
+        iconBg: 'rgba(79,227,193,.14)'
+      },
+      {
+        icon: 'assets/icons/stat_critdef.svg',
+        label: isRu ? 'Снижение крит. урона (FinalCritDef)' : 'Crit Resistance (FinalCritDef)',
+        value: critDef,
+        sub: isRu ? 'анти-крит' : 'crit evasion',
+        color: '#b57bff',
+        valColor: '#c79dff',
+        bg: 'rgba(181,123,255,.06)',
+        bd: 'rgba(181,123,255,.25)',
+        iconBg: 'rgba(181,123,255,.14)'
+      }
+    ];
+
+    const phyDef = stats.PhyDefBase || m.def || 4000;
+    const fireDef = stats.FireDefBase || phyDef;
+    const iceDef = stats.IceDefBase || phyDef;
+    const thunderDef = stats.ThunderDefBase || phyDef;
+    const superDef = stats.SuperpowerDefBase || phyDef;
+
+    const calcRes = (defVal) => (sea && sea.resist) ? ((sea.resist * 100).toFixed(2) + '%') : (((defVal / (defVal + 4000)) * 100).toFixed(1) + '%');
+
+    const elems = [
+      { icon: 'assets/icons/elem_phys.png', name: isRu ? 'Физический' : 'Physical', res: calcRes(phyDef), def: loc(phyDef) + ' DEF' },
+      { icon: 'assets/icons/elem_fire.png', name: isRu ? 'Огонь' : 'Flame', res: calcRes(fireDef), def: loc(fireDef) + ' DEF' },
+      { icon: 'assets/icons/elem_frost.png', name: isRu ? 'Лед' : 'Frost', res: calcRes(iceDef), def: loc(iceDef) + ' DEF' },
+      { icon: 'assets/icons/elem_volt.png', name: isRu ? 'Молния' : 'Volt', res: calcRes(thunderDef), def: loc(thunderDef) + ' DEF' },
+      { icon: 'assets/icons/elem_altered.png', name: isRu ? 'Альтер' : 'Altered', res: calcRes(superDef), def: loc(superDef) + ' DEF' },
+    ];
+
+    const overrides = [];
+    const checkOverride = (key, labelEn, labelRu, valFormat, descEn, descRu) => {
+      const v = stats[key];
+      if (v != null && v !== 0 && v !== '0' && v !== 'None' && v !== '') {
+        overrides.push({
+          key,
+          label: isRu ? labelRu : labelEn,
+          val: typeof valFormat === 'function' ? valFormat(v) : String(v),
+          desc: isRu ? descRu : descEn
+        });
+      }
+    };
+
+    checkOverride('PhyDefIgnoreMult', 'Phys Def Ignore Mult', 'Игнор физ. защиты', (v) => Math.round(v * 100) + '%', '', '');
+    checkOverride('FireDefIgnoreMult', 'Flame Def Ignore Mult', 'Игнор огненной защиты', (v) => Math.round(v * 100) + '%', '', '');
+    checkOverride('IceDefIgnoreMult', 'Frost Def Ignore Mult', 'Игнор ледяной защиты', (v) => Math.round(v * 100) + '%', '', '');
+    checkOverride('ThunderDefIgnoreMult', 'Volt Def Ignore Mult', 'Игнор электро защиты', (v) => Math.round(v * 100) + '%', '', '');
+    checkOverride('SuperpowerDefIgnoreMult', 'Altered Def Ignore Mult', 'Игнор альтер защиты', (v) => Math.round(v * 100) + '%', '', '');
+
+    // ExecuteMult: strictly only show if not 0 and not 150% (150% is standard normal value)
+    const execV = stats.ExecuteMult;
+    if (execV != null && execV !== 0 && execV !== '0' && execV !== 150 && execV !== '150' && execV !== 1.5 && execV !== '150%') {
+      overrides.push({
+        key: 'ExecuteMult',
+        label: isRu ? 'Множитель казни' : 'Execution Multiplier',
+        val: execV + '%',
+        desc: ''
+      });
+    }
+
+    checkOverride('Crit', 'Base Crit Rate', 'Базовый крит. шанс', (v) => Math.round(v * 100) + '%', '', '');
+    checkOverride('CritDef', 'Base Crit Evasion', 'Базовое уклонение от крита', (v) => Math.round(v * 100) + '%', '', '');
+    checkOverride('FinalCrit', 'Final Crit Probability', 'Итоговый крит. шанс', (v) => Math.round(v * 100) + '%', '', '');
+    checkOverride('AbnormalState', 'Abnormal State Infliction', 'Сила аномального состояния', (v) => Math.round(v * 100) + '%', '', '');
+    checkOverride('AbnormalStateResistance', 'Abnormal State Resistance', 'Сопротивление аномалиям', (v) => Math.round(v * 100) + '%', '', '');
+    checkOverride('Rigidity', 'Rigidity (Stagger Power)', 'Сила ошеломления', (v) => loc(v), '', '');
+    checkOverride('RigidityResistance', 'Rigidity Resistance', 'Сопротивление пошатыванию', (v) => loc(v), '', '');
+    checkOverride('MaxRage', 'Max Rage Gauge', 'Макс. шкала ярости', (v) => loc(v), '', '');
+
+    return { primary, elems, overrides };
+  }
+
+  buildLineup(sea, f, unit) {
+    const isRu = this.state.lang === 'ru';
+    const resistStr = (sea.resist * 100).toFixed(2) + '%';
+    const enemies = f.enemies || [];
+
+    if (!enemies.length) {
+      return { waves: [], resistStr };
+    }
+
+    const waveMap = new Map();
+    enemies.forEach((m) => {
+      const w = m.wave || 1;
+      if (!waveMap.has(w)) waveMap.set(w, []);
+      waveMap.get(w).push(m);
+    });
+
+    const waves = [];
+    Array.from(waveMap.keys()).sort((a, b) => a - b).forEach((wNum) => {
+      const mobsInWave = waveMap.get(wNum).slice().sort((a, b) => {
+        const hpA = a.combinedHp || a.hp || 0;
+        const hpB = b.combinedHp || b.hp || 0;
+        return hpB - hpA;
+      });
+      const isFinalWave = wNum === waveMap.size;
+      const tag = isFinalWave ? (isRu ? 'Финальный босс' : 'Final Boss') : (wNum === 1 ? (isRu ? 'Авангард' : 'Vanguard') : (isRu ? 'Штурм' : 'Assault'));
+
+      const totalMobs = mobsInWave.length;
+      const mobs = mobsInWave.map((m, idx) => {
+        let flex = '1 1 300px';
+        if (totalMobs === 4) {
+          flex = (idx === 0) ? '1 1 100%' : '1 1 calc(33.333% - 12px)';
+        } else if (totalMobs === 5) {
+          flex = (idx === 0 || idx === 1) ? '1 1 calc(50% - 12px)' : '1 1 calc(33.333% - 12px)';
+        } else if (totalMobs === 3) {
+          flex = '1 1 calc(33.333% - 12px)';
+        } else if (totalMobs === 2) {
+          flex = '1 1 calc(50% - 12px)';
+        } else if (totalMobs === 1) {
+          flex = '1 1 100%';
+        }
+
+        const name = isRu ? (m.nameRu || m.nameEn) : (m.nameEn || m.nameRu || ('Enemy #' + m.mob));
+        const code = m.codeName || '';
+        const isBoss = m.monsterType === 'BS_MONSTER_BOSS' || /boss_/i.test(code);
+        const isElite = !isBoss && (m.hpBillions >= 0.05 || (m.hp && m.hp >= 5e7));
+        const type = isBoss ? 'boss' : (isElite ? 'elite' : 'norm');
+        const cls = isBoss ? (isRu ? 'Босс' : 'Boss') : (isElite ? (isRu ? 'Элита' : 'Elite') : (isRu ? 'Моб' : 'Creep'));
+        const id = code || m.key || ('mob_' + m.mob);
+        const img = m.image || (isBoss ? 'assets/monsters/placeholder_boss.png' : (isElite ? 'assets/monsters/placeholder_elite.png' : 'assets/monsters/placeholder_creep.png'));
+
+        const hpValG = (m.combinedHp || m.hp || 0) / 1e9;
+        const atkValG = (m.atk || 0) / 1e6;
+        const st = this.mobStyle(type);
+
+        const buffs = (m.inherentBuffs || []).filter((b) => b.id && !b.id.toLowerCase().includes('immuneeverything')).map((b) => ({
+          icon: b.icon || 'assets/buffs/buff_AddElementDefFoodBase.png',
+          name: isRu ? (b.nameRu || b.nameEn) : (b.nameEn || b.nameRu),
+          desc: isRu ? (b.descRu || b.descEn) : (b.descEn || b.descRu)
+        }));
+
+        const ms = this.modalStats(m, sea, isRu);
+
+        const mobObj = {
+          name,
+          flex,
+          img,
+          type,
+          cls,
+          id,
+          hp: this.fmt(hpValG, unit),
+          unit: this.unitLabel(unit),
+          ehp: this.fmt(hpValG * sea.ehpMult, unit) + (this.unitLabel(unit) ? ' ' + this.unitLabel(unit) : ''),
+          ehpNum: this.fmt(hpValG * sea.ehpMult, unit),
+          sub: (m.count > 1 ? '×' + m.count + ' · ' : '') + 'ATK ' + this.fmt(atkValG, 'M') + 'M',
+          buffs,
+          ...st,
+        };
+
+        mobObj.onOpen = () => this.setState({
+          modal: {
+            name,
+            img,
+            type,
+            cls,
+            id,
+            hp: this.fmt(hpValG, unit) + ' ' + this.unitLabel(unit),
+            ehp: this.fmt(hpValG * sea.ehpMult, unit) + ' ' + this.unitLabel(unit),
+            atk: this.fmt(atkValG, 'M') + 'M',
+            def: resistStr,
+            buffs,
+            season: sea.season,
+            floor: f.floor,
+            primary: ms.primary,
+            elems: ms.elems,
+            overrides: ms.overrides
+          }
+        });
+
+        return mobObj;
+      });
+
+      waves.push({
+        label: isRu ? ('ВОЛНА ' + wNum) : ('WAVE ' + wNum),
+        tag,
+        mobs
+      });
+    });
+
+    return { waves, resistStr };
+  }
+
+  buildAffixes(f) {
+    const isRu = this.state.lang === 'ru';
+    const totalDropWeight = (f.dropBuffs || []).reduce((sum, d) => sum + (d.weight || 0), 0);
+    const dropMap = new Map();
+    (f.dropBuffs || []).forEach((d) => {
+      const pct = totalDropWeight > 0 ? (d.weight / totalDropWeight) * 100 : 0;
+      const formattedPct = pct % 1 === 0 ? pct.toFixed(0) + '%' : pct.toFixed(1) + '%';
+      dropMap.set(d.id, { weight: d.weight, pctStr: formattedPct });
+    });
+
+    const unifiedBuffs = [];
+    const seenBuffIds = new Set();
+
+    (f.stageMutators || []).forEach((mut) => {
+      if (!mut.id || mut.id.toLowerCase().includes('immuneeverything')) return;
+      seenBuffIds.add(mut.id);
+      const dropInfo = dropMap.get(mut.id);
+      unifiedBuffs.push({
+        icon: mut.icon || 'assets/buffs/buff_AddElementDefFoodBase.png',
+        name: isRu ? (mut.nameRu || mut.nameEn) : (mut.nameEn || mut.nameRu || mut.id),
+        desc: isRu ? (mut.descRu || mut.descEn) : (mut.descEn || mut.descRu || ''),
+        badge: dropInfo ? ((isRu ? 'ДРОП: ' : 'DROP: ') + dropInfo.pctStr) : (isRu ? 'АФФИКС' : 'AFFIX'),
+        kind: dropInfo ? 'drop' : 'affix',
+        accent: dropInfo ? '#f5d97a' : '#ff6b8b',
+        badgeCol: dropInfo ? '#f5d97a' : '#ff9bb2',
+        badgeBg: dropInfo ? 'rgba(245,217,122,.14)' : 'rgba(255,107,139,.14)',
+        badgeBd: dropInfo ? 'rgba(245,217,122,.35)' : 'rgba(255,107,139,.35)'
+      });
+    });
+
+    (f.dropBuffs || []).forEach((d) => {
+      if (!d.id || d.id.toLowerCase().includes('immuneeverything')) return;
+      if (!seenBuffIds.has(d.id)) {
+        seenBuffIds.add(d.id);
+        const dropInfo = dropMap.get(d.id);
+        unifiedBuffs.push({
+          icon: d.icon || 'assets/buffs/buff_AddElementDefFoodBase.png',
+          name: isRu ? (d.nameRu || d.nameEn) : (d.nameEn || d.nameRu || d.id),
+          desc: isRu ? (d.descRu || d.descEn) : (d.descEn || d.descRu || ''),
+          badge: (isRu ? 'ДРОП: ' : 'DROP: ') + (dropInfo ? dropInfo.pctStr : '50%'),
+          kind: 'drop',
+          accent: '#f5d97a',
+          badgeCol: '#f5d97a',
+          badgeBg: 'rgba(245,217,122,.14)',
+          badgeBd: 'rgba(245,217,122,.35)'
+        });
+      }
+    });
+
+    (f.enemies || []).forEach((m) => {
+      (m.inherentBuffs || []).forEach((ib) => {
+        if (!ib.id || ib.id.toLowerCase().includes('immuneeverything')) return;
+        if (!seenBuffIds.has(ib.id)) {
+          seenBuffIds.add(ib.id);
+          const dropInfo = dropMap.get(ib.id);
+          unifiedBuffs.push({
+            icon: ib.icon || 'assets/buffs/buff_AddElementDefFoodBase.png',
+            name: isRu ? (ib.nameRu || ib.nameEn) : (ib.nameEn || ib.nameRu || ib.id),
+            desc: isRu ? (ib.descRu || ib.descEn) : (ib.descEn || ib.descRu || ''),
+            badge: dropInfo ? ((isRu ? 'ДРОП: ' : 'DROP: ') + dropInfo.pctStr) : (isRu ? 'АФФИКС' : 'AFFIX'),
+            kind: dropInfo ? 'drop' : 'affix',
+            accent: dropInfo ? '#f5d97a' : '#ff6b8b',
+            badgeCol: dropInfo ? '#f5d97a' : '#ff9bb2',
+            badgeBg: dropInfo ? 'rgba(245,217,122,.14)' : 'rgba(255,107,139,.14)',
+            badgeBd: dropInfo ? 'rgba(245,217,122,.35)' : 'rgba(255,107,139,.35)'
+          });
+        }
+      });
+    });
+
+    unifiedBuffs.sort((a, b) => {
+      if (a.kind === 'drop' && b.kind !== 'drop') return -1;
+      if (a.kind !== 'drop' && b.kind === 'drop') return 1;
+      return 0;
+    });
+
+    return unifiedBuffs;
+  }
+
+  toast(msg) {
+    this.setState({ toast: msg });
+    clearTimeout(this._tt);
+    this._tt = setTimeout(() => this.setState({ toast: null }), 1800);
+  }
+
+  // Builds the primary multi-season chart geometry.
+  mainChart() {
+    const seasons = this.buildSeasons(this.state.mode);
+    const { active, chartMetric, chartMode, chartRange } = this.state;
+    const act = seasons.filter((s) => active.includes(s.season)).sort((a, b) => a.season - b.season);
+    let minF, maxF;
+    const _maxActFloor = Math.max(...act.map((s) => s.floorCount), (this.state.mode === 'mmo' ? 36 : 28));
+    const _ot = this.state.mode === 'mmo' ? 33 : 26;
+    const _ramp = this.state.mode === 'mmo' ? 25 : 17;
+    if (chartRange === 'overtime') { minF = _ot; maxF = _maxActFloor; }
+    else if (chartRange === 'ramp') { minF = _ramp; maxF = _maxActFloor; }
+    else { minF = 1; maxF = _maxActFloor; }
+    const W = 920, H = 300, L = 64, R = 24, T = 16, B = 30, pw = W - L - R, ph = H - T - B;
+    const valOf = (s, fl) => (chartMetric === 'boss' ? fl.bossG : fl.totalG) * (chartMode === 'ehp' ? s.ehpMult : 1);
+    let ymax = 0;
+    act.forEach((s) => s.floors.forEach((fl) => { if (fl.floor >= minF && fl.floor <= maxF) ymax = Math.max(ymax, valOf(s, fl)); }));
+    ymax = ymax * 1.08 || 1;
+    const x = (f) => L + (maxF === minF ? 0 : (f - minF) / (maxF - minF)) * pw;
+    const y = (v) => T + ph - (v / ymax) * ph;
+    const series = act.map((s) => {
+      const fls = s.floors.filter((fl) => fl.floor >= minF && fl.floor <= maxF);
+      const pts = fls.map((fl) => ({ cx: +x(fl.floor).toFixed(1), cy: +y(valOf(s, fl)).toFixed(1), floor: fl.floor, r: fl.ot ? 3.4 : 2.2 }));
+      const path = pts.map((p, i) => (i ? 'L' : 'M') + p.cx + ' ' + p.cy).join(' ');
+      const area = pts.length ? 'M' + pts[0].cx + ' ' + (T + ph) + ' ' + pts.map((p) => 'L' + p.cx + ' ' + p.cy).join(' ') + ' L' + pts[pts.length - 1].cx + ' ' + (T + ph) + ' Z' : '';
+      return { color: s.color, fill: s.color, label: 'S' + s.season, path, area, pts, season: s.season };
+    });
+    const yticks = [];
+    for (let i = 0; i <= 4; i++) {
+      const v = ymax * i / 4;
+      const yy = +y(v).toFixed(1);
+      yticks.push({ y: yy, ty: yy + 4, label: (v >= 100 ? Math.round(v) : v.toFixed(1)) + 'G' });
+    }
+    const step = Math.max(1, Math.round((maxF - minF) / 7));
+    const xticks = [];
+    for (let f = minF; f <= maxF; f += step) xticks.push({ x: +x(f).toFixed(1), label: 'F' + f });
+    if (xticks.length && xticks[xticks.length - 1].label !== 'F' + maxF) xticks.push({ x: +x(maxF).toFixed(1), label: 'F' + maxF });
+    return { series, yticks, xticks, x, y, minF, maxF, W, L, R, pw, valOf, act };
+  }
+
+  render() {}
+
+  renderVals() {
+    const st = this.state;
+    const isRu = st.lang === 'ru';
+    const copy = isRu ? {
+      gameModeLabel: 'Режим игры',
+      originalModeLabel: 'Оригинальный OOW',
+      tableTabLabel: 'Таблица этажей и составы',
+      chartsTabLabel: 'Графики инфляции и EHP',
+      difficultyTabLabel: 'График сложности',
+      seasonsLabel: 'СЕЗОНЫ',
+      collapseSeasonsTitle: 'Свернуть панель сезонов',
+      expandSeasonsTitle: 'Развернуть панель сезонов',
+      exactLabel: 'Точно',
+      compareLabelText: 'Сравнить',
+      copyJsonLabel: 'Копировать JSON',
+      compareTitle: 'Инфляция HP сезона',
+      versusLabel: 'против',
+      compareWithLabel: 'Сравнить с',
+      floorLabel: 'Этаж',
+      totalHpLabel: 'Общее HP',
+      maxMobLabel: 'Макс. HP врага',
+      mobsLabel: 'Враги',
+      waveDistributionLabel: 'Распределение по волнам',
+      resistsLabel: 'Сопротивления',
+      effectiveHpLabel: 'Эффективное HP',
+      affixesLabel: 'Модификаторы и аффиксы этажа',
+      hpModeLabel: 'Режим HP',
+      rawHpLabel: 'Номинальное HP',
+      metricLabel: 'Метрика',
+      bossHpLabel: 'HP босса',
+      totalFloorLabel: 'Весь этаж',
+      floorRangeLabel: 'Диапазон этажей',
+      allLabel: 'Все',
+      presetsLabel: 'Наборы',
+      seasonsOnChartLabel: 'Сезоны на графике',
+      mainChartTitle: 'HP босса по этажам — испытание OOW',
+      historyChartTitle: 'Историческая инфляция финального этажа',
+      historyChartDescription: 'HP финального босса от первого сезона до текущего — номинальное и эффективное в логарифмической шкале.',
+      seasonToSeasonLabel: 'Сезон → сезон',
+      floorToFloorLabel: 'Этаж → этаж',
+      goToFloorPlaceholder: 'Перейти к этажу…',
+      difficultyDescription: 'Множитель сложности поэтапно снижается от стартового пика до базовых 100% в течение сезона.',
+      liveNowLabel: 'Сейчас активно',
+      allFloorsDifficultyTitle: 'Все этажи — снижение сложности и даты',
+      peakLabel: 'Пик %',
+      peakWindowLabel: 'Период пика',
+      baselineFromLabel: '100% с',
+      stepsLabel: 'Этапы',
+      timelineLabel: 'Хронология',
+      scrollTopTitle: 'Наверх',
+      zoomImageTitle: 'Нажмите, чтобы увеличить изображение',
+      blueprintIdLabel: 'ID шаблона',
+      resistLabel: 'Сопротивление',
+      closeLabel: 'Закрыть',
+      primaryStatsLabel: 'Основные боевые характеристики',
+      elementalResistancesLabel: 'Сопротивления стихиям',
+      difficultyContextLabel: 'при сложности 2000%',
+      overridesLabel: 'Особые параметры',
+      zoomOutLabel: 'Уменьшить',
+      zoomInLabel: 'Увеличить',
+      resetZoomLabel: 'Сбросить масштаб',
+      resetLabel: 'Сбросить'
+    } : {
+      gameModeLabel: 'Game Mode',
+      originalModeLabel: 'Original OOW',
+      tableTabLabel: 'Floor Table & Lineups',
+      chartsTabLabel: 'Inflation & EHP Charts',
+      difficultyTabLabel: 'Difficulty Schedule',
+      seasonsLabel: 'SEASONS',
+      collapseSeasonsTitle: 'Collapse seasons panel',
+      expandSeasonsTitle: 'Expand seasons panel',
+      exactLabel: 'Exact',
+      compareLabelText: 'Compare',
+      copyJsonLabel: 'Copy JSON',
+      compareTitle: 'Season HP Inflation',
+      versusLabel: 'vs',
+      compareWithLabel: 'Compare with',
+      floorLabel: 'Floor',
+      totalHpLabel: 'Total HP',
+      maxMobLabel: 'Max Mob',
+      mobsLabel: 'Mobs',
+      waveDistributionLabel: 'Wave Distribution',
+      resistsLabel: 'Resists',
+      effectiveHpLabel: 'Effective HP',
+      affixesLabel: 'Stage Mutators & Affixes',
+      hpModeLabel: 'HP Mode',
+      rawHpLabel: 'Raw HP',
+      metricLabel: 'Metric',
+      bossHpLabel: 'Boss HP',
+      totalFloorLabel: 'Total Floor',
+      floorRangeLabel: 'Floor Range',
+      allLabel: 'All',
+      presetsLabel: 'Presets',
+      seasonsOnChartLabel: 'Seasons on chart',
+      mainChartTitle: 'Boss HP across floors — OOW Challenge',
+      historyChartTitle: 'Historical final-floor inflation',
+      historyChartDescription: 'Final boss HP from the first season to now — raw vs effective on a logarithmic scale.',
+      seasonToSeasonLabel: 'Season → Season',
+      floorToFloorLabel: 'Floor → Floor',
+      goToFloorPlaceholder: 'Go to floor…',
+      difficultyDescription: 'The difficulty multiplier decays step by step from the launch peak to the 100% baseline during the season.',
+      liveNowLabel: 'Live now',
+      allFloorsDifficultyTitle: 'All floors — difficulty decay & dates',
+      peakLabel: 'Peak %',
+      peakWindowLabel: 'Peak window',
+      baselineFromLabel: '100% from',
+      stepsLabel: 'Steps',
+      timelineLabel: 'Timeline',
+      scrollTopTitle: 'Scroll to top',
+      zoomImageTitle: 'Click to zoom image',
+      blueprintIdLabel: 'Blueprint ID',
+      resistLabel: 'Resist',
+      closeLabel: 'Close',
+      primaryStatsLabel: 'Primary Combat Stats',
+      elementalResistancesLabel: 'Elemental Resistances',
+      difficultyContextLabel: 'at 2000% difficulty',
+      overridesLabel: 'Notable Attribute Overrides',
+      zoomOutLabel: 'Zoom out',
+      zoomInLabel: 'Zoom in',
+      resetZoomLabel: 'Reset scale',
+      resetLabel: 'Reset'
+    };
+    const seasons = this.buildSeasons(st.mode);
+    const sea = seasons.find((s) => s.season === st.seasonIdx) || seasons[seasons.length - 1];
+    const otStart = sea.otStart, finalF = sea.floorCount;
+    const rampStart = st.mode === 'mmo' ? 25 : 17;
+    const rampLabel = rampStart + '–' + finalF;
+    const chartRampLabel = st.mode === 'mmo' ? '25–36' : '17–28';
+    const chartChallengeLabel = st.mode === 'mmo' ? '33–36' : '26–28';
+    const U = st.unit, UL = this.unitLabel(U);
+
+    // season pills
+    const seasonPills = seasons.map((s) => {
+      const activeSel = s.season === st.seasonIdx;
+      const lastFloor = s.floors[s.floors.length - 1];
+      const maxBossEnemy = lastFloor && lastFloor.enemies ? lastFloor.enemies.find((e) => e.monsterType === 'BS_MONSTER_BOSS' || /boss_/i.test(e.codeName)) : null;
+      const bossDisplayName = maxBossEnemy ? (isRu ? (maxBossEnemy.nameRu || maxBossEnemy.nameEn) : (maxBossEnemy.nameEn || maxBossEnemy.nameRu)) : (this.fmt(lastFloor ? lastFloor.bossG : 0, 'G') + 'G');
+
+      return {
+        label: 'S' + s.season,
+        ver: s.ver,
+        dates: s.dates,
+        floors: s.floorCount,
+        boss: this.fmt(lastFloor ? lastFloor.bossG : 0, 'G') + 'G',
+        bossName: bossDisplayName,
+        color: s.color,
+        titleCol: activeSel ? '#f5d97a' : '#cbc2de',
+        metaCol: activeSel ? '#e9c96f' : '#7a7290',
+        style: 'flex:none; cursor:pointer; min-width:130px; border-radius:14px; padding:11px 15px; transition:transform .15s ease; ' + (activeSel
+          ? 'background:linear-gradient(145deg, rgba(245,217,122,.16), rgba(181,123,255,.08)); border:1px solid rgba(245,217,122,.55); box-shadow:0 0 24px rgba(245,217,122,.16);'
+          : 'background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);'),
+        activeFlag: activeSel ? '1' : '0',
+        railStyle: 'cursor:pointer; border-radius:11px; padding:10px 12px; transition:background .12s; ' + (activeSel
+          ? 'background:linear-gradient(135deg, rgba(245,217,122,.15), rgba(181,123,255,.07)); border:1px solid rgba(245,217,122,.5);'
+          : 'background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07);'),
+        onSelect: () => this.setState({ seasonIdx: s.season, expandedFloor: null, search: null, diffFloor: s.season === st.seasonIdx ? st.diffFloor : null }),
+      };
+    });
+
+    // KPIs
+    const last = sea.floors[sea.floors.length - 1];
+    const avg = sea.floors.reduce((a, f) => a + f.totalG, 0) / sea.floors.length;
+    const finalBossEnemy = last && last.enemies ? last.enemies.find((e) => e.monsterType === 'BS_MONSTER_BOSS' || /boss_/i.test(e.codeName)) : null;
+
+    // floor rows with Universal Smart Search
+    let floors = sea.floors.slice();
+    if (st.search != null && String(st.search).trim() !== '') {
+      const q = String(st.search).trim().toLowerCase();
+      const num = parseInt(q, 10);
+      const isPureNum = !isNaN(num) && String(num) === q;
+      floors = floors.filter((f) => {
+        if (isPureNum && f.floor === num) return true;
+        if (String(f.floor) === q || ('f' + f.floor) === q || ('floor ' + f.floor) === q || ('этаж ' + f.floor) === q) return true;
+        const hasMob = (f.enemies || []).some((m) =>
+          (m.nameEn && m.nameEn.toLowerCase().includes(q)) ||
+          (m.nameRu && m.nameRu.toLowerCase().includes(q)) ||
+          (m.codeName && m.codeName.toLowerCase().includes(q)) ||
+          (m.bossId && m.bossId.toLowerCase().includes(q)) ||
+          (m.key && m.key.toLowerCase().includes(q))
+        );
+        if (hasMob) return true;
+        const hasBuff = (f.stageMutators || []).some((b) => (b.nameEn && b.nameEn.toLowerCase().includes(q)) || (b.nameRu && b.nameRu.toLowerCase().includes(q))) ||
+          (f.dropBuffs || []).some((b) => (b.nameEn && b.nameEn.toLowerCase().includes(q)) || (b.nameRu && b.nameRu.toLowerCase().includes(q)));
+        return hasBuff;
+      });
+    } else if (st.filter === 'ramp') {
+      floors = floors.filter((f) => f.floor >= rampStart);
+    } else if (st.filter === 'boss') {
+      floors = floors.filter((f) => f.floor >= otStart);
+    }
+
+    // Multi-wave palette
+    const gradByWave = ['linear-gradient(90deg,#4fe3c1,#38e0d0)', 'linear-gradient(90deg,#b57bff,#9d6bff)', 'linear-gradient(90deg,#f5d97a,#f0b94e)', 'linear-gradient(90deg,#ff8fa8,#ff6b8b)'];
+    const waveColors = ['#4fe3c1', '#c79dff', '#f5d97a', '#ff9bb2'];
+
+    // Single-wave enemy sectors palette (distinct vibrant gradient scheme)
+    const gradByMob = ['linear-gradient(90deg,#ff6b8b,#ff4d73)', 'linear-gradient(90deg,#f5a623,#f0b94e)', 'linear-gradient(90deg,#a855f7,#8b5cf6)', 'linear-gradient(90deg,#38bdf8,#0ea5e9)', 'linear-gradient(90deg,#34d399,#10b981)'];
+    const mobColors = ['#ff6b8b', '#f5a623', '#a855f7', '#38bdf8', '#34d399'];
+
+    const rows = floors.map((f) => {
+      const expanded = st.expandedFloor === f.floor;
+      const enemies = f.enemies || [];
+
+      const waveMap = new Map();
+      enemies.forEach((m) => {
+        const w = m.wave || 1;
+        if (!waveMap.has(w)) waveMap.set(w, []);
+        waveMap.get(w).push(m);
+      });
+
+      let segs = [];
+
+      if (waveMap.size > 1 && f.totalHp > 0) {
+        // Multi-wave division by waves
+        const waveHps = {};
+        enemies.forEach((m) => {
+          const w = m.wave || 1;
+          waveHps[w] = (waveHps[w] || 0) + (m.combinedHp || m.hp || 0);
+        });
+        const wKeys = Array.from(waveMap.keys()).sort((a, b) => a - b);
+        let pcts = wKeys.map((wk) => Math.round((waveHps[wk] / f.totalHp) * 100));
+        const sumP = pcts.reduce((a, b) => a + b, 0);
+        if (sumP !== 100 && pcts.length > 0) pcts[pcts.length - 1] += (100 - sumP);
+
+        segs = pcts.map((p, i) => {
+          const wNum = wKeys[i];
+          const wHpG = (waveHps[wNum] / 1e9);
+          return {
+            pct: p,
+            grad: gradByWave[i % gradByWave.length],
+            onHover: (e) => this.setState({
+              tip: {
+                x: e.clientX,
+                y: e.clientY,
+                label: (isRu ? ('Волна ' + wNum) : ('Wave ' + wNum)) + ' · F' + f.floor + ' (' + p + '%)',
+                hp: this.fmt(wHpG, U) + ' ' + UL,
+                col: waveColors[i % waveColors.length]
+              }
+            })
+          };
+        });
+      } else if (enemies.length > 1 && f.totalHp > 0) {
+        // Single-wave division by enemies (distinct mob sector palette)
+        const sortedEnemies = enemies.slice().sort((a, b) => (b.combinedHp || b.hp || 0) - (a.combinedHp || a.hp || 0));
+        let pcts = sortedEnemies.map((m) => Math.round(((m.combinedHp || m.hp || 0) / f.totalHp) * 100));
+        const sumP = pcts.reduce((a, b) => a + b, 0);
+        if (sumP !== 100 && pcts.length > 0) pcts[pcts.length - 1] += (100 - sumP);
+
+        segs = sortedEnemies.map((m, i) => {
+          const mHpG = (m.combinedHp || m.hp || 0) / 1e9;
+          const p = pcts[i] || 0;
+          const mobName = isRu ? (m.nameRu || m.nameEn) : (m.nameEn || m.nameRu || ('Mob #' + (i + 1)));
+          return {
+            pct: p,
+            grad: gradByMob[i % gradByMob.length],
+            onHover: (e) => this.setState({
+              tip: {
+                x: e.clientX,
+                y: e.clientY,
+                label: mobName + ' · F' + f.floor + ' (' + p + '%)',
+                hp: this.fmt(mHpG, U) + ' ' + UL,
+                col: mobColors[i % mobColors.length]
+              }
+            })
+          };
+        });
+      } else {
+        // Fallback / single unit
+        segs = [{
+          pct: 100,
+          grad: gradByWave[0],
+          onHover: (e) => this.setState({
+            tip: {
+              x: e.clientX,
+              y: e.clientY,
+              label: (isRu ? 'Волна 1' : 'Wave 1') + ' · F' + f.floor + ' (100%)',
+              hp: this.fmt(f.totalG, U) + ' ' + UL,
+              col: waveColors[0]
+            }
+          })
+        }];
+      }
+
+      const built = expanded ? this.buildLineup(sea, f, U) : null;
+      return {
+        n: 'F' + f.floor,
+        floorNum: f.floor,
+        hp: this.fmt(f.totalG, U),
+        max: this.fmt(f.bossG, U),
+        unit: UL,
+        mobs: f.mobs,
+        rowBg: f.ot ? 'rgba(255,107,139,.05)' : 'transparent',
+        floorCol: f.ot ? '#ff9bb2' : '#cbc2de',
+        floorBg: f.ot ? 'rgba(255,107,139,.12)' : 'rgba(255,255,255,.05)',
+        floorBd: f.ot ? 'rgba(255,107,139,.35)' : 'rgba(255,255,255,.09)',
+        chev: expanded ? '▾' : '›',
+        chevCol: expanded ? '#f5d97a' : '#5b5470',
+        segs,
+        expanded,
+        lineup: built ? built.waves : [],
+        resistStr: built ? built.resistStr : ((sea.resist * 100).toFixed(2) + '%'),
+        lineupTitle: f.ot ? (isRu ? 'Состав волн испытания' : 'Challenge Lineup') : (isRu ? 'Состав волн и боссы' : 'Wave Composition'),
+        affixes: expanded ? this.buildAffixes(f) : [],
+        onToggle: () => this.setState(
+          { expandedFloor: expanded ? null : f.floor },
+          expanded ? undefined : () => this._scrollExpandedFloorIntoView(f.floor)
+        ),
+      };
+    });
+
+    // compare
+    const cmp = seasons.find((s) => s.season === st.compareIdx) || seasons[0];
+    const cmpLast = cmp.floors[cmp.floors.length - 1];
+    const cmpAvg = cmp.floors.reduce((a, f) => a + f.totalG, 0) / cmp.floors.length;
+    const delta = (a, b) => {
+      if (b === 0) return { d: '—', up: 0 };
+      const pc = ((a - b) / b) * 100;
+      return { d: (pc >= 0 ? '+' : '') + pc.toFixed(0) + '%', up: pc };
+    };
+    const mkStat = (label, a, b) => {
+      const d = delta(a, b);
+      return {
+        label,
+        value: this.fmt(a, U) + ' ' + UL,
+        delta: d.d,
+        deltaCol: d.up > 0 ? '#ff9bb2' : (d.up < 0 ? '#4fe3c1' : '#948aa8'),
+        deltaBg: d.up > 0 ? 'rgba(255,107,139,.14)' : (d.up < 0 ? 'rgba(79,227,193,.14)' : 'rgba(255,255,255,.06)')
+      };
+    };
+    const compareStats = [
+      mkStat(isRu ? 'ХП финального босса' : 'Final Boss HP', last ? last.bossG : 0, cmpLast ? cmpLast.bossG : 0),
+      mkStat(isRu ? 'Среднее HP на этаж' : 'Avg Floor HP', avg, cmpAvg),
+    ];
+    const compareOptions = seasons.filter((s) => s.season !== st.seasonIdx).map((s) => ({ value: String(s.season), label: 'S' + s.season + ' (' + s.ver + ')', selected: s.season === st.compareIdx }));
+
+    // chip / button style helpers
+    const chip = (on, col) => 'cursor:pointer; font:600 12px/1 "Manrope"; padding:8px 13px; border-radius:8px; border:1px solid ' + (on ? 'transparent' : 'rgba(255,255,255,.08)') + '; ' + (on ? 'color:#17111f; background:' + col + ';' : 'color:#cbc2de; background:rgba(255,255,255,.05);');
+    const cctl = (on, col) => 'flex:1; text-align:center; cursor:pointer; font:600 10px/1.1 "Manrope"; padding:7px 5px; border-radius:7px; border:1px solid ' + (on ? col : 'rgba(255,255,255,.1)') + '; ' + (on ? 'color:#17111f; background:' + col + ';' : 'color:#b9b0cc; background:rgba(255,255,255,.04);');
+    const seg = (on, col) => 'cursor:pointer; font:700 11px/1 "JetBrains Mono"; padding:7px 12px; border-radius:999px; border:none; ' + (on ? 'background:rgba(245,217,122,.2); color:' + col + ';' : 'background:transparent; color:#7a7290;');
+    const tabStyle = (on) => 'cursor:pointer; font:' + (on ? '700' : '600') + ' 12px/1 "Manrope"; padding:8px 14px; border-radius:9px; border:1px solid ' + (on ? 'transparent' : 'rgba(255,255,255,.09)') + '; ' + (on ? 'color:#17111f; background:linear-gradient(135deg,#f5d97a,#f0b94e);' : 'color:#cbc2de; background:rgba(255,255,255,.05);');
+    const modePill = (on) => 'cursor:pointer; font:700 13px/1 "Manrope"; padding:9px 18px; border-radius:999px; border:none; transition:all .15s; ' + (on ? 'background:linear-gradient(135deg,#f5d97a,#f0b94e); color:#17111f;' : 'background:transparent; color:#7a7290;');
+
+    // charts
+    const mc = this.mainChart();
+    const hoverF = st.chartHoverFloor;
+    let showGuide = false, guideX = 0, guideLeftPct = 0, guideShift = '-50%', guideRows = [], guideFloorLabel = '';
+    if (hoverF != null && hoverF >= mc.minF && hoverF <= mc.maxF) {
+      showGuide = true;
+      guideX = +mc.x(hoverF).toFixed(1);
+      guideLeftPct = +((guideX / mc.W) * 100).toFixed(2);
+      guideShift = guideLeftPct > 70 ? '-100%' : (guideLeftPct < 12 ? '0%' : '-50%');
+      guideFloorLabel = (isRu ? 'Этаж F' : 'Floor F') + hoverF + (hoverF >= (st.mode === 'mmo' ? 33 : 26) ? (isRu ? ' · Испытание' : ' · Challenge') : '');
+      guideRows = mc.act.map((s) => {
+        const flo = s.floors.find((x) => x.floor === hoverF);
+        if (!flo) return null;
+        return { color: s.color, label: 'S' + s.season, val: this.fmt(mc.valOf(s, flo), U) + ' ' + UL };
+      }).filter(Boolean);
+    }
+
+    // history chart (log, full width)
+    const NS = seasons.length, LI = NS - 1, lastSeason = seasons[LI];
+    const HW = 920, HH = 300, HL = 58, HR = 22, HT = 22, HB = 42, hpw = HW - HL - HR, hph = HH - HT - HB, hBase = HT + hph;
+    const logMin = Math.log10(0.01), logMax = Math.log10(Math.max(...seasons.map((s) => (s.floors[s.floors.length - 1]?.bossG || 1) * s.ehpMult)) * 1.3);
+    const hx = (s) => HL + (NS === 1 ? 0 : (s - 1) / (NS - 1)) * hpw;
+    const hy = (v) => HT + hph - (Math.log10(Math.max(v, 0.01)) - logMin) / (logMax - logMin) * hph;
+    const rawPts = seasons.map((s) => ({ x: +hx(s.season).toFixed(1), y: +hy(s.floors[s.floors.length - 1]?.bossG || 0.01).toFixed(1) }));
+    const ehpPts = seasons.map((s) => ({ x: +hx(s.season).toFixed(1), y: +hy((s.floors[s.floors.length - 1]?.bossG || 0.01) * s.ehpMult).toFixed(1) }));
+    const toPath = (pts) => pts.map((p, i) => (i ? 'L' : 'M') + p.x + ' ' + p.y).join(' ');
+    const histRawPath = toPath(rawPts), histEhpPath = toPath(ehpPts);
+    const histEhpArea = 'M' + ehpPts[0].x + ' ' + hBase + ' ' + ehpPts.map((p) => 'L' + p.x + ' ' + p.y).join(' ') + ' L' + ehpPts[ehpPts.length - 1].x + ' ' + hBase + ' Z';
+    const histYTicks = [0.01, 0.1, 1, 10, 100, 1000].map((v) => {
+      const yy = +hy(v).toFixed(1);
+      return { y: yy, ty: yy + 3, label: v >= 1000 ? ((v / 1000) + 'KG') : (v + 'G') };
+    });
+    const histTickStep = Math.max(1, Math.round((NS - 1) / 6));
+    const histXTicks = [];
+    for (let s = 1; s <= NS; s += histTickStep) histXTicks.push({ x: +hx(s).toFixed(1), label: 'S' + s });
+    if (histXTicks.length && histXTicks[histXTicks.length - 1].label !== 'S' + NS) histXTicks.push({ x: +hx(NS).toFixed(1), label: 'S' + NS });
+    const histRawDots = rawPts.map((p) => ({ cx: p.x, cy: p.y }));
+    const histEhpDots = ehpPts.map((p) => ({ cx: p.x, cy: p.y }));
+    const hLastRaw = lastSeason ? (lastSeason.floors[lastSeason.floors.length - 1]?.bossG || 0) : 0;
+    const histLast = {
+      rawX: rawPts[LI] ? rawPts[LI].x : 0,
+      rawY: rawPts[LI] ? rawPts[LI].y : 0,
+      ehpX: ehpPts[LI] ? ehpPts[LI].x : 0,
+      ehpY: ehpPts[LI] ? ehpPts[LI].y : 0,
+      rawVal: this.fmt(hLastRaw, 'G') + 'G',
+      ehpVal: this.fmt(hLastRaw * (lastSeason ? lastSeason.ehpMult : 1), 'G') + 'G'
+    };
+
+    const hhs = st.histHoverSeason;
+    let histGuide = false, histGuideX = 0, histGuidePct = 0, histGuideShift = '-50%', histGuideRows = [], histGuideLabel = '', histGuideSub = '';
+    if (hhs != null && hhs >= 1 && hhs <= NS) {
+      const targetSea = seasons.find((s) => s.season === hhs);
+      if (targetSea) {
+        histGuide = true;
+        histGuideX = +hx(hhs).toFixed(1);
+        histGuidePct = +((histGuideX / 920) * 100).toFixed(2);
+        histGuideShift = histGuidePct > 70 ? '-100%' : (histGuidePct < 14 ? '0%' : '-50%');
+        const finalF = targetSea.floors[targetSea.floors.length - 1];
+        const rawG = finalF ? finalF.bossG : 0;
+        const ehpG = rawG * targetSea.ehpMult;
+        const bossName = (finalF && finalF.mobs && finalF.mobs[0]) ? (isRu ? (finalF.mobs[0].nameRu || finalF.mobs[0].nameEn) : finalF.mobs[0].nameEn) : ('F' + targetSea.floorCount);
+        const verTag = targetSea.ver && targetSea.ver !== ('Season ' + targetSea.season) && targetSea.ver !== ('S' + targetSea.season) ? (' · ' + targetSea.ver) : '';
+        histGuideLabel = (isRu ? 'Сезон ' : 'Season ') + targetSea.season + verTag;
+        histGuideSub = bossName + ' · F' + targetSea.floorCount;
+        histGuideRows = [
+          { color: '#f5d97a', label: isRu ? 'Номинал HP' : 'Raw HP', val: this.fmt(rawG, 'G') + ' G' },
+          { color: '#c79dff', label: isRu ? 'Эффективное' : 'Effective HP', val: this.fmt(ehpG, 'G') + ' G' },
+          { color: '#8fe6d4', label: isRu ? 'Резист' : 'Resist', val: (targetSea.resist * 100).toFixed(1) + '%' }
+        ];
+      }
+    }
+
+    // jump chart
+    const jMode = st.jumpMode;
+    const jMinF = mc.minF, jMaxF = mc.maxF;
+    const JL = 56, JR = 22, JT = 18, JBP = 42, jpw = 920 - JL - JR, jph = 300 - JT - JBP;
+    const jx = (f) => JL + (jMaxF === jMinF ? 0 : (f - jMinF) / (jMaxF - jMinF)) * jpw;
+    const jactRaw = mc.act;
+    const pctSeries = jactRaw.map((s) => {
+      const fls = s.floors.filter((fl) => fl.floor >= jMinF && fl.floor <= jMaxF);
+      const pts = fls.map((fl) => {
+        let base;
+        if (jMode === 'floor') {
+          const pv = s.floors.find((x) => x.floor === fl.floor - 1);
+          base = pv && pv.bossG > 0 ? ((fl.bossG - pv.bossG) / pv.bossG) * 100 : null;
+        } else {
+          const ps = seasons.find((x) => x.season === s.season - 1);
+          const pf = ps && ps.floors.find((x) => x.floor === fl.floor);
+          base = pf && pf.bossG > 0 ? ((fl.bossG - pf.bossG) / pf.bossG) * 100 : null;
+        }
+        return { floor: fl.floor, pct: base };
+      });
+      return { season: s.season, color: s.color, pts: pts.filter((p) => p.pct != null) };
+    }).filter((s) => s.pts.length);
+
+    let jMinV = 0, jMaxV = 10;
+    pctSeries.forEach((s) => s.pts.forEach((p) => { jMinV = Math.min(jMinV, p.pct); jMaxV = Math.max(jMaxV, p.pct); }));
+    const jRange = (jMaxV - jMinV) || 1;
+    jMaxV += jRange * 0.1;
+    jMinV -= jRange * 0.06;
+    const jy = (v) => JT + jph - ((v - jMinV) / (jMaxV - jMinV)) * jph;
+    const jumpSeries = pctSeries.map((s) => {
+      const pts = s.pts.map((p) => ({ cx: +jx(p.floor).toFixed(1), cy: +jy(p.pct).toFixed(1), floor: p.floor, pct: p.pct }));
+      return { color: s.color, season: s.season, label: 'S' + s.season, pts, path: pts.map((p, i) => (i ? 'L' : 'M') + p.cx + ' ' + p.cy).join(' ') };
+    });
+    const jStepV = jRange > 400 ? 200 : (jRange > 200 ? 100 : (jRange > 80 ? 50 : (jRange > 30 ? 20 : 10)));
+    const jumpYTicks = [];
+    for (let v = Math.ceil(jMinV / jStepV) * jStepV; v <= jMaxV; v += jStepV) {
+      const yy = +jy(v).toFixed(1);
+      jumpYTicks.push({ y: yy, ty: yy + 3, label: (v > 0 ? '+' : '') + Math.round(v) + '%', stroke: v === 0 ? 'rgba(255,255,255,.24)' : 'rgba(255,255,255,.06)' });
+    }
+    const jStepX = Math.max(1, Math.round((jMaxF - jMinF) / 7));
+    const jumpXTicks = [];
+    for (let f = jMinF; f <= jMaxF; f += jStepX) jumpXTicks.push({ x: +jx(f).toFixed(1), label: 'F' + f });
+
+    const jhf = st.jumpHoverFloor;
+    let jumpGuide = false, jumpGuideX = 0, jumpGuidePct = 0, jumpGuideShift = '-50%', jumpGuideRows = [], jumpGuideLabel = '';
+    if (jhf != null && jhf >= jMinF && jhf <= jMaxF && jumpSeries.length) {
+      jumpGuide = true;
+      jumpGuideX = +jx(jhf).toFixed(1);
+      jumpGuidePct = +((jumpGuideX / 920) * 100).toFixed(2);
+      jumpGuideShift = jumpGuidePct > 70 ? '-100%' : (jumpGuidePct < 14 ? '0%' : '-50%');
+      jumpGuideLabel = (isRu ? 'Этаж F' : 'Floor F') + jhf;
+      jumpGuideRows = jumpSeries.map((s) => {
+        const p = s.pts.find((x) => x.floor === jhf);
+        if (!p) return null;
+        return { color: s.color, label: 'S' + s.season, val: (p.pct > 0 ? '+' : '') + Math.round(p.pct) + '%', valCol: p.pct >= 0 ? '#4fe3c1' : '#ff9bb2' };
+      }).filter(Boolean);
+    }
+
+    // presets & chips
+    const allS = seasons.map((s) => s.season);
+    const presetDefs = [
+      { key: 'current', label: isRu ? 'Текущий' : 'Current', set: [st.seasonIdx] },
+      { key: 'last4', label: isRu ? 'Посл. 4' : 'Last 4', set: allS.slice(-4) },
+      { key: 'last10', label: isRu ? 'Посл. 10' : 'Last 10', set: allS.slice(-10) },
+      { key: 'all', label: isRu ? 'Все' : 'All', set: allS },
+    ];
+    const sameSet = (a, b) => a.length === b.length && a.every((x) => b.includes(x));
+    const presets = presetDefs.map((p) => ({ label: p.label, style: chip(sameSet(st.active, p.set), '#f5d97a'), onClick: () => this.setState({ active: p.set }) }));
+    const seasonChips = seasons.map((s) => {
+      const on = st.active.includes(s.season);
+      return {
+        label: 'S' + s.season,
+        color: s.color,
+        style: 'cursor:pointer; font:600 11px/1 "Manrope"; padding:6px 10px; border-radius:8px; border:1px solid ' + (on ? 'rgba(245,217,122,.4)' : 'rgba(255,255,255,.08)') + '; color:' + (on ? '#f6f1fb' : '#6b6480') + '; background:' + (on ? 'rgba(245,217,122,.08)' : 'rgba(255,255,255,.03)') + ';',
+        onClick: () => this.setState({ active: on ? st.active.filter((x) => x !== s.season) : [...st.active, s.season] })
+      };
+    });
+
+    // difficulty tab
+    let diffFloorNum = st.diffFloor;
+    if (!sea.floors.some((f) => f.floor === diffFloorNum)) diffFloorNum = finalF;
+    const diffFloorObj = sea.floors.find((f) => f.floor === diffFloorNum) || sea.floors[sea.floors.length - 1];
+    const dstart = new Date(sea.startISO.replace(/-/g, '/'));
+    const addDays = (n) => { const d = new Date(dstart); d.setDate(d.getDate() + n - 1); return d; };
+    const fmtD = (d) => String(d.getDate()).padStart(2, '0') + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + d.getFullYear();
+    const rng = (a, b) => (a === b ? fmtD(addDays(a)) : fmtD(addDays(a)) + ' – ' + fmtD(addDays(b)));
+    const stepCol = (pct) => pct >= 1500 ? { c: '#d98a99', bar: 'rgba(217,138,153,.6)' } : pct >= 600 ? { c: '#d0b174', bar: 'rgba(208,177,116,.55)' } : pct > 100 ? { c: '#cbb98a', bar: 'rgba(203,185,138,.5)' } : { c: '#8fbdb2', bar: 'rgba(143,189,178,.5)' };
+    const now = new Date();
+    const schedMax = Math.max(...(diffFloorObj ? diffFloorObj.difficultySchedule.steps.map((s) => s.pct) : [100]), 100);
+
+    const unlockDay = (sea.season >= 21) ? diffFloorNum : 1;
+    const rawDiffSteps = diffFloorObj ? diffFloorObj.difficultySchedule.steps : [];
+    const diffSteps = [];
+    rawDiffSteps.forEach((s) => {
+      if (s.endDay < unlockDay) return;
+      const startDay = Math.max(s.startDay, unlockDay);
+      const durDays = Math.max(1, s.endDay - startDay + 1);
+      const d1 = addDays(startDay), d2 = addDays(s.endDay);
+      const col = stepCol(s.pct);
+      const live = now >= new Date(d1.getFullYear(), d1.getMonth(), d1.getDate()) && now <= new Date(d2.getFullYear(), d2.getMonth(), d2.getDate(), 23, 59, 59);
+      diffSteps.push({
+        dayLabel: startDay === s.endDay ? ((isRu ? 'День ' : 'Day ') + startDay) : ((isRu ? 'Дни ' : 'Days ') + startDay + '–' + s.endDay),
+        dur: durDays + (isRu ? ' дн.' : 'd'),
+        date: rng(startDay, s.endDay),
+        pct: s.pct + '%',
+        barW: Math.max(8, Math.round((s.pct / schedMax) * 100)),
+        col: col.c,
+        barCol: col.bar,
+        liveShow: live
+      });
+    });
+
+    const diffFloorChips = sea.floors.map((f) => {
+      const ot = f.floor >= otStart;
+      const on = f.floor === diffFloorNum;
+      return {
+        label: 'F' + f.floor,
+        dot: ot ? '●' : '',
+        onClick: () => this.setState({ diffFloor: f.floor }),
+        style: 'cursor:pointer; font:700 11px/1 "JetBrains Mono"; padding:7px 11px; border-radius:8px; border:1px solid ' + (on ? '#f5d97a' : (ot ? 'rgba(255,107,139,.35)' : 'rgba(255,255,255,.09)')) + '; color:' + (on ? '#17111f' : (ot ? '#ff9bb2' : '#cbc2de')) + '; background:' + (on ? '#f5d97a' : (ot ? 'rgba(255,107,139,.08)' : 'rgba(255,255,255,.04)')) + ';'
+      };
+    });
+
+    const diffFilter = st.diffFilter || 'all';
+    const diffRows = sea.floors.filter((f) => (diffFilter === 'all' ? true : (diffFilter === 'ramp' ? f.floor >= rampStart : f.floor >= otStart))).map((f) => {
+      const ot = f.floor >= otStart;
+      const sch = f.difficultySchedule;
+      const fUnlockDay = (sea.season >= 21) ? f.floor : 1;
+      const rawSteps = sch.steps || [];
+      const visibleSteps = [];
+      rawSteps.forEach((s) => {
+        if (s.endDay < fUnlockDay) return;
+        const startDay = Math.max(s.startDay, fUnlockDay);
+        const durDays = Math.max(1, s.endDay - startDay + 1);
+        visibleSteps.push({
+          ...s,
+          startDay,
+          durDays,
+          dateRange: rng(startDay, s.endDay)
+        });
+      });
+
+      const first = visibleSteps.length ? visibleSteps[0] : (rawSteps[0] || { startDay: 1, endDay: 1, durDays: 1, pct: 100, dateRange: '' });
+      const col = stepCol(first.pct || sch.initialPct);
+      const pills = visibleSteps.map((s) => {
+        const pc = stepCol(s.pct);
+        return {
+          txt: (s.startDay === s.endDay ? ('D' + s.startDay) : ('D' + s.startDay + '-' + s.endDay)) + ' · ' + s.pct + '%',
+          col: pc.c
+        };
+      });
+
+      return {
+        n: 'F' + f.floor,
+        ot,
+        sel: f.floor === diffFloorNum,
+        rowBg: f.floor === diffFloorNum ? 'rgba(245,217,122,.06)' : 'transparent',
+        initial: (first.pct || sch.initialPct) + '%',
+        initialCol: col.c,
+        peakDur: (first.durDays || 1) + (isRu ? ' дн.' : 'd'),
+        peakDate: first.dateRange || rng(first.startDay, first.endDay),
+        baseDate: fmtD(addDays(sch.daysToMin || 30)),
+        baseDay: 'D' + (sch.daysToMin || 30),
+        stepsN: visibleSteps.length || 1,
+        pills,
+        floorCol: ot ? '#d98a99' : '#b2aac2',
+        floorBd: ot ? 'rgba(217,138,153,.3)' : 'rgba(255,255,255,.09)',
+        floorBg: ot ? 'rgba(217,138,153,.08)' : 'rgba(255,255,255,.05)',
+        onClick: () => this.setState({ diffFloor: f.floor })
+      };
+    });
+
+    const m = st.modal;
+    const modalStyle = m ? this.mobStyle(m.type) : {};
+
+    return {
+      ...copy,
+      railRef: this.railRef,
+      isTable: st.tab === 'table',
+      isCharts: st.tab === 'charts',
+      goTable: () => this.setState({ tab: 'table' }),
+      goCharts: () => this.setState({ tab: 'charts' }),
+      goDiff: () => this.setState({ tab: 'difficulty' }),
+      tabTableStyle: tabStyle(st.tab === 'table'),
+      tabChartsStyle: tabStyle(st.tab === 'charts'),
+      tabDiffStyle: tabStyle(st.tab === 'difficulty'),
+      isDiff: st.tab === 'difficulty',
+      modeStd: () => this.setMode('standard'),
+      modeMmo: () => this.setMode('mmo'),
+      modeStdStyle: modePill(st.mode === 'standard'),
+      modeMmoStyle: modePill(st.mode === 'mmo'),
+      searchPlaceholder: isRu ? 'Поиск этажа, босса, кода…' : 'Search floor, boss, code…',
+      heroSubtitle: isRu ? 'ДАТАМАЙН · ИСТОК ВОЙНЫ' : 'DATAMINE · ORIGIN OF WAR',
+      heroTitle: isRu ? 'Характеристики противников и сезонная сложность' : 'Enemy Stats & Seasonal Scaling',
+      heroImg: (finalBossEnemy && finalBossEnemy.image && !finalBossEnemy.image.includes('placeholder_')) ? finalBossEnemy.image : 'assets/monsters/boss2.png',
+      challengeLabel: (isRu ? 'Испытание ' : 'Challenge ') + otStart + '–' + finalF,
+      rampLabel,
+      chartRampLabel,
+      chartChallengeLabel,
+      allFloorsLabel: isRu ? 'Все этажи' : 'All Floors',
+      showRailExpanded: st.tab !== 'charts' && !st.railCollapsed,
+      showRailCollapsed: st.tab !== 'charts' && !!st.railCollapsed,
+      toggleRail: () => this.setState((prev) => ({ railCollapsed: !prev.railCollapsed })),
+      seasonCountLabel: seasons.length + (isRu ? (' ' + this.pluralRu(seasons.length, 'сезон', 'сезона', 'сезонов')) : ' seasons'),
+      showScrollTop: st.scrolled,
+      scrollTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+      diffSteps,
+      diffRows,
+      diffFilterAll: () => this.setState({ diffFilter: 'all' }),
+      diffFilterRamp: () => this.setState({ diffFilter: 'ramp' }),
+      diffFilterBoss: () => this.setState({ diffFilter: 'boss' }),
+      diffChipAll: chip(diffFilter === 'all', '#f5d97a'),
+      diffChipRamp: chip(diffFilter === 'ramp', '#f5d97a'),
+      diffChipBoss: chip(diffFilter === 'boss', '#d98a99'),
+      onDiffSearch: (e) => {
+        const v = parseInt(e.target.value, 10);
+        if (!isNaN(v)) this.setState({ diffFloor: v });
+      },
+      diffFloorTitle: 'F' + diffFloorNum + (isRu ? ' · Поэтапный спад сложности и даты' : ' · Day-by-Day Difficulty & Dates'),
+      activeSeasonLabel: (isRu ? 'Сезон ' : 'Season ') + sea.season + ' · ' + sea.dates,
+      seasonPills,
+      filterAll: () => this.setState({ filter: 'all', search: null }),
+      filterRamp: () => this.setState({ filter: 'ramp', search: null }),
+      filterBoss: () => this.setState({ filter: 'boss', search: null }),
+      chipAll: chip(st.filter === 'all' && st.search == null, '#f5d97a'),
+      chipRamp: chip(st.filter === 'ramp', '#f5d97a'),
+      chipBoss: chip(st.filter === 'boss', '#ff9bb2'),
+      onSearch: (e) => {
+        const v = e.target.value.trim();
+        this.setState({ search: v || null, expandedFloor: v ? st.expandedFloor : null });
+      },
+      unitG: () => this.setState({ unit: 'G' }),
+      unitM: () => this.setState({ unit: 'M' }),
+      unitRaw: () => this.setState({ unit: 'RAW' }),
+      unitGStyle: seg(U === 'G', '#f5d97a'),
+      unitMStyle: seg(U === 'M', '#f5d97a'),
+      unitRawStyle: seg(U === 'RAW', '#f5d97a'),
+      toggleCompare: () => this.setState({ compareOpen: !st.compareOpen }),
+      compareBtnStyle: 'font:600 12px/1 "Manrope"; cursor:pointer; padding:8px 13px; border-radius:999px; border:1px solid ' + (st.compareOpen ? 'rgba(181,123,255,.5)' : 'rgba(255,255,255,.08)') + '; color:' + (st.compareOpen ? '#c79dff' : '#cbc2de') + '; background:' + (st.compareOpen ? 'rgba(181,123,255,.1)' : 'rgba(255,255,255,.05)') + ';',
+      copyJson: () => {
+        try {
+          navigator.clipboard.writeText(JSON.stringify({ season: sea.season, version: sea.ver, floors: sea.floors.map((f) => ({ floor: f.floor, totalHp: f.totalHp, bossHp: f.bossHp, mobs: f.mobs })) }, null, 2));
+        } catch (e) {}
+        this.toast(isRu ? ('Сезон ' + sea.season + ' скопирован в JSON') : ('Season ' + sea.season + ' JSON copied'));
+      },
+      showCompare: st.compareOpen,
+      compareLabel: 'S' + cmp.season,
+      compareStats,
+      compareOptions,
+      onCompareChange: (e) => this.setState({ compareIdx: parseInt(e.target.value, 10) }),
+      rows,
+      // Chart controls and data.
+      modeEhp: () => this.setState({ chartMode: 'ehp' }),
+      modeRaw: () => this.setState({ chartMode: 'raw' }),
+      modeEhpStyle: cctl(st.chartMode === 'ehp', '#4fe3c1'),
+      modeRawStyle: cctl(st.chartMode === 'raw', '#ff9bb2'),
+      metricBoss: () => this.setState({ chartMetric: 'boss' }),
+      metricTotal: () => this.setState({ chartMetric: 'total' }),
+      metricBossStyle: cctl(st.chartMetric === 'boss', '#f5d97a'),
+      metricTotalStyle: cctl(st.chartMetric === 'total', '#f5d97a'),
+      rangeRamp: () => this.setState({ chartRange: 'ramp' }),
+      rangeOvertime: () => this.setState({ chartRange: 'overtime' }),
+      rangeAll: () => this.setState({ chartRange: 'all' }),
+      rangeRampStyle: cctl(st.chartRange === 'ramp', '#f5d97a'),
+      rangeOtStyle: cctl(st.chartRange === 'overtime', '#ff9bb2'),
+      rangeAllStyle: cctl(st.chartRange === 'all', '#f5d97a'),
+      presets,
+      seasonChips,
+      mainSeries: mc.series,
+      mainYTicks: mc.yticks,
+      mainXTicks: mc.xticks,
+      modeBadge: st.chartMode === 'ehp' ? (isRu ? '🛡 Эффективное HP (EHP)' : '🛡 Effective HP (EHP)') : (isRu ? '❤ Номинальное HP' : '❤ Raw HP'),
+      showGuide,
+      guideX,
+      guideLeftPct,
+      guideShift,
+      guideRows,
+      guideFloorLabel,
+      onChartMove: (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        const vx = ((e.clientX - r.left) / r.width) * mc.W;
+        const f = Math.round(mc.minF + ((vx - mc.L) / mc.pw) * (mc.maxF - mc.minF));
+        this.setState({ chartHoverFloor: Math.max(mc.minF, Math.min(mc.maxF, f)) });
+      },
+      onChartLeave: () => this.setState({ chartHoverFloor: null }),
+      histRawPath,
+      histEhpPath,
+      histEhpArea,
+      histYTicks,
+      histXTicks,
+      histRawDots,
+      histEhpDots,
+      histLast,
+      jumpSeries,
+      jumpYTicks,
+      jumpXTicks,
+      jumpTitle: jMode === 'floor' ? (isRu ? 'Рост HP от этажа к этажу' : 'Floor-over-floor HP jump') : (isRu ? 'Инфляция HP между сезонами' : 'Season-over-season HP growth (per floor)'),
+      jumpSub: jMode === 'floor' ? (isRu ? '% прироста каждого этажа относительно предыдущего.' : '% increase of each floor vs the previous floor.') : (isRu ? '% роста каждого этажа относительно прошлого сезона.' : '% growth of each floor vs the same floor last season.'),
+      histGuide,
+      histGuideX,
+      histGuidePct,
+      histGuideShift,
+      histGuideRows,
+      histGuideLabel,
+      histGuideSub,
+      onHistMove: (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        const vx = ((e.clientX - r.left) / r.width) * 920;
+        const s = Math.round(1 + ((vx - HL) / hpw) * (NS - 1));
+        this.setState({ histHoverSeason: Math.max(1, Math.min(NS, s)) });
+      },
+      onHistLeave: () => this.setState({ histHoverSeason: null }),
+      jumpFloor: () => this.setState({ jumpMode: 'floor' }),
+      jumpSeason: () => this.setState({ jumpMode: 'season' }),
+      jumpFloorStyle: cctl(jMode === 'floor', '#f5d97a'),
+      jumpSeasonStyle: cctl(jMode === 'season', '#c79dff'),
+      jumpGuide,
+      jumpGuideX,
+      jumpGuidePct,
+      jumpGuideShift,
+      jumpGuideRows,
+      jumpGuideLabel,
+      onJumpMove: (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        const vx = ((e.clientX - r.left) / r.width) * 920;
+        const f = Math.round(mc.minF + ((vx - 56) / (920 - 56 - 22)) * (mc.maxF - mc.minF));
+        this.setState({ jumpHoverFloor: Math.max(mc.minF, Math.min(mc.maxF, f)) });
+      },
+      onJumpLeave: () => this.setState({ jumpHoverFloor: null }),
+      showTip: !!st.tip,
+      tipX: st.tip ? st.tip.x : 0,
+      tipY: st.tip ? st.tip.y : 0,
+      tipLabel: st.tip ? st.tip.label : '',
+      tipHp: st.tip ? st.tip.hp : '',
+      tipCol: st.tip ? st.tip.col : '#fff',
+      clearTip: () => this.setState({ tip: null }),
+      showModal: !!m,
+      closeModal: () => this.setState({ modal: null }),
+      stop: (e) => e.stopPropagation(),
+      modalName: m ? m.name : '',
+      modalImg: m ? m.img : '',
+      modalCls: m ? m.cls : '',
+      modalId: m ? m.id : '',
+      modalSeason: m ? m.season : '',
+      modalFloor: m ? m.floor : '',
+      modalHp: m ? m.hp : '',
+      modalEhp: m ? m.ehp : '',
+      modalAtk: m ? m.atk : '',
+      modalDef: m ? m.def : '',
+      modalPrimary: m ? m.primary : [],
+      modalElems: m ? m.elems : [],
+      modalOverrides: m ? m.overrides : [],
+      modalHasOverrides: !!(m && m.overrides && m.overrides.length),
+      modalBd: modalStyle.bd || 'rgba(255,255,255,.1)',
+      modalHeaderBg: m ? modalStyle.bg : 'transparent',
+      modalTagCol: modalStyle.tagCol || '#fff',
+      modalTagBg: modalStyle.tagBg || 'rgba(255,255,255,.1)',
+      showToast: !!st.toast,
+      toastMsg: st.toast || '',
+      showZoomImg: !!st.zoomImg,
+      zoomImgSrc: st.zoomImg || '',
+      zoomImgName: m ? m.name : '',
+      zoomScale: st.zoomScale || 1,
+      zoomPanX: (st.zoomPan && st.zoomPan.x) || 0,
+      zoomPanY: (st.zoomPan && st.zoomPan.y) || 0,
+      zoomPct: Math.round((st.zoomScale || 1) * 100),
+      closeZoomImg: () => this.setState({ zoomImg: null, zoomScale: 1, zoomPan: { x: 0, y: 0 } }),
+      onZoomImg: () => {
+        if (m && m.img) this.setState({ zoomImg: m.img, zoomScale: 1, zoomPan: { x: 0, y: 0 } });
+      },
+      onZoomIn: () => this.setState((prev) => ({ zoomScale: Math.min(5, Number(((prev.zoomScale || 1) * 1.25).toFixed(2))) })),
+      onZoomOut: () => this.setState((prev) => ({ zoomScale: Math.max(0.5, Number(((prev.zoomScale || 1) * 0.8).toFixed(2))) })),
+      onZoomReset: () => this.setState({ zoomScale: 1, zoomPan: { x: 0, y: 0 } }),
+      onZoomToggleScale: () => this.setState((prev) => ({ zoomScale: (prev.zoomScale || 1) > 1.2 ? 1 : 2.5, zoomPan: { x: 0, y: 0 } })),
+      onZoomWheel: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        const delta = e.deltaY < 0 ? 1.15 : 0.85;
+        this.setState((prev) => ({
+          zoomScale: Math.min(5, Math.max(0.5, Number(((prev.zoomScale || 1) * delta).toFixed(2))))
+        }));
+      },
+      onZoomMouseDown: (e) => {
+        this._isDragging = true;
+        this._startX = e.clientX - ((this.state.zoomPan && this.state.zoomPan.x) || 0);
+        this._startY = e.clientY - ((this.state.zoomPan && this.state.zoomPan.y) || 0);
+      },
+      onZoomMouseMove: (e) => {
+        if (this._isDragging) {
+          this.setState({ zoomPan: { x: e.clientX - this._startX, y: e.clientY - this._startY } });
+        }
+      },
+      onZoomMouseUp: () => {
+        this._isDragging = false;
+      },
+      onZoomTouchStart: (e) => {
+        if (e.touches.length === 2) {
+          this._touchDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+          this._initialScale = this.state.zoomScale || 1;
+        } else if (e.touches.length === 1) {
+          this._isDragging = true;
+          this._startX = e.touches[0].clientX - ((this.state.zoomPan && this.state.zoomPan.x) || 0);
+          this._startY = e.touches[0].clientY - ((this.state.zoomPan && this.state.zoomPan.y) || 0);
+        }
+      },
+      onZoomTouchMove: (e) => {
+        if (e.touches.length === 2 && this._touchDist) {
+          const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+          const newScale = Math.min(5, Math.max(0.5, Number(((this._initialScale * dist) / this._touchDist).toFixed(2))));
+          this.setState({ zoomScale: newScale });
+        } else if (e.touches.length === 1 && this._isDragging) {
+          this.setState({ zoomPan: { x: e.touches[0].clientX - this._startX, y: e.touches[0].clientY - this._startY } });
+        }
+      },
+      onZoomTouchEnd: () => {
+        this._isDragging = false;
+        this._touchDist = null;
+      },
+    };
+  }
+}
+
+</script>
+</body>
+</html>

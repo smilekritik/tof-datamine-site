@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+      <defs>
+        <radialGradient id="hpGrad" cx="50%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#ff8fa8"/>
+          <stop offset="100%" stop-color="#ff4d6d"/>
+        </radialGradient>
+        <filter id="glowHp" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#ff4d6d" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <path d="M24 41.5s-14.5-9.3-19.5-17.5C-.5 15.7 3.2 5.5 13.5 5.5c5.7 0 9 4.2 10.5 6.2 1.5-2 4.8-6.2 10.5-6.2 10.3 0 14 10.2 9 18.5C38.5 32.2 24 41.5 24 41.5z" fill="url(#hpGrad)" filter="url(#glowHp)"/>
+      <path d="M14.5 10c-4 0-6.5 3.5-4 7.5 1.5 2.5 4.5 5 8 7.5" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>

@@ -1,0 +1,222 @@
+{
+  "unregisteredBosses": [
+    {
+      "bossId": "boss_006",
+      "bossNum": 6,
+      "catalogOrder": 2,
+      "catalogConfigId": "void_boss_2",
+      "sourceName": "罗贝拉格",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss001.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss001.png",
+      "nameHint": "Robarg",
+      "keys": [
+        "Boss_hum_006_1_des",
+        "Buff_boss_006_02_NeuralToxin_des",
+        "Buff_boss_006_02_Stun_des",
+        "Boss_hum_006_2_des",
+        "Boss_hum_006_3_des",
+        "Boss_hum_006_4_des"
+      ],
+      "mechanicsCount": 4,
+      "mechanics": [
+        {
+          "index": "1",
+          "key": "Boss_hum_006_1_des",
+          "en": "Robarg loses no more than 3.5% Max HP per second.",
+          "ru": "Робарг теряет не более 3,5% от максимального запаса здоровья в секунду."
+        },
+        {
+          "index": "2",
+          "key": "Buff_boss_006_02_NeuralToxin_des",
+          "en": "Stuns for 15s upon reaching 15 Neural Toxin stacks. Collect randomly spawned antidotes to remove all stacks.",
+          "ru": "При достижении 15 зарядов нейронного токсина эффект оглушает на 15 секунд. Собирайте случайно появляющиеся противоядия, чтобы снять все заряды."
+        },
+        {
+          "index": "3",
+          "key": "Boss_hum_006_3_des",
+          "en": "Increases Robarg's movement speed.",
+          "ru": "Увеличивает скорость передвижения Робарга."
+        },
+        {
+          "index": "4",
+          "key": "Boss_hum_006_4_des",
+          "en": "Robarg becomes Invincible every time he loses 25% Max HP and generates 3 purple areas nearby. His Invincibility breaks when players stand in all 3 areas simultaneously.",
+          "ru": "Робарг становится неуязвимым каждый раз, когда теряет 25% от максимального запаса здоровья и рядом с ним появляются 3 фиолетовые зоны. Его неуязвимость исчезает, когда игроки одновременно находятся во всех 3 зонах."
+        }
+      ]
+    },
+    {
+      "bossId": "boss_003",
+      "bossNum": 3,
+      "catalogOrder": null,
+      "catalogConfigId": "",
+      "sourceName": "",
+      "image": "",
+      "imageMain": "",
+      "nameHint": "Hyena Mech (Break Fate)",
+      "keys": [
+        "Breakfate_Boss_03_desc"
+      ],
+      "mechanicsCount": 1,
+      "mechanics": [
+        {
+          "index": "3",
+          "key": "Breakfate_Boss_03_desc",
+          "en": "The Hyenas invented a simple yet fairly powerful Mecha a with the limited resources they had on hand. The cannons on its shoulders are capable of suppressive fire and bombardment at the same time. And the cooling devices on its arms emit steam that can be used to attack enemies during combat.",
+          "ru": "Несмотря на нехватку ресурсов, Гиены изобрели простого, но достаточно мощного боевого робота. Пушки на плечах робота обеспечивают одновременно и огонь на подавление, и бомбардировку. Охлаждающее устройство, установленное на руках боевой машины, служит для выпуска пара, и его также можно использовать в бою против врагов."
+        }
+      ]
+    },
+    {
+      "bossId": "boss_018",
+      "bossNum": 18,
+      "catalogOrder": null,
+      "catalogConfigId": "",
+      "sourceName": "",
+      "image": "",
+      "imageMain": "",
+      "nameHint": "Habaka",
+      "keys": [
+        "Boss_hum_018_1_des",
+        "Boss_hum_018_2_des",
+        "Boss_hum_018_3_des",
+        "Boss_hum_018_4_des"
+      ],
+      "mechanicsCount": 4,
+      "mechanics": [
+        {
+          "index": "1",
+          "key": "Boss_hum_018_1_des",
+          "en": "Habaka's movement speed is increased.",
+          "ru": "Скорость движения Хабаки увеличена."
+        },
+        {
+          "index": "2",
+          "key": "Boss_hum_018_2_des",
+          "en": "Spreads Corrosion, reducing damage dealt by nearby targets.",
+          "ru": "Распространяет коррозию, уменьшая наносимый ближайшим целям урон."
+        },
+        {
+          "index": "3",
+          "key": "Boss_hum_018_3_des",
+          "en": "Gains temporary damage reduction for 5s when attacked. Cooldown: 15s.",
+          "ru": "Получает временное снижение получаемого урона на 5 сек., подвергаясь атаке. Перезарядка: 15 сек."
+        },
+        {
+          "index": "4",
+          "key": "Boss_hum_018_4_des",
+          "en": "Gains one stack of Vigor with each hit. At 10 stacks, the next attack deals massive bonus damage.",
+          "ru": "При каждом ударе получает 1 заряд энергии. При 10 зарядах следующая атака наносит значительный бонусный урон."
+        }
+      ]
+    },
+    {
+      "bossId": "boss_059",
+      "bossNum": 59,
+      "catalogOrder": null,
+      "catalogConfigId": "",
+      "sourceName": "",
+      "image": "",
+      "imageMain": "",
+      "nameHint": "Boss 059",
+      "keys": [
+        "Boss_hum_059_1_des",
+        "Boss_hum_059_2_des",
+        "Boss_hum_059_3_des",
+        "Boss_hum_059_4_des"
+      ],
+      "mechanicsCount": 4,
+      "mechanics": [
+        {
+          "index": "1",
+          "key": "Boss_hum_059_1_des",
+          "en": "Deals Corrosion Damage with attacks.",
+          "ru": "Наносит коррозионный урон при атаках."
+        },
+        {
+          "index": "2",
+          "key": "Boss_hum_059_2_des",
+          "en": "Restores Max HP over 5s.",
+          "ru": "Восстанавливает максимальное количество HP за 5 секунд."
+        },
+        {
+          "index": "3",
+          "key": "Boss_hum_059_3_des",
+          "en": "Grants a shield at the start that breaks after 200 hits.",
+          "ru": "В начале боя предоставляет щит, который разрушается после 200 попаданий."
+        },
+        {
+          "index": "4",
+          "key": "Boss_hum_059_4_des",
+          "en": "Deals huge damage based on HP percentage to nearby targets.",
+          "ru": "Наносит огромный урон ближайшим целям, зависящий от процента здоровья."
+        }
+      ]
+    },
+    {
+      "bossId": "boss_066",
+      "bossNum": 66,
+      "catalogOrder": null,
+      "catalogConfigId": "",
+      "sourceName": "",
+      "image": "",
+      "imageMain": "",
+      "nameHint": "Ying Zhao Shield Buff",
+      "keys": [
+        "Buff_boss_066_Player_Shield_-1_1_des"
+      ],
+      "mechanicsCount": 1,
+      "mechanics": [
+        {
+          "index": "1",
+          "key": "Buff_boss_066_Player_Shield_-1_1_des",
+          "en": "Energy shield obtained after absorbing dissipated energy orbs. For a short time, immune to damage when taking damage.",
+          "ru": "Энергетический щит, полученный после поглощения рассеянных энергетических сфер. На короткое время становится невосприимчивым к урону при получении урона."
+        }
+      ]
+    },
+    {
+      "bossId": "boss_079",
+      "bossNum": 79,
+      "catalogOrder": null,
+      "catalogConfigId": "",
+      "sourceName": "",
+      "image": "",
+      "imageMain": "",
+      "nameHint": "Defender",
+      "keys": [
+        "boss_hum_079_2_des",
+        "boss_hum_079_3_des",
+        "boss_hum_079_4_des",
+        "boss_hum_079_5_des"
+      ],
+      "mechanicsCount": 4,
+      "mechanics": [
+        {
+          "index": "2",
+          "key": "boss_hum_079_2_des",
+          "en": "Increases the Defender's speed for all actions.",
+          "ru": "Увеличивает скорость защитника при выполнении всех действий."
+        },
+        {
+          "index": "3",
+          "key": "boss_hum_079_3_des",
+          "en": "Launches multiple missiles on the surrounding area periodically, dealing lethal damage.",
+          "ru": "Периодически запускает множество ракет по окружающей местности, нанося смертельный урон."
+        },
+        {
+          "index": "4",
+          "key": "boss_hum_079_4_des",
+          "en": "Deploys a Radiation Bomb periodically that detonates after a 5-second delay, releasing radiation across a wide area and dealing lethal damage. Can be disarmed after hit multiple times.",
+          "ru": "Периодически запускает радиационную бомбу, которая детонирует с задержкой в 5 секунд, распространяя радиацию на большой площади и нанося смертельный урон. Может быть обезврежена после нескольких попаданий."
+        },
+        {
+          "index": "5",
+          "key": "boss_hum_079_5_des",
+          "en": "Creates an invincible copy of itself, with all the Defender's Abilities, when its HP reaches 80%.",
+          "ru": "Создаёт неуязвимую копию себя со всеми способностями Защитника, когда её запас здоровья достигает 80%."
+        }
+      ]
+    }
+  ]
+}

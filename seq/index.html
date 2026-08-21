@@ -4,45 +4,43 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="Tower of Fantasy Sequential clear requirements with charts by floor. Track boss HP, estimated effective HP, and damage thresholds needed for a clear."
-  />
+  <meta name="description" content="Compare boss HP, effective HP, and clear thresholds across all 34 Sequential floors." />
+  <meta name="theme-color" content="#0c0812" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="TOF Sequential Damage Charts" />
-  <meta
-    property="og:description"
-    content="Tower of Fantasy Sequential clear requirements with charts by floor. Track boss HP, estimated effective HP, and damage thresholds needed for a clear."
-  />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="TOF Sequential Damage Charts" />
-  <meta
-    name="twitter:description"
-    content="Tower of Fantasy Sequential clear requirements with charts by floor. Track boss HP, estimated effective HP, and damage thresholds needed for a clear."
-  />
-  <title>TOF Sequential Damage Charts</title>
-  <link rel="stylesheet" href="./styles/main.css" />
-  <link rel="stylesheet" href="./styles/components.css" />
+  <meta property="og:site_name" content="TOF Datamine Archive" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://tof.smilekritik.beer/datamine/seq/" />
+  <meta property="og:title" content="TOF Sequential Scaling Charts" />
+  <meta property="og:description" content="Compare boss HP, effective HP, and clear thresholds across all 34 Sequential floors." />
+  <meta property="og:image" content="https://tof.smilekritik.beer/datamine/social/seq.png" />
+  <meta property="og:image:secure_url" content="https://tof.smilekritik.beer/datamine/social/seq.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Sequential boss scaling charts across 34 floors" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TOF Sequential Scaling Charts" />
+  <meta name="twitter:description" content="Compare boss HP, effective HP, and clear thresholds across all 34 Sequential floors." />
+  <meta name="twitter:image" content="https://tof.smilekritik.beer/datamine/social/seq.png" />
+  <meta name="twitter:image:alt" content="Sequential boss scaling charts across 34 floors" />
+  <link rel="canonical" href="https://tof.smilekritik.beer/datamine/seq/" />
+  <title>TOF Sequential Scaling Charts</title>
+  <link rel="stylesheet" href="../shared/fonts.css" />
+  <link rel="stylesheet" href="../shared/base.css" />
+  <link rel="stylesheet" href="../shared/components.css" />
+  <link rel="stylesheet" href="../shared/header.css" />
   <link rel="stylesheet" href="./styles/datamine-seq.css" />
 </head>
 <body class="page page--datamine-seq">
   <div class="noise-bg"></div>
 
-  <header class="site-header">
-    <div class="site-header__inner">
-      <nav class="site-header__nav">
-        <a href="#overview" class="site-header__link">Overview</a>
-        <a href="#charts" class="site-header__link">Charts</a>
-        <a href="#data" class="site-header__link">Data</a>
-      </nav>
-    </div>
-  </header>
+  <div data-datamine-header data-current="seq"></div>
 
   <main class="layout">
     <section class="hero" id="overview">
       <div class="hero__content">
-        <p class="hero__eyebrow">Datamine / Sequential</p>
-        <h1 class="hero__title">Sequential boss scaling from datamined data</h1>
+        <p class="hero__eyebrow" data-seq-ui="eyebrow">DATAMINE · SEQUENTIAL</p>
+        <h1 class="hero__title" data-seq-ui="title">Sequential boss scaling from datamined data</h1>
       </div>
     </section>
 
@@ -50,10 +48,10 @@
       <div class="section__inner">
         <div class="notes notes--single">
           <article class="note note--primary" data-note>
-            <h3 class="note__title">Datamined source only</h3>
-            <p class="note__body">
+            <h3 class="note__title" data-seq-ui="sourceTitle">Datamined source only</h3>
+            <p class="note__body" data-seq-ui-html="sourceBody">
               The values on this page are extracted from datamined game data in
-              <a class="seq-inline-link" href="./DT_MonsterStaticData_Overseas.json">
+              <a class="seq-inline-link" href="./data/DT_MonsterStaticData_Overseas.json">
                 <code>DT_MonsterStaticData_Overseas.json</code>
               </a>.
               For the follow-up calculations, the page applies the sequential
@@ -68,22 +66,22 @@
     <section class="section" id="charts">
       <div class="section__inner">
         <div class="section__header">
-          <h2 class="section__title">Charts</h2>
+          <h2 class="section__title" data-seq-ui="chartsTitle">Charts</h2>
         </div>
 
         <article class="seq-chart-card">
           <div class="seq-chart-card__header">
             <div>
-              <h3 class="seq-chart-card__title">
+              <h3 class="seq-chart-card__title" data-seq-ui="chartEffective">
                 Approximated total DMG was needed in 150s without ALL mechs in sequential
               </h3>
             </div>
             <div class="seq-action-group">
               <button class="seq-button" type="button" data-action="download-chart-png" data-chart-key="effective">
-                Download PNG
+                <span data-seq-ui="downloadPng">Download PNG</span>
               </button>
               <button class="seq-button seq-button--subtle" type="button" data-action="download-chart-csv" data-chart-key="effective">
-                Download CSV
+                <span data-seq-ui="downloadCsv">Download CSV</span>
               </button>
             </div>
           </div>
@@ -94,16 +92,16 @@
           <article class="seq-chart-card">
             <div class="seq-chart-card__header">
               <div>
-                <h3 class="seq-chart-card__title">
+                <h3 class="seq-chart-card__title" data-seq-ui="chartPure">
                   Amount of boss HP in sequential (pure HP, no resists)
                 </h3>
               </div>
               <div class="seq-action-group">
                 <button class="seq-button" type="button" data-action="download-chart-png" data-chart-key="pure">
-                  Download PNG
+                  <span data-seq-ui="downloadPng">Download PNG</span>
                 </button>
                 <button class="seq-button seq-button--subtle" type="button" data-action="download-chart-csv" data-chart-key="pure">
-                  Download CSV
+                  <span data-seq-ui="downloadCsv">Download CSV</span>
                 </button>
               </div>
             </div>
@@ -114,16 +112,16 @@
           <article class="seq-chart-card">
             <div class="seq-chart-card__header">
               <div>
-                <h3 class="seq-chart-card__title">
+                <h3 class="seq-chart-card__title" data-seq-ui="chartPowercreep">
                   Approximated total powercreep from previous stage
                 </h3>
               </div>
               <div class="seq-action-group">
                 <button class="seq-button" type="button" data-action="download-chart-png" data-chart-key="powercreep">
-                  Download PNG
+                  <span data-seq-ui="downloadPng">Download PNG</span>
                 </button>
                 <button class="seq-button seq-button--subtle" type="button" data-action="download-chart-csv" data-chart-key="powercreep">
-                  Download CSV
+                  <span data-seq-ui="downloadCsv">Download CSV</span>
                 </button>
               </div>
             </div>
@@ -138,8 +136,8 @@
     <section class="section" id="data">
       <div class="section__inner">
         <div class="section__header">
-          <h2 class="section__title">Loaded values</h2>
-          <p class="section__body">
+          <h2 class="section__title" data-seq-ui="loadedTitle">Loaded values</h2>
+          <p class="section__body" data-seq-ui="loadedDescription">
             Preview of the current rows and calculated values. Export buttons
             above save CSV files that open directly in Excel.
           </p>
@@ -149,16 +147,16 @@
           <table class="seq-table">
             <thead>
               <tr>
-                <th>Stage</th>
-                <th>Row</th>
+                <th data-seq-ui="stage">Stage</th>
+                <th data-seq-ui="row">Row</th>
                 <th>MaxHealth</th>
-                <th>Effective HP</th>
-                <th>Powercreep</th>
+                <th data-seq-ui="effectiveHp">Effective HP</th>
+                <th data-seq-ui="powercreep">Powercreep</th>
               </tr>
             </thead>
             <tbody data-table-body>
               <tr>
-                <td colspan="5">Loading...</td>
+                <td colspan="5" data-seq-ui="loading">Loading...</td>
               </tr>
             </tbody>
           </table>
@@ -169,7 +167,7 @@
 
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <span class="site-footer__note">
+      <span class="site-footer__note" data-seq-ui="footer">
         TOF leaks, insane suffer with datamine
       </span>
     </div>
@@ -177,20 +175,20 @@
 
   <div class="seq-zoom-modal" data-zoom-modal hidden>
     <div class="seq-zoom-modal__backdrop" data-action="close-zoom"></div>
-    <div class="seq-zoom-modal__dialog" role="dialog" aria-modal="true" aria-label="Chart zoom">
+    <div class="seq-zoom-modal__dialog" role="dialog" aria-modal="true" aria-label="Chart zoom" data-seq-zoom-dialog>
       <div class="seq-zoom-modal__header">
         <div>
-          <p class="seq-zoom-modal__eyebrow">Chart zoom</p>
+          <p class="seq-zoom-modal__eyebrow" data-seq-ui="zoomEyebrow">Chart zoom</p>
           <h3 class="seq-zoom-modal__title" data-zoom-title>Chart</h3>
         </div>
         <div class="seq-action-group">
           <button class="seq-button seq-button--subtle" type="button" data-action="zoom-out">-</button>
           <button class="seq-button seq-button--subtle" type="button" data-action="zoom-reset">100%</button>
           <button class="seq-button seq-button--subtle" type="button" data-action="zoom-in">+</button>
-          <button class="seq-button" type="button" data-action="close-zoom">Close</button>
+          <button class="seq-button" type="button" data-action="close-zoom" data-seq-ui="close">Close</button>
         </div>
       </div>
-      <div class="seq-zoom-modal__hint">
+      <div class="seq-zoom-modal__hint" data-seq-ui="zoomHint">
         Click a chart to open zoom. In zoom view use mouse wheel to scale and drag to pan.
       </div>
       <div class="seq-zoom-modal__viewport" data-zoom-viewport>
@@ -202,7 +200,7 @@
 
   <div class="seq-chart-tooltip" data-page-chart-tooltip hidden></div>
 
-  <script src="./js/main.js"></script>
+  <script src="../shared/header.js"></script>
   <script src="./js/datamine-seq.js"></script>
 </body>
 </html>

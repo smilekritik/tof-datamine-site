@@ -396,7 +396,7 @@
   }
 
   function fetchJson(url) {
-    return fetch(url, { cache: "no-store" }).then((response) => {
+    return fetch(url).then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
@@ -720,11 +720,13 @@
           pageKind: "public",
           initialMode: "combined",
           storageKey: "tof-multype-local-renames-v1",
-          dataUrl: "./module_extra_to_files_mapping3.json",
-          renamesUrl: "./renames.base.json",
+          dataUrl: "./data/module_extra_to_files_mapping3.json",
+          renamesUrl: "./data/renames.base.json",
           pageTitle: "Multype datamine viewer",
           pageEyebrow: "Datamine / Multype",
-          pageDescription: ""
+          pageDescription: "",
+          language: "en",
+          translations: {}
         },
         options || {}
       );
@@ -774,6 +776,17 @@
       document.addEventListener("keydown", this.handleDocumentKeyDown);
 
       this.init();
+    }
+
+    getText(key, fallback) {
+      const language = this.options.language === "ru" ? "ru" : "en";
+      return this.options.translations?.[language]?.[key] || fallback || key;
+    }
+
+    setLanguage(language) {
+      this.options.language = language === "ru" ? "ru" : "en";
+      document.documentElement.lang = this.options.language;
+      this.render();
     }
 
     async init() {
@@ -1125,16 +1138,16 @@
         return `
           <section class="hero multype-anchor" id="overview">
             <div class="hero__content">
-              <p class="hero__eyebrow">${escapeHtml(this.options.pageEyebrow)}</p>
-              <h1 class="hero__title">${escapeHtml(this.options.pageTitle)}</h1>
-              <p class="hero__subtitle">${escapeHtml(this.options.pageDescription)}</p>
+              <p class="hero__eyebrow">${escapeHtml(this.getText("eyebrow", this.options.pageEyebrow))}</p>
+              <h1 class="hero__title">${escapeHtml(this.getText("title", this.options.pageTitle))}</h1>
+              <p class="hero__subtitle">${escapeHtml(this.getText("description", this.options.pageDescription))}</p>
             </div>
           </section>
           <section class="section">
             <div class="section__inner">
               <div class="multype-status-card">
-                <p class="multype-status-card__title">Loading datamine JSON...</p>
-                <p class="multype-status-card__body">Building the Main / Sub / Value model and rename dictionary.</p>
+                <p class="multype-status-card__title">${escapeHtml(this.getText("loadingTitle", "Loading datamine JSON..."))}</p>
+                <p class="multype-status-card__body">${escapeHtml(this.getText("loadingBody", "Building the Main / Sub / Value model and rename dictionary."))}</p>
               </div>
             </div>
           </section>
@@ -1145,15 +1158,15 @@
         return `
           <section class="hero multype-anchor" id="overview">
             <div class="hero__content">
-              <p class="hero__eyebrow">${escapeHtml(this.options.pageEyebrow)}</p>
-              <h1 class="hero__title">${escapeHtml(this.options.pageTitle)}</h1>
-              <p class="hero__subtitle">${escapeHtml(this.options.pageDescription)}</p>
+              <p class="hero__eyebrow">${escapeHtml(this.getText("eyebrow", this.options.pageEyebrow))}</p>
+              <h1 class="hero__title">${escapeHtml(this.getText("title", this.options.pageTitle))}</h1>
+              <p class="hero__subtitle">${escapeHtml(this.getText("description", this.options.pageDescription))}</p>
             </div>
           </section>
           <section class="section">
             <div class="section__inner">
               <div class="multype-status-card multype-status-card--error">
-                <p class="multype-status-card__title">Load error</p>
+                <p class="multype-status-card__title">${escapeHtml(this.getText("loadError", "Load error"))}</p>
                 <p class="multype-status-card__body">${escapeHtml(this.state.error)}</p>
               </div>
             </div>
@@ -1175,9 +1188,9 @@
       return `
         <section class="hero multype-anchor" id="overview">
           <div class="hero__content">
-        <p class="hero__eyebrow">${escapeHtml(this.options.pageEyebrow)}</p>
-        <h1 class="hero__title">${escapeHtml(this.options.pageTitle)}</h1>
-        <p class="hero__subtitle">${escapeHtml(this.options.pageDescription)}</p>
+        <p class="hero__eyebrow">${escapeHtml(this.getText("eyebrow", this.options.pageEyebrow))}</p>
+        <h1 class="hero__title">${escapeHtml(this.getText("title", this.options.pageTitle))}</h1>
+        <p class="hero__subtitle">${escapeHtml(this.getText("description", this.options.pageDescription))}</p>
           </div>
         </section>
 
@@ -1185,13 +1198,13 @@
           <div class="section__inner">
             <div class="notes notes--single">
               <article class="note note--primary">
-                <h3 class="note__title">Source</h3>
+                <h3 class="note__title">${escapeHtml(this.getText("source", "Source"))}</h3>
                 <p class="note__body">
-                  Source file: <code>${escapeHtml(this.state.baseRenames.sourceFile)}</code>.
-                  Total: ${dataset.totalGroups} Categories / ${dataset.totalSubs} Subcategories / ${dataset.totalValues} buffs.
-                  <a class="multype-source-inline" href="${escapeHtml(this.options.dataUrl)}" target="_blank" rel="noopener noreferrer">Open local JSON</a>
+                  ${escapeHtml(this.getText("sourceFile", "Source file"))}: <code>${escapeHtml(this.state.baseRenames.sourceFile)}</code>.
+                  ${escapeHtml(this.getText("total", "Total"))}: ${dataset.totalGroups} ${escapeHtml(this.getText("categories", "Categories"))} / ${dataset.totalSubs} ${escapeHtml(this.getText("subcategories", "Subcategories"))} / ${dataset.totalValues} ${escapeHtml(this.getText("buffs", "buffs"))}.
+                  <a class="multype-source-inline" href="${escapeHtml(this.options.dataUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(this.getText("openJson", "Open local JSON"))}</a>
                   <span class="multype-source-separator">/</span>
-                  <a class="multype-source-inline" href="https://github.com/smilekritik/Tower-of-fantasy-exporter-scanner/blob/master/Exported/module_extra_to_files_mapping3.json" target="_blank" rel="noopener noreferrer">View exporter source</a>.
+                  <a class="multype-source-inline" href="https://github.com/smilekritik/Tower-of-fantasy-exporter-scanner/blob/master/Exported/module_extra_to_files_mapping3.json" target="_blank" rel="noopener noreferrer">${escapeHtml(this.getText("viewSource", "View exporter source"))}</a>.
                 </p>
               </article>
             </div>
@@ -1202,21 +1215,21 @@
           <div class="section__inner section__inner--multype-data">
         <div class="multype-toolbar">
           <div class="multype-toolbar__row multype-toolbar__row--modes">
-            ${this.renderModeButton("renamed", "Renamed")}
-            ${this.renderModeButton("combined", "Combined")}
-            ${this.renderModeButton("datamined", "Datamined")}
+            ${this.renderModeButton("renamed", this.getText("renamed", "Renamed"))}
+            ${this.renderModeButton("combined", this.getText("combined", "Combined"))}
+            ${this.renderModeButton("datamined", this.getText("datamined", "Datamined"))}
           </div>
           <div class="multype-toolbar__row multype-toolbar__row--filters">
             <label class="multype-field multype-field--search">
-          <span class="multype-field__label">Search</span>
+          <span class="multype-field__label">${escapeHtml(this.getText("search", "Search"))}</span>
           <input class="multype-field__input" type="search" value="${escapeHtml(
             this.state.search
-          )}" placeholder="Search original keys or renamed labels..." data-control="search" />
+          )}" placeholder="${escapeHtml(this.getText("searchPlaceholder", "Search original keys or renamed labels..."))}" data-control="search" />
             </label>
             <label class="multype-field">
-          <span class="multype-field__label">Main</span>
+          <span class="multype-field__label">${escapeHtml(this.getText("main", "Main"))}</span>
           <select class="multype-field__select" data-control="main-filter">
-            <option value="">All Main</option>
+            <option value="">${escapeHtml(this.getText("allMain", "All Main"))}</option>
             ${mainFilterOptions
               .map(
             (entry) => `<option value="${escapeHtml(entry.key)}" ${
@@ -1227,9 +1240,9 @@
           </select>
             </label>
             <label class="multype-field">
-          <span class="multype-field__label">Sub</span>
+          <span class="multype-field__label">${escapeHtml(this.getText("sub", "Sub"))}</span>
           <select class="multype-field__select" data-control="sub-filter">
-            <option value="">All Sub</option>
+            <option value="">${escapeHtml(this.getText("allSub", "All Sub"))}</option>
             ${subFilterOptions
               .map(
             (entry) => `<option value="${escapeHtml(entry.key)}" ${
@@ -1240,9 +1253,9 @@
           </select>
             </label>
             <div class="multype-toolbar__toggles">
-          ${this.renderRenameFilterButton("all", "All")}
-          ${this.renderRenameFilterButton("renamed", "Renamed only")}
-          ${this.renderRenameFilterButton("unrenamed", "Unrenamed only")}
+          ${this.renderRenameFilterButton("all", this.getText("all", "All"))}
+          ${this.renderRenameFilterButton("renamed", this.getText("renamedOnly", "Renamed only"))}
+          ${this.renderRenameFilterButton("unrenamed", this.getText("unrenamedOnly", "Unrenamed only"))}
             </div>
           </div>
           ${
@@ -1282,8 +1295,8 @@
               : `
             <div class="multype-empty">
               <div>
-                <h3 class="multype-empty__title">Nothing matched</h3>
-                <p class="multype-empty__body">Try another mode, clear filters, or remove the search query.</p>
+                <h3 class="multype-empty__title">${escapeHtml(this.getText("emptyTitle", "Nothing matched"))}</h3>
+                <p class="multype-empty__body">${escapeHtml(this.getText("emptyBody", "Try another mode, clear filters, or remove the search query."))}</p>
               </div>
             </div>
               `
@@ -1341,7 +1354,7 @@
               data-tooltip-lines="${escapeHtml(encodeAttrList(tooltipLines))}"
             >
               <span class="multype-entity__label">${escapeHtml(group.mainDisplayLabel)}</span>
-              <span class="multype-entity__meta">${group.subEntries.length} sub columns</span>
+              <span class="multype-entity__meta">${group.subEntries.length} ${escapeHtml(this.getText("subColumns", "sub columns"))}</span>
             </div>
           </div>
           <div class="multype-main__body multype-main__body--columns">
@@ -1368,7 +1381,7 @@
             data-tooltip-lines="${escapeHtml(encodeAttrList(tooltipLines))}"
           >
             <span class="multype-entity__label">${escapeHtml(subEntry.subDisplayLabel)}</span>
-            <span class="multype-entity__meta">${subEntry.values.length} files</span>
+            <span class="multype-entity__meta">${subEntry.values.length} ${escapeHtml(this.getText("files", "files"))}</span>
           </div>
           <div class="multype-values">
             ${subEntry.values.map((valueEntry) => this.renderValueItem(subEntry, valueEntry)).join("")}

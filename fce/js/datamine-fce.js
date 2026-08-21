@@ -1,18 +1,23 @@
 (function () {
-  const DATA_FILE = "./fce-bosses.json";
-  const DATA_FILE_RU = "./fce-bosses.ru.json";
+  const DATA_FILE = "./data/fce-bosses.json";
+  const DATA_FILE_RU = "./data/fce-bosses.ru.json";
   const SCENE_WIDTH = 1920;
   const SCENE_HEIGHT = 1080;
   const DEFAULT_NAME_RIGHT = 0;
   const DEFAULT_NAME_Y = 38;
   const DEFAULT_NAME_WIDTH = 620;
-  const LANG_STORAGE_KEY = "fce-language";
+  const LANG_STORAGE_KEY = "tof-datamine-language";
   const PREVIEW_FOLDER_SEGMENT = "/assets/bosses/";
   const PREVIEW_REPLACEMENT_SEGMENT = "/assets/bosses-preview/";
   const UI_TEXT = {
     ui: {
       en: {
-        eyebrow: "Datamine / FCE",
+        brand: "FCE Boss Mechanics",
+        navItems: "Items",
+        navSequential: "Sequential",
+        navOow: "Origin of War",
+        navAria: "Datamine sections",
+        eyebrow: "DATAMINE · FCE",
         title: "Boss mechanics",
         download: "Download",
         rendering: "Rendering",
@@ -22,7 +27,12 @@
         loadError: "Could not load fce-bosses.json."
       },
       ru: {
-        eyebrow: "Датамайн / FCE",
+        brand: "Механики боссов FCE",
+        navItems: "Предметы",
+        navSequential: "Последовательность",
+        navOow: "Исток войны",
+        navAria: "Разделы датамайна",
+        eyebrow: "ДАТАМАЙН · FCE",
         title: "Механики боссов",
         download: "Скачать",
         rendering: "Рендер",
@@ -47,18 +57,27 @@
   let prefetchRunning = false;
 
   window.addEventListener("DOMContentLoaded", () => {
-    bindLanguageToggle();
+    window.DatamineHeader?.setLanguage(state.language, false);
+    window.addEventListener("datamine:language-change", handleLanguageChange);
     renderStaticUi();
     bindDownloadButton();
     loadPage();
   });
 
+  function handleLanguageChange(event) {
+    const nextLanguage = event.detail?.language === "ru" ? "ru" : "en";
+    if (nextLanguage === state.language) return;
+    state.language = nextLanguage;
+    renderStaticUi();
+    renderSwitcher();
+    renderCard();
+  }
+
   async function loadPage() {
     try {
-      const timestamp = Date.now();
       const [json, ruJson] = await Promise.all([
-        loadJson(`${DATA_FILE}?t=${timestamp}`, true),
-        loadJson(`${DATA_FILE_RU}?t=${timestamp}`, false)
+        loadJson(DATA_FILE, true),
+        loadJson(DATA_FILE_RU, false)
       ]);
 
       state.bosses = Array.isArray(json?.bosses) ? json.bosses : [];
@@ -76,9 +95,7 @@
   }
 
   async function loadJson(url, required) {
-    const response = await fetch(url, {
-      cache: "no-store"
-    });
+    const response = await fetch(url);
 
     if (!response.ok) {
       if (required) {
@@ -676,30 +693,12 @@
     });
   }
 
-  function bindLanguageToggle() {
-    document.querySelectorAll("[data-fce-lang]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const nextLanguage = button.getAttribute("data-fce-lang");
-        if (!nextLanguage || nextLanguage === state.language) {
-          return;
-        }
-
-        state.language = nextLanguage === "ru" ? "ru" : "en";
-        localStorage.setItem(LANG_STORAGE_KEY, state.language);
-        renderStaticUi();
-        renderSwitcher();
-        renderCard();
-      });
-    });
-  }
-
   function renderStaticUi() {
     document.documentElement.lang = state.language === "ru" ? "ru" : "en";
     const eyebrow = document.querySelector("[data-fce-eyebrow]");
     const title = document.querySelector("[data-fce-title]");
     const downloadButton = document.querySelector("[data-fce-download]");
     const downloadLabel = document.querySelector("[data-fce-download-label]");
-    const langToggle = document.querySelector("[data-fce-lang-toggle]");
     const loader = document.querySelector(".fce-card-loader");
 
     if (eyebrow) {
@@ -714,17 +713,10 @@
     if (downloadButton) {
       downloadButton.setAttribute("aria-label", getUiText("downloadAria"));
     }
-    if (langToggle) {
-      langToggle.setAttribute("aria-label", state.language === "ru" ? "Переключение языка" : "Language switcher");
-    }
     if (loader) {
       loader.textContent = getUiText("loading");
     }
 
-    document.querySelectorAll("[data-fce-lang]").forEach((button) => {
-      const buttonLanguage = button.getAttribute("data-fce-lang");
-      button.classList.toggle("is-active", buttonLanguage === state.language);
-    });
   }
 
   function getUiText(key) {

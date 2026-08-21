@@ -1,61 +1,123 @@
-# TOF Datamine Site
+# TOF Datamine Archive
+
+Public Tower of Fantasy data pages for Origin of War, FCE bosses, Sequential scaling, buff groups, and item identifiers.
 
 <p align="center">
-  A compact Tower of Fantasy datamine viewer focused on readable public pages.
-  <br />
-  Boss cards, Sequential charts, buff mapping, and item id tables live in one place.
+  <a href="https://tof.smilekritik.beer/datamine/">Live site</a>
+  ·
+  <a href="#pages">Pages</a>
+  ·
+  <a href="#run-locally">Local run</a>
+  ·
+  <a href="#screenshots">Screenshots</a>
 </p>
 
-![Datamine hub](docs/screenshots/datamine-hub.svg)
+![Datamine hub](docs/screenshots/datamine-hub.png)
 
-## Overview
+## Pages
 
-This repository contains a small datamine site for **Tower of Fantasy**.
-The goal is simple: turn raw or semi-processed game data into public pages that are easy to scan, share, and update.
+| Route | Contents |
+| --- | --- |
+| `/datamine/` | Compact index with live counts and the active Origin of War season |
+| `/datamine/oow/` | Seasons, floor waves, enemy HP and effective HP, buffs, rewards, and difficulty schedules |
+| `/datamine/fce/` | English and Russian boss mechanic cards with direct PNG export |
+| `/datamine/seq/` | Pure HP, effective HP, power-creep charts, zoom, CSV/PNG export, and source values |
+| `/datamine/multype/` | Searchable buff categories with additive and multiplicative grouping |
+| `/datamine/items/` | Searchable item IDs, developer names, translations, and copyable identifiers |
 
-The `/datamine` area is the part intended for presentation:
+All pages share the same local header, EN/RU switch, version badge, favicon, and visual language. Each route also has its own Open Graph text and 1200×630 social image in `social/`.
 
-- `/datamine/` gives a clean hub with entry cards for every public page.
-- `/datamine/fce/` presents boss mechanics as visual cards with export support.
-- `/datamine/seq/` shows Sequential boss scaling with charts and loaded values.
-- `/datamine/multype/` organizes buff data into readable categories with search and filters.
-- `/datamine/items/` lists item ids, original Chinese names, and rename fields in a fast table.
+## Standalone runtime
 
-The site is mostly static-first and built with plain HTML, CSS, and JavaScript.
-An Express server is used for local serving and for the small save endpoints used by editor-only flows.
+`datamine/` contains every browser dependency it needs:
 
+- React, ReactDOM, and Babel live in `vendor/`.
+- Manrope, Spectral, and JetBrains Mono WOFF2 files live in `fonts/`.
+- Each page keeps runtime code in `js/`, CSS in `styles/`, datasets in `data/`, and images in `assets/` when needed.
+- `oow/index.html` is the single OOW interface source.
+- Runtime code has no CDN, localhost fallback, or path into `datamine-pipeline`.
 
-## Project Notes
+`datamine-pipeline/` contains development and extraction tools. The public pages do not load it. The only runtime component outside this directory is the repository-level `server.js`, which serves static files and the item-editor save endpoints.
 
-- The public pages are designed to be browsed directly from `/datamine`.
-- JSON files stay close to the pages that consume them, which keeps edits straightforward.
-- Styling is intentionally custom per page, while shared datamine pages still reuse a common visual base.
+Run the standalone contract check after changing paths, metadata, fonts, vendors, or social cards:
+
+```bash
+npm run check:datamine
+```
+
+The check covers all six routes, shared navigation, local runtime assets, social metadata, PNG dimensions, and forbidden external fallbacks.
+
+## Run locally
+
+From the repository root:
+
+```bash
+npm install
+npm start
+```
+
+Open [http://127.0.0.1:3001/datamine/](http://127.0.0.1:3001/datamine/).
+
+The server refreshes stale Datamine caches on startup, then checks them every 24 hours. Opening a page does not start a rebuild.
+
+## Data and build commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run cache:datamine` | Rebuild the Sequential cache and compact hub manifest |
+| `npm run build:seq` | Rebuild Sequential source data |
+| `npm run build:seq-cache` | Rebuild the Sequential chart cache |
+| `npm run build:fce` | Parse FCE mechanics data |
+| `npm run build:fce-previews` | Regenerate FCE boss preview images |
+| `npm run build:items` | Rebuild item mapping JSON |
+| `npm run check:datamine` | Validate the standalone public subproject |
+
+## Structure
+
+```text
+datamine/
+  index.html                 Hub entry point
+  favicon.svg                Shared 119/99 tab icon
+  js/hub.js                  Hub data and interactions
+  styles/hub.css             Hub-specific styles
+  data/                      Hub summary and exported client version
+  shared/                    Header, base styles, components, and font declarations
+  fonts/                     Local WOFF2 files
+  vendor/                    Pinned browser libraries
+  social/                    Open Graph cards and their HTML generator
+  docs/screenshots/          README screenshots
+  oow/                       index.html + js/ + styles/ + data/ + assets/
+  fce/                       index.html + js/ + styles/ + data/ + assets/ + docs/
+  seq/                       index.html + js/ + styles/ + data/
+  multype/                   index/local HTML + js/ + styles/ + data/
+  items/                     index/local HTML + js/ + styles/ + data/
+```
 
 ## Screenshots
 
-### FCE
+### Origin of War
 
-![FCE page](docs/screenshots/datamine-fce.png)
+![Origin of War seasons and floor data](docs/screenshots/datamine-oow.png)
+
+### FCE boss mechanics
+
+![FCE boss mechanics card](docs/screenshots/datamine-fce.png)
 
 ### Sequential
 
-![Sequential page](docs/screenshots/datamine-seq.png)
+![Sequential boss scaling chart](docs/screenshots/datamine-seq.png)
 
 ### Multype
 
-![Multype page](docs/screenshots/datamine-multype.svg)
+![Multype buff category viewer](docs/screenshots/datamine-multype.png)
 
 ### Items
 
-![Items page](docs/screenshots/datamine-items.svg)
+![Item identifier table](docs/screenshots/datamine-items.png)
 
-## Why this repo exists
+## Notes
 
-Raw game data is useful, but it is rarely pleasant to read in raw form.
-This project exists to make that information easier to browse, compare, explain, and share without turning it into a heavy framework app.
-
-## Help With Updates
-
-If you want to add new data, update existing data, or fix something in the project, just contact me by any available method.
-
-I will help, explain how the relevant datamine workflow is done, and provide full access.
+- `shared/header.js` and `shared/header.css` own navigation, language state, and version display.
+- `data/datamine-summary.json` keeps the hub fast by avoiding full dataset downloads.
+- Social card source lives at `social/card.html`; the six generated PNG files sit beside it.
+- Multype's light/dark control changes the data surface while the shared archive shell stays dark.

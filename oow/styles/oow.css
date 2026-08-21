@@ -1,0 +1,127 @@
+:root {
+  color-scheme: dark;
+  --oow-bg: #0c0812;
+  --oow-surface: rgba(255,255,255,.03);
+  --oow-border: rgba(255,255,255,.08);
+  --oow-text: #cbc2de;
+  --oow-text-strong: #f6f1fb;
+  --oow-text-muted: #948aa8;
+  --oow-gold: #f5d97a;
+  --oow-violet: #b57bff;
+  --oow-mint: #4fe3c1;
+  --oow-danger: #ff9bb2;
+  --oow-radius-sm: 8px;
+  --oow-radius-md: 12px;
+  --oow-radius-lg: 16px;
+  --oow-ease: cubic-bezier(.2,.8,.2,1);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--oow-bg); font-family: "Manrope", system-ui, sans-serif; }
+button, input, select { font: inherit; }
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--oow-gold);
+  outline-offset: 2px;
+}
+a { color: var(--oow-gold); text-decoration: none; }
+a:hover { color: #ffe9a8; }
+::-webkit-scrollbar { height: 8px; width: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(245,217,122,.3); border-radius: 4px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,.03); }
+
+@keyframes oowpulse { 0%,100% { transform: scale(.85); opacity: .6; } 50% { transform: scale(1.35); opacity: 1; } }
+@keyframes oowdrawer { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes oowdrawerexpand { from { grid-template-rows: 0fr; opacity: 0; } to { grid-template-rows: 1fr; opacity: 1; } }
+@keyframes oowmodal { from { opacity: 0; transform: scale(.97) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes oowfade { from { opacity: 0; } to { opacity: 1; } }
+
+.oow-floor-drawer {
+  display: grid;
+  grid-template-rows: 1fr;
+  animation: oowdrawerexpand .32s var(--oow-ease) both;
+}
+
+.oow-floor-drawer__clip {
+  min-height: 0;
+  overflow: hidden;
+}
+
+#oow-boss-floating-art {
+  position: absolute;
+  left: calc(50vw + 735px);
+  top: 78px;
+  z-index: 15;
+  pointer-events: none;
+  user-select: none;
+  width: calc(50vw - 755px);
+  max-width: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#oow-boss-floating-art img {
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,.6));
+}
+
+@media (max-width: 1740px) {
+  #oow-boss-floating-art { display: none !important; }
+}
+
+@media (max-width: 900px) {
+  .oow-main-layout { flex-direction: column !important; gap: 14px !important; }
+  .oow-season-aside { width: 100% !important; max-height: 240px !important; position: static !important; }
+  .oow-season-aside > div:last-child { max-height: 190px !important; }
+  #oow-boss-floating-art { display: none !important; }
+  .oow-header-inner { padding: 10px 14px !important; }
+  .oow-main-wrap { padding-left: 12px !important; padding-right: 12px !important; }
+  .oow-mob-card { padding: 10px 12px !important; gap: 10px !important; }
+  .oow-mob-avatar { width: 44px !important; height: 44px !important; }
+  .oow-mob-hp-val { font-size: 20px !important; }
+  .oow-mob-ehp-val { font-size: 16px !important; }
+  .oow-affixes-grid { grid-template-columns: 1fr !important; }
+  .oow-chart-controls, .oow-chart-pair { grid-template-columns: 1fr !important; }
+  .oow-table-panel { overflow-x: auto !important; }
+  .oow-floor-grid { min-width: 760px; }
+  .oow-diff-grid { min-width: 780px; }
+  .oow-element-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}
+
+@media (max-width: 600px) {
+  .oow-header-nav { display: none !important; }
+  .oow-mob-hp-col { min-width: 82px !important; }
+  .oow-mob-hp-val { font-size: 18px !important; }
+  .oow-mob-ehp-val { font-size: 15px !important; }
+  .oow-element-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+.oow-header-brand,
+.oow-header-link {
+  text-decoration: none;
+  transition: color .15s ease;
+}
+
+.oow-header-brand:hover,
+.oow-header-link:hover {
+  color: #f5d97a !important;
+}
+
+.oow-header-brand:focus-visible,
+.oow-header-link:focus-visible {
+  outline: 2px solid #f5d97a;
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

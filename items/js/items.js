@@ -4,13 +4,39 @@
       return;
     }
 
-    window.TofLeaksItemsCore.createItemsApp({
+    const app = window.TofLeaksItemsCore.createItemsApp({
       rootSelector: "[data-items-app]",
-      dataUrls: ["./merged_mapping_with_original.json"],
+      datasets: {
+        gacha: {
+          label: "Gacha",
+          dataUrls: ["./data/merged_mapping_with_original.json"],
+          saveMode: "gacha"
+        },
+        mmo: {
+          label: "MMO",
+          dataUrls: ["./data/merged_mapping_with_original_mmo.json"],
+          saveMode: "mmo"
+        }
+      },
       editable: false,
       pageTitle: "",
       pageHint: "",
       emptyRenameLabel: ""
     });
+
+    const renderShellUi = () => {
+      const language = app.getLanguage();
+      document.documentElement.lang = language;
+      document.title = app.getText("pageTitle");
+
+    };
+
+    window.DatamineHeader?.setLanguage(app.getLanguage(), false);
+    window.addEventListener("datamine:language-change", (event) => {
+      app.setLanguage(event.detail?.language);
+      renderShellUi();
+    });
+
+    renderShellUi();
   });
 })();

@@ -9,6 +9,87 @@
     window.TofLeaksItemsCore = api;
   }
 })(function () {
+  const LANG_STORAGE_KEY = "tof-datamine-language";
+  const VIRTUAL_WINDOW_SIZE = 300;
+  const VIRTUAL_ROW_HEIGHT = 38;
+  const VIRTUAL_BUFFER_ROWS = 80;
+  const DEFAULT_UI = {
+    en: {
+      pageTitle: "TOF Datamine Items",
+      brand: "Item Datamine",
+      navItems: "Items",
+      navSequential: "Sequential",
+      navOow: "Origin of War",
+      navAria: "Datamine sections",
+      eyebrow: "DATAMINE · ITEMS",
+      title: "Item mapping",
+      hint: "Game item IDs, developer names, and translated labels in one searchable table.",
+      loading: "Loading...",
+      rendering: "Rendering...",
+      rowFilterAria: "Row filter",
+      all: "All",
+      renamed: "Renamed",
+      searchPlaceholder: "Search num / id / name / original / rename",
+      itemSourceAria: "Item source",
+      num: "num",
+      id: "id",
+      name: "name",
+      original: "original",
+      rename: "rename",
+      noRows: "No rows for the current filter.",
+      matches: "matches",
+      rows: "rows",
+      copied: "Copied",
+      copyFailed: "Copy failed",
+      copyIdTitle: "Click to copy ID",
+      editTitle: "Double click to edit",
+      languageAria: "Language switcher"
+    },
+    ru: {
+      pageTitle: "TOF — датамайн предметов",
+      brand: "Датамайн предметов",
+      navItems: "Предметы",
+      navSequential: "Последовательность",
+      navOow: "Исток войны",
+      navAria: "Разделы датамайна",
+      eyebrow: "ДАТАМАЙН · ПРЕДМЕТЫ",
+      title: "Сопоставление предметов",
+      hint: "Игровые ID предметов, имена разработчиков и переведённые названия в одной таблице с поиском.",
+      loading: "Загрузка...",
+      rendering: "Отрисовка...",
+      rowFilterAria: "Фильтр строк",
+      all: "Все",
+      renamed: "Переименованные",
+      searchPlaceholder: "Поиск по номеру, ID, имени, оригиналу или переводу",
+      itemSourceAria: "Источник предметов",
+      num: "номер",
+      id: "ID",
+      name: "имя",
+      original: "оригинал",
+      rename: "перевод",
+      noRows: "Для текущего фильтра нет строк.",
+      matches: "совпадений",
+      rows: "строк",
+      copied: "Скопировано",
+      copyFailed: "Не удалось скопировать",
+      copyIdTitle: "Нажмите, чтобы скопировать ID",
+      editTitle: "Дважды нажмите для редактирования",
+      languageAria: "Переключение языка"
+    }
+  };
+
+  function resolveInitialLanguage() {
+    if (typeof window === "undefined") {
+      return "en";
+    }
+    const fromSearch = new URLSearchParams(window.location.search).get("lang");
+    if (fromSearch === "ru" || fromSearch === "en") {
+      return fromSearch;
+    }
+    const stored = window.localStorage.getItem(LANG_STORAGE_KEY);
+    return stored === "ru" || stored === "en" ? stored : "en";
+  }
+
   function escapeHtml(value) {
     return String(value ?? "")
       .replace(/&/g, "&amp;")
@@ -16,6 +97,43 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#39;");
+  }
+
+  function normalizeSearchNeedle(value) {
+    return String(value ?? "").trim().toLocaleLowerCase();
+  }
+
+  function buildHighlightedHtml(value, query) {
+    const source = String(value ?? "");
+    const needle = normalizeSearchNeedle(query);
+
+    if (!needle) {
+      return escapeHtml(source);
+    }
+
+    const loweredSource = source.toLocaleLowerCase();
+    let cursor = 0;
+    let markup = "";
+
+    while (cursor < source.length) {
+      const matchIndex = loweredSource.indexOf(needle, cursor);
+
+      if (matchIndex === -1) {
+        markup += escapeHtml(source.slice(cursor));
+        break;
+      }
+
+      if (matchIndex > cursor) {
+        markup += escapeHtml(source.slice(cursor, matchIndex));
+      }
+
+      markup += `<mark class="items-match">${escapeHtml(
+        source.slice(matchIndex, matchIndex + needle.length)
+      )}</mark>`;
+      cursor = matchIndex + needle.length;
+    }
+
+    return markup;
   }
 
   function fetchJson(url, options) {
@@ -64,20 +182,49 @@
     throw lastError;
   }
 
-  function buildDefaultDataUrls() {
-    return uniqueUrls([
-      "/api/datamine/items",
-      "http://127.0.0.1:3001/api/datamine/items",
-      "http://localhost:3001/api/datamine/items"
-    ]);
+  function normalizeModeValue(value) {
+    return value === "mmo" ? "mmo" : "gacha";
+  }
+
+  function buildDefaultDataUrls(mode) {
+    const resolvedMode = normalizeModeValue(mode);
+    const suffix = resolvedMode === "mmo" ? "?mode=mmo" : "";
+    return [`/api/datamine/items${suffix}`];
   }
 
   function buildDefaultSaveUrls() {
-    return uniqueUrls([
-      "/api/datamine/items/rename",
-      "http://127.0.0.1:3001/api/datamine/items/rename",
-      "http://localhost:3001/api/datamine/items/rename"
-    ]);
+    return ["/api/datamine/items/rename"];
+  }
+
+  function resolveDatasets(options) {
+    const provided = options?.datasets;
+    const modes = ["gacha", "mmo"];
+    const datasets = {};
+
+    if (provided && typeof provided === "object" && !Array.isArray(provided)) {
+      modes.forEach((mode) => {
+        const config = provided[mode];
+        if (!config || typeof config !== "object") {
+          return;
+        }
+
+        datasets[mode] = {
+          label: typeof config.label === "string" && config.label.trim() ? config.label.trim() : mode,
+          dataUrls: uniqueUrls(config.dataUrls || buildDefaultDataUrls(mode)),
+          saveMode: normalizeModeValue(config.saveMode || mode)
+        };
+      });
+    }
+
+    if (!datasets.gacha) {
+      datasets.gacha = {
+        label: "Gacha",
+        dataUrls: uniqueUrls(options?.dataUrls || buildDefaultDataUrls("gacha")),
+        saveMode: "gacha"
+      };
+    }
+
+    return datasets;
   }
 
   function escapeSelectorValue(value) {
@@ -123,6 +270,8 @@
         original: String(item?.original || ""),
         rename: String(item?.rename || ""),
         searchText: [
+          String(key),
+          String(item?.id || ""),
           String(item?.name || ""),
           String(item?.original || ""),
           String(item?.rename || "")
@@ -153,24 +302,33 @@
       this.options = Object.assign(
         {
           rootSelector: "[data-items-app]",
-          dataUrls: buildDefaultDataUrls(),
+          dataUrls: buildDefaultDataUrls("gacha"),
           saveUrls: buildDefaultSaveUrls(),
           editable: false,
           pageTitle: "",
           pageHint: "",
-          emptyRenameLabel: ""
+          emptyRenameLabel: "",
+          ui: DEFAULT_UI
         },
         options || {}
       );
+      this.datasets = resolveDatasets(this.options);
+      this.modeOrder = ["gacha", "mmo"].filter((mode) => this.datasets[mode]);
       this.root = document.querySelector(this.options.rootSelector);
       this.state = {
-        rows: [],
+        rowsByMode: Object.fromEntries(this.modeOrder.map((mode) => [mode, []])),
+        loadErrors: {},
+        mode: this.modeOrder.includes("gacha") ? "gacha" : this.modeOrder[0] || "gacha",
         filter: "all",
         search: "",
         renderToken: 0,
         editingKey: null,
-        isSaving: false
+        isSaving: false,
+        language: resolveInitialLanguage()
       };
+      this.virtualRows = [];
+      this.virtualStart = -1;
+      this.virtualScrollFrame = 0;
 
       if (!this.root) {
         return;
@@ -179,6 +337,7 @@
       this.handleDoubleClick = this.handleDoubleClick.bind(this);
       this.handleClick = this.handleClick.bind(this);
       this.handleInput = this.handleInput.bind(this);
+      this.handleScroll = this.handleScroll.bind(this);
       this.handleKeyDown = this.handleKeyDown.bind(this);
       this.handleFocusOut = this.handleFocusOut.bind(this);
 
@@ -187,12 +346,40 @@
       this.load();
     }
 
+    getText(key) {
+      const ui = this.options.ui || DEFAULT_UI;
+      return ui[this.state.language]?.[key] || ui.en?.[key] || "";
+    }
+
+    getLanguage() {
+      return this.state.language;
+    }
+
+    setLanguage(language) {
+      const nextLanguage = language === "ru" ? "ru" : "en";
+      if (nextLanguage === this.state.language) {
+        return;
+      }
+
+      this.state.language = nextLanguage;
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(LANG_STORAGE_KEY, nextLanguage);
+      }
+      this.renderShell();
+      this.updateModeUi();
+      this.updateFilterUi();
+      this.renderRows();
+      this.updateStatus();
+    }
+
     renderShell() {
-      const titleMarkup = this.options.pageTitle
-        ? `<h1 class="items-title">${escapeHtml(this.options.pageTitle)}</h1>`
+      const toolbarTitle = this.options.pageTitle || "";
+      const toolbarHint = this.options.pageHint || "";
+      const titleMarkup = toolbarTitle
+        ? `<h2 class="items-toolbar__title">${escapeHtml(toolbarTitle)}</h2>`
         : "";
-      const hintMarkup = this.options.pageHint
-        ? `<p class="items-hint">${escapeHtml(this.options.pageHint)}</p>`
+      const hintMarkup = toolbarHint
+        ? `<p class="items-hint">${escapeHtml(toolbarHint)}</p>`
         : "";
       const copyMarkup =
         titleMarkup || hintMarkup
@@ -205,29 +392,51 @@
           : "";
 
       this.root.innerHTML = `
+        <section class="items-hero" aria-labelledby="items-page-title">
+          <p class="items-hero__eyebrow">${escapeHtml(this.getText("eyebrow"))}</p>
+          <h1 class="items-title" id="items-page-title">${escapeHtml(this.getText("title"))}</h1>
+          <p class="items-hero__hint">${escapeHtml(this.getText("hint"))}</p>
+        </section>
         <section class="items-panel">
           <div class="items-toolbar">
             <div class="items-toolbar__main">
               ${copyMarkup}
-              <div class="items-status" data-items-status>Loading...</div>
+              <div class="items-status" data-items-status>${escapeHtml(this.getText("loading"))}</div>
             </div>
             <div class="items-toolbar__controls">
+              <div class="items-filter-group" role="group" aria-label="${escapeHtml(this.getText("rowFilterAria"))}">
+                <button class="items-filter-button items-filter-button--active" type="button" data-filter="all">
+                  ${escapeHtml(this.getText("all"))}
+                </button>
+                <button class="items-filter-button" type="button" data-filter="renamed">
+                  ${escapeHtml(this.getText("renamed"))}
+                </button>
+              </div>
               <label class="items-search">
                 <input
                   class="items-search__input"
                   type="search"
                   value="${escapeHtml(this.state.search)}"
-                  placeholder="Search name / original / rename"
+                  placeholder="${escapeHtml(this.getText("searchPlaceholder"))}"
                   data-search-input
                 />
               </label>
-              <div class="items-filter-group" role="group" aria-label="Row filter">
-                <button class="items-filter-button items-filter-button--active" type="button" data-filter="all">
-                  All
-                </button>
-                <button class="items-filter-button" type="button" data-filter="renamed">
-                  Renamed
-                </button>
+              <div class="items-mode-group" role="group" aria-label="${escapeHtml(this.getText("itemSourceAria"))}">
+                ${this.modeOrder
+                  .map(
+                    (mode) => `
+                      <button
+                        class="items-mode-button${
+                          mode === this.state.mode ? " items-mode-button--active" : ""
+                        }"
+                        type="button"
+                        data-mode="${escapeHtml(mode)}"
+                      >
+                        ${escapeHtml(this.datasets[mode].label)}
+                      </button>
+                    `
+                  )
+                  .join("")}
               </div>
             </div>
           </div>
@@ -242,16 +451,16 @@
               </colgroup>
               <thead>
                 <tr>
-                  <th>num</th>
-                  <th>id</th>
-                  <th>name</th>
-                  <th>original</th>
-                  <th>rename</th>
+                  <th>${escapeHtml(this.getText("num"))}</th>
+                  <th>${escapeHtml(this.getText("id"))}</th>
+                  <th>${escapeHtml(this.getText("name"))}</th>
+                  <th>${escapeHtml(this.getText("original"))}</th>
+                  <th>${escapeHtml(this.getText("rename"))}</th>
                 </tr>
               </thead>
               <tbody data-items-body>
                 <tr>
-                  <td colspan="5">Loading...</td>
+                  <td colspan="5">${escapeHtml(this.getText("loading"))}</td>
                 </tr>
               </tbody>
             </table>
@@ -268,6 +477,7 @@
     bindEvents() {
       this.root.addEventListener("click", this.handleClick);
       this.root.addEventListener("input", this.handleInput);
+      this.root.addEventListener("scroll", this.handleScroll, { passive: true, capture: true });
 
       if (!this.options.editable) {
         return;
@@ -279,18 +489,30 @@
     }
 
     async load() {
-      try {
-        const payload = await fetchJsonWithFallback(this.options.dataUrls, {
-          cache: "no-store"
-        });
-        this.state.rows = normalizeRows(payload);
-        this.updateFilterUi();
-        this.renderRows();
-        this.updateStatus();
-      } catch (error) {
-        this.bodyNode.innerHTML = `<tr><td colspan="5">${escapeHtml(error.message)}</td></tr>`;
-        this.setStatus("Load failed", "error");
-      }
+      const results = await Promise.allSettled(
+        this.modeOrder.map(async (mode) => {
+          const payload = await fetchJsonWithFallback(this.datasets[mode].dataUrls);
+          return [mode, normalizeRows(payload)];
+        })
+      );
+
+      const loadErrors = {};
+      results.forEach((result, index) => {
+        const mode = this.modeOrder[index];
+        if (result.status === "fulfilled") {
+          this.state.rowsByMode[mode] = result.value[1];
+          return;
+        }
+
+        this.state.rowsByMode[mode] = [];
+        loadErrors[mode] = result.reason?.message || "Load failed";
+      });
+
+      this.state.loadErrors = loadErrors;
+      this.updateModeUi();
+      this.updateFilterUi();
+      this.renderRows();
+      this.updateStatus();
     }
 
     setStatus(message, tone) {
@@ -302,53 +524,89 @@
       this.statusNode.dataset.tone = tone || "neutral";
     }
 
-    renderRows() {
-      const renderToken = this.state.renderToken + 1;
-      this.state.renderToken = renderToken;
+    getCurrentDataset() {
+      return this.datasets[this.state.mode] || this.datasets.gacha || null;
+    }
+
+    getCurrentRows() {
+      return this.state.rowsByMode[this.state.mode] || [];
+    }
+
+    getCurrentLoadError() {
+      return this.state.loadErrors[this.state.mode] || "";
+    }
+
+    renderRows(options) {
+      const resetScroll = options?.resetScroll !== false;
+      this.state.renderToken += 1;
+      const loadError = this.getCurrentLoadError();
+
+      if (loadError) {
+        this.virtualRows = [];
+        this.virtualStart = -1;
+        this.bodyNode.innerHTML = `<tr><td colspan="5">${escapeHtml(loadError)}</td></tr>`;
+        return;
+      }
+
       const visibleRows = this.getVisibleRows();
+      this.virtualRows = visibleRows;
+      this.virtualStart = -1;
 
       if (!visibleRows.length) {
-        this.bodyNode.innerHTML = `<tr><td colspan="5">No rows for current filter.</td></tr>`;
+        this.bodyNode.innerHTML = `<tr><td colspan="5">${escapeHtml(this.getText("noRows"))}</td></tr>`;
         return;
       }
 
-      if (visibleRows.length <= 800) {
-        this.bodyNode.innerHTML = visibleRows.map((row) => this.renderRowMarkup(row)).join("");
+      const wrap = this.getTableWrap();
+      if (resetScroll && wrap) {
+        wrap.scrollTop = 0;
+      }
+      this.renderVirtualWindow(true);
+    }
+
+    renderVirtualWindow(force) {
+      const rows = this.virtualRows || [];
+      const wrap = this.getTableWrap();
+      if (!this.bodyNode || !wrap || !rows.length) {
         return;
       }
 
-      this.bodyNode.innerHTML = "";
-      const chunkSize = 320;
-      let index = 0;
+      const total = rows.length;
+      const maxStart = Math.max(0, total - VIRTUAL_WINDOW_SIZE);
+      const firstVisibleIndex = Math.max(0, Math.floor(wrap.scrollTop / VIRTUAL_ROW_HEIGHT));
+      let start = this.virtualStart;
 
-      const renderChunk = () => {
-        if (this.state.renderToken !== renderToken) {
-          return;
-        }
+      const outsideBufferedWindow =
+        start < 0 ||
+        firstVisibleIndex < start + VIRTUAL_BUFFER_ROWS ||
+        firstVisibleIndex >= start + VIRTUAL_WINDOW_SIZE - VIRTUAL_BUFFER_ROWS;
 
-        const chunk = visibleRows.slice(index, index + chunkSize);
-        if (!chunk.length) {
-          return;
-        }
+      if (force || outsideBufferedWindow) {
+        start = Math.min(maxStart, Math.max(0, firstVisibleIndex - VIRTUAL_BUFFER_ROWS));
+      }
 
-        this.bodyNode.insertAdjacentHTML(
-          "beforeend",
-          chunk.map((row) => this.renderRowMarkup(row)).join("")
-        );
-        index += chunkSize;
+      if (!force && start === this.virtualStart) {
+        return;
+      }
 
-        if (index < visibleRows.length) {
-          window.requestAnimationFrame(renderChunk);
-        }
-      };
+      const end = Math.min(total, start + VIRTUAL_WINDOW_SIZE);
+      const topHeight = start * VIRTUAL_ROW_HEIGHT;
+      const bottomHeight = Math.max(0, (total - end) * VIRTUAL_ROW_HEIGHT);
+      const spacer = (height, position) => height > 0
+        ? `<tr class="items-virtual-spacer items-virtual-spacer--${position}" aria-hidden="true"><td colspan="5" style="height:${height}px"></td></tr>`
+        : "";
 
-      window.requestAnimationFrame(renderChunk);
+      this.virtualStart = start;
+      this.bodyNode.innerHTML =
+        spacer(topHeight, "top") +
+        rows.slice(start, end).map((row) => this.renderRowMarkup(row)).join("") +
+        spacer(bottomHeight, "bottom");
     }
 
     getVisibleRows() {
       const searchNeedle = this.state.search.trim().toLocaleLowerCase();
 
-      return this.state.rows.filter((row) => {
+      return this.getCurrentRows().filter((row) => {
         if (this.state.filter === "renamed" && !row.rename.trim()) {
           return false;
         }
@@ -370,39 +628,59 @@
       });
     }
 
+    updateModeUi() {
+      this.root.querySelectorAll("[data-mode]").forEach((button) => {
+        button.classList.toggle(
+          "items-mode-button--active",
+          button.dataset.mode === this.state.mode
+        );
+      });
+    }
+
     updateStatus() {
-      const visibleCount = this.getVisibleRows().length;
-      const totalCount = this.state.rows.length;
+      const loadError = this.getCurrentLoadError();
+      if (loadError) {
+        this.setStatus(loadError, "error");
+        return;
+      }
+
+      const visibleCount = this.virtualRows.length;
+      const totalCount = this.getCurrentRows().length;
       const hasSearch = Boolean(this.state.search.trim());
+      const locale = this.state.language === "ru" ? "ru-RU" : "en-US";
+      const visibleLabel = visibleCount.toLocaleString(locale);
+      const totalLabel = totalCount.toLocaleString(locale);
+      const renamedLabel = this.getText("renamed").toLocaleLowerCase(locale);
 
       if (this.state.filter === "renamed" && hasSearch) {
         this.setStatus(
-          `${visibleCount.toLocaleString()} matches / ${totalCount.toLocaleString()} rows`
+          `${visibleLabel} ${this.getText("matches")} / ${totalLabel} ${this.getText("rows")}`
         );
         return;
       }
 
       if (this.state.filter === "renamed") {
         this.setStatus(
-          `${visibleCount.toLocaleString()} renamed / ${totalCount.toLocaleString()} rows`
+          `${visibleLabel} ${renamedLabel} / ${totalLabel} ${this.getText("rows")}`
         );
         return;
       }
 
       if (hasSearch) {
         this.setStatus(
-          `${visibleCount.toLocaleString()} matches / ${totalCount.toLocaleString()} rows`
+          `${visibleLabel} ${this.getText("matches")} / ${totalLabel} ${this.getText("rows")}`
         );
         return;
       }
 
-      this.setStatus(`${totalCount.toLocaleString()} rows`);
+      this.setStatus(`${totalLabel} ${this.getText("rows")}`);
     }
 
     renderRowMarkup(row) {
       const rename = row.rename.trim();
       const renameText = rename || this.options.emptyRenameLabel;
       const renameClasses = ["items-table__rename"];
+      const searchQuery = this.state.search;
 
       if (rename) {
         renameClasses.push("items-table__rename--filled");
@@ -416,32 +694,32 @@
         <tr data-row-key="${escapeHtml(row.key)}" ${
           rename ? 'class="items-table__row items-table__row--renamed"' : 'class="items-table__row"'
         }>
-          <td>${escapeHtml(row.num)}</td>
+          <td title="${escapeHtml(row.num)}">${buildHighlightedHtml(row.num, searchQuery)}</td>
           <td>
             <button
               class="items-id-button"
               type="button"
               data-copy-id="${escapeHtml(row.id)}"
-              title="Click to copy id"
+              title="${escapeHtml(this.getText("copyIdTitle"))}"
             >
-              <code>${escapeHtml(row.id)}</code>
+              <code>${buildHighlightedHtml(row.id, searchQuery)}</code>
             </button>
           </td>
-          <td>${escapeHtml(row.name)}</td>
-          <td>${escapeHtml(row.original)}</td>
+          <td title="${escapeHtml(row.name)}">${buildHighlightedHtml(row.name, searchQuery)}</td>
+          <td title="${escapeHtml(row.original)}">${buildHighlightedHtml(row.original, searchQuery)}</td>
           <td
             class="${renameClasses.join(" ")}"
             data-rename-cell="${escapeHtml(row.key)}"
-            ${this.options.editable ? 'title="Double click to edit"' : ""}
+            title="${escapeHtml(this.options.editable ? this.getText("editTitle") : renameText)}"
           >
-            ${renameText ? escapeHtml(renameText) : ""}
+            ${renameText ? buildHighlightedHtml(renameText, searchQuery) : ""}
           </td>
         </tr>
       `;
     }
 
     findRow(key) {
-      return this.state.rows.find((row) => row.key === key) || null;
+      return this.getCurrentRows().find((row) => row.key === key) || null;
     }
 
     findRenameCell(key) {
@@ -484,11 +762,34 @@
     }
 
     async handleClick(event) {
+      const modeButton = event.target.closest("[data-mode]");
+      if (modeButton && this.root.contains(modeButton)) {
+        if (this.state.editingKey && !this.state.isSaving) {
+          await this.commitEditing();
+        }
+
+        const nextMode = normalizeModeValue(modeButton.dataset.mode);
+        if (nextMode === this.state.mode) {
+          return;
+        }
+
+        this.state.mode = nextMode;
+        this.updateModeUi();
+        this.setStatus(this.getText("rendering"));
+        this.renderRows();
+        this.updateStatus();
+        return;
+      }
+
       const filterButton = event.target.closest("[data-filter]");
       if (filterButton && this.root.contains(filterButton)) {
+        if (this.state.editingKey && !this.state.isSaving) {
+          await this.commitEditing();
+        }
+
         this.state.filter = filterButton.dataset.filter === "renamed" ? "renamed" : "all";
         this.updateFilterUi();
-        this.setStatus("Rendering...");
+        this.setStatus(this.getText("rendering"));
         this.renderRows();
         this.updateStatus();
         return;
@@ -506,9 +807,9 @@
 
       try {
         await copyTextToClipboard(id);
-        this.showCursorToast(event.clientX, event.clientY, `Copied: ${id}`);
+        this.showCursorToast(event.clientX, event.clientY, `${this.getText("copied")}: ${id}`);
       } catch (error) {
-        this.showCursorToast(event.clientX, event.clientY, "Copy failed", "error");
+        this.showCursorToast(event.clientX, event.clientY, this.getText("copyFailed"), "error");
       }
     }
 
@@ -516,10 +817,22 @@
       const searchInput = event.target.closest("[data-search-input]");
       if (searchInput && this.root.contains(searchInput)) {
         this.state.search = searchInput.value || "";
-        this.setStatus("Rendering...");
+        this.setStatus(this.getText("rendering"));
         this.renderRows();
         this.updateStatus();
       }
+    }
+
+    handleScroll(event) {
+      const wrap = event.target;
+      if (!wrap?.classList?.contains("items-table-wrap") || this.virtualScrollFrame) {
+        return;
+      }
+
+      this.virtualScrollFrame = window.requestAnimationFrame(() => {
+        this.virtualScrollFrame = 0;
+        this.renderVirtualWindow(false);
+      });
     }
 
     showCursorToast(clientX, clientY, message, tone) {
@@ -692,14 +1005,17 @@
           },
           body: JSON.stringify({
             key,
-            rename: nextRename
+            rename: nextRename,
+            mode: this.getCurrentDataset()?.saveMode || this.state.mode
           })
         });
 
         const row = this.findRow(key);
         if (row) {
           row.rename = String(payload?.item?.rename || "");
-          row.searchText = [row.name, row.original, row.rename].join("\n").toLocaleLowerCase();
+          row.searchText = [row.num, row.id, row.name, row.original, row.rename]
+            .join("\n")
+            .toLocaleLowerCase();
         }
 
         this.state.editingKey = null;
@@ -708,7 +1024,7 @@
         if (shouldRerenderList) {
           this.state.renderToken += 1;
           this.preserveTableScroll(() => {
-            this.renderRows();
+            this.renderRows({ resetScroll: false });
           });
         } else {
           this.syncRowState(key);
@@ -746,12 +1062,12 @@
 
       if (this.options.editable) {
         cell.classList.add("items-table__rename--editable");
-        cell.title = "Double click to edit";
+        cell.title = this.getText("editTitle");
       } else {
         cell.removeAttribute("title");
       }
 
-      cell.innerHTML = renameText ? escapeHtml(renameText) : "";
+      cell.innerHTML = renameText ? buildHighlightedHtml(renameText, this.state.search) : "";
     }
   }
 

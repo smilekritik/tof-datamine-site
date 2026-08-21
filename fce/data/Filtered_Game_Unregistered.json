@@ -1,0 +1,22 @@
+{
+    "Boss_hum_006_1_des": "Robarg loses no more than 3.5% Max HP per second.",
+    "Buff_boss_006_02_NeuralToxin_des": "Stuns for 15s upon reaching 15 Neural Toxin stacks. Collect randomly spawned antidotes to remove all stacks.",
+    "Buff_boss_006_02_Stun_des": "Stuns for 15s.",
+    "Boss_hum_006_2_des": "Robarg applies 1 stack of Neural Toxin on targets hit. Reaching 15 stacks Stuns the target for 15s. Neural Toxin stacks can be cleansed by picking up randomly dropped antidotes.",
+    "Boss_hum_006_3_des": "Increases Robarg's movement speed.",
+    "Boss_hum_006_4_des": "Robarg becomes Invincible every time he loses 25% Max HP and generates 3 purple areas nearby. His Invincibility breaks when players stand in all 3 areas simultaneously.",
+    "Breakfate_Boss_03_desc": "The Hyenas invented a simple yet fairly powerful Mecha a with the limited resources they had on hand. The cannons on its shoulders are capable of suppressive fire and bombardment at the same time. And the cooling devices on its arms emit steam that can be used to attack enemies during combat.",
+    "Boss_hum_018_1_des": "Habaka's movement speed is increased.",
+    "Boss_hum_018_2_des": "Spreads Corrosion, reducing damage dealt by nearby targets.",
+    "Boss_hum_018_3_des": "Gains temporary damage reduction for 5s when attacked. Cooldown: 15s.",
+    "Boss_hum_018_4_des": "Gains one stack of Vigor with each hit. At 10 stacks, the next attack deals massive bonus damage.",
+    "Boss_hum_059_1_des": "Deals Corrosion Damage with attacks.",
+    "Boss_hum_059_2_des": "Restores Max HP over 5s.",
+    "Boss_hum_059_3_des": "Grants a shield at the start that breaks after 200 hits.",
+    "Boss_hum_059_4_des": "Deals huge damage based on HP percentage to nearby targets.",
+    "Buff_boss_066_Player_Shield_-1_1_des": "Energy shield obtained after absorbing dissipated energy orbs. For a short time, immune to damage when taking damage.",
+    "boss_hum_079_2_des": "Increases the Defender's speed for all actions.",
+    "boss_hum_079_3_des": "Launches multiple missiles on the surrounding area periodically, dealing lethal damage.",
+    "boss_hum_079_4_des": "Deploys a Radiation Bomb periodically that detonates after a 5-second delay, releasing radiation across a wide area and dealing lethal damage. Can be disarmed after hit multiple times.",
+    "boss_hum_079_5_des": "Creates an invincible copy of itself, with all the Defender's Abilities, when its HP reaches 80%."
+}

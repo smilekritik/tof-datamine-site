@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <radialGradient id="bgGlowElite" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c79dff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#120c1e" stop-opacity="0.95"/>
+    </radialGradient>
+    <linearGradient id="borderGradElite" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c79dff"/>
+      <stop offset="100%" stop-color="#54248a"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="18" fill="url(#bgGlowElite)"/>
+  <rect x="1" y="1" width="118" height="118" rx="17" fill="none" stroke="url(#borderGradElite)" stroke-width="1.5"/>
+  <g transform="translate(60, 52) scale(1.3)" text-anchor="middle">
+    <!-- Diamond Elite Crest -->
+    <path d="M0 -22 L18 0 L0 22 L-18 0 Z" fill="none" stroke="#d4b5ff" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M0 -12 L10 0 L0 12 L-10 0 Z" fill="rgba(199,157,255,0.25)" stroke="#c79dff" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="3" fill="#ffffff"/>
+  </g>
+  <text x="60" y="104" text-anchor="middle" fill="#d4b5ff" font-family="Manrope, sans-serif" font-weight="800" font-size="11" letter-spacing="2">ELITE</text>
+</svg>

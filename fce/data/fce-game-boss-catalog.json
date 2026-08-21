@@ -1,0 +1,338 @@
+{
+  "source": "Hotta/Content/ResourcesOverSea/CoreBlueprints/DataTable/Dungeon/VoidCloneBossConfigDataTable_Overseas.json",
+  "bosses": [
+    {
+      "order": 1,
+      "configId": "void_boss_1",
+      "bossId": "Boss_hum_001",
+      "bossNum": 1,
+      "sourceName": "异化弗兰肯",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss005.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss005.png"
+    },
+    {
+      "order": 2,
+      "configId": "void_boss_2",
+      "bossId": "Boss_hum_006",
+      "bossNum": 6,
+      "sourceName": "罗贝拉格",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss001.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss001.png"
+    },
+    {
+      "order": 3,
+      "configId": "void_boss_3",
+      "bossId": "Boss_hum_007",
+      "bossNum": 7,
+      "sourceName": "鬣狗帮机甲",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss002.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss002.png"
+    },
+    {
+      "order": 4,
+      "configId": "void_boss_4",
+      "bossId": "Boss_hum_008",
+      "bossNum": 8,
+      "sourceName": "伏尔甘",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss006.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss006.png"
+    },
+    {
+      "order": 5,
+      "configId": "void_boss_5",
+      "bossId": "Boss_hum_009",
+      "bossNum": 9,
+      "sourceName": "人马座喀戎",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss004.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss004.png"
+    },
+    {
+      "order": 6,
+      "configId": "void_boss_7",
+      "bossId": "Boss_hum_017",
+      "bossNum": 17,
+      "sourceName": "急冻机甲",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss008.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss008.png"
+    },
+    {
+      "order": 7,
+      "configId": "void_boss_8",
+      "bossId": "Boss_hum_019",
+      "bossNum": 19,
+      "sourceName": "弗丽嘉",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss012.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss012.png"
+    },
+    {
+      "order": 8,
+      "configId": "void_boss_10",
+      "bossId": "Boss_hum_022",
+      "bossNum": 22,
+      "sourceName": "伊希斯",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss010.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss010.png"
+    },
+    {
+      "order": 9,
+      "configId": "void_boss_11",
+      "bossId": "Boss_hum_026",
+      "bossNum": 26,
+      "sourceName": "希尔",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss009.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss009.png"
+    },
+    {
+      "order": 10,
+      "configId": "void_boss_12",
+      "bossId": "Boss_hum_002",
+      "bossNum": 2,
+      "sourceName": "米诺陶",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss003.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss003.png"
+    },
+    {
+      "order": 11,
+      "configId": "void_boss_13",
+      "bossId": "Boss_hum_012",
+      "bossNum": 12,
+      "sourceName": "歌者傀儡",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_05.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_05.png"
+    },
+    {
+      "order": 12,
+      "configId": "void_boss_14",
+      "bossId": "boss_hum_057_quest",
+      "bossNum": 57,
+      "sourceName": "暝伥·朱厌",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_10.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_10.png"
+    },
+    {
+      "order": 13,
+      "configId": "SY_boss_LDR_LV1",
+      "bossId": "Boss_hum_030",
+      "bossNum": 30,
+      "sourceName": "伦迪尔",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_01.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_01.png"
+    },
+    {
+      "order": 14,
+      "configId": "SY_boss_GY_LV2",
+      "bossId": "boss_hum_042",
+      "bossNum": 42,
+      "sourceName": "阿比斯-盖亚",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_02.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_02.png"
+    },
+    {
+      "order": 15,
+      "configId": "SY_boss_BBLS_LV3",
+      "bossId": "Boss_hum_025",
+      "bossNum": 25,
+      "sourceName": "巴巴罗萨",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_03.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_03.png"
+    },
+    {
+      "order": 16,
+      "configId": "SY_boss_BZZ_LV4",
+      "bossId": "Boss_hum_072",
+      "bossNum": 72,
+      "sourceName": "编织者",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_04.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_04.png"
+    },
+    {
+      "order": 17,
+      "configId": "SY_boss_GZ_LV5",
+      "bossId": "Boss_hum_012",
+      "bossNum": 12,
+      "sourceName": "歌者傀儡",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_05.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_05.png"
+    },
+    {
+      "order": 18,
+      "configId": "SY_boss_SLZ",
+      "bossId": "Boss_hum_038",
+      "bossNum": 38,
+      "sourceName": "撕裂者G-042",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_07.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_07.png"
+    },
+    {
+      "order": 19,
+      "configId": "SY_boss_SLF",
+      "bossId": "Boss_hum_010",
+      "bossNum": 10,
+      "sourceName": "塞拉芙",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_06.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_06.png"
+    },
+    {
+      "order": 20,
+      "configId": "SY_boss_RM",
+      "bossId": "Boss_hum_009",
+      "bossNum": 9,
+      "sourceName": "人马座喀戎",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss004.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss004.png"
+    },
+    {
+      "order": 21,
+      "configId": "SY_boss_RM_01",
+      "bossId": "Boss_hum_009",
+      "bossNum": 9,
+      "sourceName": "人马座喀戎",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss004.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss004.png"
+    },
+    {
+      "order": 22,
+      "configId": "SY_boss_Gz_01",
+      "bossId": "Boss_hum_012",
+      "bossNum": 12,
+      "sourceName": "歌者傀儡",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_05.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_05.png"
+    },
+    {
+      "order": 23,
+      "configId": "SY_boss_GY_01",
+      "bossId": "boss_hum_042",
+      "bossNum": 42,
+      "sourceName": "阿比斯-盖亚",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_02.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_02.png"
+    },
+    {
+      "order": 24,
+      "configId": "SY_boss_LDR_01",
+      "bossId": "Boss_hum_030",
+      "bossNum": 30,
+      "sourceName": "伦迪尔",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_01.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_01.png"
+    },
+    {
+      "order": 25,
+      "configId": "SY_boss_FLK_01",
+      "bossId": "Boss_hum_001",
+      "bossNum": 1,
+      "sourceName": "异化弗兰肯",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss005.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss005.png"
+    },
+    {
+      "order": 26,
+      "configId": "SY_boss_SLZ_01",
+      "bossId": "Boss_hum_038",
+      "bossNum": 38,
+      "sourceName": "撕裂者G-042",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_07.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_07.png"
+    },
+    {
+      "order": 27,
+      "configId": "SY_boss_ABFS",
+      "bossId": "Boss_hum_014",
+      "bossNum": 14,
+      "sourceName": "阿波菲斯",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss015.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss015.png"
+    },
+    {
+      "order": 28,
+      "configId": "SY_boss_HLJJ",
+      "bossId": "Boss_hum_046",
+      "bossNum": 46,
+      "sourceName": "混乱机甲",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_08.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_08.png"
+    },
+    {
+      "order": 29,
+      "configId": "SY_boss_YMJD",
+      "bossId": "boss_hum_047_SY",
+      "bossNum": 47,
+      "sourceName": "耶梦加得",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_09.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_09.png"
+    },
+    {
+      "order": 30,
+      "configId": "SY_boss_XR_01",
+      "bossId": "BB91C1AE4398DE8458D238B03813381A",
+      "bossNum": null,
+      "sourceName": "希尔",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss009.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss009.png"
+    },
+    {
+      "order": 31,
+      "configId": "SY_boss_XR_WH_01",
+      "bossId": "boss_hum_037_stage1",
+      "bossNum": 37,
+      "sourceName": "晦暝·铁俑",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_11.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_11.png"
+    },
+    {
+      "order": 32,
+      "configId": "SY_boss_XR_ZY_01",
+      "bossId": "boss_hum_057_quest",
+      "bossNum": 57,
+      "sourceName": "暝伥·朱厌",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_10.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_10.png"
+    },
+    {
+      "order": 33,
+      "configId": "SY_boss_XR_WH_02",
+      "bossId": "boss_hum_037_stage1",
+      "bossNum": 37,
+      "sourceName": "晦暝·铁俑",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_11.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_11.png"
+    },
+    {
+      "order": 34,
+      "configId": "SY_boss_XR_ZY_02",
+      "bossId": "boss_hum_057_quest",
+      "bossNum": 57,
+      "sourceName": "暝伥·朱厌",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_10.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_10.png"
+    },
+    {
+      "order": 35,
+      "configId": "SY_boss_tt_01",
+      "bossId": "boss_hum_055",
+      "bossNum": 55,
+      "sourceName": "晦暝·饕餮",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss024.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss024.png"
+    },
+    {
+      "order": 36,
+      "configId": "SY_boss_tt_02",
+      "bossId": "boss_hum_055",
+      "bossNum": 55,
+      "sourceName": "晦暝·饕餮",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss024.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss024.png"
+    },
+    {
+      "order": 37,
+      "configId": "SY_boss_XT",
+      "bossId": "boss_hum_064",
+      "bossNum": 64,
+      "sourceName": "晦暝·刑天",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss025.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss025.png"
+    }
+  ]
+}
