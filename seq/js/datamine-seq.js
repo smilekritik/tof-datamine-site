@@ -4,6 +4,7 @@
   const STAGE_LIMIT_FILE = "./data/seq-stage-limit.txt";
   const MECHANICS_FILE = "./data/seq-mechanics-overrides.json";
   const LANG_STORAGE_KEY = "tof-datamine-language";
+  const CHART_THEME_STORAGE_KEY = "tof-datamine-seq-chart-theme";
   const UI_TEXT = {
     en: {
       pageTitle: "TOF Sequential Damage Charts",
@@ -37,7 +38,10 @@
       zoomEyebrow: "Chart zoom",
       zoomHint: "Click a chart to open zoom. In zoom view, use the mouse wheel to scale and drag to pan.",
       zoomAria: "Chart zoom",
-      close: "Close"
+      close: "Close",
+      chartPalette: "Chart palette",
+      paletteLight: "Light",
+      paletteDark: "Dark"
     },
     ru: {
       pageTitle: "TOF — графики Последовательности",
@@ -71,7 +75,10 @@
       zoomEyebrow: "Масштабирование графика",
       zoomHint: "Нажмите на график, чтобы открыть его крупнее. Используйте колесо мыши для масштаба и перетаскивание для перемещения.",
       zoomAria: "Увеличенный график",
-      close: "Закрыть"
+      close: "Закрыть",
+      chartPalette: "Палитра графика",
+      paletteLight: "Светлая",
+      paletteDark: "Тёмная"
     }
   };
 
@@ -138,7 +145,9 @@
     stageLimit: 0,
     mechanicsOverrides: DEFAULT_MECHANICS_OVERRIDES,
     chartExports: {},
+    chartGeometry: {},
     language: resolveInitialLanguage(),
+    chartTheme: resolveInitialChartTheme(),
     zoom: {
       chartKey: "",
       title: "",
@@ -158,6 +167,8 @@
   };
 
   const numberFormatter = new Intl.NumberFormat("en-US");
+  // Original chart geometry (kept intact so the look matches the source design).
+  // The SVG is responsive via CSS (width:100%); these are viewBox units.
   const CHART_DIMENSIONS = {
     width: 1800,
     height: 760
@@ -174,11 +185,51 @@
     hitboxRadius: 18,
     edgeInset: 34
   };
+  // Palette surfaces. Light mirrors the original white design exactly; dark is the
+  // added night palette for the Chart-palette toggle. Only surface colors change —
+  // accent (line/point/label) colors stay the original bright hues in both.
+  const CHART_THEMES = {
+    light: {
+      plotBg: "#ffffff",
+      frameBg: "linear-gradient(180deg, rgba(247,249,253,1), rgba(255,255,255,1)), #ffffff",
+      grid: "#e6e6e6",
+      gridMajor: "#cccccc",
+      baseline: "#333333",
+      tickMark: "#eeeeee",
+      axis: "#555555",
+      title: "#1f2937",
+      halo: "#ffffff",
+      pointStroke: "#ffffff",
+      guide: "rgba(120,120,120,.5)"
+    },
+    dark: {
+      plotBg: "#0f0b15",
+      frameBg: "#0f0b15",
+      grid: "rgba(255,255,255,.06)",
+      gridMajor: "rgba(255,255,255,.12)",
+      baseline: "rgba(255,255,255,.28)",
+      tickMark: "rgba(255,255,255,.12)",
+      axis: "#9a91ad",
+      title: "#f6f1fb",
+      halo: "#0f0b15",
+      pointStroke: "#0f0b15",
+      guide: "rgba(245,217,122,.5)"
+    }
+  };
+  // Original bright accent per chart, used in both palettes (deep red for negatives).
+  const CHART_ACCENTS = {
+    pure: { dark: "#f5d97a", light: "#f5d97a" },
+    effective: { dark: "#b57bff", light: "#b57bff" },
+    powercreep: { dark: "#ff9bb2", light: "#ff9bb2" },
+    negative: { dark: "#ff8f8f", light: "#a94442" }
+  };
 
   window.addEventListener("DOMContentLoaded", () => {
     window.DatamineHeader?.setLanguage(state.language, false);
     window.addEventListener("datamine:language-change", handleLanguageChange);
+    applyChartThemeAttribute();
     renderStaticUi();
+    renderChartThemeControl();
     bindActions();
     bindChartFrames();
     bindZoomInteractions();
@@ -221,6 +272,50 @@
     return UI_TEXT[state.language]?.[key] || UI_TEXT.en[key] || "";
   }
 
+  function resolveInitialChartTheme() {
+    const fromSearch = new URLSearchParams(window.location.search).get("chartTheme");
+    if (fromSearch === "dark" || fromSearch === "light") {
+      return fromSearch;
+    }
+    const stored = localStorage.getItem(CHART_THEME_STORAGE_KEY);
+    return stored === "dark" ? "dark" : "light";
+  }
+
+  function getChartTheme() {
+    return CHART_THEMES[state.chartTheme] || CHART_THEMES.light;
+  }
+
+  function resolveChartColor(accent, negative) {
+    const key = negative ? "negative" : null;
+    const entry = key ? CHART_ACCENTS[key] : accent;
+    return entry ? entry[state.chartTheme] || entry.light : "#888888";
+  }
+
+  function setChartTheme(theme) {
+    const normalized = theme === "dark" ? "dark" : "light";
+    if (normalized === state.chartTheme) return;
+    state.chartTheme = normalized;
+    try {
+      localStorage.setItem(CHART_THEME_STORAGE_KEY, normalized);
+    } catch (error) {
+      /* storage unavailable — keep in-memory only */
+    }
+    applyChartThemeAttribute();
+    renderChartThemeControl();
+    renderCharts();
+  }
+
+  function applyChartThemeAttribute() {
+    document.body.setAttribute("data-chart-theme", state.chartTheme);
+  }
+
+  function renderChartThemeControl() {
+    document.querySelectorAll("[data-chart-theme-switch] [data-chart-theme]").forEach((button) => {
+      const active = button.getAttribute("data-chart-theme") === state.chartTheme;
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+
   function getMechanicsNote(entry) {
     if (!entry?.isMechanicsAdjusted) {
       return "";
@@ -233,6 +328,11 @@
       button.addEventListener("click", async () => {
         const action = button.getAttribute("data-action");
         const chartKey = button.getAttribute("data-chart-key");
+
+        if (action === "set-chart-theme") {
+          setChartTheme(button.getAttribute("data-chart-theme"));
+          return;
+        }
 
         if (action === "reload") {
           await loadAndRender();
@@ -653,7 +753,7 @@
         title: getUiText("chartPure"),
         width: CHART_DIMENSIONS.width,
         height: CHART_DIMENSIONS.height,
-        color: "#f5d97a",
+        accent: CHART_ACCENTS.pure,
         mode: "linear",
         forceZero: true,
         tickFormatter: (value) => formatAxisCompact(value),
@@ -669,7 +769,7 @@
         title: getUiText("chartPowercreep"),
         width: CHART_DIMENSIONS.width,
         height: CHART_DIMENSIONS.height,
-        color: "#ff9bb2",
+        accent: CHART_ACCENTS.powercreep,
         mode: "linear",
         forceZero: false,
         tickFormatter: (value) => `${value.toFixed(0)}%`,
@@ -685,7 +785,7 @@
         title: getUiText("chartEffective"),
         width: CHART_DIMENSIONS.width,
         height: CHART_DIMENSIONS.height,
-        color: "#b57bff",
+        accent: CHART_ACCENTS.effective,
         mode: "linear",
         forceZero: true,
         tickFormatter: (value) => formatAxisCompact(value),
@@ -705,26 +805,31 @@
         return;
       }
 
-      const svgMarkup = buildLineChartSvg(chartConfig);
+      const { inner, geometry } = buildLineChartSvg(chartConfig);
+      const svgMarkup = wrapChartSvg(inner, chartConfig.width, chartConfig.height, chartConfig.title);
       root.innerHTML = svgMarkup;
-      bindPointTooltips(root, false);
+      state.chartGeometry[key] = geometry;
       state.chartExports[key] = {
         title: chartConfig.title,
+        inner,
         svgMarkup,
         width: chartConfig.width,
         height: chartConfig.height
       };
+      bindCrosshair(root, key);
     });
   }
 
+  // Builds the line chart in the original visual style (kept faithful to the source
+  // design: in-chart title, every stage on the x-axis, large ringed points, no area
+  // fill, proportional labels). Only the palette colors switch with the theme, plus
+  // an added crosshair guide. Returns { inner, geometry } for inline/zoom/export.
   function buildLineChartSvg(config) {
-    const { width, height, color, values, mode, title, forceZero, tickFormatter } = config;
-    const margin = {
-      top: 76,
-      right: 86,
-      bottom: 92,
-      left: 104
-    };
+    const { width, height, values, mode, forceZero, tickFormatter, title } = config;
+    const theme = getChartTheme();
+    const accent = config.accent || CHART_ACCENTS.pure;
+    const lineColor = accent[state.chartTheme] || accent.light;
+    const margin = { top: 76, right: 86, bottom: 92, left: 104 };
 
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
@@ -734,104 +839,100 @@
     const yScale =
       mode === "log"
         ? createLogScale(values.map((item) => item.value), chartHeight, margin.top)
-        : createLinearScale(
-            values.map((item) => item.value),
-            chartHeight,
-            margin.top,
-            {
-              forceZero,
-              tickFormatter
-            }
-          );
+        : createLinearScale(values.map((item) => item.value), chartHeight, margin.top, { forceZero, tickFormatter });
     const axisBottom = margin.top + chartHeight;
 
-    const pathData = values
-      .map((item, index) => {
-        const prefix = index === 0 ? "M" : "L";
-        return `${prefix}${xAt(index).toFixed(2)} ${yScale.toY(item.value).toFixed(2)}`;
-      })
-      .join("");
+    const coords = values.map((item, index) => ({
+      index,
+      x: +xAt(index).toFixed(2),
+      y: +yScale.toY(item.value).toFixed(2),
+      stage: item.stage,
+      value: item.value,
+      label: item.label,
+      tooltip: item.tooltip,
+      isMechanicsAdjusted: item.isMechanicsAdjusted
+    }));
+
+    const pathData = coords.map((p, i) => `${i === 0 ? "M" : "L"}${p.x} ${p.y}`).join(" ");
 
     const yGrid = yScale.ticks
       .map((tick) => {
         const y = yScale.toY(tick.value);
         return `
-          <line x1="${margin.left}" y1="${y.toFixed(2)}" x2="${(width - margin.right).toFixed(2)}" y2="${y.toFixed(2)}" stroke="${tick.major ? "#cccccc" : "#e6e6e6"}" stroke-width="1" />
-          <text x="${margin.left - 18}" y="${(y + 5).toFixed(2)}" text-anchor="end" font-size="${CHART_TEXT.axisTick}" fill="#555555">${escapeHtml(tick.label)}</text>
+          <line x1="${margin.left}" y1="${y.toFixed(2)}" x2="${(width - margin.right).toFixed(2)}" y2="${y.toFixed(2)}" stroke="${tick.major ? theme.gridMajor : theme.grid}" stroke-width="1" />
+          <text x="${margin.left - 18}" y="${(y + 5).toFixed(2)}" text-anchor="end" font-size="${CHART_TEXT.axisTick}" fill="${theme.axis}">${escapeHtml(tick.label)}</text>
         `;
       })
       .join("");
 
-    const xAxisLabels = values
-      .map((item, index) => {
-        const x = xAt(index);
+    // Every stage is labelled on the x-axis, exactly like the original chart.
+    const xAxisLabels = coords
+      .map((p) => {
         const y = axisBottom + 26;
         return `
-          <line x1="${x.toFixed(2)}" y1="${axisBottom}" x2="${x.toFixed(2)}" y2="${(axisBottom + 6).toFixed(2)}" stroke="#eeeeee" stroke-width="1" />
-          <text x="${x.toFixed(2)}" y="${y.toFixed(2)}" text-anchor="middle" font-size="${CHART_TEXT.axisTick - 2}" fill="#555555">
-            ${item.stage}${item.isMechanicsAdjusted ? "*" : ""}
-            <title>${escapeHtml(item.tooltip)}</title>
-          </text>
+          <line x1="${p.x}" y1="${axisBottom}" x2="${p.x}" y2="${(axisBottom + 6).toFixed(2)}" stroke="${theme.tickMark}" stroke-width="1" />
+          <text x="${p.x}" y="${y.toFixed(2)}" text-anchor="middle" font-size="${CHART_TEXT.axisTick - 2}" fill="${theme.axis}">${p.stage}${p.isMechanicsAdjusted ? "*" : ""}<title>${escapeHtml(p.tooltip)}</title></text>
         `;
       })
       .join("");
 
-    const points = values
-      .map((item, index) => {
-        const x = xAt(index);
-        const y = yScale.toY(item.value);
-        return `
-          <circle class="seq-chart-point-hitbox" cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="${CHART_POINT.hitboxRadius}" fill="transparent" pointer-events="all"
-            data-stage="${item.stage}"
-            data-value="${escapeHtml(item.label)}"
-            data-tooltip="${escapeHtml(item.tooltip)}"
-            data-note="${escapeHtml(item.isMechanicsAdjusted ? "Includes mechanics-adjusted HP formula." : "")}">
-          </circle>
-          <circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="${CHART_POINT.radius}" fill="${color}" stroke="#ffffff" stroke-width="${CHART_POINT.strokeWidth}" pointer-events="none">
-          </circle>
-        `;
-      })
+    const points = coords
+      .map((p) => `
+          <circle class="seq-chart-point-hitbox" cx="${p.x}" cy="${p.y}" r="${CHART_POINT.hitboxRadius}" fill="transparent" pointer-events="all"
+            data-stage="${p.stage}"
+            data-value="${escapeHtml(p.label)}"
+            data-tooltip="${escapeHtml(p.tooltip)}"
+            data-note="${escapeHtml(p.isMechanicsAdjusted ? "Includes mechanics-adjusted HP formula." : "")}"></circle>
+          <circle cx="${p.x}" cy="${p.y}" r="${CHART_POINT.radius}" fill="${lineColor}" stroke="${theme.pointStroke}" stroke-width="${CHART_POINT.strokeWidth}" pointer-events="none"></circle>
+        `)
       .join("");
 
-    const pointYs = values.map((item) => yScale.toY(item.value));
-    const labelPlacements = buildAdaptiveLabelPlacements(
-      values,
-      pointYs,
-      xAt,
-      {
-        axisTop: margin.top,
-        axisBottom,
-        axisLeft: margin.left,
-        axisRight: width - margin.right,
-        fontSize: CHART_TEXT.valueLabel
-      }
-    );
+    const pointYs = coords.map((p) => p.y);
+    const labelPlacements = buildAdaptiveLabelPlacements(values, pointYs, xAt, {
+      axisTop: margin.top,
+      axisBottom,
+      axisLeft: margin.left,
+      axisRight: width - margin.right,
+      fontSize: CHART_TEXT.valueLabel
+    });
 
-    const labels = values
-      .map((item, index) => {
+    const labels = coords
+      .map((p, index) => {
         const placement = labelPlacements[index];
-        const labelColor = item.value < 0 ? "#a94442" : color;
-
-        return `
-          <text x="${placement.x.toFixed(2)}" y="${placement.y.toFixed(2)}" text-anchor="middle" font-size="${CHART_TEXT.valueLabel}" font-weight="700" fill="${labelColor}" pointer-events="none">
-            ${escapeHtml(item.label)}
-          </text>
-        `;
+        if (!placement || placement.hidden) return "";
+        const labelColor = p.value < 0 ? resolveChartColor(null, true) : lineColor;
+        return `<text x="${placement.x.toFixed(2)}" y="${placement.y.toFixed(2)}" text-anchor="middle" font-size="${CHART_TEXT.valueLabel}" font-weight="700" fill="${labelColor}" paint-order="stroke" stroke="${theme.halo}" stroke-width="3" stroke-linejoin="round" pointer-events="none">${escapeHtml(p.label)}</text>`;
       })
       .join("");
 
-    return `
-      <svg class="seq-chart-svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${escapeHtml(title)}">
-        <rect width="${width}" height="${height}" fill="#ffffff" />
-        <text x="${width / 2}" y="42" text-anchor="middle" font-size="${CHART_TEXT.title}" font-weight="700" fill="#1f2937">${escapeHtml(title)}</text>
+    const inner = `
+        <rect x="0" y="0" width="${width}" height="${height}" fill="${theme.plotBg}" />
+        <text x="${width / 2}" y="42" text-anchor="middle" font-family="Spectral, Georgia, serif" font-size="${CHART_TEXT.title}" font-weight="700" fill="${theme.title}">${escapeHtml(title || "")}</text>
         ${yGrid}
-        <line x1="${margin.left}" y1="${axisBottom}" x2="${width - margin.right}" y2="${axisBottom}" stroke="#333333" stroke-width="1.2" />
-        <path d="${pathData}" fill="none" stroke="${color}" stroke-width="3" />
+        <line x1="${margin.left}" y1="${axisBottom}" x2="${width - margin.right}" y2="${axisBottom}" stroke="${theme.baseline}" stroke-width="1.2" />
+        <path d="${pathData}" fill="none" stroke="${lineColor}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" pointer-events="none" />
         ${points}
         ${labels}
+        <line class="seq-chart-guide" x1="0" y1="${margin.top.toFixed(2)}" x2="0" y2="${axisBottom.toFixed(2)}" stroke="${theme.guide}" stroke-width="1.4" stroke-dasharray="6 5" visibility="hidden" pointer-events="none" />
         ${xAxisLabels}
-        <text x="${width / 2}" y="${height - 22}" text-anchor="middle" font-size="${CHART_TEXT.axisLabel}" fill="#555555">${escapeHtml(getUiText("axisStage"))}</text>
-      </svg>
+        <text x="${width / 2}" y="${height - 22}" text-anchor="middle" font-size="${CHART_TEXT.axisLabel}" fill="${theme.axis}">${escapeHtml(getUiText("axisStage"))}</text>
+    `;
+
+    return {
+      inner,
+      geometry: {
+        viewWidth: width,
+        viewHeight: height,
+        axisTop: margin.top,
+        axisBottom,
+        points: coords.map((p) => ({ stage: p.stage, x: p.x, y: p.y, label: p.label, tooltip: p.tooltip, isMechanicsAdjusted: p.isMechanicsAdjusted }))
+      }
+    };
+  }
+
+  function wrapChartSvg(inner, width, height, title) {
+    return `
+      <svg class="seq-chart-svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${escapeHtml(title)}">${inner}</svg>
     `.trim();
   }
 
@@ -895,6 +996,8 @@
       let bestPlacement = null;
       let bestRect = null;
       let bestScore = Number.POSITIVE_INFINITY;
+      let bestOverlap = Infinity;
+      const isEndpoint = index === 0 || index === values.length - 1;
 
       candidates.forEach((candidate, candidateIndex) => {
         const clampedX = clamp(
@@ -921,13 +1024,19 @@
           bestScore = score;
           bestPlacement = { x: clampedX, y: clampedY };
           bestRect = rect;
+          bestOverlap = overlapCount;
         }
       });
 
-      placements[index] = bestPlacement || { x: pointX, y: pointY - 16 };
-      occupiedRects.push(
-        bestRect || buildLabelRect(pointX, pointY - 16, textWidth, fontSize)
-      );
+      // Auto-thin: when no candidate clears its neighbours, hide the label rather
+      // than stack numbers on top of each other. Endpoints are kept as anchors.
+      const hidden = bestOverlap > 0 && !isEndpoint;
+      placements[index] = { ...(bestPlacement || { x: pointX, y: pointY - 16 }), hidden };
+      if (!hidden) {
+        occupiedRects.push(
+          bestRect || buildLabelRect(pointX, pointY - 16, textWidth, fontSize)
+        );
+      }
     });
 
     return placements;
@@ -1227,8 +1336,24 @@
     URL.revokeObjectURL(url);
   }
 
+  // The chart already carries its own in-chart title, so the export is just the
+  // full chart at 2x on a palette-matched background.
+  function buildExportSvg(chartExport) {
+    const theme = getChartTheme();
+    const width = chartExport.width;
+    const height = chartExport.height;
+    return `
+      <svg viewBox="0 0 ${width} ${height}" width="${width * 2}" height="${height * 2}" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="${width}" height="${height}" fill="${theme.plotBg}" />
+        ${chartExport.inner}
+      </svg>
+    `.trim();
+  }
+
   async function downloadChartPng(chartKey, chartExport) {
-    const svgBlob = new Blob([chartExport.svgMarkup], {
+    const theme = getChartTheme();
+    const exportMarkup = buildExportSvg(chartExport);
+    const svgBlob = new Blob([exportMarkup], {
       type: "image/svg+xml;charset=utf-8"
     });
     const svgUrl = URL.createObjectURL(svgBlob);
@@ -1241,10 +1366,10 @@
     });
 
     const canvas = document.createElement("canvas");
-    canvas.width = chartExport.width;
-    canvas.height = chartExport.height;
+    canvas.width = chartExport.width * 2;
+    canvas.height = chartExport.height * 2;
     const context = canvas.getContext("2d");
-    context.fillStyle = "#ffffff";
+    context.fillStyle = theme.plotBg;
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
 
@@ -1314,6 +1439,64 @@
       point.addEventListener("mousemove", (event) => showPointTooltip(event, isZoom));
       point.addEventListener("mouseleave", () => hidePointTooltip(isZoom));
     });
+  }
+
+  // OOW-style crosshair: moving the cursor anywhere over the chart snaps a vertical
+  // guide to the nearest stage and shows a floating tooltip.
+  function bindCrosshair(frame, chartKey) {
+    const svg = frame.querySelector("svg");
+    const guide = frame.querySelector(".seq-chart-guide");
+    if (!svg || !guide) {
+      return;
+    }
+
+    const onMove = (event) => {
+      const geometry = state.chartGeometry[chartKey];
+      if (!geometry || !geometry.points.length) {
+        return;
+      }
+      const rect = svg.getBoundingClientRect();
+      if (rect.width === 0) {
+        return;
+      }
+      const viewX = ((event.clientX - rect.left) / rect.width) * geometry.viewWidth;
+      let nearest = geometry.points[0];
+      let bestDistance = Infinity;
+      geometry.points.forEach((point) => {
+        const distance = Math.abs(point.x - viewX);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          nearest = point;
+        }
+      });
+
+      guide.setAttribute("x1", nearest.x);
+      guide.setAttribute("x2", nearest.x);
+      guide.setAttribute("visibility", "visible");
+      showCrosshairTooltip(nearest, event);
+    };
+
+    frame.addEventListener("mousemove", onMove);
+    frame.addEventListener("mouseleave", () => {
+      guide.setAttribute("visibility", "hidden");
+      hidePointTooltip(false);
+    });
+  }
+
+  function showCrosshairTooltip(point, event) {
+    const tooltip = document.querySelector("[data-page-chart-tooltip]");
+    if (!tooltip) {
+      return;
+    }
+    const note = point.isMechanicsAdjusted ? "Includes mechanics-adjusted HP formula." : "";
+    tooltip.innerHTML = `
+      <span class="seq-chart-tooltip__stage">${escapeHtml(getUiText("stage"))} ${escapeHtml(String(point.stage))}</span>
+      <span class="seq-chart-tooltip__value">${escapeHtml(point.label)}</span>
+      ${note ? `<span class="seq-chart-tooltip__note">${escapeHtml(note)}</span>` : ""}
+    `;
+    tooltip.hidden = false;
+    tooltip.style.left = `${event.clientX + 18}px`;
+    tooltip.style.top = `${event.clientY + 18}px`;
   }
 
   function showPointTooltip(event, isZoom) {

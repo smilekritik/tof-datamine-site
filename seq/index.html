@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="../shared/base.css" />
   <link rel="stylesheet" href="../shared/components.css" />
   <link rel="stylesheet" href="../shared/header.css" />
-  <link rel="stylesheet" href="./styles/datamine-seq.css" />
+  <link rel="stylesheet" href="./styles/datamine-seq.css?v=2" />
 </head>
 <body class="page page--datamine-seq">
   <div class="noise-bg"></div>
@@ -65,8 +65,21 @@
 
     <section class="section" id="charts">
       <div class="section__inner">
-        <div class="section__header">
+        <div class="section__header seq-charts-header">
           <h2 class="section__title" data-seq-ui="chartsTitle">Charts</h2>
+          <div class="seq-chart-theme-control">
+            <span class="seq-chart-theme-control__label" data-seq-ui="chartPalette">Chart palette</span>
+            <div class="seq-chart-theme-switch" role="group" data-chart-theme-switch aria-label="Chart palette">
+              <button class="seq-chart-theme-switch__button" type="button" data-action="set-chart-theme" data-chart-theme="light" aria-pressed="true">
+                <svg class="seq-chart-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
+                <span data-seq-ui="paletteLight">Light</span>
+              </button>
+              <button class="seq-chart-theme-switch__button" type="button" data-action="set-chart-theme" data-chart-theme="dark" aria-pressed="false">
+                <svg class="seq-chart-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+                <span data-seq-ui="paletteDark">Dark</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <article class="seq-chart-card">
@@ -201,6 +214,7 @@
   <div class="seq-chart-tooltip" data-page-chart-tooltip hidden></div>
 
   <script src="../shared/header.js?server-cache=1"></script>
-  <script src="./js/datamine-seq.js"></script>
+  <script src="./js/datamine-seq.js?v=3"></script>
+  <script src="../shared/scroll-top.js"></script>
 </body>
 </html>

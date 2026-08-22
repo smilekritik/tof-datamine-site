@@ -100,6 +100,20 @@ a:hover { color: #ffe9a8; }
   stroke-width: 1.8;
 }
 
+.oow-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  /* stretch (the original .oow-chart-pair default) keeps the two bottom cards
+     equal height; the promoted full-span card is alone in its row, so it is
+     unaffected. */
+  align-items: stretch;
+}
+
+.oow-charts-grid [data-chart-card] {
+  will-change: transform;
+}
+
 .oow-chart-actions {
   display: flex;
   align-items: center;
@@ -198,7 +212,7 @@ a:hover { color: #ffe9a8; }
   .oow-mob-hp-val { font-size: 20px !important; }
   .oow-mob-ehp-val { font-size: 16px !important; }
   .oow-affixes-grid { grid-template-columns: 1fr !important; }
-  .oow-chart-controls, .oow-chart-pair { grid-template-columns: 1fr !important; }
+  .oow-chart-controls, .oow-chart-pair, .oow-charts-grid { grid-template-columns: 1fr !important; }
   .oow-table-panel { width: 100% !important; max-width: 100% !important; min-width: 0 !important; overflow-x: auto !important; }
   .oow-floor-grid { min-width: 760px; }
   .oow-diff-grid { min-width: 780px; }
@@ -224,6 +238,15 @@ a:hover { color: #ffe9a8; }
   .oow-modal-header { padding: 16px 16px !important; gap: 12px !important; }
   .oow-modal-header img { width: 64px !important; height: 64px !important; }
   .oow-modal-body { padding: 16px !important; }
+
+  /* Difficulty-decay table: drop the tall day-by-day timeline column (it wraps to
+     ~6 lines and makes every row huge) and compact the remaining columns. */
+  .oow-diff-grid {
+    grid-template-columns: 44px 56px minmax(120px, 1fr) 104px 34px !important;
+    min-width: 400px !important;
+  }
+  .oow-diff-grid > *:nth-child(6) { display: none !important; }
+  .oow-diff-grid > * { padding: 9px 8px !important; }
 }
 
 .oow-header-brand,

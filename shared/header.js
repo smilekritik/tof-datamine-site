@@ -59,8 +59,20 @@
   const EXPORT_STRINGS = {
     lastUpdate: { en: "Last update", ru: "Last update" },
     version: { en: "Version:", ru: "Версия:" },
-    client: { en: "Client:", ru: "Клиент:" }
+    client: { en: "Client:", ru: "Клиент:" },
+    tooltipTitle: { en: "Export details", ru: "Данные экспорта" },
+    updated: { en: "Updated", ru: "Обновлено" },
+    branch: { en: "Branch", ru: "Ветка" }
   };
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
 
   let exportMeta = {
     version: "6.3.0",
@@ -154,8 +166,21 @@
       ? exportMeta.clientNameRu
       : (exportMeta.clientName || "Korea Dev 2");
 
-    const dateTitle = exportMeta.lastUpdate ? `Updated: ${exportMeta.lastUpdate}` : "";
-    const tooltip = [dateTitle, exportMeta.branch ? `(${exportMeta.branch})` : ""].filter(Boolean).join(" ");
+    const tooltipRows = [
+      exportMeta.lastUpdate
+        ? `<div class="datamine-header__export-tooltip-row"><span class="datamine-header__export-tooltip-key">${EXPORT_STRINGS.updated[language]}</span><span class="datamine-header__export-tooltip-value">${escapeHtml(exportMeta.lastUpdate)}</span></div>`
+        : "",
+      exportMeta.branch
+        ? `<div class="datamine-header__export-tooltip-row"><span class="datamine-header__export-tooltip-key">${EXPORT_STRINGS.branch[language]}</span><span class="datamine-header__export-tooltip-value">${escapeHtml(exportMeta.branch)}</span></div>`
+        : ""
+    ].filter(Boolean).join("");
+    const tooltipHtml = tooltipRows
+      ? `<div class="datamine-header__export-tooltip" role="tooltip"><span class="datamine-header__export-tooltip-title">${EXPORT_STRINGS.tooltipTitle[language]}</span>${tooltipRows}</div>`
+      : "";
+    const ariaTooltip = [
+      exportMeta.lastUpdate ? `${EXPORT_STRINGS.updated[language]}: ${exportMeta.lastUpdate}` : "",
+      exportMeta.branch ? `${EXPORT_STRINGS.branch[language]}: ${exportMeta.branch}` : ""
+    ].filter(Boolean).join(" · ");
 
     host.innerHTML = `
       <header class="datamine-header">
@@ -167,7 +192,7 @@
               <button class="datamine-header__language-button${language === "en" ? " is-active" : ""}" type="button" data-datamine-language="en" aria-pressed="${language === "en"}">EN</button>
               <button class="datamine-header__language-button${language === "ru" ? " is-active" : ""}" type="button" data-datamine-language="ru" aria-pressed="${language === "ru"}">RU</button>
             </div>
-            <div class="datamine-header__export-info" data-datamine-export-info title="${tooltip}">
+            <div class="datamine-header__export-info" data-datamine-export-info tabindex="0" aria-label="${escapeHtml(ariaTooltip)}">
               <span class="datamine-header__export-label">${EXPORT_STRINGS.lastUpdate[language]}</span>
               <div class="datamine-header__export-details">
                 <div class="datamine-header__export-row">
@@ -179,6 +204,7 @@
                   <strong class="datamine-header__export-client-name" data-datamine-field="clientName">${clientDisplayName}</strong>
                 </div>
               </div>
+              ${tooltipHtml}
             </div>
           </div>
         </div>

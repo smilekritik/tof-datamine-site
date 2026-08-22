@@ -27,7 +27,7 @@
 <title>TOF Origin of War Datamine</title>
 <link rel="stylesheet" href="../shared/fonts.css">
 <link rel="stylesheet" href="../shared/header.css">
-<link rel="stylesheet" href="./styles/oow.css">
+<link rel="stylesheet" href="./styles/oow.css?v=5">
 <script src="../vendor/react-18.3.1.production.min.js"></script>
 <script src="../vendor/react-dom-18.3.1.production.min.js"></script>
 <script src="./js/support.js"></script>
@@ -351,10 +351,12 @@
           </div>
         </div>
 
+        <!-- CHARTS GRID (main + sub-charts; double-click a sub-chart to swap it big) -->
+        <div class="oow-charts-grid" style="{{ chartsGridStyle }}">
         <!-- MAIN LINE CHART -->
-        <div class="oow-main-chart-card" style="{{ mainChartCardStyle }}">
+        <div class="oow-main-chart-card" data-chart-card="main" onDoubleClick="{{ demoteMain }}" style="{{ mainChartCardStyle }}">
           <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:10px; flex-wrap:wrap;">
-            <h2 style="{{ mainChartTitleStyle }}">{{ mainChartTitle }}</h2>
+            <h2 style="{{ mainChartTitleStyle }}" title="{{ mainDblHint }}">{{ mainChartTitle }}</h2>
             <div class="oow-chart-actions">
               <button class="oow-chart-export-button oow-chart-export-button--primary" type="button" onClick="{{ downloadMainPng }}">{{ downloadPngLabel }}</button>
               <button class="oow-chart-export-button" type="button" onClick="{{ downloadMainCsv }}" style="{{ exportCsvStyle }}">{{ downloadCsvLabel }}</button>
@@ -404,13 +406,11 @@
           </div>
         </div>
 
-        <!-- SUB CHARTS -->
-        <div class="oow-chart-pair" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-          <!-- HISTORY -->
-          <div class="oow-subchart-card" style="{{ subChartCardStyle }}">
+        <!-- SUB CHART: HISTORY -->
+          <div class="oow-subchart-card" data-chart-card="history" onDoubleClick="{{ promoteHistory }}" style="{{ historyCardStyle }}">
             <div class="oow-subchart-header">
               <div>
-                <h3 style="{{ subChartTitleStyle }}">{{ historyChartTitle }}</h3>
+                <h3 style="{{ subChartTitleStyle }}" title="{{ subDblHint }}">{{ historyChartTitle }}</h3>
                 <p style="{{ subChartDescriptionStyle }}">{{ historyChartDescription }}</p>
               </div>
               <div class="oow-subchart-export-actions">
@@ -438,9 +438,10 @@
                 <sc-for list="{{ histEhpDots }}" as="d" hint-placeholder-count="22"><circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="2.6" fill="#c79dff"/></sc-for>
                 <sc-for list="{{ histRawDots }}" as="d" hint-placeholder-count="22"><circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="2.6" fill="#f5d97a"/></sc-for>
                 <circle cx="{{ histLast.ehpX }}" cy="{{ histLast.ehpY }}" r="4.2" fill="#c79dff"/>
-                <foreignObject class="oow-svg-value-label" x="{{ histLast.labelX }}" y="{{ histLast.ehpLabelY }}" width="68" height="18" pointer-events="none"><div style="color:#c79dff; text-align:right; font:700 11px/18px 'JetBrains Mono',monospace; white-space:nowrap;">{{ histLast.ehpVal }}</div></foreignObject>
                 <circle cx="{{ histLast.rawX }}" cy="{{ histLast.rawY }}" r="4.2" fill="#f5d97a"/>
-                <foreignObject class="oow-svg-value-label" x="{{ histLast.labelX }}" y="{{ histLast.rawLabelY }}" width="68" height="18" pointer-events="none"><div style="color:#f5d97a; text-align:right; font:700 11px/18px 'JetBrains Mono',monospace; white-space:nowrap;">{{ histLast.rawVal }}</div></foreignObject>
+                <sc-for list="{{ histLabels }}" as="p" hint-placeholder-count="24">
+                  <foreignObject class="oow-svg-value-label" x="{{ p.lx }}" y="{{ p.fy }}" width="64" height="15" pointer-events="none"><div style="color:{{ p.color }}; text-align:center; font:700 9px/15px 'JetBrains Mono',monospace; white-space:nowrap; text-shadow:-1px -1px 0 {{ chartLabelHalo }},1px -1px 0 {{ chartLabelHalo }},-1px 1px 0 {{ chartLabelHalo }},1px 1px 0 {{ chartLabelHalo }};">{{ p.label }}</div></foreignObject>
+                </sc-for>
                 <rect x="0" y="0" width="920" height="300" fill="transparent" onMouseMove="{{ onHistMove }}" onMouseLeave="{{ onHistLeave }}" style="cursor:crosshair;"></rect>
               </svg>
               <sc-if value="{{ histGuide }}" hint-placeholder-val="{{ false }}">
@@ -458,10 +459,10 @@
             </div>
           </div>
           <!-- JUMP -->
-          <div class="oow-subchart-card" style="{{ subChartCardStyle }}">
+          <div class="oow-subchart-card" data-chart-card="jump" onDoubleClick="{{ promoteJump }}" style="{{ jumpCardStyle }}">
             <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:6px;">
               <div>
-                <h3 style="{{ subChartTitleStyle }}">{{ jumpTitle }}</h3>
+                <h3 style="{{ subChartTitleStyle }}" title="{{ subDblHint }}">{{ jumpTitle }}</h3>
                 <p style="{{ subChartDescriptionStyle }}">{{ jumpSub }}</p>
               </div>
               <div class="oow-subchart-tools">
@@ -490,6 +491,9 @@
                     <path d="{{ s.path }}" fill="none" stroke="{{ s.color }}" stroke-width="2.2" stroke-linejoin="round"/>
                     <sc-for list="{{ s.pts }}" as="p" hint-placeholder-count="15"><circle cx="{{ p.cx }}" cy="{{ p.cy }}" r="2.4" fill="{{ s.color }}"/></sc-for>
                   </g>
+                </sc-for>
+                <sc-for list="{{ jumpLabels }}" as="p" hint-placeholder-count="24">
+                  <foreignObject class="oow-svg-value-label" x="{{ p.lx }}" y="{{ p.fy }}" width="48" height="15" pointer-events="none"><div style="color:{{ p.color }}; text-align:center; font:700 9px/15px 'JetBrains Mono',monospace; white-space:nowrap; text-shadow:-1px -1px 0 {{ chartLabelHalo }},1px -1px 0 {{ chartLabelHalo }},-1px 1px 0 {{ chartLabelHalo }},1px 1px 0 {{ chartLabelHalo }};">{{ p.label }}</div></foreignObject>
                 </sc-for>
                 <rect x="0" y="0" width="920" height="300" fill="transparent" onMouseMove="{{ onJumpMove }}" onMouseLeave="{{ onJumpLeave }}" style="cursor:crosshair;"></rect>
               </svg>
@@ -591,10 +595,7 @@
     </div>
   </div>
 
-  <!-- SCROLL TO TOP -->
-  <sc-if value="{{ showScrollTop }}" hint-placeholder-val="{{ false }}">
-    <button type="button" onClick="{{ scrollTop }}" title="{{ scrollTopTitle }}" aria-label="{{ scrollTopTitle }}" style="position:fixed; right:28px; bottom:28px; z-index:70; width:46px; height:46px; border-radius:13px; border:1px solid rgba(245,217,122,.4); background:rgba(18,10,26,.92); color:#f5d97a; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 12px 34px rgba(0,0,0,.5); backdrop-filter:blur(8px);" style-hover="background:rgba(245,217,122,.16);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>
-  </sc-if>
+  <!-- Scroll-to-top is provided globally by ../shared/scroll-top.js -->
 
   <!-- HOVER TIP (distribution) -->
   <sc-if value="{{ showTip }}" hint-placeholder-val="{{ false }}">
@@ -750,6 +751,7 @@ class Component extends DCLogic {
     chartMetric: 'boss',
     chartRange: 'ramp',
     chartTheme: resolveOowChartTheme(),
+    promotedSub: null,
     active: [19, 20, 21, 22],
     chartHoverFloor: null,
     jumpMode: 'season',
@@ -1215,7 +1217,6 @@ class Component extends DCLogic {
     const armor = stats.ArmorBase || 0;
     const critDef = stats.FinalCritDef != null ? ((stats.FinalCritDef * 100).toFixed(1).replace(/\.0$/, '') + '%') : '0%';
     const maxHp = stats.MaxHealth || m.hp || 0;
-    const hpG = maxHp / 1e9;
     const hpM = maxHp / 1e6;
     const atk = stats.CommonAtkBase || m.atk || 0;
 
@@ -1224,7 +1225,7 @@ class Component extends DCLogic {
         icon: 'assets/icons/stat_hp.svg',
         label: isRu ? 'Максимальное ОЗ' : 'Max Health',
         value: loc(maxHp),
-        sub: (hpG >= 0.01 ? hpG.toFixed(2) + ' G · ' : '') + hpM.toFixed(1) + ' M',
+        sub: hpM.toFixed(1) + ' M',
         color: '#ff6b8b',
         valColor: '#ff8fa8',
         bg: 'rgba(255,107,139,.06)',
@@ -1257,7 +1258,7 @@ class Component extends DCLogic {
         icon: 'assets/icons/stat_critdef.svg',
         label: isRu ? 'Снижение крит. урона (FinalCritDef)' : 'Crit Resistance (FinalCritDef)',
         value: critDef,
-        sub: isRu ? 'анти-крит' : 'crit evasion',
+        sub: isRu ? 'анти-крит' : 'reduce crit chance',
         color: '#b57bff',
         valColor: '#c79dff',
         bg: 'rgba(181,123,255,.06)',
@@ -1526,6 +1527,51 @@ class Component extends DCLogic {
     this.setState({ chartTheme: normalized });
   }
 
+  // Double-click a sub-chart to swap it into the main (full-width) slot, and the
+  // main chart down into the sub-chart's slot. Double-click again to swap back.
+  // A FLIP animation makes the swap glide smoothly instead of snapping.
+  togglePromoteChart(which) {
+    return (event) => {
+      if (event && event.target && event.target.closest('button, a, input, select, .oow-chart-theme-switch')) return;
+      const next = this.state.promotedSub === which ? null : which;
+      this._flipCharts(() => this.setState({ promotedSub: next }));
+    };
+  }
+
+  _flipCharts(mutate) {
+    const grid = document.querySelector('.oow-charts-grid');
+    if (!grid) { mutate(); return; }
+    const first = new Map();
+    grid.querySelectorAll('[data-chart-card]').forEach((card) => {
+      first.set(card.getAttribute('data-chart-card'), card.getBoundingClientRect());
+    });
+    mutate();
+    const play = () => {
+      const grid2 = document.querySelector('.oow-charts-grid');
+      if (!grid2) return;
+      grid2.querySelectorAll('[data-chart-card]').forEach((card) => {
+        const before = first.get(card.getAttribute('data-chart-card'));
+        if (!before) return;
+        const after = card.getBoundingClientRect();
+        const dx = before.left - after.left;
+        const dy = before.top - after.top;
+        const sx = after.width ? before.width / after.width : 1;
+        const sy = after.height ? before.height / after.height : 1;
+        if (Math.abs(dx) < 1 && Math.abs(dy) < 1 && Math.abs(sx - 1) < 0.01 && Math.abs(sy - 1) < 0.01) return;
+        if (typeof card.animate !== 'function') return;
+        card.animate(
+          [
+            { transformOrigin: 'top left', transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + sx + ',' + sy + ')' },
+            { transformOrigin: 'top left', transform: 'none' }
+          ],
+          { duration: 460, easing: 'cubic-bezier(.4,0,.2,1)' }
+        );
+      });
+    };
+    // Run after the runtime has committed the new layout.
+    requestAnimationFrame(() => requestAnimationFrame(play));
+  }
+
   // Builds the primary multi-season chart geometry.
   mainChart() {
     const seasons = this.buildSeasons(this.state.mode);
@@ -1595,6 +1641,44 @@ class Component extends DCLogic {
     return { series, labels, yticks, xticks, x, y, minF, maxF, W, H, L, R, pw, valOf, act };
   }
 
+  // Places small value labels next to a set of points while avoiding overlap.
+  // Each input point: { cx, cy, label, color, prefer }, prefer = 'above'|'below'.
+  // Labels that cannot find a clear slot are dropped (auto-thin) so dense charts
+  // stay readable. Returns only the labels that should be rendered, each with
+  // { lx, fy, color, label } matching the oow-svg-value-label foreignObject.
+  placeValueLabels(points, opts) {
+    const o = opts || {};
+    const width = o.width || 64;      // foreignObject width used by the template
+    const halfW = width / 2;
+    const rowH = o.rowH || 16;        // vertical footprint of one label (label box is 15px + halo)
+    const top = o.top != null ? o.top : 4;
+    const bottom = o.bottom != null ? o.bottom : 296;
+    const left = o.left != null ? o.left : 2;
+    const right = o.right != null ? o.right : 918;
+    const occupied = [];
+    const overlaps = (a) => occupied.some((b) => a.l < b.r && a.r > b.l && a.t < b.b && a.b > b.t);
+    const out = [];
+    points.forEach((p) => {
+      const above = p.prefer !== 'below';
+      // Candidate top-edge offsets from the point (px). Try near first, then further.
+      const offs = above
+        ? [-15, -24, -33, 8, 17]
+        : [6, 15, 24, -15, -24];
+      let cx = Math.max(left + halfW, Math.min(right - halfW, p.cx));
+      let placed = null;
+      for (let i = 0; i < offs.length; i++) {
+        let fy = p.cy + offs[i];
+        fy = Math.max(top, Math.min(bottom - rowH, fy));
+        const rect = { l: cx - halfW, r: cx + halfW, t: fy, b: fy + rowH };
+        if (!overlaps(rect)) { placed = { fy, rect }; break; }
+      }
+      if (!placed) return; // drop this label
+      occupied.push(placed.rect);
+      out.push({ lx: +(cx - halfW).toFixed(1), fy: +placed.fy.toFixed(1), color: p.color, label: p.label });
+    });
+    return out;
+  }
+
   downloadBlob(content, mimeType, fileName) {
     const blob = content instanceof Blob ? content : new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
@@ -1634,11 +1718,6 @@ class Component extends DCLogic {
 
   async downloadMainChartPng() {
     const isRu = this.state.lang === 'ru';
-    const range = this.state.chartRange === 'all'
-      ? (isRu ? 'Все этажи' : 'All floors')
-      : (this.state.chartRange === 'overtime'
-        ? (this.state.mode === 'mmo' ? 'F33–F36' : 'F26–F28')
-        : (this.state.mode === 'mmo' ? 'F25–F36' : 'F17–F28'));
     return this.downloadChartPng('[data-oow-main-chart]', this.chartExportName('png'), {
       title: isRu ? 'HP босса по этажам — испытание OOW' : 'Boss HP across floors — OOW Challenge',
       badges: [
@@ -1649,8 +1728,7 @@ class Component extends DCLogic {
         {
           label: (isRu ? 'Метрика · ' : 'Metric · ') + (this.state.chartMetric === 'boss' ? (isRu ? 'HP босса' : 'Boss HP') : (isRu ? 'Весь этаж' : 'Total Floor')),
           color: '#c99d22'
-        },
-        { label: (isRu ? 'Диапазон · ' : 'Range · ') + range, color: '#8e62d4' }
+        }
       ]
     });
   }
@@ -1703,7 +1781,8 @@ class Component extends DCLogic {
       const badgeWidths = badges.map((badge) => Math.max(82, Math.min(230, badge.label.length * 6.3 + 24)));
       const badgeGap = 8;
       const badgesWidth = badgeWidths.reduce((sum, width) => sum + width, 0) + Math.max(0, badges.length - 1) * badgeGap;
-      let badgeX = 460 - badgesWidth / 2;
+      // Right-align the badge row to the plot's right edge (x=896) instead of centering.
+      let badgeX = 896 - badgesWidth;
       badges.forEach((badge, index) => {
         const width = badgeWidths[index];
         const rect = document.createElementNS(svgNs, 'rect');
@@ -2138,6 +2217,16 @@ class Component extends DCLogic {
 
     const chartIsLight = st.chartTheme !== 'dark';
     const chartThemeButton = (active) => 'border:0; border-radius:6px; background:' + (active ? (chartIsLight ? '#f5d97a' : '#6f537f') : 'transparent') + '; color:' + (active ? (chartIsLight ? '#17101e' : '#fff9ff') : '#948aa8') + ';';
+
+    // Chart swap (promote a sub-chart into the main full-width slot). Placement is
+    // expressed purely as grid order + column span; the FLIP animation handles motion.
+    const promoted = st.promotedSub === 'history' || st.promotedSub === 'jump' ? st.promotedSub : null;
+    const chartPlacement = (() => {
+      if (!promoted) return { main: { o: 0, full: true }, history: { o: 1, full: false }, jump: { o: 2, full: false } };
+      if (promoted === 'history') return { history: { o: 0, full: true }, main: { o: 1, full: false }, jump: { o: 2, full: false } };
+      return { jump: { o: 0, full: true }, history: { o: 1, full: false }, main: { o: 2, full: false } };
+    })();
+    const placeStyle = (which) => 'order:' + chartPlacement[which].o + '; grid-column:' + (chartPlacement[which].full ? '1 / -1' : 'auto') + '; min-width:0;';
     const subctl = (on, col) => 'flex:1; text-align:center; cursor:pointer; font:600 10px/1.1 "Manrope"; padding:7px 8px; border-radius:7px; border:1px solid ' + (on ? col : 'transparent') + '; ' + (on ? 'color:#17111f; background:' + col + ';' : 'color:' + (chartIsLight ? '#514958' : '#b9b0cc') + '; background:transparent;');
 
     // charts
@@ -2196,6 +2285,16 @@ class Component extends DCLogic {
       rawVal: this.fmt(hLastRaw, 'G') + 'G',
       ehpVal: this.fmt(hLastRaw * (lastSeason ? lastSeason.ehpMult : 1), 'G') + 'G'
     };
+    // Per-point value labels for both lines (EHP on top → above, Raw → below).
+    const ehpLabelPts = seasons.map((s, i) => {
+      const raw = s.floors[s.floors.length - 1]?.bossG || 0;
+      return { cx: ehpPts[i].x, cy: ehpPts[i].y, color: '#c79dff', prefer: 'above', label: this.fmt(raw * s.ehpMult, 'G') + 'G' };
+    });
+    const rawLabelPts = seasons.map((s, i) => {
+      const raw = s.floors[s.floors.length - 1]?.bossG || 0;
+      return { cx: rawPts[i].x, cy: rawPts[i].y, color: '#f5d97a', prefer: 'below', label: this.fmt(raw, 'G') + 'G' };
+    });
+    const histLabels = this.placeValueLabels([...ehpLabelPts, ...rawLabelPts], { top: HT, bottom: hBase, left: HL - 30, right: HW - HR + 30 });
 
     const hhs = st.histHoverSeason;
     let histGuide = false, histGuideX = 0, histGuidePct = 0, histGuideShift = '-50%', histGuideRows = [], histGuideLabel = '', histGuideSub = '';
@@ -2254,6 +2353,22 @@ class Component extends DCLogic {
       const pts = s.pts.map((p) => ({ cx: +jx(p.floor).toFixed(1), cy: +jy(p.pct).toFixed(1), floor: p.floor, pct: p.pct }));
       return { color: s.color, season: s.season, label: 'S' + s.season, pts, path: pts.map((p, i) => (i ? 'L' : 'M') + p.cx + ' ' + p.cy).join(' ') };
     });
+    // Per-point % labels. When several series share the same value at a floor the
+    // labels stack exactly, so keep one per (floor, value) — newest season wins.
+    const jumpLabelByPoint = new Map();
+    jumpSeries.forEach((s) => {
+      s.pts.forEach((p) => {
+        const rounded = Math.round(p.pct);
+        jumpLabelByPoint.set(p.floor + ':' + rounded, {
+          cx: p.cx, cy: p.cy, color: s.color, prefer: 'above',
+          label: (rounded > 0 ? '+' : '') + rounded + '%'
+        });
+      });
+    });
+    const jumpLabels = this.placeValueLabels(
+      Array.from(jumpLabelByPoint.values()),
+      { width: 48, top: JT, bottom: JT + jph, left: JL - 24, right: 920 - JR + 24 }
+    );
     const jStepV = jRange > 400 ? 200 : (jRange > 200 ? 100 : (jRange > 80 ? 50 : (jRange > 30 ? 20 : 10)));
     const jumpYTicks = [];
     for (let v = Math.ceil(jMinV / jStepV) * jStepV; v <= jMaxV; v += jStepV) {
@@ -2502,8 +2617,16 @@ class Component extends DCLogic {
       chartThemeDarkPressed: chartIsLight ? 'false' : 'true',
       chartThemeLightStyle: chartThemeButton(chartIsLight),
       chartThemeDarkStyle: chartThemeButton(!chartIsLight),
-      mainChartCardStyle: 'border-radius:14px; padding:14px 18px; transition:background-color .18s ease,border-color .18s ease; background:' + (chartIsLight ? '#ffffff' : 'rgba(255,255,255,.02)') + '; border:1px solid ' + (chartIsLight ? '#dedbe3' : 'rgba(255,255,255,.07)') + ';',
+      chartsGridStyle: '',
+      mainChartCardStyle: 'border-radius:14px; padding:14px 18px; transition:background-color .18s ease,border-color .18s ease; background:' + (chartIsLight ? '#ffffff' : 'rgba(255,255,255,.02)') + '; border:1px solid ' + (chartIsLight ? '#dedbe3' : 'rgba(255,255,255,.07)') + ';' + placeStyle('main'),
       subChartCardStyle: 'border-radius:16px; padding:20px 22px; transition:background-color .18s ease,border-color .18s ease; background:' + (chartIsLight ? '#ffffff' : 'rgba(255,255,255,.02)') + '; border:1px solid ' + (chartIsLight ? '#dedbe3' : 'rgba(255,255,255,.07)') + ';',
+      historyCardStyle: 'border-radius:16px; padding:20px 22px; transition:background-color .18s ease,border-color .18s ease; background:' + (chartIsLight ? '#ffffff' : 'rgba(255,255,255,.02)') + '; border:1px solid ' + (chartIsLight ? '#dedbe3' : 'rgba(255,255,255,.07)') + ';' + placeStyle('history'),
+      jumpCardStyle: 'border-radius:16px; padding:20px 22px; transition:background-color .18s ease,border-color .18s ease; background:' + (chartIsLight ? '#ffffff' : 'rgba(255,255,255,.02)') + '; border:1px solid ' + (chartIsLight ? '#dedbe3' : 'rgba(255,255,255,.07)') + ';' + placeStyle('jump'),
+      promoteHistory: this.togglePromoteChart('history'),
+      promoteJump: this.togglePromoteChart('jump'),
+      demoteMain: promoted ? this.togglePromoteChart(promoted) : (() => {}),
+      mainDblHint: promoted ? (isRu ? 'Двойной клик — вернуть' : 'Double-click to restore') : '',
+      subDblHint: isRu ? 'Двойной клик — увеличить' : 'Double-click to enlarge',
       mainChartTitleStyle: 'font:400 16px/1.15 "Spectral", serif; margin:0; color:' + (chartIsLight ? '#17111f' : '#f6f1fb') + ';',
       subChartTitleStyle: 'font:400 17px/1.2 "Spectral", serif; margin:0 0 4px; color:' + (chartIsLight ? '#17111f' : '#f6f1fb') + ';',
       subChartDescriptionStyle: 'font:500 12px/1.5 "Manrope"; margin:0; color:' + (chartIsLight ? '#665e6d' : '#948aa8') + ';',
@@ -2571,7 +2694,9 @@ class Component extends DCLogic {
       histRawDots,
       histEhpDots,
       histLast,
+      histLabels,
       jumpSeries,
+      jumpLabels,
       jumpYTicks,
       jumpXTicks,
       jumpTitle: jMode === 'floor' ? (isRu ? 'Рост HP от этажа к этажу' : 'Floor-over-floor HP jump') : (isRu ? 'Инфляция HP между сезонами' : 'Season-over-season HP growth (per floor)'),
@@ -2700,5 +2825,6 @@ class Component extends DCLogic {
 }
 
 </script>
+<script src="../shared/scroll-top.js"></script>
 </body>
 </html>

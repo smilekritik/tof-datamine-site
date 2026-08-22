@@ -511,6 +511,17 @@ body.page--datamine-fce {
   line-height: 1;
 }
 
+/* Keep the shared scroll-to-top button clear of the download button. */
+.page--datamine-fce .dm-scrolltop {
+  bottom: 80px;
+}
+
+@media (max-width: 600px) {
+  .page--datamine-fce .dm-scrolltop {
+    bottom: 68px;
+  }
+}
+
 @keyframes fceDriftOne {
   0% {
     transform: translate3d(-1.6%, -1.4%, 0) scale(1.04) rotate(-0.18deg);

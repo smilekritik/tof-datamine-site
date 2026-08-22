@@ -677,3 +677,101 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── Chart palette switch (Light / Dark) ─────────────────────────────── */
+.seq-charts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.seq-chart-theme-control {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.seq-chart-theme-control__label {
+  color: var(--oow-text-muted);
+  font: 700 9px/1 "Manrope", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.seq-chart-theme-switch {
+  display: flex;
+  gap: 3px;
+  height: 34px;
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 9px;
+  background: rgba(7, 5, 11, 0.72);
+}
+
+.seq-chart-theme-switch__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 74px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--oow-text-muted);
+  font: 700 10px/1 "Manrope", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.seq-chart-theme-switch__button:hover {
+  color: var(--oow-text-strong);
+}
+
+.seq-chart-theme-switch__button[aria-pressed="true"] {
+  background: var(--oow-gold);
+  color: #17101e;
+  box-shadow: 0 3px 12px rgba(245, 217, 122, 0.16);
+}
+
+.seq-chart-theme-switch__button[data-chart-theme="dark"][aria-pressed="true"] {
+  background: #6f537f;
+  color: #fff9ff;
+}
+
+.seq-chart-theme-switch__icon {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+/* ── Theme-aware chart surfaces ──────────────────────────────────────── */
+body[data-chart-theme="dark"] .seq-chart-frame {
+  background: #0f0b15;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+body[data-chart-theme="dark"] .seq-chart-frame:hover {
+  border-color: rgba(245, 217, 122, 0.34);
+}
+
+body[data-chart-theme="dark"] .seq-zoom-modal__viewport {
+  background: #0f0b15;
+}
+
+@media (max-width: 600px) {
+  .seq-charts-header {
+    align-items: flex-start;
+  }
+
+  .seq-chart-theme-control {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
