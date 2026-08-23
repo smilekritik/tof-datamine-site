@@ -7,6 +7,8 @@ Public Tower of Fantasy data pages for Origin of War, FCE bosses, Sequential sca
   ·
   <a href="#pages">Pages</a>
   ·
+  <a href="#builder">Builder</a>
+  ·
   <a href="#run-locally">Local run</a>
   ·
   <a href="#screenshots">Screenshots</a>
@@ -46,6 +48,20 @@ npm run check:datamine
 ```
 
 The check covers all six routes, shared navigation, local runtime assets, social metadata, PNG dimensions, and forbidden external fallbacks.
+
+## Builder
+
+`builder/` holds unlisted, browser-only authoring tools for maintainers and contributors. They are **not** linked from the hub and are marked `noindex`. Nothing is written to the site — each tool keeps edits in `localStorage` and lets you **export files** that you drop into `datamine/` and commit.
+
+| Tool | URL | Exports |
+| --- | --- | --- |
+| FCE Card Builder | `/datamine/builder/fce/` | `fce/data/bosses/{slug}.json` (+ `fce/assets/bosses/{slug}.png`) |
+| Multype Rename Editor | `/datamine/builder/multype/` | `multype/data/renames.base.json` |
+| OOW Image Binder | `/datamine/builder/oow/` | `oow/assets/monsters/<codeName>.png` + a mapping to merge into the pipeline's `monster-image-mapping.json` |
+
+The Multype and FCE exports drop straight into the folders above (rerun the matching `build:*` step when noted). The OOW binder is an exact copy of the OOW page — open any enemy card, bind a portrait to its `codeName`, and export; the private extraction pipeline rebuilds those into `oow_stats.json`.
+
+To propose a change: open the relevant builder, export the file(s), and attach them to a PR or send them over. Edits never touch the live site until the files are committed.
 
 ## Run locally
 
@@ -89,8 +105,11 @@ datamine/
   oow/                       index.html + js/ + styles/ + data/ + assets/
   fce/                       index.html + js/ + styles/ + data/ + assets/ + docs/
   seq/                       index.html + js/ + styles/ + data/
-  multype/                   index/local HTML + js/ + styles/ + data/
+  multype/                   index.html + js/ + styles/ + data/
   items/                     index/local HTML + js/ + styles/ + data/
+builder/                     Unlisted editing tools (FCE / Multype / OOW) — export files, not live edits
+  index.html                 Builder hub
+  fce/  multype/  oow/        One folder per tool (own index.html + js/ + styles/)
 ```
 
 ## Screenshots

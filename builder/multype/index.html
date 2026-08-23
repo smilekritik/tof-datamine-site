@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Local editor for TOF Multype category and file renames, with JSON export." />
+  <meta name="theme-color" content="#0c0812" />
+  <title>Multype Rename Editor</title>
+  <script>
+    (function () {
+      const savedTheme = document.cookie
+        .split("; ")
+        .find((entry) => entry.startsWith("tof-multype-theme="))
+        ?.split("=")[1];
+      document.documentElement.dataset.multypeTheme = savedTheme === "dark" ? "dark" : "light";
+    })();
+  </script>
+  <link rel="stylesheet" href="../../shared/fonts.css" />
+  <link rel="stylesheet" href="../../shared/base.css" />
+  <link rel="stylesheet" href="../../shared/components.css" />
+  <link rel="stylesheet" href="../../multype/styles/datamine-multype.css" />
+  <style>
+    /* ==== Builder header (self-contained, FCE-builder concept) ============ */
+    :root {
+      --mtb-gold: #f5d97a;
+      --mtb-gold-deep: #e5a93b;
+    }
+    .mtb-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 10px 20px;
+      background: rgba(15, 10, 22, 0.88);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+    }
+    .mtb-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 9px;
+    }
+    .mtb-brand__badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      background: linear-gradient(135deg, var(--mtb-gold), var(--mtb-gold-deep));
+      color: #17111f;
+      font-weight: 800;
+      font-size: 11px;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+      transform: translateY(-1px);
+    }
+    .mtb-brand__title {
+      color: #f4eefb;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .mtb-brand__sub {
+      color: rgba(244, 238, 251, 0.5);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .mtb-header__right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    /* Compact the shared theme switch to sit inline in the header. */
+    .mtb-header .multype-theme-switch { margin: 0; }
+    /* EN / RU */
+    .mtb-lang {
+      display: inline-flex;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .mtb-lang__btn {
+      appearance: none;
+      background: transparent;
+      border: 0;
+      color: rgba(244, 238, 251, 0.7);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      cursor: pointer;
+    }
+    .mtb-lang__btn.is-active {
+      background: rgba(245, 217, 122, 0.16);
+      color: var(--mtb-gold);
+    }
+    /* Action buttons */
+    .mtb-btn {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #f4eefb;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    .mtb-btn:hover {
+      border-color: rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.07);
+    }
+    /* Primary = simple yellow outline */
+    .mtb-btn--primary {
+      background: rgba(245, 217, 122, 0.08);
+      border-color: var(--mtb-gold);
+      color: var(--mtb-gold);
+    }
+    .mtb-btn--primary:hover {
+      background: rgba(245, 217, 122, 0.16);
+      border-color: var(--mtb-gold);
+    }
+    /* The editor's own action row moves to the header, so hide the in-body one
+       (its buttons stay in the DOM and are triggered from the header). */
+    .multype-toolbar__row--actions { display: none !important; }
+    @media (max-width: 720px) {
+      .mtb-header { justify-content: center; }
+    }
+  </style>
+</head>
+<body class="page page--datamine-multype page--datamine-multype-local">
+  <div class="noise-bg"></div>
+
+  <header class="mtb-header">
+    <div class="mtb-brand">
+      <span class="mtb-brand__badge">MT</span>
+      <span class="mtb-brand__title">Rename Editor</span>
+      <span class="mtb-brand__sub">Multype</span>
+    </div>
+    <div class="mtb-header__right">
+      <div class="multype-theme-switch" role="group" aria-label="Table color theme" data-multype-theme-switch>
+        <button class="multype-theme-switch__button" type="button" data-multype-theme-value="light">
+          <svg class="multype-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.5"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+          </svg>
+          <span data-multype-theme-button-label>Light</span>
+        </button>
+        <button class="multype-theme-switch__button" type="button" data-multype-theme-value="dark">
+          <svg class="multype-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.2 15.2A8.6 8.6 0 0 1 8.8 3.8 8.6 8.6 0 1 0 20.2 15.2Z"></path>
+          </svg>
+          <span data-multype-theme-button-label>Dark</span>
+        </button>
+      </div>
+      <div class="mtb-lang" role="group" aria-label="Language">
+        <button class="mtb-lang__btn is-active" type="button" data-mtb-lang="en">EN</button>
+        <button class="mtb-lang__btn" type="button" data-mtb-lang="ru">RU</button>
+      </div>
+      <button class="mtb-btn" type="button" data-mtb-action="reset">Reset draft</button>
+      <button class="mtb-btn" type="button" data-mtb-action="import">Import JSON</button>
+      <button class="mtb-btn mtb-btn--primary" type="button" data-mtb-action="export"
+              title="Downloads renames.base.json — replace datamine/multype/data/renames.base.json and redeploy">&#x2913; Export JSON</button>
+    </div>
+  </header>
+
+  <main class="layout multype-layout" data-multype-app></main>
+
+  <script src="../../shared/header.js"></script>
+  <script src="../../multype/js/datamine-multype-theme.js"></script>
+  <script src="../../multype/js/datamine-multype-core.js"></script>
+  <script src="./js/boot.js"></script>
+</body>
+</html>

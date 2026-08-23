@@ -1,0 +1,84 @@
+/* OOW Image Binder — builder-only chrome. Scoped under .oowb- so it never
+   collides with the copied OOW page styles. */
+
+/* Floating dock, bottom-left, above the modal (z-90). */
+.oowb-dock {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 268px;
+  padding: 14px;
+  background: rgba(15, 10, 22, 0.92);
+  border: 1px solid rgba(245, 217, 122, 0.35);
+  border-radius: 14px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55);
+  color: #f2ecfa;
+  font-family: "Manrope", system-ui, sans-serif;
+}
+.oowb-dock__head { display: flex; align-items: center; gap: 8px; }
+.oowb-dock__badge {
+  display: inline-flex; align-items: center; padding: 3px 8px;
+  background: linear-gradient(135deg, #f5d97a, #e5a93b);
+  color: #17111f; font-weight: 800; font-size: 11px; border-radius: 4px; letter-spacing: 0.08em;
+}
+.oowb-dock__title { font-size: 13px; font-weight: 700; }
+.oowb-dock__count { font-size: 12px; color: rgba(242, 236, 250, 0.6); }
+.oowb-dock__hint { font-size: 11.5px; line-height: 1.45; color: rgba(242, 236, 250, 0.55); margin: 0; }
+.oowb-dock__row { display: flex; gap: 8px; }
+
+.oowb-btn {
+  appearance: none; flex: 1;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f2ecfa; font: 600 12.5px/1 "Manrope", sans-serif;
+  padding: 8px 12px; border-radius: 8px; cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.oowb-btn:hover { border-color: rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.08); }
+.oowb-btn--primary {
+  background: rgba(245, 217, 122, 0.10);
+  border-color: #f5d97a; color: #f5d97a; font-weight: 700;
+}
+.oowb-btn--primary:hover { background: rgba(245, 217, 122, 0.2); }
+.oowb-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Upload control injected onto the modal portrait. */
+.oowb-portrait-tool {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  display: flex; justify-content: center;
+  padding: 4px;
+  background: linear-gradient(180deg, transparent, rgba(6, 3, 10, 0.85));
+  border-radius: 0 0 14px 14px;
+}
+.oowb-portrait-tool__btn {
+  appearance: none;
+  font: 700 9px/1 "Manrope", sans-serif; letter-spacing: 0.04em; text-transform: uppercase;
+  color: #17111f; background: linear-gradient(135deg, #f5d97a, #f0b94e);
+  border: none; padding: 4px 8px; border-radius: 5px; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.oowb-portrait-tool__btn:hover { filter: brightness(1.06); }
+
+/* A dot marking the portrait when a local binding is active. */
+.oowb-portrait-flag {
+  position: absolute; top: 5px; right: 5px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #4fe3c1; border: 2px solid #0c0812;
+  box-shadow: 0 0 8px #4fe3c1;
+}
+
+.oowb-toast {
+  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+  z-index: 130;
+  background: rgba(18, 10, 26, 0.96); border: 1px solid rgba(79, 227, 193, 0.4);
+  color: #cbeee4; font: 600 12.5px/1.3 "Manrope", sans-serif;
+  padding: 9px 16px; border-radius: 10px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  opacity: 0; transition: opacity 0.2s ease; pointer-events: none;
+}
+.oowb-toast.is-visible { opacity: 1; }
