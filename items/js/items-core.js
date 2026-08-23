@@ -330,6 +330,10 @@
       this.virtualStart = -1;
       this.virtualScrollFrame = 0;
 
+      // Restore shareable filter/search state from the URL before the first
+      // renderShell so the search box and buttons come up pre-set.
+      this.applyUrlState();
+
       if (!this.root) {
         return;
       }
@@ -370,6 +374,43 @@
       this.updateFilterUi();
       this.renderRows();
       this.updateStatus();
+    }
+
+    // Seed mode/filter/search from the query string. Invalid values (or an
+    // mmo mode with no mmo dataset) are ignored and fall back to defaults.
+    applyUrlState() {
+      const store = window.DatamineUrlState;
+      if (!store) return;
+      const params = store.read();
+
+      if (params.mode) {
+        const nextMode = normalizeModeValue(params.mode);
+        if (this.modeOrder.includes(nextMode)) {
+          this.state.mode = nextMode;
+        }
+      }
+      if (params.filter === "renamed" || params.filter === "all") {
+        this.state.filter = params.filter;
+      }
+      if (typeof params.q === "string") {
+        this.state.search = params.q;
+      }
+    }
+
+    // Mirror mode/filter/search into the address bar. Params equal to their
+    // default (mode gacha, filter all, empty search) are omitted.
+    syncUrl() {
+      const store = window.DatamineUrlState;
+      if (!store) return;
+
+      const defaultMode = this.modeOrder.includes("gacha")
+        ? "gacha"
+        : this.modeOrder[0] || "gacha";
+      store.write({
+        mode: this.state.mode === defaultMode ? null : this.state.mode,
+        filter: this.state.filter === "all" ? null : this.state.filter,
+        q: this.state.search || null
+      });
     }
 
     renderShell() {
@@ -778,6 +819,7 @@
         this.setStatus(this.getText("rendering"));
         this.renderRows();
         this.updateStatus();
+        this.syncUrl();
         return;
       }
 
@@ -792,6 +834,7 @@
         this.setStatus(this.getText("rendering"));
         this.renderRows();
         this.updateStatus();
+        this.syncUrl();
         return;
       }
 
@@ -820,6 +863,7 @@
         this.setStatus(this.getText("rendering"));
         this.renderRows();
         this.updateStatus();
+        this.syncUrl();
       }
     }
 

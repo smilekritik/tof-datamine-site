@@ -1,6 +1,6 @@
 (function () {
-  const DATA_FILE = "./data/fce-bosses.json";
-  const DATA_FILE_RU = "./data/fce-bosses.ru.json";
+  const INDEX_FILE = "./data/fce-index.json";
+  const BOSS_DIR = "./data/bosses/";
   const SCENE_WIDTH = 1920;
   const SCENE_HEIGHT = 1080;
   const DEFAULT_NAME_RIGHT = 0;
@@ -24,7 +24,7 @@
         downloadAria: "Download current boss card",
         loading: "Loading boss card...",
         noBoss: "No boss selected.",
-        loadError: "Could not load fce-bosses.json."
+        loadError: "Could not load boss list."
       },
       ru: {
         brand: "Механики боссов FCE",
@@ -39,14 +39,14 @@
         downloadAria: "Скачать текущую карточку босса",
         loading: "Загрузка карточки босса...",
         noBoss: "Босс не выбран.",
-        loadError: "Не удалось загрузить fce-bosses.json."
+        loadError: "Не удалось загрузить список боссов."
       }
     }
   };
 
   const state = {
     bosses: [],
-    ruBosses: new Map(),
+    bossCache: new Map(),
     selectedSlug: "",
     switcherRowCount: 0,
     language: resolveInitialLanguage()
@@ -75,17 +75,14 @@
 
   async function loadPage() {
     try {
-      const [json, ruJson] = await Promise.all([
-        loadJson(DATA_FILE, true),
-        loadJson(DATA_FILE_RU, false)
-      ]);
+      const index = await loadJson(INDEX_FILE, true);
 
-      state.bosses = Array.isArray(json?.bosses) ? json.bosses : [];
-      state.ruBosses = createBossTranslationMap(ruJson);
+      state.bosses = Array.isArray(index?.bosses) ? index.bosses : [];
       state.selectedSlug = resolveInitialBoss(state.bosses);
       state.switcherRowCount = getSwitcherRowCount();
       renderSwitcher();
       renderCard();
+      prefetchBossData();
       window.addEventListener("hashchange", handleHashChange);
       window.addEventListener("resize", handleResize);
       window.addEventListener("load", updateSceneScale);
@@ -93,6 +90,31 @@
       console.error("[FCE] Failed to initialise boss data:", error);
       renderError(getUiText("loadError"));
     }
+  }
+
+  // Load one boss's full (bilingual) card file, caching by slug so language
+  // toggles and repeat visits never refetch.
+  async function loadBoss(slug) {
+    if (!slug) return null;
+    if (state.bossCache.has(slug)) return state.bossCache.get(slug);
+    const data = await loadJson(`${BOSS_DIR}${encodeURIComponent(slug)}.json`, false);
+    if (data) state.bossCache.set(slug, data);
+    return data;
+  }
+
+  // Warm the remaining per-boss files in the background so switching bosses is
+  // instant. Tiny JSON payloads; throttled to stay out of the way of art.
+  function prefetchBossData() {
+    const slugs = state.bosses
+      .map((boss) => boss.slug)
+      .filter((slug) => slug && !state.bossCache.has(slug));
+    let i = 0;
+    const step = () => {
+      if (i >= slugs.length) return;
+      const slug = slugs[i++];
+      loadBoss(slug).catch(() => {}).finally(() => window.setTimeout(step, 60));
+    };
+    window.setTimeout(step, 400);
   }
 
   async function loadJson(url, required) {
@@ -150,17 +172,6 @@
       throw lastError || new Error(`Failed to load ${url}`);
     }
     return null;
-  }
-
-  function createBossTranslationMap(json) {
-    const map = new Map();
-    const bosses = Array.isArray(json?.bosses) ? json.bosses : [];
-    bosses.forEach((boss) => {
-      if (boss?.slug) {
-        map.set(boss.slug, boss);
-      }
-    });
-    return map;
   }
 
   function resolveInitialBoss(bosses) {
@@ -231,24 +242,51 @@
     });
   }
 
-  function renderCard() {
+  async function renderCard() {
     const shell = document.querySelector("[data-boss-card-shell]");
     if (!shell) {
       return;
     }
 
-    const boss = state.bosses.find((entry) => entry.slug === state.selectedSlug);
-    if (!boss) {
+    const entry = state.bosses.find((item) => item.slug === state.selectedSlug);
+    if (!entry) {
       shell.innerHTML = `<div class="fce-card-loader">${escapeHtml(getUiText("noBoss"))}</div>`;
       return;
     }
-    const displayName = getBossName(boss);
 
-    const mechanics = (boss.mechanics || [])
-      .map((entry, mechanicIndex) => {
+    const slug = entry.slug;
+    let boss = state.bossCache.get(slug);
+    if (!boss) {
+      // Boss file not cached yet — show the loader while it fetches.
+      if (!shell.querySelector("[data-fce-viewport]")) {
+        shell.innerHTML = `<div class="fce-card-loader">${escapeHtml(getUiText("loading"))}</div>`;
+      }
+      boss = await loadBoss(slug);
+      // Selection changed mid-fetch — a newer render now owns the shell.
+      if (state.selectedSlug !== slug) {
+        return;
+      }
+      if (!boss) {
+        shell.innerHTML = `<div class="fce-card-loader">${escapeHtml(getUiText("loadError"))}</div>`;
+        return;
+      }
+    }
+
+    // Resolve the active language from the combined bilingual file. Shared
+    // layout/art fields live at the top level of `boss`, so buildVisualStyle,
+    // updateCardArt and fitCardContent keep working exactly as before.
+    const lang = state.language === "ru" ? "ru" : "en";
+    const localized = boss[lang] || boss.en || {};
+    const displayName = localized.name || (boss.en && boss.en.name) || boss.name || "";
+    const mechanicsData = Array.isArray(localized.mechanics)
+      ? localized.mechanics
+      : ((boss.en && boss.en.mechanics) || []);
+
+    const mechanics = mechanicsData
+      .map((mech) => {
         return `
           <article class="fce-card__line">
-            <p class="fce-card__text"><span class="fce-card__index">${escapeHtml(entry.index || "?")}.</span>${renderMechanicText(entry, boss, mechanicIndex)}</p>
+            <p class="fce-card__text"><span class="fce-card__index">${escapeHtml(mech.index || "?")}.</span>${renderMechanicText(mech)}</p>
           </article>
         `;
       })
@@ -318,17 +356,8 @@
     }
   }
 
-  function renderMechanicText(entry, boss, mechanicIndex) {
-    const localizedEntry = state.language === "ru"
-      ? state.ruBosses.get(boss?.slug)?.mechanics?.[mechanicIndex]
-      : null;
-
-    if (typeof localizedEntry?.html === "string" && localizedEntry.html.trim()) {
-      return localizedEntry.html;
-    }
-    if (typeof localizedEntry?.text === "string" && localizedEntry.text.trim()) {
-      return escapeHtml(localizedEntry.text);
-    }
+  function renderMechanicText(entry) {
+    // Mechanics arrive already localized (from the boss file's en/ru block).
     if (typeof entry?.html === "string" && entry.html.trim()) {
       return entry.html;
     }
@@ -769,8 +798,9 @@
   }
 
   function getBossName(boss) {
+    // `boss` here is a manifest entry: `name` (EN) + optional `name_ru`.
     if (state.language === "ru") {
-      return state.ruBosses.get(boss?.slug)?.name || boss?.name || "";
+      return boss?.name_ru || boss?.name || "";
     }
     return boss?.name || "";
   }

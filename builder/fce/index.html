@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-<meta name="robots" content="noindex, nofollow" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FCE Card Builder</title>
   <meta name="description" content="Local builder and editor for FCE boss mechanic cards with PNG and JSON export." />
-  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="../../datamine/favicon.svg" />
   
   <!-- Font definitions (Offline local fonts with Google Fonts fallbacks) -->
-  <link rel="stylesheet" href="../../shared/fonts.css" />
+  <link rel="stylesheet" href="../../datamine/shared/fonts.css" />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Manrope:wght@400;500;600;700;800&family=Spectral:wght@500;600;700&display=swap" rel="stylesheet" />
   
   <!-- App Styles -->
@@ -245,7 +244,7 @@
             <div class="fceb-field" style="margin-top: 12px;">
               <label for="inputArtUrl" class="fceb-field__label" data-i18n="labelArtUrl">Or path / URL to art</label>
               <div class="fceb-input-with-btn">
-                <input type="text" id="inputArtUrl" class="fceb-input" placeholder="./assets/bosses/chaos-armor.png" value="../../fce/assets/bosses/chaos-armor.png" />
+                <input type="text" id="inputArtUrl" class="fceb-input" placeholder="./assets/bosses/chaos-armor.png" value="../../datamine/fce/assets/bosses/chaos-armor.png" />
                 <button id="btnClearArt" class="fceb-btn fceb-btn--ghost" data-i18n-title="titleBtnClearArt" title="Remove artwork">✕</button>
               </div>
             </div>
@@ -644,7 +643,7 @@
 
             <!-- Visual Layer (Boss Art + Boss Name + Extra Images) -->
             <div class="fce-card__visual" id="cardVisual" style="--fce-name-color: #f16937; --fce-art-scale: 1; --fce-art-x: 0px; --fce-art-y: 0px; --fce-art-opacity: 1; --fce-name-right: 0px; --fce-name-y: 38px; --fce-name-width: 620px; --fce-name-scale: 1;">
-              <img id="cardArtImg" class="fce-card__art" src="../../fce/assets/bosses/chaos-armor.png" alt="Chaos Armor" />
+              <img id="cardArtImg" class="fce-card__art" src="../../datamine/fce/assets/bosses/chaos-armor.png" alt="Chaos Armor" />
               <!-- Container for Extra Images Layers -->
               <div id="cardExtraImages" class="fce-card__extra-images"></div>
               <div class="fce-card__name" id="cardNameText" contenteditable="true" spellcheck="false" data-i18n-title="cardNameTitle" title="Click to edit boss name directly on canvas">Chaos Armor</div>

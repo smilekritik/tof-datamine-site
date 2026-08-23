@@ -224,9 +224,84 @@
     negative: { dark: "#ff8f8f", light: "#a94442" }
   };
 
+  // Maps a shareable hash token to a chart key. All three charts are always
+  // visible, so a deep-link like seq/#hp just smoothly scrolls to the chart.
+  const SEQ_CHART_HASH_ALIASES = {
+    hp: "pure",
+    pure: "pure",
+    ehp: "effective",
+    effective: "effective",
+    powercreep: "powercreep",
+    creep: "powercreep"
+  };
+
+  function resolveSeqChartFromHash() {
+    const raw = (window.location.hash || "").replace(/^#/, "").trim().toLowerCase();
+    if (!raw) return null;
+    return SEQ_CHART_HASH_ALIASES[raw] || null;
+  }
+
+  // Charts in DOM order and the canonical hash token each maps to (pure uses
+  // the friendly "hp"). Used by the scroll-spy so the hash tracks the chart the
+  // reader is currently on, keeping a copied URL pointed at what they see.
+  const SEQ_CHART_ORDER = ["effective", "pure", "powercreep"];
+  const SEQ_CHART_HASH_TOKENS = { effective: "effective", pure: "hp", powercreep: "powercreep" };
+
+  let seqScrollLast = 0;
+
+  function updateSeqHashFromScroll() {
+    const threshold = 160; // px below the viewport top a chart must cross to be "active"
+    let activeKey = null;
+    for (const key of SEQ_CHART_ORDER) {
+      const el = document.querySelector(`[data-chart="${key}"]`);
+      if (!el) continue;
+      const card = el.closest(".seq-chart-card") || el;
+      if (card.getBoundingClientRect().top <= threshold) activeKey = key;
+    }
+    const desired = activeKey ? "#" + SEQ_CHART_HASH_TOKENS[activeKey] : "";
+    if ((window.location.hash || "") === desired) return; // only write on boundary crossings
+    const url = window.location.pathname + window.location.search + desired;
+    try {
+      // replaceState (not location.hash) so this never fires hashchange and so
+      // it does not add history entries as the reader scrolls.
+      window.history.replaceState(null, "", url);
+    } catch (e) {}
+  }
+
+  // Time-based throttle (not requestAnimationFrame, which is paused in
+  // background tabs) so the hash keeps tracking while scrolling anywhere.
+  function onSeqScroll() {
+    const now = Date.now();
+    if (now - seqScrollLast < 100) return;
+    seqScrollLast = now;
+    updateSeqHashFromScroll();
+  }
+
+  // Scroll the linked chart into view. Safe to call before charts exist (the
+  // target simply isn't found yet); loadAndRender() calls it once the chart
+  // frames have real height. Runs synchronously so it also works in background
+  // tabs (where requestAnimationFrame is paused).
+  function scrollToSeqHash() {
+    const chartKey = resolveSeqChartFromHash();
+    if (!chartKey) return;
+    const target = document.querySelector(`[data-chart="${chartKey}"]`);
+    if (!target) return;
+    const card = target.closest(".seq-chart-card") || target;
+    const reduceMotion = window.matchMedia
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false;
+    card.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }
+
   window.addEventListener("DOMContentLoaded", () => {
     window.DatamineHeader?.setLanguage(state.language, false);
     window.addEventListener("datamine:language-change", handleLanguageChange);
+    window.addEventListener("hashchange", scrollToSeqHash);
+    // The browser finalizes its own initial scroll position around the load
+    // event; re-assert the hash target afterwards so the deep-link wins.
+    window.addEventListener("load", scrollToSeqHash);
+    // Track the chart the reader scrolls to and keep the hash in sync with it.
+    window.addEventListener("scroll", onSeqScroll, { passive: true });
     applyChartThemeAttribute();
     renderStaticUi();
     renderChartThemeControl();
@@ -483,6 +558,9 @@
 
     renderTable();
     renderCharts();
+
+    // Charts now exist with real height, so a hash deep-link can land accurately.
+    scrollToSeqHash();
   }
 
   async function loadStageLimit(warnings) {

@@ -267,6 +267,8 @@
   background: rgba(255, 255, 255, 0.025);
   padding: 12px;
   box-shadow: none;
+  /* Clear the sticky datamine header when a #hash deep-link scrolls here. */
+  scroll-margin-top: 80px;
 }
 
 .seq-chart-card::before {

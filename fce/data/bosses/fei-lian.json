@@ -1,0 +1,51 @@
+{
+  "slug": "fei-lian",
+  "order": 28,
+  "boss_id": "boss_hum_067",
+  "name_color": "#d2db4f",
+  "art": "./assets/bosses/fei-lian.png",
+  "art_object_position": "center center",
+  "source_psd": "BOSS_FL.png",
+  "en": {
+    "name": "Fei Lian",
+    "mechanics": [
+      {
+        "index": "1",
+        "html": "Grants Fei Lian 1 stack of Damage Reduction of an Element for 3s after getting hit with that Element. Grants up to 1 stack every second."
+      },
+      {
+        "index": "2",
+        "html": "Ignores the target's resistances when attacking."
+      },
+      {
+        "index": "3",
+        "html": "Owns 5 stacks of Element Shield, each stack reducing the damage Fei Lian takes. Elemental attacks remove the corresponding Shield for 10s."
+      },
+      {
+        "index": "4",
+        "html": "Generates Elemental Ores every 15s around Fei Lian. The ores break upon 5 hits of the corresponding Elements but explode if they are not broken within 15s, dealing lethal damage to characters and healing Fei Lian."
+      }
+    ]
+  },
+  "ru": {
+    "name": "Фэй Лянь",
+    "mechanics": [
+      {
+        "index": "1",
+        "html": "После получения урона стихией Фэй Лянь получает 1 стак снижения урона от этой стихии на 3 секунды. Может получать не более 1 стака в секунду."
+      },
+      {
+        "index": "2",
+        "html": "Игнорирует сопротивления цели при атаке."
+      },
+      {
+        "index": "3",
+        "html": "Имеет 5 стаков Element Shield; каждый стак снижает получаемый Фэй Лянем урон. Стихийные атаки снимают соответствующий Shield на 10 секунд."
+      },
+      {
+        "index": "4",
+        "html": "Каждые 15 секунд вокруг Фэй Ляня появляются Elemental Ores. Они разрушаются после 5 попаданий соответствующими стихиями, но если не уничтожить их за 15 секунд, они взрываются, наносят персонажам смертельный урон и исцеляют Фэй Ляня."
+      }
+    ]
+  }
+}

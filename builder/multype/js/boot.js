@@ -73,8 +73,8 @@
     const app = window.TofMultypeCore.createMultypeApp({
       rootSelector: "[data-multype-app]",
       pageKind: "local",
-      dataUrl: "../../multype/data/module_extra_to_files_mapping3.json",
-      renamesUrl: "../../multype/data/renames.base.json",
+      dataUrl: "../../datamine/multype/data/module_extra_to_files_mapping3.json",
+      renamesUrl: "../../datamine/multype/data/renames.base.json",
       storageKey: "tof-multype-local-renames-v1",
       language: initialLanguage,
       translations,

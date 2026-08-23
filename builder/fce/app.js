@@ -380,7 +380,7 @@
     boss_id: 'boss_hum_046',
     source_psd: 'хаос.psd',
     name_color: '#f16937',
-    art: '../../fce/assets/bosses/chaos-armor.png',
+    art: '../../datamine/fce/assets/bosses/chaos-armor.png',
     art_scale: 1.08,
     art_scale_x: 1.08,
     art_scale_y: 1.08,
@@ -2710,7 +2710,7 @@
       return url;
     }
     if (url.startsWith('./assets/bosses/') || url.startsWith('assets/bosses/')) {
-      return `../../fce/${url.replace(/^\.\//, '')}`;
+      return `../../datamine/fce/${url.replace(/^\.\//, '')}`;
     }
     return url;
   }
@@ -4078,8 +4078,8 @@
     let cleanArtPath = state.art || '';
     if (cleanArtPath.startsWith('data:')) {
       cleanArtPath = `./assets/bosses/${state.slug}.png`;
-    } else if (cleanArtPath.startsWith('../../fce/')) {
-      cleanArtPath = cleanArtPath.replace('../../fce/', './');
+    } else if (cleanArtPath.startsWith('../../datamine/fce/')) {
+      cleanArtPath = cleanArtPath.replace('../../datamine/fce/', './');
     } else if (!cleanArtPath) {
       cleanArtPath = `./assets/bosses/${state.slug}.png`;
     }
@@ -4598,7 +4598,7 @@
     if (location.protocol === 'file:') return;
     // Same origin as whatever served the builder: localhost syncs local data,
     // the prod server syncs prod data — no hardcoded domain.
-    const BASE = '../../fce/data/';
+    const BASE = '../../datamine/fce/data/';
     try {
       const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
       const timer = controller ? setTimeout(() => controller.abort(), 4000) : null;

@@ -751,6 +751,12 @@
         selectedExactValueKey: ""
       };
 
+      // Restore shareable filter/search state from the URL before the first
+      // render so the controls come up pre-set (only on the public page).
+      if (this.options.pageKind !== "local") {
+        this.applyUrlState();
+      }
+
       if (!this.root) {
         return;
       }
@@ -787,6 +793,42 @@
       this.options.language = language === "ru" ? "ru" : "en";
       document.documentElement.lang = this.options.language;
       this.render();
+    }
+
+    // Seed filter/search state from the query string. Values are written
+    // directly into state (bypassing the change handlers) so main/sub can be
+    // restored together without the auto-clear that firing them in sequence
+    // would cause. Invalid values are ignored and fall back to defaults.
+    applyUrlState() {
+      const store = window.DatamineUrlState;
+      if (!store) return;
+      const params = store.read();
+
+      if (["renamed", "combined", "datamined"].includes(params.mode)) {
+        this.state.mode = params.mode;
+      }
+      if (["all", "renamed", "unrenamed"].includes(params.rename)) {
+        this.state.renameFilter = params.rename;
+      }
+      if (typeof params.main === "string") this.state.mainFilter = params.main;
+      if (typeof params.sub === "string") this.state.subFilter = params.sub;
+      if (typeof params.q === "string") this.state.search = params.q;
+    }
+
+    // Mirror the current filter/search state into the address bar (public page
+    // only). Params equal to their default are omitted for clean, short links.
+    syncUrl() {
+      const store = window.DatamineUrlState;
+      if (!store || this.options.pageKind === "local") return;
+
+      const defaultMode = this.options.initialMode || "combined";
+      store.write({
+        mode: this.state.mode === defaultMode ? null : this.state.mode,
+        main: this.state.mainFilter || null,
+        sub: this.state.subFilter || null,
+        rename: this.state.renameFilter === "all" ? null : this.state.renameFilter,
+        q: this.state.search || null
+      });
     }
 
     async init() {
@@ -1131,6 +1173,7 @@
       }
 
       this.syncTooltipState();
+      this.syncUrl();
     }
 
     renderShell(viewModel, globalStats, editorModel) {

@@ -57,7 +57,7 @@
   };
 
   const EXPORT_STRINGS = {
-    lastUpdate: { en: "Last update", ru: "Last update" },
+    lastUpdate: { en: "Last update", ru: "Последнее обновление" },
     version: { en: "Version:", ru: "Версия:" },
     client: { en: "Client:", ru: "Клиент:" },
     tooltipTitle: { en: "Export details", ru: "Данные экспорта" },

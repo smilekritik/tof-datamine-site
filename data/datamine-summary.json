@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T13:18:21.797Z",
+  "generatedAt": "2026-08-23T02:37:40.544Z",
   "exportVersion": {
     "version": "6.3.0",
     "appVersion": "3.0.0",
@@ -155,7 +155,7 @@
     "bootstrap": {
       "standardSeason": 22,
       "mmoSeason": 4,
-      "bytes": 659834
+      "bytes": 1137955
     }
   },
   "fce": {

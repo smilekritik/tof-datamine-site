@@ -31,6 +31,7 @@
 <script src="../vendor/react-18.3.1.production.min.js"></script>
 <script src="../vendor/react-dom-18.3.1.production.min.js"></script>
 <script src="./js/support.js"></script>
+<script src="../shared/url-state.js?v=1"></script>
 </head>
 <body>
 <div data-datamine-header data-current="oow"></div>
@@ -903,6 +904,7 @@ class Component extends DCLogic {
       compareIdx: activeSeasonNum > 1 ? activeSeasonNum - 1 : activeSeasonNum
     }, () => {
       this._scrollRailToLatest();
+      this._applyDeepLink();
     });
     return true;
   }
@@ -959,7 +961,12 @@ class Component extends DCLogic {
         this.setState({
           seasonIdx: selectedSeasonNum,
           active: ss.map((x) => x.season).slice(-4)
-        }, () => this._scrollRailToLatest());
+        }, () => {
+          this._scrollRailToLatest();
+          this._applyDeepLink();
+        });
+      } else {
+        this._applyDeepLink();
       }
     }
   }
@@ -987,8 +994,115 @@ class Component extends DCLogic {
     this.loadFullDatamineData();
   }
 
+  // ---- Shareable deep-linking (query params) -----------------------------
+  // Only the load-bearing "which view" state is encoded: season (s), dataset
+  // (mode), the Graphs/Difficulties tab (tab), and the open opponent card
+  // (floor + mob code). Everything else (filters, units, search, chart tuning)
+  // is intentionally left out so links stay short and stable.
+
+  _parseDeepLink() {
+    const store = window.DatamineUrlState;
+    if (!store) return null;
+    const p = store.read();
+    const mode = p.mode === 'mmo' ? 'mmo' : (p.mode === 'standard' ? 'standard' : null);
+    const seasonNum = Number(p.s);
+    const season = (p.s !== undefined && p.s !== '' && Number.isFinite(seasonNum)) ? seasonNum : null;
+    const tab = (p.tab === 'charts' || p.tab === 'difficulty' || p.tab === 'table') ? p.tab : null;
+    const floorNum = Number(p.floor);
+    const floor = (p.floor !== undefined && p.floor !== '' && Number.isFinite(floorNum)) ? floorNum : null;
+    const mob = (typeof p.mob === 'string' && p.mob) ? p.mob : null;
+    const hasAny = mode || season != null || tab || floor != null || mob;
+    return hasAny ? { mode, season, tab, floor, mob } : null;
+  }
+
+  // Applies the parsed deep link after data has loaded. Called from both the
+  // bootstrap and the full-data load callbacks: the first call applies the
+  // base view (mode/season/tab) and, for lightweight "season-index" seasons,
+  // waits for the full dataset before the opponent card can be resolved.
+  _applyDeepLink() {
+    if (this._deepLinkApplied) return;
+    const dl = this._deepLink;
+    if (!dl) { this._deepLinkApplied = true; return; }
+
+    if (!dl._baseApplied) {
+      dl._baseApplied = true;
+      const targetMode = dl.mode || this.state.mode;
+      const ss = this.buildSeasons(targetMode);
+      let season = dl.season;
+      if (season == null || !ss.some((s) => Number(s.season) === Number(season))) {
+        season = this.getActiveSeasonNumber(ss);
+      }
+      const patch = { mode: targetMode, seasonIdx: season };
+      if (dl.tab) patch.tab = dl.tab;
+      if (dl.floor != null) patch.expandedFloor = dl.floor;
+
+      this.setState(patch, () => {
+        const season2 = this._datasets?.[this.state.mode]?.seasons?.find(
+          (s) => Number(s.season) === Number(this.state.seasonIdx)
+        );
+        if (season2?.cacheScope === 'season-index') this.loadFullDatamineData();
+        this._tryOpenDeepLinkCard();
+      });
+      return;
+    }
+
+    // Subsequent call (phase-2 full data): retry the opponent card only.
+    this._tryOpenDeepLinkCard();
+  }
+
+  _tryOpenDeepLinkCard() {
+    const dl = this._deepLink;
+    if (!dl || dl._done) return;
+    if (dl.mob && dl.floor != null) {
+      const ok = this.openOpponentByCode(this.state.seasonIdx, dl.floor, dl.mob);
+      if (!ok) return; // enemies not loaded yet; wait for the phase-2 retry.
+    }
+    dl._done = true;
+    this._deepLinkApplied = true; // deep link settled: URL syncing may begin.
+  }
+
+  // Reopens an opponent card by its code name without any new modal logic:
+  // it rebuilds the target floor's lineup with the existing buildLineup() and
+  // invokes the matching mob's own onOpen() (which sets state.modal).
+  openOpponentByCode(seasonNumber, floorNumber, code) {
+    const ss = this.buildSeasons(this.state.mode);
+    const sea = ss.find((s) => Number(s.season) === Number(seasonNumber));
+    if (!sea) return false;
+    const f = (sea.floors || []).find((fl) => Number(fl.floor) === Number(floorNumber));
+    if (!f || !(f.enemies && f.enemies.length)) return false;
+    const { waves } = this.buildLineup(sea, f, this.state.unit);
+    for (const wave of waves) {
+      const mob = (wave.mobs || []).find((m) => m.id === code);
+      if (mob && typeof mob.onOpen === 'function') {
+        mob.onOpen();
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Mirrors the current view into the address bar (defaults omitted). Held off
+  // until the incoming deep link has been applied so it is never clobbered.
+  _syncUrl() {
+    const store = window.DatamineUrlState;
+    if (!store || !this._deepLinkApplied) return;
+    const st = this.state;
+    const modal = st.modal;
+    // A card carries its own floor; otherwise reflect the expanded floor drawer.
+    const floor = modal ? modal.floor : (st.expandedFloor != null ? st.expandedFloor : null);
+    store.write({
+      s: st.seasonIdx != null ? st.seasonIdx : null,
+      mode: st.mode === 'standard' ? null : st.mode,
+      tab: st.tab === 'table' ? null : st.tab,
+      floor: floor,
+      mob: modal ? modal.id : null
+    });
+  }
+
   componentDidMount() {
     this._hydrateImgs();
+    this._deepLink = this._parseDeepLink();
+    this._deepLinkApplied = false;
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
     document.documentElement.lang = this.state.lang;
@@ -1021,6 +1135,7 @@ class Component extends DCLogic {
       this._prevMode = this.state.mode;
       this._scrollRailToLatest();
     }
+    this._syncUrl();
   }
 
   componentWillUnmount() {
