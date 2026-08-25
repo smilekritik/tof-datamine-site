@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en" class="dm-scrollbar dm-scrollbar--slim">
+<head>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Explore Origin of War seasons floor by floor: enemy HP, effective HP, waves, buffs, rewards, and difficulty schedules.">
+<meta name="theme-color" content="#0c0812">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TOF Datamine Archive">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://tof.smilekritik.beer/datamine/oow/">
+<meta property="og:title" content="TOF Origin of War Datamine">
+<meta property="og:description" content="Explore Origin of War seasons floor by floor: enemy HP, effective HP, waves, buffs, rewards, and difficulty schedules.">
+<meta property="og:image" content="https://tof.smilekritik.beer/datamine/social/datamine-social.png">
+<meta property="og:image:secure_url" content="https://tof.smilekritik.beer/datamine/social/datamine-social.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1731">
+<meta property="og:image:height" content="909">
+<meta property="og:image:alt" content="Origin of War seasonal enemy stats and floor data">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TOF Origin of War Datamine">
+<meta name="twitter:description" content="Explore Origin of War seasons floor by floor: enemy HP, effective HP, waves, buffs, rewards, and difficulty schedules.">
+<meta name="twitter:image" content="https://tof.smilekritik.beer/datamine/social/datamine-social.png">
+<meta name="twitter:image:alt" content="Origin of War seasonal enemy stats and floor data">
+<link rel="canonical" href="https://tof.smilekritik.beer/datamine/oow/">
+<title>TOF Origin of War Datamine</title>
+<link rel="stylesheet" href="../shared/fonts.css">
+<link rel="stylesheet" href="../shared/base.css">
+<link rel="stylesheet" href="../shared/shell.css">
+<link rel="stylesheet" href="../shared/header.css?v=2">
+<link rel="stylesheet" href="../shared/footer.css">
+<link rel="stylesheet" href="../shared/scrollbars.css?v=2">
+<link rel="stylesheet" href="./styles/oow.css?v=15">
+<script src="../vendor/react-18.3.1.production.min.js"></script>
+<script src="../vendor/react-dom-18.3.1.production.min.js"></script>
+<script src="../shared/site-config.js"></script>
+<script src="../shared/i18n.js"></script>
+<script src="../shared/data-meta.js"></script>
+<script src="../shared/version-status.js"></script>
+<script src="./js/support.js"></script>
+<script src="../shared/url-state.js?v=1"></script>
+</head>
+<body>
+<div data-datamine-header data-current="oow"></div>
+<x-dc>
+<helmet>
+  <script src="../shared/header.js?server-cache=5"></script>
+<script src="../shared/footer.js"></script>
+</helmet>
+
+<main id="oow-main" class="oow-page" style="min-height:100vh; position:relative; color:var(--oow-text); background:var(--oow-bg); padding-bottom:80px;">
+
+  
+  
+
+  <!-- Static boss artwork in the right page margin. -->
+  <sc-if value="{{ heroImgVisible }}" hint-placeholder-val="{{ false }}">
+    <div id="oow-boss-floating-art">
+      <img src="{{ heroImg }}" data-src="{{ heroImg }}" alt="" />
+    </div>
+  </sc-if>
+
+  <!-- 
+  ========================================================================
+  [FEATURE TOGGLE: DRAGGABLE / MOVEABLE BOSS ARTWORK]
+  To enable mouse dragging, uncomment the script below and set pointer-events:auto.
+  ========================================================================
+  <script>
+    (function initDraggableBoss() {
+      const el = document.getElementById('oow-boss-floating-art');
+      if (!el) return;
+      el.style.pointerEvents = 'auto';
+      el.style.cursor = 'grab';
+
+      let isDragging = false, startX, startY, initialLeft, initialTop;
+
+      el.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        el.style.cursor = 'grabbing';
+        const rect = el.getBoundingClientRect();
+        initialLeft = rect.left + window.scrollX;
+        initialTop = rect.top + window.scrollY;
+        startX = e.clientX;
+        startY = e.clientY;
+        el.style.right = 'auto';
+        el.style.left = initialLeft + 'px';
+        el.style.top = initialTop + 'px';
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        el.style.left = (initialLeft + dx) + 'px';
+        el.style.top = (initialTop + dy) + 'px';
+      });
+
+      window.addEventListener('mouseup', function() {
+        if (isDragging) {
+          isDragging = false;
+          el.style.cursor = 'grab';
+        }
+      });
+    })();
+  </script>
+  -->
+
+  <div class="oow-main-wrap" aria-busy="{{ runtimeError ? 'false' : (isDataLoaded ? 'false' : 'true') }}" style="max-width:1440px; margin:0 auto; padding:14px 28px 0; position:relative;">
+
+    <sc-if value="{{ runtimeError }}" hint-placeholder-val="{{ false }}">
+      <div role="alert" class="oow-runtime-error">
+        <span>{{ runtimeErrorLabel }}</span>
+        <button type="button" onClick="{{ retryRuntime }}">{{ retryLabel }}</button>
+      </div>
+    </sc-if>
+
+    <!-- COMPACT HERO + TABS -->
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:14px;">
+      <div style="min-width:0;">
+        <div style="font:700 11px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#f5d97a; margin-bottom:6px;">{{ heroSubtitle }}</div>
+        <h1 style="font:700 26px/1.25 var(--font-sans); color:#f4f0f6; margin:0; letter-spacing:-0.01em;">{{ heroTitle }}</h1>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span style="font:700 11px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#948aa8;">{{ gameModeLabel }}</span>
+        <div style="display:flex; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:999px; padding:4px;">
+          <button type="button" onClick="{{ modeStd }}" style="{{ modeStdStyle }}">{{ originalModeLabel }}</button>
+          <button type="button" onClick="{{ modeMmo }}" style="{{ modeMmoStyle }}">MMO</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN TABS -->
+    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
+      <button type="button" onClick="{{ goTable }}" style="{{ tabTableStyle }}">{{ tableTabLabel }}</button>
+      <button type="button" onClick="{{ goCharts }}" style="{{ tabChartsStyle }}">{{ chartsTabLabel }}</button>
+      <button type="button" onClick="{{ goDiff }}" style="{{ tabDiffStyle }}">{{ difficultyTabLabel }}</button>
+    </div>
+
+    <div class="oow-main-layout" style="display:flex; gap:22px; align-items:flex-start;">
+
+      <!-- STICKY SEASON RAIL (EXPANDED) -->
+      <sc-if value="{{ showRailExpanded }}" hint-placeholder-val="{{ true }}">
+        <aside class="oow-season-aside">
+          <div class="oow-season-aside__header">
+            <button type="button" onClick="{{ toggleRail }}" title="{{ collapseSeasonsTitle }}" style="display:inline-flex; align-items:center; gap:5px; font:700 10px/1 'Manrope'; letter-spacing:.14em; color:#17111f; background:linear-gradient(135deg,#f5d97a,#f0b94e); padding:5px 9px; border-radius:5px; border:none; cursor:pointer; box-shadow:0 2px 8px rgba(245,217,122,.25);" style-hover="transform:scale(1.04); opacity:.9;">
+              {{ seasonsLabel }} <span style="font-size:8px; opacity:.8;">◀</span>
+            </button>
+            <span style="font:700 10px/1 'Manrope'; color:#8fe6d4;">{{ seasonCountLabel }}</span>
+          </div>
+          <div ref="{{ railRef }}" class="oow-season-rail-scroll dm-scrollbar dm-scrollbar--slim">
+            <sc-for list="{{ seasonPills }}" as="s" hint-placeholder-count="3">
+              <button type="button" onClick="{{ s.onSelect }}" data-active-pill="{{ s.activeFlag }}" data-season-pill="{{ s.num }}" style="{{ s.railStyle }}" aria-current="{{ s.currentAria }}" aria-hidden="{{ isDataLoaded ? 'false' : 'true' }}">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+                  <span style="display:flex; align-items:center; gap:7px; font:700 14px/1 'Manrope'; color:{{ s.titleCol }};">
+                    <sc-if value="{{ s.label }}"><span style="width:9px;height:9px;border-radius:3px;background:{{ s.color }};flex:none;"></span>{{ s.label }}</sc-if>
+                  </span>
+                  <span style="font:700 11px/1 'JetBrains Mono'; color:{{ s.metaCol }};">{{ s.boss }}</span>
+                </div>
+                <sc-if value="{{ s.dates }}"><div style="font:500 10px/1.4 'JetBrains Mono'; color:{{ s.metaCol }}; margin-top:6px;">{{ s.dates }} · {{ s.floors }}F</div></sc-if>
+              </button>
+            </sc-for>
+          </div>
+        </aside>
+      </sc-if>
+
+      <div class="oow-content-column" style="flex:1; min-width:0; display:flex; flex-direction:column; gap:20px;">
+
+    <!-- ================= TAB 1: TABLE ================= -->
+    <sc-if value="{{ isTable }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; flex-direction:column; gap:20px;">
+
+        <!-- TOOLBAR -->
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <sc-if value="{{ showRailCollapsed }}" hint-placeholder-val="{{ false }}">
+              <button type="button" onClick="{{ toggleRail }}" title="{{ expandSeasonsTitle }}" style="display:inline-flex; align-items:center; gap:6px; font:700 10px/1 'Manrope'; letter-spacing:.14em; color:#17111f; background:linear-gradient(135deg,#f5d97a,#f0b94e); padding:6px 11px; border-radius:999px; border:none; cursor:pointer; box-shadow:0 2px 8px rgba(245,217,122,.25);" style-hover="transform:scale(1.04);">
+                <span style="font-size:8px;">▶</span> {{ seasonsLabel }}
+              </button>
+            </sc-if>
+            <sc-if value="{{ hasActiveSeasonLabel }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; align-items:center; gap:7px; font:700 12px/1 'Manrope'; color:#4fe3c1; background:rgba(79,227,193,.1); border:1px solid rgba(79,227,193,.25); padding:6px 12px; border-radius:999px;"><span style="width:7px;height:7px;border-radius:50%;background:#4fe3c1;box-shadow:0 0 8px #4fe3c1;animation:oowpulse 1.8s infinite;"></span>{{ activeSeasonLabel }}</div>
+            </sc-if>
+            <sc-if value="{{ !hasActiveSeasonLabel }}" hint-placeholder-val="{{ true }}">
+              <div style="width:140px; height:26px; border-radius:999px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07);"></div>
+            </sc-if>
+            <div style="display:flex; gap:6px;">
+              <button type="button" onClick="{{ filterAll }}" style="{{ chipAll }}">{{ allFloorsLabel }}</button>
+              <button type="button" onClick="{{ filterRamp }}" style="{{ chipRamp }}">{{ rampLabel }}</button>
+              <button type="button" onClick="{{ filterBoss }}" style="{{ chipBoss }}">{{ challengeLabel }}</button>
+            </div>
+            <input type="text" placeholder="{{ searchPlaceholder }}" onInput="{{ onSearch }}" style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:9px; color:#f6f1fb; padding:7px 12px; font:500 13px/1 'Manrope'; width:220px; outline:none;" />
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <div style="display:flex; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:999px; padding:2px;">
+              <button type="button" onClick="{{ unitG }}" style="{{ unitGStyle }}">G</button>
+              <button type="button" onClick="{{ unitM }}" style="{{ unitMStyle }}">M</button>
+              <button type="button" onClick="{{ unitRaw }}" style="{{ unitRawStyle }}">{{ exactLabel }}</button>
+            </div>
+            <button type="button" onClick="{{ toggleCompare }}" style="{{ compareBtnStyle }}">⇆ {{ compareLabelText }}</button>
+            <button type="button" onClick="{{ copyJson }}" style="font:600 12px/1 'Manrope'; color:#cbc2de; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); padding:8px 13px; border-radius:999px; cursor:pointer;">{{ copyJsonLabel }}</button>
+          </div>
+        </div>
+
+        <!-- COMPARE PANEL -->
+        <sc-if value="{{ showCompare }}" hint-placeholder-val="{{ false }}">
+          <div style="background:rgba(181,123,255,.06); border:1px solid rgba(181,123,255,.3); border-radius:14px; padding:16px 18px; animation:oowdrawer .22s ease;">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:14px;">
+              <h3 style="font:600 16px/1.2 var(--font-sans); color:#c79dff; margin:0;">{{ compareTitle }} — {{ activeSeasonLabel }} {{ versusLabel }} {{ compareLabel }}</h3>
+              <div style="display:flex; align-items:center; gap:10px; font:600 12px/1 var(--font-sans); color:#948aa8;">{{ compareWithLabel }}
+                <select onChange="{{ onCompareChange }}" style="background:#1a1226; border:1px solid rgba(255,255,255,.14); color:#f6f1fb; padding:6px 12px; border-radius:8px; outline:none; font:600 12px/1 var(--font-sans); cursor:pointer;">
+                  <sc-for list="{{ compareOptions }}" as="o" hint-placeholder-count="12">
+                    <option value="{{ o.value }}" selected="{{ o.selected }}" style="background:#1a1226; color:#f6f1fb;">{{ o.label }}</option>
+                  </sc-for>
+                </select>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
+              <sc-for list="{{ compareStats }}" as="c" hint-placeholder-count="3">
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:12px 14px;">
+                  <div><div style="font:600 11px/1 var(--font-sans); color:#948aa8; text-transform:uppercase; letter-spacing:.04em;">{{ c.label }}</div><div style="font:800 17px/1.2 var(--font-sans); color:#f6f1fb; margin-top:5px;">{{ c.value }}</div></div>
+                  <span style="font:700 12px/1 var(--font-sans); padding:4px 10px; border-radius:999px; color:{{ c.deltaCol }}; background:{{ c.deltaBg }};">{{ c.delta }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- FLOOR TABLE -->
+        <div class="oow-table-panel dm-scrollbar" style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:16px; overflow:hidden;">
+          <div class="oow-floor-grid" style="display:grid; grid-template-columns:96px 150px 140px 70px 1fr 66px; background:rgba(255,255,255,.03); border-bottom:1px solid rgba(255,255,255,.07);">
+            <div style="font:700 11px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#7a7290; padding:14px 18px;">{{ floorLabel }}</div>
+            <div style="font:700 11px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#7a7290; padding:14px 18px;">{{ totalHpLabel }}</div>
+            <div style="font:700 11px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#7a7290; padding:14px 18px;">{{ maxMobLabel }}</div>
+            <div style="font:700 11px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#7a7290; padding:14px 18px;">{{ mobsLabel }}</div>
+            <div style="font:700 11px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#7a7290; padding:14px 18px;">{{ waveDistributionLabel }}</div>
+            <div style="padding:14px 18px;"></div>
+          </div>
+          <sc-for list="{{ rows }}" as="f" hint-placeholder-count="10">
+            <div>
+              <div onClick="{{ f.onToggle }}" class="oow-floor-grid" data-oow-floor-row="{{ f.floorNum }}" style="display:grid; grid-template-columns:96px 150px 140px 70px 1fr 66px; align-items:center; border-bottom:1px solid rgba(255,255,255,.05); background:{{ f.rowBg }}; cursor:pointer;" aria-hidden="{{ isDataLoaded ? 'false' : 'true' }}">
+                <div style="padding:13px 18px;">
+                  <sc-if value="{{ f.n }}"><span style="font:800 12px/1 var(--font-sans); color:{{ f.floorCol }}; background:{{ f.floorBg }}; border:1px solid {{ f.floorBd }}; padding:6px 12px; border-radius:8px;">{{ f.n }}</span></sc-if>
+                  <sc-if value="{{ !f.n }}"><span style="{{ f.floorBadgeStyle }}"></span></sc-if>
+                </div>
+                <div style="padding:13px 18px; font:800 16px/1 var(--font-mono); color:#f5d97a;">
+                  <sc-if value="{{ f.hp }}">{{ f.hp }}<span style="font-size:10px; color:#8f7a3f;"> {{ f.unit }}</span></sc-if>
+                  <sc-if value="{{ !f.hp }}"><span style="{{ f.hpPlaceholderStyle }}"></span></sc-if>
+                </div>
+                <div style="padding:13px 18px; font:700 14px/1 var(--font-mono); color:#f6f1fb;">
+                  <sc-if value="{{ f.max }}">{{ f.max }}<span style="font-size:9px; color:#5b5470;"> {{ f.unit }}</span></sc-if>
+                  <sc-if value="{{ !f.max }}"><span style="{{ f.maxPlaceholderStyle }}"></span></sc-if>
+                </div>
+                <div style="padding:13px 18px; font:600 13px/1 var(--font-mono); color:#948aa8;">
+                  <sc-if value="{{ f.mobs }}">{{ f.mobs }}</sc-if>
+                  <sc-if value="{{ !f.mobs }}"><span style="{{ f.mobsPlaceholderStyle }}"></span></sc-if>
+                </div>
+                <div style="padding:13px 18px;">
+                  <div style="display:flex; height:10px; gap:3px; width:250px; border-radius:999px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); overflow:hidden;">
+                    <sc-for list="{{ f.segs }}" as="sg" hint-placeholder-count="0">
+                      <div onMouseMove="{{ sg.onHover }}" onMouseLeave="{{ clearTip }}" style="width:{{ sg.pct }}%; background:{{ sg.grad }}; cursor:help;" style-hover="filter:brightness(1.35);"></div>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="padding:13px 18px; text-align:right; font:700 15px/1 var(--font-sans); color:{{ f.chevCol }};">{{ f.chev }}</div>
+              </div>
+              <sc-if value="{{ f.expanded }}" hint-placeholder-val="{{ false }}">
+                <div data-oow-floor-details="{{ f.floorNum }}" class="oow-floor-drawer">
+                  <div class="oow-floor-drawer__clip">
+                    <div style="background:linear-gradient(180deg, rgba(181,123,255,.05), rgba(0,0,0,.16)); border-bottom:1px solid rgba(255,255,255,.06); padding:20px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.06);">
+                    <div style="font:600 16px/1.2 var(--font-sans); color:#f6f1fb;">{{ f.n }} · {{ f.lineupTitle }}</div>
+                    <div style="display:flex; align-items:center; gap:11px; background:linear-gradient(135deg, rgba(79,227,193,.18), rgba(79,227,193,.04)); border:1px solid rgba(79,227,193,.45); padding:8px 15px; border-radius:12px;">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="#4fe3c1"><path d="M12 2l8 3.2V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.2z"/><path d="M10.2 12.1l-1.6-1.6-1.15 1.15 2.75 2.75 4.5-4.5-1.15-1.15z" fill="#0c0812"/></svg>
+                      <div><div style="font:700 8px/1 'Manrope'; letter-spacing:.12em; text-transform:uppercase; color:#8fe6d4;">{{ resistsLabel }}</div><div style="font:800 18px/1 'JetBrains Mono'; color:#4fe3c1; margin-top:4px;">{{ f.resistStr }}</div></div>
+                    </div>
+                  </div>
+                  <sc-for list="{{ f.lineup }}" as="wv" hint-placeholder-count="3">
+                    <div style="margin-bottom:16px;">
+                      <div style="font:700 11px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#b57bff; margin-bottom:10px;">{{ wv.label }} · {{ wv.tag }}</div>
+                      <div style="display:flex; flex-wrap:wrap; gap:12px;">
+                        <sc-for list="{{ wv.mobs }}" as="m" hint-placeholder-count="2">
+                          <button type="button" onClick="{{ m.onOpen }}" class="oow-mob-card" style="display:flex; align-items:center; text-align:left; gap:12px; background:{{ m.bg }}; border:1px solid {{ m.bd }}; border-radius:12px; padding:11px 13px; cursor:pointer; flex:{{ m.flex }}; min-width:0; box-sizing:border-box; overflow:hidden;" style-hover="border-color:{{ m.bdHover }}; transform:translateY(-2px);">
+                            <img data-src="{{ m.img }}" data-fallback-src="{{ m.fallbackImg }}" alt="" class="oow-mob-avatar" style="width:48px; height:48px; object-fit:cover; object-position:center 30%; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.1); border-radius:10px; flex:none;" />
+                            <div style="min-width:0; flex:1; overflow:hidden;">
+                              <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                                <span style="font:700 13px/1.2 'Manrope'; color:#f6f1fb; word-break:break-word;">{{ m.name }}</span>
+                                <span style="font:700 8px/1 'Manrope'; letter-spacing:.06em; text-transform:uppercase; color:{{ m.tagCol }}; background:{{ m.tagBg }}; padding:2px 5px; border-radius:4px; flex:none;">{{ m.cls }}</span>
+                              </div>
+                              <div style="font:500 10px/1.3 'Manrope'; color:#948aa8; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ m.sub }}</div>
+                            </div>
+                            <div class="oow-mob-hp-col" style="text-align:right; flex:none; min-width:92px; margin-left:auto;">
+                              <div style="font:600 8px/1 'Manrope'; color:#6b6480; text-transform:uppercase; letter-spacing:.08em;">HP</div>
+                              <div class="oow-mob-hp-val" style="font:800 22px/1 'JetBrains Mono'; color:{{ m.hpCol }}; margin-top:3px; white-space:nowrap;">{{ m.hp }}<span style="font:600 12px/1 'Manrope'; color:#8a8398; margin-left:2px;">{{ m.unit }}</span></div>
+                              <div style="font:600 8px/1 'Manrope'; color:#3f7d6f; text-transform:uppercase; letter-spacing:.08em; margin-top:6px;">{{ effectiveHpLabel }}</div>
+                              <div class="oow-mob-ehp-val" style="font:800 17px/1 'JetBrains Mono'; color:#4fe3c1; margin-top:3px; white-space:nowrap;">{{ m.ehpNum }}<span style="font:600 10px/1 'Manrope'; color:#2f7d6e; margin-left:2px;">{{ m.unit }}</span></div>
+                            </div>
+                          </button>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-for>
+                  <!-- MUTATORS & AFFIXES -->
+                  <div style="padding-top:12px; border-top:1px solid rgba(255,255,255,.06);">
+                    <div style="display:flex; align-items:center; gap:8px; font:700 11px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#f5d97a; margin-bottom:12px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>{{ affixesLabel }}</div>
+                    <div class="oow-affixes-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:10px;">
+                      <sc-for list="{{ f.affixes }}" as="a" hint-placeholder-count="6">
+                        <div style="background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.07); border-left:3px solid {{ a.accent }}; border-radius:10px; padding:11px 13px;">
+                          <div style="display:flex; align-items:center; gap:10px; margin-bottom:7px;">
+                            <img data-src="{{ a.icon }}" alt="" style="width:30px; height:30px; border-radius:7px; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.1); flex:none;" />
+                            <div style="min-width:0; flex:1;">
+                              <div style="font:700 12px/1.2 'Manrope'; color:#f6f1fb; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ a.name }}</div>
+                              <span style="display:inline-block; margin-top:4px; font:800 9px/1 'Manrope'; letter-spacing:.06em; padding:3px 7px; border-radius:4px; color:{{ a.badgeCol }}; background:{{ a.badgeBg }}; border:1px solid {{ a.badgeBd }};">{{ a.badge }}</span>
+                            </div>
+                          </div>
+                          <div style="font:500 11px/1.45 'Manrope'; color:#948aa8;">{{ a.desc }}</div>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= TAB 2: CHARTS ================= -->
+    <sc-if value="{{ isCharts }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <!-- CONTROLS -->
+        <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:12px 14px;">
+          <div class="oow-chart-controls" style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:11px;">
+            <div style="background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:9px 11px;">
+              <div style="font:700 9px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#8fe6d4; margin-bottom:7px;">{{ hpModeLabel }}</div>
+              <div style="display:flex; gap:5px;">
+                <button type="button" onClick="{{ modeEhp }}" style="{{ modeEhpStyle }}">{{ effectiveHpLabel }}</button>
+                <button type="button" onClick="{{ modeRaw }}" style="{{ modeRawStyle }}">{{ rawHpLabel }}</button>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:9px 11px;">
+              <div style="font:700 9px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#e9c96f; margin-bottom:7px;">{{ metricLabel }}</div>
+              <div style="display:flex; gap:5px;">
+                <button type="button" onClick="{{ metricBoss }}" style="{{ metricBossStyle }}">{{ bossHpLabel }}</button>
+                <button type="button" onClick="{{ metricTotal }}" style="{{ metricTotalStyle }}">{{ totalFloorLabel }}</button>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:9px 11px;">
+              <div style="font:700 9px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#c79dff; margin-bottom:7px;">{{ floorRangeLabel }}</div>
+              <div style="display:flex; gap:5px;">
+                <button type="button" onClick="{{ rangeRamp }}" style="{{ rangeRampStyle }}">{{ chartRampLabel }}</button>
+                <button type="button" onClick="{{ rangeOvertime }}" style="{{ rangeOtStyle }}">{{ chartChallengeLabel }}</button>
+                <button type="button" onClick="{{ rangeAll }}" style="{{ rangeAllStyle }}">{{ allLabel }}</button>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:9px 0; border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06); margin-bottom:10px;">
+            <span style="font:700 9px/1 'Manrope'; letter-spacing:.08em; text-transform:uppercase; color:#948aa8;">{{ presetsLabel }}</span>
+            <sc-for list="{{ presets }}" as="p" hint-placeholder-count="4">
+              <button type="button" onClick="{{ p.onClick }}" style="{{ p.style }}">{{ p.label }}</button>
+            </sc-for>
+            <div class="oow-chart-theme-control">
+              <span class="oow-chart-theme-control__label">{{ chartPaletteLabel }}</span>
+              <div class="oow-chart-theme-switch" role="group" aria-label="{{ chartPaletteAria }}">
+                <button class="oow-chart-theme-switch__button" type="button" onClick="{{ chartThemeLight }}" aria-pressed="{{ chartThemeLightPressed }}" style="{{ chartThemeLightStyle }}">
+                  <svg class="oow-chart-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
+                  {{ lightLabel }}
+                </button>
+                <button class="oow-chart-theme-switch__button" type="button" onClick="{{ chartThemeDark }}" aria-pressed="{{ chartThemeDarkPressed }}" style="{{ chartThemeDarkStyle }}">
+                  <svg class="oow-chart-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+                  {{ darkLabel }}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="font:700 9px/1 'Manrope'; letter-spacing:.08em; text-transform:uppercase; color:#948aa8; margin-bottom:8px;">{{ seasonsOnChartLabel }}</div>
+            <div style="display:flex; gap:5px; flex-wrap:wrap;">
+              <sc-for list="{{ seasonChips }}" as="c" hint-placeholder-count="22">
+                <button type="button" onClick="{{ c.onClick }}" style="{{ c.style }}"><span style="width:8px;height:8px;border-radius:2px;background:{{ c.color }};display:inline-block;margin-right:6px;vertical-align:middle;"></span>{{ c.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHARTS GRID (main + sub-charts; double-click a sub-chart to swap it big) -->
+        <div class="oow-charts-grid" style="{{ chartsGridStyle }}">
+        <!-- MAIN LINE CHART -->
+        <div class="oow-main-chart-card" data-chart-card="main" onDoubleClick="{{ demoteMain }}" style="{{ mainChartCardStyle }}">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:10px; flex-wrap:wrap;">
+            <h2 style="{{ mainChartTitleStyle }}" title="{{ mainDblHint }}">{{ mainChartTitle }}</h2>
+            <div class="oow-chart-actions">
+              <button class="oow-chart-export-button oow-chart-export-button--primary" type="button" onClick="{{ downloadMainPng }}">{{ downloadPngLabel }}</button>
+              <button class="oow-chart-export-button" type="button" onClick="{{ downloadMainCsv }}" style="{{ exportCsvStyle }}">{{ downloadCsvLabel }}</button>
+              <span style="{{ modeBadgeStyle }}">{{ modeBadge }}</span>
+            </div>
+          </div>
+          <div style="position:relative;" onMouseMove="{{ onChartMove }}" onMouseLeave="{{ onChartLeave }}">
+            <svg data-oow-main-chart viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ mainChartTitle }}">
+              <rect x="0" y="0" width="920" height="300" rx="8" fill="{{ chartPlotBackground }}"/>
+              <sc-for list="{{ mainYTicks }}" as="t" hint-placeholder-count="5">
+                <g>
+                  <line x1="64" y1="{{ t.y }}" x2="896" y2="{{ t.y }}" stroke="{{ chartGridColor }}" stroke-width="1"/>
+                  <foreignObject class="oow-svg-axis-label" x="0" y="{{ t.fy }}" width="58" height="16"><div style="color:{{ chartAxisColor }}; text-align:right; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject>
+                </g>
+              </sc-for>
+              <sc-for list="{{ mainXTicks }}" as="t" hint-placeholder-count="8">
+                <foreignObject class="oow-svg-axis-label" x="{{ t.fx }}" y="278" width="50" height="16"><div style="color:{{ chartAxisColor }}; text-align:center; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject>
+              </sc-for>
+              <sc-if value="{{ showGuide }}" hint-placeholder-val="{{ false }}">
+                <line x1="{{ guideX }}" y1="16" x2="{{ guideX }}" y2="270" stroke="rgba(245,217,122,.5)" stroke-width="1" stroke-dasharray="4 4"/>
+              </sc-if>
+              <sc-for list="{{ mainSeries }}" as="s" hint-placeholder-count="4">
+                <g>
+                  <path d="{{ s.area }}" fill="{{ s.fill }}" opacity="0.12"/>
+                  <path d="{{ s.path }}" fill="none" stroke="{{ s.color }}" stroke-width="2.2" stroke-linejoin="round"/>
+                  <sc-for list="{{ s.pts }}" as="p" hint-placeholder-count="15">
+                    <circle cx="{{ p.cx }}" cy="{{ p.cy }}" r="{{ p.r }}" fill="{{ s.color }}"/>
+                  </sc-for>
+                </g>
+              </sc-for>
+              <sc-for list="{{ mainLabels }}" as="p" hint-placeholder-count="24">
+                <foreignObject class="oow-svg-value-label" x="{{ p.lx }}" y="{{ p.fy }}" width="64" height="15" pointer-events="none"><div style="color:{{ p.color }}; text-align:center; font:700 9px/15px 'JetBrains Mono',monospace; white-space:nowrap; text-shadow:-1px -1px 0 {{ chartLabelHalo }},1px -1px 0 {{ chartLabelHalo }},-1px 1px 0 {{ chartLabelHalo }},1px 1px 0 {{ chartLabelHalo }};">{{ p.label }}</div></foreignObject>
+              </sc-for>
+              <rect x="0" y="0" width="920" height="300" fill="transparent" onMouseMove="{{ onChartMove }}" onMouseLeave="{{ onChartLeave }}" style="cursor:crosshair;"></rect>
+            </svg>
+            <sc-if value="{{ showGuide }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; top:8px; left:{{ guideLeftPct }}%; transform:translateX({{ guideShift }}); background:rgba(18,10,26,.96); border:1px solid rgba(255,255,255,.14); border-radius:10px; padding:10px 12px; pointer-events:none; min-width:150px; box-shadow:0 10px 30px rgba(0,0,0,.5);">
+                <div style="font:700 11px/1 'JetBrains Mono'; color:#f5d97a; margin-bottom:8px;">{{ guideFloorLabel }}</div>
+                <sc-for list="{{ guideRows }}" as="g" hint-placeholder-count="4">
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:5px;">
+                    <span style="font:600 11px/1 'Manrope'; color:#cbc2de;"><span style="width:8px;height:8px;border-radius:2px;background:{{ g.color }};display:inline-block;margin-right:6px;"></span>{{ g.label }}</span>
+                    <span style="font:700 11px/1 'JetBrains Mono'; color:#f6f1fb;">{{ g.val }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+
+        <!-- SUB CHART: HISTORY -->
+          <div class="oow-subchart-card" data-chart-card="history" onDoubleClick="{{ promoteHistory }}" style="{{ historyCardStyle }}">
+            <div class="oow-subchart-header">
+              <div>
+                <h3 style="{{ subChartTitleStyle }}" title="{{ subDblHint }}">{{ historyChartTitle }}</h3>
+                <p style="{{ subChartDescriptionStyle }}">{{ historyChartDescription }}</p>
+              </div>
+              <div class="oow-subchart-export-actions">
+                <button class="oow-chart-export-button oow-chart-export-button--primary oow-chart-export-button--compact" type="button" onClick="{{ downloadHistoryPng }}">PNG</button>
+                <button class="oow-chart-export-button oow-chart-export-button--compact" type="button" onClick="{{ downloadHistoryCsv }}" style="{{ exportCsvStyle }}">CSV</button>
+              </div>
+            </div>
+            <div style="display:flex; gap:16px; margin-bottom:10px;">
+              <span style="font:600 11px/1 'Manrope'; color:#f5d97a;"><span style="width:14px;height:3px;background:#f5d97a;display:inline-block;vertical-align:middle;margin-right:6px;border-radius:2px;"></span>{{ rawHpLabel }}</span>
+              <span style="font:600 11px/1 'Manrope'; color:#c79dff;"><span style="width:14px;height:3px;background:#c79dff;display:inline-block;vertical-align:middle;margin-right:6px;border-radius:2px;"></span>{{ effectiveHpLabel }}</span>
+            </div>
+            <div style="position:relative;" onMouseMove="{{ onHistMove }}" onMouseLeave="{{ onHistLeave }}">
+              <svg data-oow-history-chart viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ historyChartTitle }}">
+                <rect x="0" y="0" width="920" height="300" rx="8" fill="{{ chartPlotBackground }}"/>
+                <sc-for list="{{ histYTicks }}" as="t" hint-placeholder-count="6">
+                  <g><line x1="58" y1="{{ t.y }}" x2="898" y2="{{ t.y }}" stroke="{{ chartGridColor }}"/><foreignObject class="oow-svg-axis-label" x="0" y="{{ t.fy }}" width="52" height="16"><div style="color:{{ chartAxisColor }}; text-align:right; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject></g>
+                </sc-for>
+                <sc-for list="{{ histXTicks }}" as="t" hint-placeholder-count="7">
+                  <foreignObject class="oow-svg-axis-label" x="{{ t.fx }}" y="274" width="50" height="16"><div style="color:{{ chartAxisColor }}; text-align:center; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject>
+                </sc-for>
+                <sc-if value="{{ histGuide }}" hint-placeholder-val="{{ false }}"><line x1="{{ histGuideX }}" y1="14" x2="{{ histGuideX }}" y2="258" stroke="rgba(245,217,122,.5)" stroke-width="1" stroke-dasharray="4 4"/></sc-if>
+                <path d="{{ histEhpArea }}" fill="#c79dff" opacity="0.13"/>
+                <path d="{{ histEhpPath }}" fill="none" stroke="#c79dff" stroke-width="2.4" stroke-linejoin="round"/>
+                <path d="{{ histRawPath }}" fill="none" stroke="#f5d97a" stroke-width="2.4" stroke-linejoin="round"/>
+                <sc-for list="{{ histEhpDots }}" as="d" hint-placeholder-count="22"><circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="2.6" fill="#c79dff"/></sc-for>
+                <sc-for list="{{ histRawDots }}" as="d" hint-placeholder-count="22"><circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="2.6" fill="#f5d97a"/></sc-for>
+                <circle cx="{{ histLast.ehpX }}" cy="{{ histLast.ehpY }}" r="4.2" fill="#c79dff"/>
+                <circle cx="{{ histLast.rawX }}" cy="{{ histLast.rawY }}" r="4.2" fill="#f5d97a"/>
+                <sc-for list="{{ histLabels }}" as="p" hint-placeholder-count="24">
+                  <foreignObject class="oow-svg-value-label" x="{{ p.lx }}" y="{{ p.fy }}" width="64" height="15" pointer-events="none"><div style="color:{{ p.color }}; text-align:center; font:700 9px/15px 'JetBrains Mono',monospace; white-space:nowrap; text-shadow:-1px -1px 0 {{ chartLabelHalo }},1px -1px 0 {{ chartLabelHalo }},-1px 1px 0 {{ chartLabelHalo }},1px 1px 0 {{ chartLabelHalo }};">{{ p.label }}</div></foreignObject>
+                </sc-for>
+                <rect x="0" y="0" width="920" height="300" fill="transparent" onMouseMove="{{ onHistMove }}" onMouseLeave="{{ onHistLeave }}" style="cursor:crosshair;"></rect>
+              </svg>
+              <sc-if value="{{ histGuide }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute; top:6px; left:{{ histGuidePct }}%; transform:translateX({{ histGuideShift }}); background:rgba(18,10,26,.96); border:1px solid rgba(255,255,255,.14); border-radius:12px; padding:10px 14px; pointer-events:none; width:max-content; min-width:180px; max-width:280px; box-shadow:0 12px 36px rgba(0,0,0,.6); z-index:20;">
+                  <div style="font:700 12px/1 'JetBrains Mono'; color:#f5d97a; margin-bottom:3px; white-space:nowrap;">{{ histGuideLabel }}</div>
+                  <div style="font:500 11px/1.2 'Manrope'; color:#948aa8; margin-bottom:8px; white-space:nowrap;">{{ histGuideSub }}</div>
+                  <sc-for list="{{ histGuideRows }}" as="g" hint-placeholder-count="3">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:5px; white-space:nowrap;">
+                      <span style="font:600 11px/1 'Manrope'; color:#cbc2de; white-space:nowrap; display:inline-flex; align-items:center;"><span style="width:8px;height:8px;border-radius:2px;background:{{ g.color }};display:inline-block;margin-right:6px;flex:none;"></span>{{ g.label }}</span>
+                      <span style="font:700 12px/1 'JetBrains Mono'; color:#f6f1fb; white-space:nowrap; margin-left:12px;">{{ g.val }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+          <!-- JUMP -->
+          <div class="oow-subchart-card" data-chart-card="jump" onDoubleClick="{{ promoteJump }}" style="{{ jumpCardStyle }}">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:6px;">
+              <div>
+                <h3 style="{{ subChartTitleStyle }}" title="{{ subDblHint }}">{{ jumpTitle }}</h3>
+                <p style="{{ subChartDescriptionStyle }}">{{ jumpSub }}</p>
+              </div>
+              <div class="oow-subchart-tools">
+                <div class="oow-subchart-export-actions">
+                  <button class="oow-chart-export-button oow-chart-export-button--primary oow-chart-export-button--compact" type="button" onClick="{{ downloadJumpPng }}">PNG</button>
+                  <button class="oow-chart-export-button oow-chart-export-button--compact" type="button" onClick="{{ downloadJumpCsv }}" style="{{ exportCsvStyle }}">CSV</button>
+                </div>
+                <div style="display:flex; background:{{ subChartControlBackground }}; border:1px solid {{ subChartControlBorder }}; border-radius:9px; padding:2px; flex:none;">
+                  <button type="button" onClick="{{ jumpSeason }}" style="{{ jumpSeasonStyle }}">{{ seasonToSeasonLabel }}</button>
+                  <button type="button" onClick="{{ jumpFloor }}" style="{{ jumpFloorStyle }}">{{ floorToFloorLabel }}</button>
+                </div>
+              </div>
+            </div>
+            <div style="position:relative;" onMouseMove="{{ onJumpMove }}" onMouseLeave="{{ onJumpLeave }}">
+              <svg data-oow-jump-chart viewBox="0 0 920 300" style="width:100%; height:auto; display:block; overflow:visible;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ jumpTitle }}">
+                <rect x="0" y="0" width="920" height="300" rx="8" fill="{{ chartPlotBackground }}"/>
+                <sc-for list="{{ jumpYTicks }}" as="t" hint-placeholder-count="5">
+                  <g><line x1="56" y1="{{ t.y }}" x2="900" y2="{{ t.y }}" stroke="{{ t.stroke }}"/><foreignObject class="oow-svg-axis-label" x="0" y="{{ t.fy }}" width="50" height="16"><div style="color:{{ chartAxisColor }}; text-align:right; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject></g>
+                </sc-for>
+                <sc-for list="{{ jumpXTicks }}" as="t" hint-placeholder-count="8">
+                  <foreignObject class="oow-svg-axis-label" x="{{ t.fx }}" y="278" width="50" height="16"><div style="color:{{ chartAxisColor }}; text-align:center; font:10px/16px 'JetBrains Mono',monospace; white-space:nowrap;">{{ t.label }}</div></foreignObject>
+                </sc-for>
+                <sc-if value="{{ jumpGuide }}" hint-placeholder-val="{{ false }}"><line x1="{{ jumpGuideX }}" y1="14" x2="{{ jumpGuideX }}" y2="258" stroke="rgba(245,217,122,.5)" stroke-width="1" stroke-dasharray="4 4"/></sc-if>
+                <sc-for list="{{ jumpSeries }}" as="s" hint-placeholder-count="4">
+                  <g>
+                    <path d="{{ s.path }}" fill="none" stroke="{{ s.color }}" stroke-width="2.2" stroke-linejoin="round"/>
+                    <sc-for list="{{ s.pts }}" as="p" hint-placeholder-count="15"><circle cx="{{ p.cx }}" cy="{{ p.cy }}" r="2.4" fill="{{ s.color }}"/></sc-for>
+                  </g>
+                </sc-for>
+                <sc-for list="{{ jumpLabels }}" as="p" hint-placeholder-count="24">
+                  <foreignObject class="oow-svg-value-label" x="{{ p.lx }}" y="{{ p.fy }}" width="48" height="15" pointer-events="none"><div style="color:{{ p.color }}; text-align:center; font:700 9px/15px 'JetBrains Mono',monospace; white-space:nowrap; text-shadow:-1px -1px 0 {{ chartLabelHalo }},1px -1px 0 {{ chartLabelHalo }},-1px 1px 0 {{ chartLabelHalo }},1px 1px 0 {{ chartLabelHalo }};">{{ p.label }}</div></foreignObject>
+                </sc-for>
+                <rect x="0" y="0" width="920" height="300" fill="transparent" onMouseMove="{{ onJumpMove }}" onMouseLeave="{{ onJumpLeave }}" style="cursor:crosshair;"></rect>
+              </svg>
+              <sc-if value="{{ jumpGuide }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute; top:6px; left:{{ jumpGuidePct }}%; transform:translateX({{ jumpGuideShift }}); background:rgba(18,10,26,.96); border:1px solid rgba(255,255,255,.14); border-radius:12px; padding:10px 14px; pointer-events:none; width:max-content; min-width:160px; max-width:280px; box-shadow:0 12px 36px rgba(0,0,0,.6); z-index:20;">
+                  <div style="font:700 11px/1 'JetBrains Mono'; color:#f5d97a; margin-bottom:7px;">{{ jumpGuideLabel }}</div>
+                  <sc-for list="{{ jumpGuideRows }}" as="g" hint-placeholder-count="4">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:4px;">
+                      <span style="font:600 11px/1 'Manrope'; color:#cbc2de;"><span style="width:8px;height:8px;border-radius:2px;background:{{ g.color }};display:inline-block;margin-right:6px;"></span>{{ g.label }}</span>
+                      <span style="font:700 11px/1 'JetBrains Mono'; color:{{ g.valCol }};">{{ g.val }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ================= TAB 3: DIFFICULTY ================= -->
+    <sc-if value="{{ isDiff }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+          <h2 style="font:600 16px/1.2 var(--font-sans); color:#f6f1fb; margin:0;">{{ activeSeasonLabel }} · {{ difficultyTabLabel }}</h2>
+        </div>
+
+        <!-- TOOLBAR -->
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <sc-if value="{{ showRailCollapsed }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ toggleRail }}" title="{{ expandSeasonsTitle }}" style="display:inline-flex; align-items:center; gap:6px; font:700 10px/1 var(--font-sans); letter-spacing:.04em; color:#17111f; background:linear-gradient(135deg,#f5d97a,#f0b94e); padding:6px 11px; border-radius:999px; border:none; cursor:pointer; box-shadow:0 2px 8px rgba(245,217,122,.25);" style-hover="transform:scale(1.04);">
+              <span style="font-size:8px;">▶</span> {{ seasonsLabel }}
+            </button>
+          </sc-if>
+          <div style="display:flex; gap:6px;">
+            <button type="button" onClick="{{ diffFilterAll }}" style="{{ diffChipAll }}">{{ allFloorsLabel }}</button>
+            <button type="button" onClick="{{ diffFilterRamp }}" style="{{ diffChipRamp }}">{{ rampLabel }}</button>
+            <button type="button" onClick="{{ diffFilterBoss }}" style="{{ diffChipBoss }}">{{ challengeLabel }}</button>
+          </div>
+          <input type="number" placeholder="{{ goToFloorPlaceholder }}" onInput="{{ onDiffSearch }}" style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:9px; color:#f6f1fb; padding:7px 12px; font:500 13px/1 var(--font-sans); width:130px; outline:none;" />
+        </div>
+
+        <!-- STEP PROGRESSION -->
+        <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:16px; padding:20px 22px;">
+          <h3 style="font:600 17px/1.2 var(--font-sans); color:#e9e3f2; margin:0 0 4px;">{{ diffFloorTitle }}</h3>
+          <p style="font:500 12px/1.5 var(--font-sans); color:#8a8398; margin:0 0 16px;">{{ difficultyDescription }}</p>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(186px,1fr)); gap:11px;">
+            <sc-for list="{{ diffSteps }}" as="s" hint-placeholder-count="5">
+              <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.08); border-radius:11px; padding:13px 14px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px;">
+                  <span style="font:700 12px/1 var(--font-sans); color:#cbc2de;">{{ s.dayLabel }}</span>
+                  <span style="font:700 12px/1 var(--font-mono); color:#f5d97a; background:rgba(245,217,122,.12); border:1px solid rgba(245,217,122,.28); padding:3px 8px; border-radius:6px; letter-spacing:.02em;">{{ s.dur }}</span>
+                </div>
+                <div style="font:700 24px/1 var(--font-mono); color:{{ s.col }};">{{ s.pct }}</div>
+                <div style="height:5px; background:rgba(255,255,255,.05); border-radius:999px; overflow:hidden; margin:10px 0 9px;">
+                  <div style="height:100%; width:{{ s.barW }}%; background:{{ s.barCol }};"></div>
+                </div>
+                <div style="font:500 10px/1.4 var(--font-mono); color:#7c7690;">{{ s.date }}</div>
+                <sc-if value="{{ s.liveShow }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:inline-block; margin-top:9px; font:700 8px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#8fe6d4; background:rgba(79,227,193,.1); border:1px solid rgba(79,227,193,.25); padding:4px 8px; border-radius:999px;">● {{ liveNowLabel }}</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- ALL FLOORS TABLE -->
+        <div class="oow-table-panel dm-scrollbar" style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:16px; overflow:hidden;">
+          <div style="padding:16px 20px 12px;"><h3 style="font:600 17px/1.2 var(--font-sans); color:#f6f1fb; margin:0;">{{ allFloorsDifficultyTitle }}</h3></div>
+          <div class="oow-diff-grid" style="display:grid; grid-template-columns:70px 90px 150px 130px 60px 1fr; background:rgba(255,255,255,.03); border-top:1px solid rgba(255,255,255,.07); border-bottom:1px solid rgba(255,255,255,.07);">
+            <div style="font:700 10px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ floorLabel }}</div>
+            <div style="font:700 10px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ peakLabel }}</div>
+            <div style="font:700 10px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ peakWindowLabel }}</div>
+            <div style="font:700 10px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ baselineFromLabel }}</div>
+            <div style="font:700 10px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ stepsLabel }}</div>
+            <div style="font:700 10px/1 var(--font-sans); letter-spacing:.04em; text-transform:uppercase; color:#7a7290; padding:11px 16px;">{{ timelineLabel }}</div>
+          </div>
+          <sc-for list="{{ diffRows }}" as="r" hint-placeholder-count="12">
+            <div onClick="{{ r.onClick }}" class="oow-diff-grid" style="display:grid; grid-template-columns:70px 90px 150px 130px 60px 1fr; align-items:center; border-bottom:1px solid rgba(255,255,255,.05); background:{{ r.rowBg }}; cursor:pointer;">
+              <div style="padding:11px 16px;"><span style="font:800 12px/1 var(--font-sans); color:{{ r.floorCol }}; background:{{ r.floorBg }}; border:1px solid {{ r.floorBd }}; padding:5px 10px; border-radius:8px;">{{ r.n }}</span></div>
+              <div style="padding:11px 16px; font:800 14px/1 var(--font-mono); color:{{ r.initialCol }};">{{ r.initial }}</div>
+              <div style="padding:11px 16px;"><div style="font:700 12px/1 var(--font-mono); color:#f6f1fb;">{{ r.peakDur }}</div><div style="font:500 10px/1.4 var(--font-mono); color:#7c7690; margin-top:3px;">{{ r.peakDate }}</div></div>
+              <div style="padding:11px 16px;"><div style="font:700 12px/1 var(--font-mono); color:#8fbdb2;">{{ r.baseDate }}</div><div style="font:500 10px/1.4 var(--font-mono); color:#6b6480; margin-top:3px;">{{ r.baseDay }}</div></div>
+              <div style="padding:11px 16px; font:600 12px/1 var(--font-mono); color:#948aa8;">{{ r.stepsN }}</div>
+              <div style="padding:11px 16px; align-self:stretch;">
+                <div style="display:flex; gap:4px; flex-wrap:wrap; align-content:flex-start;">
+                  <sc-for list="{{ r.pills }}" as="p" hint-placeholder-count="4">
+                    <span style="font:600 9px/1.4 var(--font-mono); color:{{ p.col }}; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:4px 7px; border-radius:5px; white-space:nowrap;">{{ p.txt }}</span>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll-to-top is provided globally by ../shared/scroll-top.js -->
+
+  <!-- HOVER TIP (distribution) -->
+  <sc-if value="{{ showTip }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; left:{{ tipX }}px; top:{{ tipY }}px; transform:translate(-50%,-130%); z-index:80; pointer-events:none; background:rgba(18,10,26,.97); border:1px solid rgba(255,255,255,.16); border-radius:9px; padding:8px 11px; box-shadow:0 10px 28px rgba(0,0,0,.55); animation:oowfade .1s ease;">
+      <div style="font:700 10px/1 var(--font-sans); letter-spacing:.04em; color:{{ tipCol }}; text-transform:uppercase;">{{ tipLabel }}</div>
+      <div style="font:800 15px/1.1 var(--font-mono); color:#f6f1fb; margin-top:4px;">{{ tipHp }}</div>
+    </div>
+  </sc-if>
+
+  <!-- DEEP INTEL MODAL -->
+  <sc-if value="{{ showModal }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed; inset:0; z-index:90; background:rgba(6,3,10,.7); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:24px; animation:oowfade .16s ease;">
+      <div data-oow-dialog="boss" role="dialog" aria-modal="true" aria-labelledby="oow-boss-dialog-title" tabindex="-1" onClick="{{ stop }}" class="{{ modalCardClass }}" style="border:1px solid {{ modalBd }};">
+        <div class="oow-modal-header" style="display:flex; gap:18px; padding:22px 24px; border-bottom:1px solid rgba(255,255,255,.08); background:{{ modalHeaderBg }};">
+          <button type="button" style="position:relative; flex:none; cursor:zoom-in; padding:0; border:0; background:transparent;" onClick="{{ onZoomImg }}" title="{{ zoomImageTitle }}" aria-label="{{ zoomImageTitle }}">
+            <img data-src="{{ modalImg }}" data-fallback-src="{{ modalFallbackImg }}" alt="{{ modalName }}" style="width:96px; height:96px; object-fit:cover; object-position:center 30%; background:rgba(0,0,0,.4); border:1px solid rgba(255,255,255,.12); border-radius:14px; display:block; transition:transform .15s ease;" />
+          </button>
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <h2 id="oow-boss-dialog-title" style="font:700 24px/1.2 var(--font-sans); color:#f6f1fb; margin:0;">{{ modalName }}</h2>
+              <span style="font:800 10px/1 'Manrope'; letter-spacing:.06em; text-transform:uppercase; color:{{ modalTagCol }}; background:{{ modalTagBg }}; padding:4px 8px; border-radius:5px;">{{ modalCls }}</span>
+            </div>
+            <div style="font:500 11px/1 'JetBrains Mono'; color:#6b6480; margin-top:8px;">{{ blueprintIdLabel }} · {{ modalId }} · S{{ modalSeason }} / F{{ modalFloor }}</div>
+            <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+              <div style="background:rgba(245,217,122,.1); border:1px solid rgba(245,217,122,.25); border-radius:9px; padding:8px 12px;"><div style="font:600 9px/1 'Manrope'; color:#948aa8; text-transform:uppercase; letter-spacing:.05em;">HP</div><div style="font:800 15px/1 'JetBrains Mono'; color:#f5d97a; margin-top:4px;">{{ modalHp }}</div></div>
+              <div style="background:rgba(79,227,193,.1); border:1px solid rgba(79,227,193,.25); border-radius:9px; padding:8px 12px;"><div style="font:600 9px/1 'Manrope'; color:#948aa8; text-transform:uppercase; letter-spacing:.05em;">{{ effectiveHpLabel }}</div><div style="font:800 15px/1 'JetBrains Mono'; color:#4fe3c1; margin-top:4px;">{{ modalEhp }}</div></div>
+              <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:9px; padding:8px 12px;"><div style="font:600 9px/1 'Manrope'; color:#948aa8; text-transform:uppercase; letter-spacing:.05em;">ATK</div><div style="font:800 15px/1 'JetBrains Mono'; color:#f6f1fb; margin-top:4px;">{{ modalAtk }}</div></div>
+              <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:9px; padding:8px 12px;"><div style="font:600 9px/1 'Manrope'; color:#948aa8; text-transform:uppercase; letter-spacing:.05em;">{{ resistLabel }}</div><div style="font:800 15px/1 'JetBrains Mono'; color:#4fe3c1; margin-top:4px;">{{ modalDef }}</div></div>
+            </div>
+          </div>
+          <button type="button" data-oow-dialog-close="boss" onClick="{{ closeModal }}" title="{{ closeLabel }}" aria-label="{{ closeLabel }}" style="font:400 22px/1 'Manrope'; color:#948aa8; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); width:34px; height:34px; border-radius:9px; cursor:pointer; flex:none;">×</button>
+        </div>
+        <div class="oow-modal-body" style="padding:20px 24px;">
+          <!-- Primary Combat Stats -->
+          <div style="font:700 11px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#f5d97a; margin-bottom:12px;">{{ primaryStatsLabel }}</div>
+          <div class="oow-primary-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px;">
+            <sc-for list="{{ modalPrimary }}" as="p" hint-placeholder-count="4">
+              <div style="display:flex; align-items:center; gap:14px; background:{{ p.bg }}; border:1px solid {{ p.bd }}; border-radius:12px; padding:12px 14px;">
+                <div style="width:38px; height:38px; border-radius:10px; background:{{ p.iconBg }}; border:1px solid {{ p.bd }}; display:flex; align-items:center; justify-content:center; flex:none; padding:4px;">
+                  <img data-src="{{ p.icon }}" alt="" style="width:24px; height:24px; object-fit:contain;" />
+                </div>
+                <div style="min-width:0;">
+                  <div style="font:600 10px/1.3 'Manrope'; color:#948aa8; text-transform:uppercase; letter-spacing:.04em;">{{ p.label }}</div>
+                  <div style="font:800 18px/1.1 'JetBrains Mono'; color:{{ p.valColor }}; margin-top:4px;">{{ p.value }}</div>
+                  <div style="font:500 10px/1.3 'JetBrains Mono'; color:#7a7290; margin-top:3px;">{{ p.sub }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <!-- Elemental Resistances -->
+          <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:12px;">
+            <span style="font:700 11px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#4fe3c1;">{{ elementalResistancesLabel }}</span>
+            <span style="font:500 10px/1 'Manrope'; color:#6b6480;">{{ difficultyContextLabel }}</span>
+          </div>
+          <div class="oow-element-grid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:24px;">
+            <sc-for list="{{ modalElems }}" as="e" hint-placeholder-count="5">
+              <div style="background:rgba(79,227,193,.05); border:1px solid rgba(79,227,193,.2); border-radius:10px; padding:11px 8px; text-align:center;">
+                <img data-src="{{ e.icon }}" alt="" style="width:22px; height:22px; object-fit:contain;" />
+                <div style="font:600 10px/1 'Manrope'; color:#9fd8cd; margin-top:7px;">{{ e.name }}</div>
+                <div style="font:800 14px/1 'JetBrains Mono'; color:#4fe3c1; margin-top:6px;">{{ e.res }}</div>
+                <div style="font:500 9px/1 'JetBrains Mono'; color:#6b6480; margin-top:5px;">{{ e.def }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <!-- Boss Mechanics Section (from FCE) -->
+          <sc-if value="{{ modalHasMechanics }}" hint-placeholder-val="{{ false }}">
+            <div class="oow-mechanics-section" style="{{ modalMechanicsStyle }}">
+              <div class="oow-mechanics-card">
+                <div class="oow-mechanics-card-header">
+                  <div class="oow-mechanics-title-group">
+                    <span class="oow-mechanics-title">{{ mechanicsTitleLabel }}</span>
+                    <span class="oow-mechanics-badge">{{ modalMechanicsCount }}</span>
+                  </div>
+                </div>
+                <div class="oow-mechanics-panel">
+                  <sc-if value="{{ mechanicsLoading }}" hint-placeholder-val="{{ false }}">
+                    <div class="oow-mechanics-loader">{{ mechanicsLoadingLabel }}</div>
+                  </sc-if>
+                  <sc-if value="{{ mechanicsError }}" hint-placeholder-val="{{ false }}">
+                    <div class="oow-mechanics-error">
+                      <span>{{ mechanicsErrorLabel }}</span>
+                      <button type="button" onClick="{{ retryLoadMechanics }}" class="oow-mechanics-retry">{{ retryLabel }}</button>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ mechanicsReady }}" hint-placeholder-val="{{ false }}">
+                    <div class="oow-mechanics-list">
+                      <sc-for list="{{ modalMechanicsList }}" as="m" hint-placeholder-count="4">
+                        <div class="oow-mechanics-item">
+                          <span class="oow-mechanics-num">{{ m.index }}</span>
+                          <div class="oow-mechanics-text">{{ m.content }}</div>
+                        </div>
+                      </sc-for>
+                    </div>
+                    <div class="oow-mechanics-footer">
+                      <a href="{{ modalFceLink }}" class="oow-mechanics-fce-link" target="_blank" rel="noopener">{{ viewFullFceLabel }} →</a>
+                    </div>
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+          <!-- Notable overrides -->
+          <sc-if value="{{ modalHasOverrides }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-bottom:12px;">
+              <span style="font:700 11px/1 'Manrope'; letter-spacing:.1em; text-transform:uppercase; color:#ff9bb2;">{{ overridesLabel }}</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <sc-for list="{{ modalOverrides }}" as="o" hint-placeholder-count="4">
+                <div style="background:rgba(255,107,139,.06); border:1px solid rgba(255,107,139,.4); border-radius:10px; padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                  <div style="min-width:0;">
+                    <span style="font:700 12px/1.2 'JetBrains Mono'; color:#ff9bb2;">{{ o.key }}</span>
+                    <span style="font:500 11px/1.2 'Manrope'; color:#cbc2de; margin-left:8px;">{{ o.label }}</span>
+                  </div>
+                  <div style="font:800 15px/1 'JetBrains Mono'; color:#ff6b8b; flex:none;">{{ o.val }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  
+  <!-- IMAGE ZOOM LIGHTBOX WITH WHEEL & TOUCH PINCH ZOOM -->
+  <sc-if value="{{ showZoomImg }}" hint-placeholder-val="{{ false }}">
+    <div data-oow-dialog="lightbox" role="dialog" aria-modal="true" aria-label="{{ enlargedImageLabel }}" tabindex="-1" onClick="{{ closeZoomImg }}" onWheel="{{ onZoomWheel }}" onTouchStart="{{ onZoomTouchStart }}" onTouchMove="{{ onZoomTouchMove }}" onTouchEnd="{{ onZoomTouchEnd }}" style="position:fixed; inset:0; z-index:100; background:rgba(4,2,8,.92); backdrop-filter:blur(12px); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; animation:oowfade .15s ease; user-select:none; touch-action:none; overflow:hidden; overscroll-behavior:contain;">
+      <div onClick="{{ stop }}" onMouseDown="{{ onZoomMouseDown }}" onMouseMove="{{ onZoomMouseMove }}" onMouseUp="{{ onZoomMouseUp }}" onDoubleClick="{{ onZoomToggleScale }}" style="position:relative; max-width:90vw; max-height:80vh; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <img data-src="{{ zoomImgSrc }}" alt="" style="max-width:85vw; max-height:75vh; object-fit:contain; border-radius:18px; filter:drop-shadow(0 20px 50px rgba(0,0,0,.8)); border:1px solid rgba(255,255,255,.15); background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.08), rgba(0,0,0,.6)); padding:16px; transform:translate({{ zoomPanX }}px, {{ zoomPanY }}px) scale({{ zoomScale }}); transform-origin:center center; cursor:grab; pointer-events:auto;" />
+      </div>
+      <!-- Controls Toolbar -->
+      <div onClick="{{ stop }}" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); font:700 13px/1 'Manrope'; color:#f6f1fb; background:rgba(18,10,26,.94); border:1px solid rgba(255,255,255,.16); border-radius:999px; padding:6px 14px; display:flex; align-items:center; gap:12px; box-shadow:0 12px 36px rgba(0,0,0,.65); backdrop-filter:blur(10px); z-index:101;">
+        <span style="font:600 13px/1 'Manrope'; color:#cbc2de; padding-right:4px;">{{ zoomImgName }}</span>
+        <div style="display:flex; align-items:center; gap:6px; border-left:1px solid rgba(255,255,255,.15); padding-left:10px;">
+          <button type="button" onClick="{{ onZoomOut }}" style="background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); color:#f6f1fb; width:28px; height:28px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1;" title="{{ zoomOutLabel }}" aria-label="{{ zoomOutLabel }}">−</button>
+          <span style="font:700 11px/1 'JetBrains Mono'; color:#f5d97a; min-width:38px; text-align:center;">{{ zoomPct }}%</span>
+          <button type="button" onClick="{{ onZoomIn }}" style="background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); color:#f6f1fb; width:28px; height:28px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1;" title="{{ zoomInLabel }}" aria-label="{{ zoomInLabel }}">+</button>
+          <button type="button" onClick="{{ onZoomReset }}" style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); color:#948aa8; font:600 11px/1 'Manrope'; padding:6px 10px; border-radius:8px; cursor:pointer; margin-left:4px;" title="{{ resetZoomLabel }}">{{ resetLabel }}</button>
+        </div>
+        <button type="button" data-oow-dialog-close="lightbox" onClick="{{ closeZoomImg }}" style="background:rgba(255,107,139,.15); border:1px solid rgba(255,107,139,.3); color:#ff9bb2; width:28px; height:28px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; margin-left:4px;" title="{{ closeImageLabel }}" aria-label="{{ closeImageLabel }}">×</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- TOAST -->
+  <sc-if value="{{ showToast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; bottom:28px; left:50%; transform:translateX(-50%); z-index:95; background:rgba(18,10,26,.97); border:1px solid rgba(245,217,122,.4); color:#f5d97a; font:700 13px/1 'Manrope'; padding:13px 20px; border-radius:11px; box-shadow:0 14px 40px rgba(0,0,0,.6); animation:oowfade .18s ease;">{{ toastMsg }}</div>
+  </sc-if>
+</main>
+</x-dc>
+<footer class="datamine-footer" data-datamine-footer data-base-path="../"></footer>
+<script type="module" src="./js/oow-bootstrap.js?v=1"></script>
+<script src="../shared/footer.js"></script>
+<script src="../shared/scroll-top.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Browse 36 FCE bosses with concise mechanic cards in English and Russian. Export any guide as a PNG." />
+  <meta name="theme-color" content="#0c0812" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="TOF Datamine Archive" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://tof.smilekritik.beer/datamine/fce/" />
+  <meta property="og:title" content="TOF FCE Boss Mechanics" />
+  <meta property="og:description" content="Browse 36 FCE bosses with concise mechanic cards in English and Russian. Export any guide as a PNG." />
+  <meta property="og:image" content="https://tof.smilekritik.beer/datamine/social/datamine-social.png" />
+  <meta property="og:image:secure_url" content="https://tof.smilekritik.beer/datamine/social/datamine-social.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:image:alt" content="FCE boss mechanics archive with 36 boss guides" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TOF FCE Boss Mechanics" />
+  <meta name="twitter:description" content="Browse 36 FCE bosses with concise mechanic cards in English and Russian. Export any guide as a PNG." />
+  <meta name="twitter:image" content="https://tof.smilekritik.beer/datamine/social/datamine-social.png" />
+  <meta name="twitter:image:alt" content="FCE boss mechanics archive with 36 boss guides" />
+  <link rel="canonical" href="https://tof.smilekritik.beer/datamine/fce/" />
+  <title>TOF FCE Boss Mechanics</title>
+  <link rel="stylesheet" href="../shared/fonts.css" />
+  <link rel="stylesheet" href="../shared/base.css" />
+  <link rel="stylesheet" href="../shared/shell.css" />
+  <link rel="stylesheet" href="../shared/header.css" />
+  <link rel="stylesheet" href="../shared/footer.css" />
+  <link rel="stylesheet" href="./styles/datamine-fce.css?v=6" />
+</head>
+<body class="page page--datamine-fce">
+  <div class="noise-bg"></div>
+
+  <div data-datamine-header data-current="fce"></div>
+
+  <main class="layout">
+    <section class="hero" id="overview">
+      <div class="hero__content">
+        <p class="hero__eyebrow" data-fce-eyebrow>DATAMINE · FCE</p>
+        <h1 class="hero__title" data-fce-title>Boss mechanics archive</h1>
+      </div>
+    </section>
+
+    <section class="section section--boss-switcher" id="bosses">
+      <div class="section__inner">
+        <div class="fce-switcher" data-boss-switcher></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__inner section__inner--fce-card">
+        <div class="fce-card-shell" data-boss-card-shell>
+          <div class="fce-card-loader">Loading boss card...</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="datamine-footer" data-datamine-footer data-base-path="../"></footer>
+
+  <button class="fce-download-button" type="button" data-fce-download aria-label="Download current boss card">
+    <span class="fce-download-button__icon">⭳</span>
+    <span class="fce-download-button__label" data-fce-download-label>Download</span>
+  </button>
+
+  <script src="../shared/site-config.js"></script>
+  <script src="../shared/i18n.js"></script>
+  <script src="../shared/data-meta.js"></script>
+  <script src="../shared/version-status.js"></script>
+  <script src="../shared/header.js?server-cache=5"></script>
+  <script src="../shared/footer.js"></script>
+  <script src="./js/html2canvas.min.js"></script>
+  <script src="./js/datamine-fce.js?v=3"></script>
+  <script src="../shared/scroll-top.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-08-25T03:33:55.293Z",
+  "catalogSource": "Hotta/Content/ResourcesOverSea/CoreBlueprints/DataTable/Dungeon/VoidCloneBossConfigDataTable_Overseas.json",
+  "description": "Bosses missing from the curated FCE list, ordered by the in-game boss catalog.",
+  "bosses": [
+    {
+      "order": 4,
+      "configId": "void_boss_4",
+      "bossId": "Boss_hum_008",
+      "bossNum": 8,
+      "sourceName": "伏尔甘",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss006.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss006.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 8,
+      "configId": "void_boss_10",
+      "bossId": "Boss_hum_022",
+      "bossNum": 22,
+      "sourceName": "伊希斯",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss010.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss010.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 9,
+      "configId": "void_boss_11",
+      "bossId": "Boss_hum_026",
+      "bossNum": 26,
+      "sourceName": "希尔",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss009.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss009.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 16,
+      "configId": "SY_boss_BZZ_LV4",
+      "bossId": "Boss_hum_072",
+      "bossNum": 72,
+      "sourceName": "编织者",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_04.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_04.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 18,
+      "configId": "SY_boss_SLZ",
+      "bossId": "Boss_hum_038",
+      "bossNum": 38,
+      "sourceName": "撕裂者G-042",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss_SY_07.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss_SY_07.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 30,
+      "configId": "SY_boss_XR_01",
+      "bossId": "BB91C1AE4398DE8458D238B03813381A",
+      "bossNum": null,
+      "sourceName": "希尔",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss009.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss009.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    },
+    {
+      "order": 35,
+      "configId": "SY_boss_tt_01",
+      "bossId": "boss_hum_055",
+      "bossNum": 55,
+      "sourceName": "晦暝·饕餮",
+      "image": "Hotta/Content/Resources/UI/void/boss/boss024.png",
+      "imageMain": "Hotta/Content/Resources/UI/void/boss/bigboss024.png",
+      "mechanicsCount": 0,
+      "mechanics": []
+    }
+  ]
+}

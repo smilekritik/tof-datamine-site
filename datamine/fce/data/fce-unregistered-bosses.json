@@ -1,0 +1,93 @@
+{
+  "unregisteredBosses": [
+    {
+      "bossId": "boss_003",
+      "bossNum": 3,
+      "catalogOrder": null,
+      "catalogConfigId": "",
+      "sourceName": "",
+      "image": "",
+      "imageMain": "",
+      "nameHint": "Hyena Mech (Break Fate)",
+      "keys": [
+        "Breakfate_Boss_03_desc"
+      ],
+      "mechanicsCount": 1,
+      "mechanics": [
+        {
+          "index": "3",
+          "key": "Breakfate_Boss_03_desc",
+          "en": "The Hyenas invented a simple yet fairly powerful Mecha a with the limited resources they had on hand. The cannons on its shoulders are capable of suppressive fire and bombardment at the same time. And the cooling devices on its arms emit steam that can be used to attack enemies during combat.",
+          "ru": "Несмотря на нехватку ресурсов, Гиены изобрели простого, но достаточно мощного боевого робота. Пушки на плечах робота обеспечивают одновременно и огонь на подавление, и бомбардировку. Охлаждающее устройство, установленное на руках боевой машины, служит для выпуска пара, и его также можно использовать в бою против врагов."
+        }
+      ]
+    },
+    {
+      "bossId": "boss_066",
+      "bossNum": 66,
+      "catalogOrder": null,
+      "catalogConfigId": "",
+      "sourceName": "",
+      "image": "",
+      "imageMain": "",
+      "nameHint": "Ying Zhao Shield Buff",
+      "keys": [
+        "Buff_boss_066_Player_Shield_-1_1_des"
+      ],
+      "mechanicsCount": 1,
+      "mechanics": [
+        {
+          "index": "1",
+          "key": "Buff_boss_066_Player_Shield_-1_1_des",
+          "en": "Energy shield obtained after absorbing dissipated energy orbs. For a short time, immune to damage when taking damage.",
+          "ru": "Энергетический щит, полученный после поглощения рассеянных энергетических сфер. На короткое время становится невосприимчивым к урону при получении урона."
+        }
+      ]
+    },
+    {
+      "bossId": "boss_078",
+      "bossNum": 78,
+      "catalogOrder": null,
+      "catalogConfigId": "",
+      "sourceName": "",
+      "image": "",
+      "imageMain": "",
+      "nameHint": "boss_078",
+      "keys": [
+        "Buff_boss_078_1_Throns_des",
+        "Boss_hum_078_1_des",
+        "Buff_boss_078_2_BeDamDown_des",
+        "Boss_hum_078_2_des",
+        "Boss_hum_078_3_des",
+        "Boss_hum_078_4_des"
+      ],
+      "mechanicsCount": 4,
+      "mechanics": [
+        {
+          "index": "1",
+          "key": "Boss_hum_078_1_des",
+          "en": "Ground Controller gains Deflect every 7s. When hit, it removes Deflect and deflects 10% of that damage back to the attacker. The deflected damage cannot be fatal.",
+          "ru": "Наземный Контроллер получает эффект Отражения каждые 7 секунд. При попадании эффект Отражения исчезает, и 10% от полученного урона возвращается атакующему. Отражённый урон не может быть смертельным."
+        },
+        {
+          "index": "2",
+          "key": "Boss_hum_078_2_des",
+          "en": "Ground Controller has a 50% Damage Reduction. Hitting its Weak Points removes its Damage Reduction for 30s.",
+          "ru": "Наземный контроллер обладает 50% снижением урона. Попадание по его слабым местам снимает это снижение урона на 30 секунд."
+        },
+        {
+          "index": "3",
+          "key": "Boss_hum_078_3_des",
+          "en": "Ground Controller slows all nearby targets.",
+          "ru": "Наземный контроллер замедляет все находящиеся поблизости цели."
+        },
+        {
+          "index": "4",
+          "key": "Boss_hum_078_4_des",
+          "en": "Ground Controller leaves a timed magnetic bomb every 15s on the ground that explodes 5s later, inflicting control effects on the target for 3s.",
+          "ru": "Наземный диспетчер каждые 15 секунд оставляет на земле магнитную бомбу с таймером, которая взрывается через 5 секунд, накладывая на цель эффекты контроля на 3 секунды."
+        }
+      ]
+    }
+  ]
+}

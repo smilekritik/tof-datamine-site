@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Stage 7 mobile route test</title></head>
+<body>
+  <iframe id="multype" title="Multype mobile" src="/datamine/multype/?stage7=mobile" width="390" height="844"></iframe>
+  <iframe id="items" title="Items mobile" src="/datamine/items/?stage7=mobile" width="390" height="844"></iframe>
+  <iframe id="fce" title="FCE mobile" src="/datamine/fce/?stage7=mobile" width="390" height="844"></iframe>
+  <pre id="result">waiting</pre>
+  <script>
+    const frames = ['multype', 'items', 'fce'].map((id) => document.getElementById(id));
+    Promise.all(frames.map((frame) => new Promise((resolve) => frame.addEventListener('load', resolve, { once: true })))).then(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 750));
+      const details = Object.fromEntries(frames.map((frame) => {
+        const page = frame.contentDocument;
+        return [frame.id, {
+          width: page.documentElement.clientWidth,
+          route: page.location.pathname,
+          overflow: page.documentElement.scrollWidth > page.documentElement.clientWidth,
+          scale: page.querySelector('[data-zoom-display]')?.textContent || '',
+          controls: Boolean(page.querySelector('[data-action="zoom-fit"]')),
+          card: Boolean(page.querySelector('[data-fce-viewport]')),
+          rows: page.querySelectorAll('tbody tr:not(.items-virtual-spacer)').length
+        }];
+      }));
+      document.getElementById('result').textContent = JSON.stringify(details);
+    });
+  </script>
+</body>
+</html>

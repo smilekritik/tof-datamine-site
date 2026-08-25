@@ -1,0 +1,10 @@
+{
+    "Breakfate_Boss_03_desc": "The Hyenas invented a simple yet fairly powerful Mecha a with the limited resources they had on hand. The cannons on its shoulders are capable of suppressive fire and bombardment at the same time. And the cooling devices on its arms emit steam that can be used to attack enemies during combat.",
+    "Buff_boss_066_Player_Shield_-1_1_des": "Energy shield obtained after absorbing dissipated energy orbs. For a short time, immune to damage when taking damage.",
+    "Buff_boss_078_1_Throns_des": "When hit, it removes Deflect and deflects 10% of that damage back to the attacker, removing Deflect. The deflected damage cannot be fatal.",
+    "Boss_hum_078_1_des": "Ground Controller gains Deflect every 7s. When hit, it removes Deflect and deflects 10% of that damage back to the attacker. The deflected damage cannot be fatal.",
+    "Buff_boss_078_2_BeDamDown_des": "Grants a 50% Damage Reduction. Hitting its Weak Points removes its Damage Reduction for 30s.",
+    "Boss_hum_078_2_des": "Ground Controller has a 50% Damage Reduction. Hitting its Weak Points removes its Damage Reduction for 30s.",
+    "Boss_hum_078_3_des": "Ground Controller slows all nearby targets.",
+    "Boss_hum_078_4_des": "Ground Controller leaves a timed magnetic bomb every 15s on the ground that explodes 5s later, inflicting control effects on the target for 3s."
+}

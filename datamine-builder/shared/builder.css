@@ -1,0 +1,500 @@
+/* ==========================================================================
+   TOF DATAMINE BUILDER — SHARED WORKSPACE CHROME & TOKENS
+   ========================================================================== */
+
+:root {
+  /* Dark workspace palette (matches public datamine theme) */
+  --db-bg: #0c0812;
+  --db-surface: #120d1a;
+  --db-surface-raised: #181122;
+  --db-surface-subtle: rgba(255, 255, 255, 0.035);
+  
+  --db-border: rgba(255, 255, 255, 0.08);
+  --db-border-hover: rgba(245, 217, 122, 0.28);
+  --db-border-strong: rgba(255, 255, 255, 0.16);
+
+  --db-text: #ded8e6;
+  --db-text-strong: #f4f0f6;
+  --db-muted: #918899;
+
+  --db-gold: #f5d97a;
+  --db-violet: #a77add;
+  --db-mint: #7fd2af;
+  --db-red: #df899b;
+
+  --db-font-ui: "Barlow", "Manrope", system-ui, -apple-system, sans-serif;
+  --db-font-mono: "JetBrains Mono", monospace;
+  --db-font-serif: "Spectral", Georgia, serif;
+
+  --db-radius-xs: 4px;
+  --db-radius-sm: 6px;
+  --db-radius-md: 8px;
+  --db-radius-lg: 10px;
+  --db-radius-full: 999px;
+}
+
+/* Base Body Defaults for Builder Workspace */
+body.db-body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--db-font-ui);
+  color: var(--db-text);
+  background: var(--db-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==== Reusable Builder Header ============================================= */
+.db-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 10px 24px;
+  background: rgba(12, 8, 18, 0.92);
+  border-bottom: 1px solid var(--db-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Informational / Safety notice banner */
+.db-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 10px 16px;
+  margin-bottom: 22px;
+  background: rgba(127, 210, 175, 0.08);
+  border: 1px solid rgba(127, 210, 175, 0.25);
+  border-radius: var(--db-radius-md, 8px);
+  color: var(--db-text);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.db-banner__text {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.db-banner__icon {
+  color: var(--db-mint, #7fd2af);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.db-banner__link {
+  color: var(--db-gold, #f5d97a);
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.db-banner__link:hover {
+  text-decoration: underline;
+}
+
+.db-header__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.db-brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.db-code {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  background: rgba(245, 217, 122, 0.12);
+  border: 1px solid rgba(245, 217, 122, 0.35);
+  color: var(--db-gold);
+  font-family: var(--db-font-ui);
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1.2;
+  border-radius: var(--db-radius-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.db-title {
+  margin: 0;
+  color: var(--db-text-strong);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.db-sub {
+  color: var(--db-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.db-header__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ==== Status & Counters =================================================== */
+.db-count,
+.db-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--db-font-ui);
+  font-variant-numeric: tabular-nums;
+  font-size: 11.5px;
+  color: var(--db-muted);
+}
+
+.db-status--clean {
+  color: var(--db-mint);
+}
+
+.db-status--dirty {
+  color: var(--db-gold);
+}
+
+.db-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ==== Language Switcher =================================================== */
+.db-lang {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--db-border);
+  border-radius: var(--db-radius-sm);
+  background: var(--db-surface);
+}
+
+.db-lang__btn {
+  appearance: none;
+  min-width: 32px;
+  min-height: 24px;
+  border: 0;
+  border-radius: var(--db-radius-xs);
+  background: transparent;
+  color: var(--db-muted);
+  font-family: var(--db-font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.db-lang__btn:hover {
+  color: var(--db-text-strong);
+}
+
+.db-lang__btn.is-active {
+  background: var(--db-gold);
+  color: #17101e;
+}
+
+/* ==== Action Buttons ====================================================== */
+.db-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--db-radius-sm);
+  border: 1px solid var(--db-border);
+  background: var(--db-surface-subtle);
+  color: var(--db-text);
+  font-family: var(--db-font-ui);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.db-btn:hover {
+  border-color: var(--db-border-strong);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--db-text-strong);
+}
+
+.db-btn--primary {
+  background: rgba(245, 217, 122, 0.08);
+  border-color: rgba(245, 217, 122, 0.45);
+  color: var(--db-gold);
+}
+
+.db-btn--primary:hover {
+  background: rgba(245, 217, 122, 0.18);
+  border-color: var(--db-gold);
+  color: #fff8d4;
+}
+
+.db-btn--danger {
+  background: rgba(223, 137, 155, 0.08);
+  border-color: rgba(223, 137, 155, 0.35);
+  color: var(--db-red);
+}
+
+.db-btn--danger:hover {
+  background: rgba(223, 137, 155, 0.18);
+  border-color: var(--db-red);
+}
+
+.db-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.db-btn:focus-visible {
+  outline: 2px solid var(--db-gold);
+  outline-offset: 2px;
+}
+
+/* ==== Technical Path Badge ================================================ */
+.db-path {
+  display: block;
+  padding: 7px 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--db-border);
+  border-radius: var(--db-radius-xs, 4px);
+  font-family: var(--db-font-mono);
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--db-text);
+  white-space: normal;
+  word-break: break-word;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* ==== Standardized Workspace Toast ======================================== */
+.db-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 130;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--db-radius-md);
+  background: rgba(18, 12, 25, 0.96);
+  border: 1px solid rgba(127, 210, 175, 0.4);
+  color: #cbeee4;
+  font-family: var(--db-font-ui);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.db-toast.is-visible {
+  opacity: 1;
+}
+
+.db-toast--warning {
+  border-color: rgba(245, 217, 122, 0.45);
+  color: #ffeeb3;
+}
+
+.db-toast--error {
+  border-color: rgba(223, 137, 155, 0.45);
+  color: #ffd0da;
+}
+
+/* ==== Builder Hub (Tool Grid & Cards) ===================================== */
+.db-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+.db-head {
+  margin-bottom: 24px;
+}
+
+.db-head__title {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--db-text-strong);
+}
+
+.db-head__sub {
+  margin: 0;
+  color: var(--db-muted);
+  font-size: 13.5px;
+  line-height: 1.5;
+  max-width: 72ch;
+}
+
+.db-head__sub code {
+  font-family: var(--db-font-mono);
+  color: var(--db-text);
+  font-size: 12px;
+}
+
+.db-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 960px) {
+  .db-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .db-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.db-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--db-surface);
+  border: 1px solid var(--db-border);
+  border-radius: var(--db-radius-md);
+  padding: 20px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.db-card:hover {
+  border-color: var(--db-border-hover);
+  background: var(--db-surface-raised);
+}
+
+.db-card__code {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--db-gold);
+  font-family: var(--db-font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.db-card__title {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--db-text-strong);
+  line-height: 1.25;
+}
+
+.db-card__body {
+  margin: 0 0 16px;
+  color: #a89fb6;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.db-card__meta {
+  margin-top: auto;
+  margin-bottom: 16px;
+}
+
+.db-card__label {
+  display: block;
+  margin-bottom: 5px;
+  font-family: var(--db-font-ui);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--db-muted);
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.db-card__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  align-self: flex-start;
+  color: var(--db-text-strong);
+  font-family: var(--db-font-ui);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.db-card__action-arrow {
+  color: var(--db-gold);
+  font-family: var(--db-font-mono);
+  font-size: 13px;
+  transition: transform 0.15s ease;
+}
+
+.db-card__action:hover {
+  color: var(--db-gold);
+}
+
+.db-card__action:hover .db-card__action-arrow {
+  transform: translateX(3px);
+}
+
+.db-foot {
+  margin-top: 36px;
+  padding-top: 16px;
+  border-top: 1px solid var(--db-border);
+  color: var(--db-muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.db-foot a {
+  color: var(--db-gold);
+  font-family: var(--db-font-mono);
+  text-decoration: none;
+}
+
+.db-foot a:hover {
+  text-decoration: underline;
+}
+
+.db-foot code {
+  font-family: var(--db-font-mono);
+  color: var(--db-gold);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1px 5px;
+  border-radius: var(--db-radius-xs);
+  border: 1px solid var(--db-border);
+}

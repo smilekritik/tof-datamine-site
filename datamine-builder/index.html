@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Local editing workspace for TOF datamine content." />
+  <meta name="theme-color" content="#0c0812" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="../datamine/favicon.svg" />
+  <title>Datamine Builder</title>
+  <link rel="stylesheet" href="../datamine/shared/fonts.css" />
+  <link rel="stylesheet" href="./shared/builder.css" />
+</head>
+<body class="db-body">
+  <header class="db-header">
+    <div class="db-header__left">
+      <div class="db-brand">
+        <span class="db-code">BUILDER</span>
+        <h2 class="db-title">Datamine tools</h2>
+        <span class="db-sub">Local workspace</span>
+      </div>
+    </div>
+    <div class="db-header__right">
+      <a class="db-btn" href="../datamine/contribute/#corrections">Contribution guide ↗</a>
+      <a class="db-btn" href="../datamine/">Live archive ↗</a>
+    </div>
+  </header>
+
+  <div class="db-wrap">
+    <aside class="db-banner" aria-label="Builder workspace notice">
+      <div class="db-banner__text">
+        <span class="db-banner__icon">ℹ</span>
+        <span>Edits made here stay in your browser or are exported as files. They do not modify the live Datamine directly.</span>
+      </div>
+      <a class="db-banner__link" href="../datamine/contribute/#corrections">How to contribute corrections →</a>
+    </aside>
+
+    <header class="db-head">
+      <h1 class="db-head__title">Datamine tools</h1>
+      <p class="db-head__sub">Local editors for Datamine content. Each tool edits live values and exports drop-in files to replace in <code>datamine/</code>.</p>
+    </header>
+
+    <section class="db-grid" aria-label="Datamine builders">
+      <!-- OOW -->
+      <article class="db-card">
+        <span class="db-card__code">OOW</span>
+        <h2 class="db-card__title">Origin of War</h2>
+        <p class="db-card__body">Upload and bind monster portrait artwork to codeNames, then export the mapping and image assets.</p>
+        <div class="db-card__meta">
+          <span class="db-card__label">Exports to</span>
+          <code class="db-path">datamine/oow/assets/monsters/ + scripts/monster-image-mapping.json</code>
+        </div>
+        <a class="db-card__action" href="./oow/">Open editor <span class="db-card__action-arrow">→</span></a>
+      </article>
+
+      <!-- FCE -->
+      <article class="db-card">
+        <span class="db-card__code">FCE</span>
+        <h2 class="db-card__title">FCE Card Builder</h2>
+        <p class="db-card__body">Build and edit FCE boss mechanic cards with live 1920×1080 preview, PNG and JSON export.</p>
+        <div class="db-card__meta">
+          <span class="db-card__label">Exports to</span>
+          <code class="db-path">datamine/fce/data/bosses/{slug}.json (+ PNG)</code>
+        </div>
+        <a class="db-card__action" href="./fce/">Open editor <span class="db-card__action-arrow">→</span></a>
+      </article>
+
+      <!-- SEQ -->
+      <article class="db-card">
+        <span class="db-card__code">SEQ</span>
+        <h2 class="db-card__title">Effective HP Editor</h2>
+        <p class="db-card__body">Loaded-values table with double-click Effective HP mechanics overrides, then export overrides.</p>
+        <div class="db-card__meta">
+          <span class="db-card__label">Exports to</span>
+          <code class="db-path">datamine/seq/data/seq-mechanics-overrides.json</code>
+        </div>
+        <a class="db-card__action" href="./seq/">Open editor <span class="db-card__action-arrow">→</span></a>
+      </article>
+
+      <!-- MULTYPE -->
+      <article class="db-card">
+        <span class="db-card__code">MULTYPE</span>
+        <h2 class="db-card__title">Rename Editor</h2>
+        <p class="db-card__body">Category, subcategory, and file rename editor with live matrix and dictionary export.</p>
+        <div class="db-card__meta">
+          <span class="db-card__label">Exports to</span>
+          <code class="db-path">datamine/multype/data/renames.base.json</code>
+        </div>
+        <a class="db-card__action" href="./multype/">Open editor <span class="db-card__action-arrow">→</span></a>
+      </article>
+
+      <!-- ITEMS -->
+      <article class="db-card">
+        <span class="db-card__code">ITEMS</span>
+        <h2 class="db-card__title">Item Rename Editor</h2>
+        <p class="db-card__body">Searchable items table with double-click rename editing for Gacha + MMO datasets.</p>
+        <div class="db-card__meta">
+          <span class="db-card__label">Exports to</span>
+          <code class="db-path">datamine/items/data/merged_mapping_with_original*.json</code>
+        </div>
+        <a class="db-card__action" href="./items/">Open editor <span class="db-card__action-arrow">→</span></a>
+      </article>
+    </section>
+
+    <footer class="db-foot">
+      Local workspace. Public site: <a href="../datamine/">/datamine/</a>. After replacing files, run <code>npm run check:datamine</code>.
+    </footer>
+  </div>
+</body>
+</html>

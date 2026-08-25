@@ -1,0 +1,76 @@
+/* Shared Footer for TOF Datamine */
+.datamine-footer {
+  position: relative;
+  z-index: 20;
+  border-top: 1px solid var(--dm-border, rgba(255, 255, 255, 0.08));
+  margin-top: 48px;
+  background: transparent;
+  width: 100%;
+}
+
+.datamine-footer__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 20px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: var(--dm-font-ui, "Barlow", "Manrope", sans-serif);
+  font-size: 13px;
+  color: var(--dm-muted, #918899);
+  line-height: 1.4;
+}
+
+.datamine-footer__copyright {
+  color: var(--dm-muted, #918899);
+  letter-spacing: 0.02em;
+}
+
+.datamine-footer__nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.datamine-footer .datamine-footer__link,
+.datamine-footer__link {
+  color: var(--dm-muted, #918899) !important;
+  text-decoration: none;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  font-weight: 500;
+}
+
+.datamine-footer .datamine-footer__link:hover,
+.datamine-footer__link:hover {
+  color: var(--dm-text-strong, #f4f0f6) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.datamine-footer .datamine-footer__link:focus-visible,
+.datamine-footer__link:focus-visible {
+  outline: 2px solid var(--dm-gold, #f5d97a);
+  outline-offset: 2px;
+  border-radius: var(--dm-radius-xs, 4px);
+}
+
+@media (max-width: 640px) {
+  .datamine-footer {
+    margin-top: 36px;
+  }
+
+  .datamine-footer__inner {
+    padding: 20px 16px 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .datamine-footer__nav {
+    gap: 14px;
+    width: 100%;
+  }
+}

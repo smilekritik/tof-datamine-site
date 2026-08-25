@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "inputs": [
+    { "id": "snapshot-metadata", "dataset": "Metadata", "class": "required", "paths": ["export-version.json"], "rationale": "Fresh export metadata produced by Script 1 is required to generate release-manifest.json. Stale release-manifest fallback is forbidden." },
+    { "id": "items-global-primary", "dataset": "Items Global", "class": "required", "oneOf": ["MappingItemId.json", "ST_Item_Oversea.json"], "rationale": "At least one fresh Global item table is required to reproduce the public mapping." },
+    { "id": "items-global-enrichment", "dataset": "Items Global", "class": "optional", "paths": ["MappingItemIdAndName.json", "MappingItemIdAndColor.json"], "rationale": "Names and colors enrich rows but do not establish item identity." },
+    { "id": "items-mmo-primary", "dataset": "Items MMO", "class": "required", "oneOf": ["ST_Item_MMO.json", "CookingFoodDataTable_MMO.json", "DT_LifeJob_HarvestableItems.json", "DT_LifeJobCraftingConfig.json"], "rationale": "MMO is a published runtime dataset and must be rebuilt from a fresh source." },
+    { "id": "items-manual-overrides", "dataset": "Items", "class": "curated-preserve", "paths": ["datamine/items/curated/gacha-overrides.json", "datamine/items/curated/mmo-overrides.json"], "rationale": "Explicit manually maintained name/rename fields are preserved; merged runtime mappings are generated." },
+    { "id": "items-machine-translations", "dataset": "Items", "class": "curated-preserve", "paths": ["datamine/items/curated/gacha-translations.json", "datamine/items/curated/mmo-translations.json"], "rationale": "Machine-translated fallback names are keyed by canonical string item ID and remain isolated by dataset. They never own NUM, original, quality, or rename." },
+    { "id": "monster-table", "dataset": "Sequential", "class": "required", "oneOf": ["DT_MonsterStaticData_Overseas.json", "DT_MonsterStaticData.json"], "rationale": "Required for Sequential stages and enemy stat reproduction." },
+    { "id": "oow-standard-tables", "dataset": "OOW Standard", "class": "required", "paths": ["OriginWarSeasonConfigDataTable_Overseas.json", "OriginWarRoundConfigDataTable_Overseas.json", "OriginWarMonsterPoolDataTable_Overseas.json", "DT_MonsterStaticData_Overseas.json"], "rationale": "All four Standard tables (or standard base aliases) are required. Cross-mode substitution from MMO is forbidden." },
+    { "id": "oow-mmo-tables", "dataset": "OOW MMO", "class": "required", "paths": ["OriginWarSeasonConfigDataTable_MMO.json", "OriginWarRoundConfigDataTable_MMO.json", "OriginWarMonsterPoolDataTable_MMO.json", "DT_MonsterStaticData_MMO.json"], "rationale": "All four MMO tables are required. Cross-mode substitution from Standard is forbidden." },
+    { "id": "fce-en-game", "dataset": "FCE mechanics", "class": "required", "paths": ["Game/en/Game.json"], "rationale": "English localization is the authoritative mechanics source." },
+    { "id": "fce-ru-game", "dataset": "FCE mechanics", "class": "optional", "paths": ["Game/ru/Game.json"], "rationale": "Russian localization enriches English results; EN remains a valid fallback." },
+    { "id": "fce-game-boss-catalog", "dataset": "FCE mechanics", "class": "required", "oneOf": ["VoidCloneBossConfigDataTable_Overseas.json", "VoidCloneBossConfigDataTable.json"], "rationale": "The public review/catalog outputs require a non-empty in-game boss catalog." },
+    { "id": "fce-boss-cards", "dataset": "FCE index", "class": "curated-preserve", "paths": ["datamine/fce/data/bosses/*.json"], "rationale": "Human-maintained boss cards are the index source and must be non-empty and valid." },
+    { "id": "seq-overrides", "dataset": "Sequential", "class": "curated-preserve", "paths": ["datamine/seq/data/seq-mechanics-overrides.json"], "rationale": "Human-maintained mechanics annotations are not generated runtime fallback." }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "tof-leaks-server",
+  "version": "1.0.0",
+  "description": "TOF version proxy server",
+  "scripts": {
+    "test": "node tests/contract-ehp.test.js && node tests/version-status.test.js && node tests/oow-loading-state.test.js && node tests/oow-scroll-behavior.test.js && node tests/stage5-shared-accessibility.test.js && node tests/stage6-oow-runtime.test.js && node tests/multype-layout.test.js && node tests/multype-export.test.js && node tests/stage7-product-performance.test.js && node tests/stage8-copy-seo-cleanup.test.js && node tests/stage9-multype-virtualization.test.js && node tests/stage10-runtime-modules.test.js && node tests/datamine-scrollbars.test.js && node tests/pipeline-portable.test.js && node tests/processor-sync.test.js && node tests/ui-polish-contracts.test.js && node tests/items-contract.test.js && node tests/item-translations.test.js && node tests/fce-target-boss-cards.test.js && node tests/oow-metadata-contracts.test.js && node tests/editorial-layout-contracts.test.js && node tests/stage4-version-truth.test.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "shard:oow": "node pipeline/processors/shard-oow-data.js",
+    "sync:pipeline": "node scripts/sync-fast-datamine.js",
+    "check:processors": "node scripts/check-fast-datamine-processors.js",
+    "build:seq-cache": "node scripts/build-seq-boss-cache.js",
+    "cache:datamine": "node scripts/build-datamine-cache.js",
+    "sync:social-meta": "node scripts/datamine-social-meta.js",
+    "check:datamine": "node scripts/check-datamine.js",
+    "check:builder": "node scripts/check-builder.js",
+    "check:versions": "node version-tracker.js",
+    "lint": "eslint server.js version-tracker.js scripts pipeline tests datamine/shared datamine/**/*.js --no-warn-ignored",
+    "build:fce-previews": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate-fce-previews.ps1",
+    "build:items-gacha": "node scripts/build-items-gacha-json.js",
+    "build:items-mmo": "node scripts/build-items-mmo-json.js",
+    "build:items": "node pipeline/processors/build-items-json.js",
+    "build:seq": "node pipeline/processors/build-seq-data.js",
+    "build:fce": "node pipeline/processors/parse-fce-mechanics.js",
+    "build:fce-index": "node pipeline/processors/build-fce-index.js",
+    "build:fce-presets": "node scripts/build-fcebuilder-presets.js",
+    "process:datamine": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/2-process-datamine.ps1"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^4.22.1",
+    "node-fetch": "^2.7.0",
+    "xmldom": "^0.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.5",
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

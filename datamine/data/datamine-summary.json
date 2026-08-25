@@ -1,0 +1,172 @@
+{
+  "generatedAt": "2026-08-25T03:49:04.817Z",
+  "snapshot": {
+    "version": "6.3.5",
+    "exportedAt": "2026-08-25T03:01:31.078Z",
+    "sources": [
+      {
+        "client": "Korea Dev 1",
+        "branch": "TestPC_KR2New",
+        "clientRu": "Корея Dev 1",
+        "appVersion": "3.0.0",
+        "hash": "7beb3f"
+      }
+    ]
+  },
+  "oow": {
+    "seasonCount": 23,
+    "seasons": [
+      {
+        "season": 1,
+        "startDate": "2023-02-01",
+        "endDate": "2023-04-01",
+        "floorCount": 25
+      },
+      {
+        "season": 2,
+        "startDate": "2023-04-02",
+        "endDate": "2023-05-11",
+        "floorCount": 25
+      },
+      {
+        "season": 3,
+        "startDate": "2023-05-12",
+        "endDate": "2023-07-11",
+        "floorCount": 30
+      },
+      {
+        "season": 4,
+        "startDate": "2023-07-12",
+        "endDate": "2023-09-11",
+        "floorCount": 25
+      },
+      {
+        "season": 5,
+        "startDate": "2023-09-12",
+        "endDate": "2023-11-11",
+        "floorCount": 25
+      },
+      {
+        "season": 6,
+        "startDate": "2023-11-12",
+        "endDate": "2024-01-11",
+        "floorCount": 25
+      },
+      {
+        "season": 7,
+        "startDate": "2024-01-12",
+        "endDate": "2024-03-11",
+        "floorCount": 25
+      },
+      {
+        "season": 8,
+        "startDate": "2024-03-12",
+        "endDate": "2024-05-11",
+        "floorCount": 28
+      },
+      {
+        "season": 9,
+        "startDate": "2024-05-12",
+        "endDate": "2024-07-11",
+        "floorCount": 28
+      },
+      {
+        "season": 10,
+        "startDate": "2024-07-12",
+        "endDate": "2024-09-11",
+        "floorCount": 28
+      },
+      {
+        "season": 11,
+        "startDate": "2024-09-12",
+        "endDate": "2024-11-11",
+        "floorCount": 28
+      },
+      {
+        "season": 12,
+        "startDate": "2024-11-12",
+        "endDate": "2025-01-11",
+        "floorCount": 28
+      },
+      {
+        "season": 13,
+        "startDate": "2025-01-12",
+        "endDate": "2025-03-11",
+        "floorCount": 28
+      },
+      {
+        "season": 14,
+        "startDate": "2025-03-12",
+        "endDate": "2025-05-11",
+        "floorCount": 28
+      },
+      {
+        "season": 15,
+        "startDate": "2025-05-12",
+        "endDate": "2025-07-11",
+        "floorCount": 28
+      },
+      {
+        "season": 16,
+        "startDate": "2025-07-12",
+        "endDate": "2025-09-11",
+        "floorCount": 28
+      },
+      {
+        "season": 17,
+        "startDate": "2025-09-12",
+        "endDate": "2025-11-11",
+        "floorCount": 28
+      },
+      {
+        "season": 18,
+        "startDate": "2025-11-12",
+        "endDate": "2026-01-11",
+        "floorCount": 28
+      },
+      {
+        "season": 19,
+        "startDate": "2026-01-12",
+        "endDate": "2026-03-11",
+        "floorCount": 28
+      },
+      {
+        "season": 20,
+        "startDate": "2026-03-12",
+        "endDate": "2026-05-11",
+        "floorCount": 28
+      },
+      {
+        "season": 21,
+        "startDate": "2026-05-12",
+        "endDate": "2026-07-11",
+        "floorCount": 28
+      },
+      {
+        "season": 22,
+        "startDate": "2026-07-12",
+        "endDate": "2026-09-11",
+        "floorCount": 28
+      },
+      {
+        "season": 23,
+        "startDate": "2026-09-12",
+        "endDate": "2026-11-11",
+        "floorCount": 28
+      }
+    ]
+  },
+  "fce": {
+    "bossCount": 37
+  },
+  "sequential": {
+    "floorCount": 35,
+    "rowCount": 35
+  },
+  "multype": {
+    "buffCount": 9261
+  },
+  "items": {
+    "itemCount": 12856
+  }
+}

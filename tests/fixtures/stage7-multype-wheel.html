@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Stage 7 Multype wheel test</title></head>
+<body>
+  <iframe id="subject" title="Multype test subject" src="/datamine/multype/?stage7=wheel" width="1280" height="900"></iframe>
+  <pre id="result">waiting</pre>
+  <script>
+    const frame = document.getElementById('subject');
+    const result = document.getElementById('result');
+    frame.addEventListener('load', async () => {
+      const page = frame.contentDocument;
+      const pageWindow = frame.contentWindow;
+      for (let attempt = 0; attempt < 100; attempt += 1) {
+        if (page.querySelector('[data-multype-viewport]')) break;
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      }
+
+      const viewport = page.querySelector('[data-multype-viewport]');
+      const readScale = () => page.querySelector('[data-zoom-display]')?.textContent || '';
+      const initialScale = readScale();
+      let ctrlObserved = false;
+      viewport.addEventListener('wheel', (event) => {
+        ctrlObserved = event.ctrlKey === true;
+      }, { capture: true, once: true });
+
+      const ctrlWheel = new pageWindow.WheelEvent('wheel', {
+        bubbles: true,
+        cancelable: true,
+        ctrlKey: true,
+        deltaY: -120
+      });
+      const ctrlDispatchResult = viewport.dispatchEvent(ctrlWheel);
+      const scaleAfterCtrlWheel = readScale();
+
+      const ordinaryWheel = new pageWindow.WheelEvent('wheel', {
+        bubbles: true,
+        cancelable: true,
+        deltaY: 120
+      });
+      const ordinaryDispatchResult = viewport.dispatchEvent(ordinaryWheel);
+
+      result.textContent = JSON.stringify({
+        initialScale,
+        ctrlObserved,
+        ctrlDefaultPrevented: ctrlWheel.defaultPrevented,
+        ctrlDispatchResult,
+        scaleAfterCtrlWheel,
+        ordinaryDefaultPrevented: ordinaryWheel.defaultPrevented,
+        ordinaryDispatchResult,
+        scaleAfterOrdinaryWheel: readScale(),
+        documentOverflow: page.documentElement.scrollWidth > page.documentElement.clientWidth
+      });
+    });
+  </script>
+</body>
+</html>

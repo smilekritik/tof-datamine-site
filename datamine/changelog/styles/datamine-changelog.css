@@ -1,0 +1,242 @@
+/* Styles for /datamine/changelog/ */
+.page--datamine-changelog {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.changelog-layout {
+  max-width: var(--dm-editorial-max, 1220px);
+  margin: 0 auto;
+  padding: 24px 24px 64px;
+  width: 100%;
+}
+
+.changelog-container {
+  width: 100%;
+}
+
+/* Hero Section */
+.changelog-hero {
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--dm-border, rgba(255, 255, 255, 0.08));
+}
+
+.changelog-hero__eyebrow {
+  font-family: var(--dm-font-mono, "JetBrains Mono", monospace);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dm-gold, #f5d97a);
+  margin: 0 0 10px;
+}
+
+.changelog-hero__title {
+  font-family: var(--dm-font-display, "Spectral", serif);
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--dm-text-strong, #f4f0f6);
+  margin: 0 0 12px;
+  letter-spacing: -0.01em;
+}
+
+.changelog-hero__subtitle {
+  font-family: var(--dm-font-ui, "Barlow", sans-serif);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--dm-text, #d7d0dd);
+  margin: 0;
+  max-width: var(--dm-prose-max, 74ch);
+}
+
+/* Sections */
+.changelog-section {
+  margin-bottom: 40px;
+}
+
+.changelog-section__header {
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--dm-border, rgba(255, 255, 255, 0.06));
+  padding-bottom: 8px;
+}
+
+.changelog-section__title {
+  font-family: var(--dm-font-ui, "Barlow", sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--dm-text-strong, #f4f0f6);
+  margin: 0;
+}
+
+/* Freshness Summary Grid */
+.changelog-status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.changelog-status-card {
+  padding: 12px 14px;
+  background: var(--dm-surface, #100d14);
+  border: 1px solid var(--dm-border, rgba(255, 255, 255, 0.08));
+  border-radius: var(--dm-radius-sm, 6px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.changelog-status-card__name {
+  font-family: var(--dm-font-ui, "Barlow", sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dm-text-strong, #f4f0f6);
+}
+
+.changelog-status-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-family: var(--dm-font-mono, "JetBrains Mono", monospace);
+  font-size: 11px;
+}
+
+.changelog-status-card__ver {
+  color: var(--dm-gold, #f5d97a);
+  font-weight: 600;
+}
+
+.changelog-status-card__badge {
+  color: var(--dm-muted, #918899);
+}
+
+/* Release Articles */
+.changelog-history {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.changelog-release {
+  padding: 20px;
+  background: var(--dm-surface, #100d14);
+  border: 1px solid var(--dm-border, rgba(255, 255, 255, 0.08));
+  border-radius: var(--dm-radius-md, 8px);
+}
+
+.changelog-release__header {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--dm-border, rgba(255, 255, 255, 0.06));
+}
+
+.changelog-release__title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.changelog-release__version {
+  font-family: var(--dm-font-mono, "JetBrains Mono", monospace);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dm-gold, #f5d97a);
+  margin: 0;
+}
+
+.changelog-release__date {
+  font-family: var(--dm-font-mono, "JetBrains Mono", monospace);
+  font-size: 12px;
+  color: var(--dm-muted, #918899);
+}
+
+.changelog-release__client {
+  font-family: var(--dm-font-ui, "Barlow", sans-serif);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--dm-border, rgba(255, 255, 255, 0.08));
+  border-radius: var(--dm-radius-xs, 4px);
+  color: var(--dm-text, #d7d0dd);
+}
+
+.changelog-release__summary {
+  font-family: var(--dm-font-ui, "Barlow", sans-serif);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--dm-text, #d7d0dd);
+  margin: 0;
+  max-width: var(--dm-prose-max, 74ch);
+}
+
+/* Change Items List */
+.changelog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.changelog-item {
+  display: grid;
+  grid-template-columns: 80px 100px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 13.5px;
+  line-height: 1.5;
+  font-family: var(--dm-font-ui, "Barlow", sans-serif);
+}
+
+.changelog-item__section {
+  font-weight: 700;
+  color: var(--dm-text-strong, #f4f0f6);
+}
+
+.changelog-item__tag {
+  font-family: var(--dm-font-mono, "JetBrains Mono", monospace);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.changelog-item__tag--game-data {
+  color: var(--dm-gold, #f5d97a);
+}
+
+.changelog-item__tag--calculated {
+  color: var(--dm-violet, #a77add);
+}
+
+.changelog-item__tag--curated {
+  color: var(--dm-text-strong, #f4f0f6);
+}
+
+.changelog-item__tag--research {
+  color: #8ce8ff;
+}
+
+.changelog-item__text {
+  color: var(--dm-text, #d7d0dd);
+}
+
+@media (max-width: 680px) {
+  .changelog-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--dm-border, rgba(255, 255, 255, 0.04));
+  }
+
+  .changelog-layout {
+    padding: 16px 14px 48px;
+  }
+}

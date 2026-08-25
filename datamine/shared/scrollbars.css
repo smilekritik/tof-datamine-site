@@ -1,0 +1,50 @@
+/* Shared native scrollbar treatment for Datamine data surfaces. */
+.dm-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245, 217, 122, 0.3) rgba(255, 255, 255, 0.03);
+}
+
+.dm-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dm-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+
+.dm-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(245, 217, 122, 0.3);
+  border-radius: 4px;
+}
+
+.dm-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 217, 122, 0.5);
+}
+
+.dm-scrollbar::-webkit-scrollbar-corner {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.dm-scrollbar.dm-scrollbar--slim::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.dm-scrollbar.dm-scrollbar--slim::-webkit-scrollbar-track,
+.dm-scrollbar.dm-scrollbar--slim::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+}
+
+.dm-scrollbar.dm-scrollbar--slim::-webkit-scrollbar-thumb {
+  background: rgba(245, 217, 122, 0.28);
+}
+
+.dm-scrollbar.dm-scrollbar--slim::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 217, 122, 0.5);
+}
+
+.dm-scrollbar.dm-scrollbar--slim {
+  scrollbar-color: rgba(245, 217, 122, 0.28) rgba(255, 255, 255, 0.03);
+}

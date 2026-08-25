@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "kind": "portable-processor-package",
+  "canonicalSource": "pipeline/processors",
+  "processors": {
+    "build-user-stats.js": "723dffa5f2fbda26d495301f312d0fcd5d6e8894ae358ba9cb8bdb35cec6f7c8",
+    "extract-oow-deep-intel.js": "8147fbc8f5222d3d5827a29e5c52e48e4aebff5334010480145ff7c12d03ae6d",
+    "build-fce-index.js": "0d7c3ecb0171145518b807b7547db583fe96791787fa97572cbdccec2d376def",
+    "parse-fce-mechanics.js": "a5dc1f31947e81b7437c369768bfe9f2c504c6e2992ff6685d393c1d364f50f2",
+    "build-seq-data.js": "3dd1bc5203cf696d29d92e53dcb911e651e6002174ac96b5f11527044646849d",
+    "build-items-json.js": "6c1f26d4ed4d5eb0381b3f091d9eacf08b627094c5ddb92eed3192c7dbb16395",
+    "shard-oow-data.js": "2f9fe9306bb1fc726b65628004c6342d9fe07702a19c783ff5f26a95733b5bca"
+  },
+  "curatedInputs": [
+    "fce/data/bosses",
+    "seq/data/seq-mechanics-overrides.json",
+    "items/curated/gacha-overrides.json",
+    "items/curated/mmo-overrides.json",
+    "items/curated/gacha-translations.json",
+    "items/curated/mmo-translations.json",
+    "items/curated/README.md"
+  ],
+  "buildTools": {
+    "prepare-staging.js": "5db89cc5bbc8b5320b2d5eb4abfb39c70a4685eef2a0128eada8439a47d9390d",
+    "validate-datamine.js": "db71888051254589ad105936869af26a7c044455e096408ccff1f663cc02e976",
+    "publish-managed.js": "4f6057d2b1fe0c110c23a75bd4fa1b5ec4f2c9b6baa6d1011265bd74f361d168",
+    "generate-release-manifest.js": "701658d0dd315fe7c8898c7787b47b3f2113b607542b6f79bb37ea1ce9ebd460",
+    "finalize-public-bundle.js": "dbfde8fa5f0454dbcbac0f795e7479d85cc8da6df69732ee5246dd0429a81926"
+  },
+  "contracts": {
+    "inputs.json": "a19bc0f2c55510dde42865720c244c4e7ffff1ad6c9e2cc4d6ba7d0d5e566eef",
+    "outputs.json": "cfbd59cc6442d5bc9ef17bfcff00c853e3692a8c0c58a405e85f9c780ec29e29"
+  }
+}

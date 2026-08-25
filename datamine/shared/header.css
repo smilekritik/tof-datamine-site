@@ -1,0 +1,368 @@
+[data-datamine-header] {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.datamine-header {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid var(--dm-border, rgba(255, 255, 255, 0.08));
+  background: rgba(12, 9, 16, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  font-family: var(--font-sans, "Barlow", "Manrope", system-ui, sans-serif);
+}
+
+.datamine-header__inner {
+  width: 100%;
+  max-width: 1440px;
+  box-sizing: border-box;
+  min-height: 54px;
+  margin: 0 auto;
+  padding: 10px 28px;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto minmax(220px, 1fr);
+  align-items: center;
+  column-gap: 28px;
+}
+
+.datamine-header__nav,
+.datamine-header__language,
+.datamine-header__right-area {
+  display: flex;
+  align-items: center;
+}
+
+.datamine-header__brand {
+  min-width: 0;
+  max-width: 100%;
+  justify-self: start;
+  overflow: hidden;
+  color: var(--dm-gold, #f5d97a);
+  font-family: "Spectral", Georgia, serif;
+  font-size: 17.5px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  text-align: left;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.datamine-header__brand:hover {
+  color: #ffe9a8;
+}
+
+.datamine-header__nav {
+  justify-self: center;
+  gap: 22px;
+}
+
+.datamine-header__link {
+  color: #a89fb6;
+  font-family: var(--font-sans, "Barlow", "Manrope", system-ui, sans-serif);
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.datamine-header__link:hover {
+  color: #ffffff;
+}
+
+.datamine-header__link.is-active {
+  color: var(--dm-gold, #f5d97a);
+  font-weight: 500;
+}
+
+.datamine-header__right-area {
+  justify-self: end;
+  gap: 14px;
+}
+
+/* Language Switcher */
+.datamine-header__language {
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--dm-border, rgba(255, 255, 255, 0.08));
+  border-radius: var(--dm-radius-sm, 6px);
+  background: var(--dm-surface, #100d14);
+  box-sizing: border-box;
+}
+
+.datamine-header__language-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 24px;
+  box-sizing: border-box;
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--dm-radius-xs, 4px);
+  background: transparent;
+  color: var(--dm-muted, #918899);
+  font-family: var(--font-sans, "Barlow", "Manrope", system-ui, sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.datamine-header__language-button:hover {
+  color: var(--dm-text-strong, #f4f0f6);
+}
+
+.datamine-header__language-button.is-active {
+  color: #17111f;
+  background: var(--dm-gold, #f5d97a);
+  font-weight: 700;
+}
+
+/* Build Version / Export Widget */
+.datamine-header__export-info {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 8px;
+  box-sizing: border-box;
+  border-radius: var(--dm-radius-sm, 6px);
+  background: var(--dm-surface, #100d14);
+  border: 1px solid var(--dm-border, rgba(255, 255, 255, 0.08));
+  transition: border-color 0.15s ease, background 0.15s ease;
+  user-select: none;
+  cursor: default;
+  outline: none;
+}
+
+.datamine-header__export-info:hover {
+  background: var(--dm-surface-raised, #151119);
+  border-color: var(--dm-border-hover, rgba(245, 217, 122, 0.28));
+}
+
+.datamine-header__version-badge {
+  font-family: var(--dm-font-mono, "JetBrains Mono", monospace);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+  color: var(--dm-gold, #f5d97a);
+  padding: 1px 5px;
+  box-sizing: border-box;
+  border-radius: var(--dm-radius-xs, 4px);
+  background: rgba(245, 217, 122, 0.1);
+  border: 1px solid rgba(245, 217, 122, 0.28);
+  white-space: nowrap;
+  line-height: 1.25;
+}
+
+.datamine-header__export-info:hover .datamine-header__version-badge {
+  background: rgba(245, 217, 122, 0.2);
+  border-color: rgba(245, 217, 122, 0.5);
+  color: #fff4a3;
+}
+
+.datamine-header__export-client-name {
+  font-family: var(--font-sans, "Barlow", "Manrope", system-ui, sans-serif);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--dm-muted, #918899);
+  white-space: nowrap;
+}
+
+/* Styled export tooltip */
+.datamine-header__export-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 220px;
+  max-width: 280px;
+  padding: 11px 13px;
+  box-sizing: border-box;
+  border-radius: var(--dm-radius-md, 8px);
+  background: var(--dm-surface-raised, #151119);
+  border: 1px solid var(--dm-border-hover, rgba(245, 217, 122, 0.28));
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px) scale(0.98);
+  transform-origin: top right;
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s ease;
+}
+
+/* Invisible hover bridge between trigger and tooltip */
+.datamine-header__export-tooltip::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+.datamine-header__export-tooltip::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 16px;
+  width: 8px;
+  height: 8px;
+  background: var(--dm-surface-raised, #151119);
+  border-left: 1px solid var(--dm-border-hover, rgba(245, 217, 122, 0.28));
+  border-top: 1px solid var(--dm-border-hover, rgba(245, 217, 122, 0.28));
+  transform: rotate(45deg);
+}
+
+.datamine-header__export-info:hover .datamine-header__export-tooltip,
+.datamine-header__export-info:focus-within .datamine-header__export-tooltip,
+.datamine-header__export-info.is-open .datamine-header__export-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.datamine-header__export-tooltip-title {
+  font: 700 10px/1 var(--font-sans, sans-serif);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dm-gold, #f5d97a);
+  padding-bottom: 5px;
+  margin-bottom: 1px;
+  border-bottom: 1px solid var(--dm-border, rgba(255, 255, 255, 0.08));
+}
+
+.datamine-header__export-tooltip-row {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  align-items: baseline;
+  gap: 10px;
+  font: 500 11.5px/1.3 var(--font-sans, sans-serif);
+}
+
+.datamine-header__export-tooltip-key {
+  color: var(--dm-muted, #918899);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.datamine-header__export-tooltip-value {
+  color: var(--dm-text-strong, #f4f0f6);
+  font-family: var(--dm-font-mono, "JetBrains Mono", monospace);
+  font-size: 11px;
+  font-weight: 500;
+  text-align: left;
+  word-break: break-word;
+}
+
+/* Update Available section in popover */
+.datamine-header__export-update-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--dm-border, rgba(255, 255, 255, 0.08));
+}
+
+.datamine-header__export-update-title {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #ff9bb2;
+  margin-bottom: 2px;
+}
+
+.datamine-header__export-update-text {
+  margin: 0;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--dm-text-strong, #f4f0f6);
+  line-height: 1.35;
+}
+
+.datamine-header__export-update-subtext {
+  margin: 0;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--dm-muted, #b4abbf);
+  line-height: 1.35;
+}
+
+.datamine-header__export-help-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--dm-gold, #f5d97a);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.datamine-header__export-help-link:hover {
+  text-decoration: underline;
+  color: #fff4a3;
+}
+
+.datamine-header__brand:focus-visible,
+.datamine-header__link:focus-visible,
+.datamine-header__language-button:focus-visible {
+  outline: 2px solid var(--dm-gold, #f5d97a);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1080px) {
+  .datamine-header__inner {
+    padding-inline: 18px;
+    column-gap: 16px;
+  }
+
+  .datamine-header__nav {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .datamine-header__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-inline: 14px;
+  }
+
+  .datamine-header__brand {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .datamine-header__nav {
+    display: none;
+  }
+
+  .datamine-header__export-info {
+    padding: 3px 8px;
+    gap: 6px;
+  }
+}

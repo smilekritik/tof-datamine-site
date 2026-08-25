@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TOF Datamine Social Card</title>
+  <link rel="stylesheet" href="../shared/fonts.css" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 1200px; height: 630px; margin: 0; overflow: hidden; }
+    body {
+      --accent: #f5d97a;
+      --accent-rgb: 245, 217, 122;
+      color: #d8d0e2;
+      font-family: "Manrope", sans-serif;
+      background: #0c0812;
+    }
+    .card {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      padding: 46px 58px 40px;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
+        radial-gradient(circle at 84% 18%, rgba(var(--accent-rgb), .16), transparent 315px),
+        radial-gradient(circle at 12% 100%, rgba(181,123,255,.09), transparent 360px),
+        #0c0812;
+      background-size: 48px 48px, 48px 48px, auto, auto, auto;
+    }
+    .card::before {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 8px;
+      background: var(--accent);
+      box-shadow: 0 0 34px rgba(var(--accent-rgb), .45);
+      content: "";
+    }
+    .card::after {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(115deg, rgba(255,255,255,.035), transparent 28%, transparent 76%, rgba(var(--accent-rgb), .04));
+      content: "";
+    }
+    .topline, .layout, .footer { position: relative; z-index: 1; }
+    .topline { display: flex; align-items: center; justify-content: space-between; }
+    .brand {
+      color: #f5d97a;
+      font: 500 32px/1 "Spectral", serif;
+      letter-spacing: .045em;
+    }
+    .route {
+      color: #80758f;
+      font: 600 18px/1 "JetBrains Mono", monospace;
+      letter-spacing: .05em;
+    }
+    .layout {
+      height: 448px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(350px, .7fr);
+      align-items: center;
+      gap: 42px;
+    }
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--accent);
+      font: 700 18px/1 "JetBrains Mono", monospace;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 700px;
+      margin: 0;
+      color: #fbf7fc;
+      font: 500 84px/.96 "Spectral", serif;
+      letter-spacing: -.035em;
+    }
+    .description {
+      max-width: 680px;
+      margin: 20px 0 0;
+      color: #ada3ba;
+      font-size: 28px;
+      line-height: 1.38;
+    }
+    .metrics { display: flex; gap: 14px; margin-top: 22px; }
+    .metric {
+      min-width: 146px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      background: rgba(255,255,255,.035);
+    }
+    .metric strong {
+      display: block;
+      color: #faf6fc;
+      font: 700 30px/1 "JetBrains Mono", monospace;
+      letter-spacing: -.04em;
+    }
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--accent);
+      font: 700 14px/1 "JetBrains Mono", monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .visual {
+      position: relative;
+      min-height: 320px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(30,23,36,.94), rgba(17,13,22,.88));
+      box-shadow: 0 24px 70px rgba(0,0,0,.33), inset 0 1px 0 rgba(255,255,255,.035);
+    }
+    .visual::before {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(var(--accent-rgb),.09), transparent 42%);
+      content: "";
+    }
+    .visual-head { position: relative; display: flex; justify-content: space-between; align-items: center; }
+    .visual-code { color: var(--accent); font: 700 15px/1 "JetBrains Mono", monospace; letter-spacing: .1em; }
+    .visual-status { color: #71677f; font: 700 12px/1 "JetBrains Mono", monospace; letter-spacing: .08em; }
+    .plot {
+      position: relative;
+      height: 225px;
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      margin-top: 30px;
+      padding: 0 4px 24px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .plot::before, .plot::after {
+      position: absolute;
+      left: 0;
+      right: 0;
+      border-top: 1px dashed rgba(255,255,255,.065);
+      content: "";
+    }
+    .plot::before { top: 55px; }
+    .plot::after { top: 125px; }
+    .bar {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      min-width: 0;
+      border: 1px solid rgba(var(--accent-rgb), .48);
+      border-radius: 6px 6px 2px 2px;
+      background: linear-gradient(to top, rgba(var(--accent-rgb), .14), rgba(var(--accent-rgb), .5));
+      box-shadow: 0 0 20px rgba(var(--accent-rgb), .08);
+    }
+    .bar:last-child { background: var(--accent); box-shadow: 0 0 25px rgba(var(--accent-rgb), .2); }
+    .footer { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.09); }
+    .footer-label { color: #80758f; font: 600 15px/1 "JetBrains Mono", monospace; letter-spacing: .1em; }
+    .footer-version { color: #b9afc6; font: 700 15px/1 "JetBrains Mono", monospace; letter-spacing: .07em; }
+  </style>
+</head>
+<body>
+  <article class="card">
+    <header class="topline">
+      <div class="brand">Datamine Archive</div>
+      <div class="route" data-route></div>
+    </header>
+    <main class="layout">
+      <section>
+        <p class="eyebrow" data-eyebrow></p>
+        <h1 data-title></h1>
+        <p class="description" data-description></p>
+        <div class="metrics" data-metrics></div>
+      </section>
+      <aside class="visual" aria-hidden="true">
+        <div class="visual-head"><span class="visual-code" data-code></span><span class="visual-status">DATAMINED / VERIFIED</span></div>
+        <div class="plot" data-plot></div>
+      </aside>
+    </main>
+    <footer class="footer"><span class="footer-label">TOF.SMILEKRITIK.BEER</span><span class="footer-version">VERSION FROM RELEASE MANIFEST</span></footer>
+  </article>
+  <script>
+    const cards = {
+      hub: {
+        accent: "#b57bff", rgb: "181,123,255", route: "/datamine/", eyebrow: "Datamine · Archive",
+        title: "Tower of Fantasy\nData Archive",
+        description: "Game data, boss mechanics, seasonal scaling, buff groups, and item IDs.",
+        metrics: [["5", "datasets"], ["manifest", "client version"]], code: "ARCHIVE / INDEX", bars: [34, 52, 43, 70, 61, 88]
+      },
+      oow: {
+        accent: "#f5d97a", rgb: "245,217,122", route: "/datamine/oow/", eyebrow: "Origin of War",
+        title: "Seasonal enemy\nstats",
+        description: "Floor HP, effective HP, enemy waves, buffs, rewards, and difficulty schedules.",
+        metrics: [["23", "seasons"], ["28", "floors"]], code: "OOW / S22", bars: [31, 39, 55, 72, 91, 100]
+      },
+      fce: {
+        accent: "#ff9bb2", rgb: "255,155,178", route: "/datamine/fce/", eyebrow: "FCE · Boss Archive",
+        title: "Boss mechanics",
+        description: "Visual boss guides with concise mechanics in English and Russian.",
+        metrics: [["32", "bosses"], ["PNG", "card export"]], code: "FCE / BOSS DATA", bars: [78, 41, 65, 52, 86, 68]
+      },
+      seq: {
+        accent: "#b57bff", rgb: "181,123,255", route: "/datamine/seq/", eyebrow: "Sequential",
+        title: "Boss scaling\ncharts",
+        description: "Boss HP, effective HP, and clear thresholds for every available floor.",
+        metrics: [["34", "floors"], ["HP × EHP", "comparison"]], code: "SEQUENTIAL / F34", bars: [18, 27, 39, 56, 76, 100]
+      },
+      multype: {
+        accent: "#4fe3c1", rgb: "79,227,193", route: "/datamine/multype/", eyebrow: "Multype · Buff Data",
+        title: "Buff categories",
+        description: "Search buff keys and compare additive groups with multiplicative columns.",
+        metrics: [["9,261", "buffs"], ["ADD × MULT", "stacking"]], code: "MULTYPE / GROUPS", bars: [73, 38, 84, 49, 63, 92]
+      },
+      items: {
+        accent: "#f5d97a", rgb: "245,217,122", route: "/datamine/items/", eyebrow: "Items · Identifiers",
+        title: "Item ID database",
+        description: "Search item IDs, developer names, and translated labels in one table.",
+        metrics: [["12,855", "items"], ["ID / NAME", "search"]], code: "ITEMS / MAPPING", bars: [82, 58, 91, 43, 69, 96]
+      }
+    };
+    const key = new URLSearchParams(location.search).get("card") || "hub";
+    const card = cards[key] || cards.hub;
+    document.body.style.setProperty("--accent", card.accent);
+    document.body.style.setProperty("--accent-rgb", card.rgb);
+    document.querySelector("[data-route]").textContent = card.route;
+    document.querySelector("[data-eyebrow]").textContent = card.eyebrow;
+    document.querySelector("[data-title]").innerHTML = card.title.split("\n").map((line) => `<span style="display:block">${line}</span>`).join("");
+    document.querySelector("[data-description]").textContent = card.description;
+    document.querySelector("[data-code]").textContent = card.code;
+    document.querySelector("[data-metrics]").replaceChildren(...card.metrics.map(([value, label]) => {
+      const metric = document.createElement("div");
+      metric.className = "metric";
+      const strong = document.createElement("strong");
+      const span = document.createElement("span");
+      strong.textContent = value;
+      span.textContent = label;
+      metric.append(strong, span);
+      return metric;
+    }));
+    document.querySelector("[data-plot]").replaceChildren(...card.bars.map((height) => {
+      const bar = document.createElement("span");
+      bar.className = "bar";
+      bar.style.height = `${height}%`;
+      return bar;
+    }));
+  </script>
+</body>
+</html>

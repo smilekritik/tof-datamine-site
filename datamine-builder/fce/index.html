@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FCE Card Builder</title>
+  <meta name="description" content="Local builder and editor for FCE boss mechanic cards with PNG and JSON export." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="../../datamine/favicon.svg" />
+  
+  <!-- Font definitions (Offline local fonts) -->
+  <link rel="stylesheet" href="../../datamine/shared/fonts.css" />
+  <link rel="stylesheet" href="../shared/builder.css" />
+  
+  <!-- App Styles -->
+  <link rel="stylesheet" href="./styles.css?v=5" />
+</head>
+<body class="fceb-body">
+  <div class="fceb-noise"></div>
+
+  <!-- App Header -->
+  <header class="fceb-header">
+    <div class="fceb-header__left">
+      <div class="fceb-brand">
+        <span class="fceb-brand__badge">FCE</span>
+        <h1 class="fceb-brand__title" data-i18n="brandTitle">Card Builder</h1>
+      </div>
+
+      <!-- Presets Selector & Status -->
+      <div class="fceb-preset-picker">
+        <label for="fcePresetSelect" class="fceb-preset-picker__label" data-i18n="presetLabel">Boss Preset:</label>
+        <select id="fcePresetSelect" class="fceb-select">
+          <option value="" data-i18n="presetDefault">-- Select existing boss (32) --</option>
+        </select>
+        <button id="btnNewBoss" class="fceb-btn fceb-btn--ghost fceb-btn--sm" data-i18n-title="titleBtnNewBoss" title="Create a blank card from scratch" data-i18n="btnNew">+ New</button>
+
+        <!-- Edit Status Badge (Original / Edited) & Reset Button -->
+        <div class="fceb-status-badge-wrap" id="bossStatusWrap">
+          <span class="fceb-status-badge fceb-status-badge--clean" id="bossStatusBadge">
+            <span class="fceb-status-dot"></span>
+            <span class="fceb-status-text" id="bossStatusText" data-i18n="statusOriginal">Site Original</span>
+          </span>
+          <button id="btnRevertToOriginal" class="fceb-btn-revert" data-i18n-title="titleBtnRevertToOriginal" data-i18n="btnRevertToOriginal" title="Revert all changes for this boss back to the site original" style="display: none;">↺ Revert to Original</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="fceb-header__center">
+      <!-- Zoom & View controls -->
+      <div class="fceb-zoom-bar">
+        <button class="fceb-zoom-btn" data-zoom="fit" data-i18n-title="titleZoomFit" title="Fit to screen" data-i18n="zoomFit">Fit</button>
+        <button class="fceb-zoom-btn" data-zoom="0.5">50%</button>
+        <button class="fceb-zoom-btn is-active" data-zoom="auto" data-i18n="zoomSize">Size</button>
+        <button class="fceb-zoom-btn" data-zoom="0.8">80%</button>
+        <button class="fceb-zoom-btn" data-zoom="1.0">100%</button>
+      </div>
+    </div>
+
+    <div class="fceb-header__right">
+      <!-- Language preset switcher -->
+      <div class="fceb-lang-switch">
+        <button class="fceb-lang-btn is-active" data-lang="en">EN</button>
+        <button class="fceb-lang-btn" data-lang="ru">RU</button>
+      </div>
+
+      <!-- Main Quick Export buttons -->
+      <button id="btnQuickExportZip" class="fceb-btn fceb-btn--secondary" data-i18n-title="titleBtnQuickExportZip" title="Download ZIP package (JSON + Art matching datamine/fce structure)">
+        <span class="fceb-btn__icon">📦</span>
+        <span data-i18n="btnQuickExportZip">ZIP (JSON + Art)</span>
+      </button>
+
+      <button id="btnDownloadPng" class="fceb-btn fceb-btn--primary" data-i18n-title="titleBtnDownloadPng" title="Download high-resolution 1920×1080 card image">
+        <span class="fceb-btn__icon">⭳</span>
+        <span class="fceb-btn__text" data-i18n="btnDownloadPng">Download PNG (1920×1080)</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Split Layout -->
+  <main class="fceb-main">
+    <!-- Left Sidebar: Controls & Lines Editor -->
+    <aside class="fceb-sidebar" id="fcebSidebar">
+      
+      <!-- TAB NAVIGATION (2-Row Layout) -->
+      <nav class="fceb-tabs" id="sidebarTabs">
+        <button class="fceb-tab is-active" data-tab="boss" data-i18n="tabBoss">Boss Info</button>
+        <button class="fceb-tab" data-tab="art" data-i18n="tabArt">Artwork</button>
+        <button class="fceb-tab" data-tab="layout" data-i18n="tabLayout">Position</button>
+        <button class="fceb-tab" data-tab="typography" data-i18n="tabTypography">Typography &amp; Styles</button>
+        <button class="fceb-tab" data-tab="export" data-i18n="tabExport">Export</button>
+      </nav>
+
+      <div class="fceb-sidebar__content">
+        <!-- ==================== TAB 1: BOSS DETAILS ==================== -->
+        <section class="fceb-panel is-active" data-panel="boss">
+          
+          <!-- BOSS NAMES (RU & EN) -->
+          <div class="fceb-card-group">
+            <div class="fceb-card-group__header">
+              <h2 class="fceb-panel__title" data-i18n="panelBossDetailsTitle">Boss Name (RU / EN)</h2>
+              <span class="fceb-badge fceb-badge--gold" data-i18n="badgeDisplayedOnCard">Displayed on card</span>
+            </div>
+
+            <div class="fceb-grid fceb-grid--2">
+              <div class="fceb-field">
+                <label for="inputBossNameRu" class="fceb-field__label" data-i18n="labelBossNameRu">🇷🇺 Russian Name</label>
+                <input type="text" id="inputBossNameRu" class="fceb-input fceb-input--lg" placeholder="Хаос Армор" value="Хаос Армор" />
+              </div>
+              <div class="fceb-field">
+                <label for="inputBossNameEn" class="fceb-field__label" data-i18n="labelBossNameEn">🇺🇸 English Name (EN)</label>
+                <input type="text" id="inputBossNameEn" class="fceb-input fceb-input--lg" placeholder="Chaos Armor" value="Chaos Armor" />
+              </div>
+            </div>
+          </div>
+
+          <!-- IDENTIFIERS & METADATA -->
+          <div class="fceb-card-group">
+            <h2 class="fceb-panel__title" data-i18n="labelBossDetails">Identifiers &amp; Parameters</h2>
+            
+            <div class="fceb-grid fceb-grid--2">
+              <div class="fceb-field">
+                <label for="inputBossSlug" class="fceb-field__label" data-i18n="labelBossSlug">Slug (URL / file identifier)</label>
+                <input type="text" id="inputBossSlug" class="fceb-input" placeholder="chaos-armor" value="chaos-armor" />
+              </div>
+              <div class="fceb-field">
+                <label for="inputBossId" class="fceb-field__label" data-i18n="labelBossId">Game Boss ID</label>
+                <input type="text" id="inputBossId" class="fceb-input" placeholder="boss_hum_046" value="boss_hum_046" />
+              </div>
+            </div>
+
+            <div class="fceb-field" style="margin-top: 10px;">
+              <label for="inputSourcePsd" class="fceb-field__label" data-i18n="labelSourcePsd">Source / Notes</label>
+              <input type="text" id="inputSourcePsd" class="fceb-input" placeholder="хаос.psd" value="хаос.psd" />
+            </div>
+          </div>
+
+          <!-- BOSS NAME COLOR PICKER (COMPACT AT BOTTOM) -->
+          <div class="fceb-card-group fceb-card-group--compact">
+            <div class="fceb-card-group__header">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <h2 class="fceb-panel__title" data-i18n="paletteTitle">Boss Name Color</h2>
+                <div class="fceb-color-preview fceb-color-preview--sm" id="sidebarColorPreviewDot" style="background-color: #f16937;"></div>
+              </div>
+              <span class="fceb-badge fceb-badge--gold" data-i18n="badge18Colors">18 swatches</span>
+            </div>
+
+            <!-- Compact Quick Swatches Grid (9x2) -->
+            <div class="fceb-swatches fceb-swatches--compact" id="sidebarColorSwatches">
+              <button class="fceb-swatch is-active" data-color="#f16937" style="background-color: #f16937;" title="Chaos Orange (#f16937)"></button>
+              <button class="fceb-swatch" data-color="#ff5a4d" style="background-color: #ff5a4d;" title="Zhuyan Flame Red (#ff5a4d)"></button>
+              <button class="fceb-swatch" data-color="#bb313d" style="background-color: #bb313d;" title="Asurada Crimson (#bb313d)"></button>
+              <button class="fceb-swatch" data-color="#ef62bd" style="background-color: #ef62bd;" title="Frigg Pink (#ef62bd)"></button>
+              <button class="fceb-swatch" data-color="#cb60f1" style="background-color: #cb60f1;" title="Hive Mother Magenta (#cb60f1)"></button>
+              <button class="fceb-swatch" data-color="#a46ae7" style="background-color: #a46ae7;" title="Merbelle Royal Purple (#a46ae7)"></button>
+              <button class="fceb-swatch" data-color="#4e55df" style="background-color: #4e55df;" title="Jormungand Cobalt Blue (#4e55df)"></button>
+              <button class="fceb-swatch" data-color="#4b8fff" style="background-color: #4b8fff;" title="Frost Bot Azure (#4b8fff)"></button>
+              <button class="fceb-swatch" data-color="#73d9ee" style="background-color: #73d9ee;" title="Sphere Sky Blue (#73d9ee)"></button>
+              <button class="fceb-swatch" data-color="#4ec7d6" style="background-color: #4ec7d6;" title="Culton Cyan (#4ec7d6)"></button>
+              <button class="fceb-swatch" data-color="#2fa8c5" style="background-color: #2fa8c5;" title="Chiron Deep Teal (#2fa8c5)"></button>
+              <button class="fceb-swatch" data-color="#52d9d5" style="background-color: #52d9d5;" title="Singer Aqua (#52d9d5)"></button>
+              <button class="fceb-swatch" data-color="#9adf3e" style="background-color: #9adf3e;" title="Rudolph Lime Green (#9adf3e)"></button>
+              <button class="fceb-swatch" data-color="#b7e84a" style="background-color: #b7e84a;" title="Scorpion Acid Green (#b7e84a)"></button>
+              <button class="fceb-swatch" data-color="#ebe154" style="background-color: #ebe154;" title="Valkyrie Gold (#ebe154)"></button>
+              <button class="fceb-swatch" data-color="#e08c42" style="background-color: #e08c42;" title="Sweetie Amber (#e08c42)"></button>
+              <button class="fceb-swatch" data-color="#9f95c8" style="background-color: #9f95c8;" title="Gu Chen Lavender (#9f95c8)"></button>
+              <button class="fceb-swatch" data-color="#ffffff" style="background-color: #ffffff;" title="Pure White (#ffffff)"></button>
+            </div>
+
+            <!-- Dark Spectrum 2D Area in Sidebar Tab 1 -->
+            <div class="fceb-picker-spectrum-wrap" id="sidebarSpectrumWrap">
+              <div class="fceb-picker-spectrum" id="sidebarSpectrum" data-i18n-title="titleSpectrum" title="Drag to pick saturation &amp; brightness">
+                <div class="fceb-picker-cursor" id="sidebarCursor"></div>
+              </div>
+              <!-- Rainbow Hue Slider in Sidebar -->
+              <div class="fceb-picker-hue-bar" id="sidebarHueBar" data-i18n-title="titleHue" title="Drag to pick hue spectrum">
+                <div class="fceb-picker-hue-thumb" id="sidebarHueThumb"></div>
+              </div>
+            </div>
+
+            <!-- Custom Color Controls in Sidebar: Eyedropper + Preview + Hex -->
+            <div class="fceb-custom-color fceb-custom-color--dark">
+              <button type="button" class="fceb-eyedropper-btn" id="sidebarBtnEyeDropper" data-i18n-title="titleEyeDropper" title="Eyedropper (pick color from screen)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2l4 4-8.5 8.5-4-4L14 2z"/>
+                  <path d="M5.5 10.5l4 4"/>
+                  <path d="M2 22l3-3-2-2-1 3z"/>
+                </svg>
+              </button>
+              <div class="fceb-color-preview-box" id="sidebarPickerPreviewBox" style="background-color: #f16937;"></div>
+              <input type="text" id="sidebarHexColorInput" value="#f16937" class="fceb-hex-input" maxlength="7" placeholder="#ffffff" />
+            </div>
+
+            <!-- Textual RGB Inputs Row in Sidebar -->
+            <div class="fceb-rgb-inputs-row">
+              <label class="fceb-rgb-field">
+                <span class="fceb-rgb-label">R</span>
+                <input type="number" id="sidebarInputRgbR" min="0" max="255" value="241" class="fceb-rgb-input" />
+              </label>
+              <label class="fceb-rgb-field">
+                <span class="fceb-rgb-label">G</span>
+                <input type="number" id="sidebarInputRgbG" min="0" max="255" value="105" class="fceb-rgb-input" />
+              </label>
+              <label class="fceb-rgb-field">
+                <span class="fceb-rgb-label">B</span>
+                <input type="number" id="sidebarInputRgbB" min="0" max="255" value="55" class="fceb-rgb-input" />
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 2: ARTWORK (BOSS ART + EXTRA IMAGES) ==================== -->
+        <section class="fceb-panel" data-panel="art">
+          
+          <!-- IMAGE LAYERS MANAGER -->
+          <div class="fceb-card-group">
+            <div class="fceb-card-group__header">
+              <h2 class="fceb-panel__title" data-i18n="panelImagesTitle">Image Layers</h2>
+              <button type="button" id="btnAddExtraImageBtn" class="fceb-btn fceb-btn--ghost fceb-btn--xs" data-i18n="btnAddExtraImage">+ Add Image</button>
+              <input type="file" id="inputExtraImageFile" accept="image/*" style="display: none;" />
+            </div>
+
+            <!-- Layer items chips list -->
+            <div class="fceb-layer-chips" id="artLayersChips">
+              <!-- Dynamically populated chips: Boss Art + Extra Images -->
+            </div>
+          </div>
+
+          <!-- ACTIVE IMAGE CONTROLS INSPECTOR -->
+          <div class="fceb-card-group" id="activeImageInspectorCard">
+            <div class="fceb-card-group__header">
+              <h2 class="fceb-panel__title" id="activeImageTitle" data-i18n="panelBossArtTitle">Boss Artwork Image</h2>
+              <span class="fceb-badge fceb-badge--gold" id="artStatusBadge" data-i18n="badgeReady">Ready</span>
+            </div>
+
+            <!-- Drag and Drop Dropzone -->
+            <div class="fceb-dropzone" id="artDropzone">
+              <div class="fceb-dropzone__icon">🖼️</div>
+              <div class="fceb-dropzone__text">
+                <strong data-i18n="dropzoneStrong">Drag &amp; drop boss image here</strong>
+                <span data-i18n="dropzoneSpan">or click to select file from PC (.png, .webp, .jpg)</span>
+              </div>
+              <input type="file" id="inputArtFile" class="fceb-dropzone__input" accept="image/*" />
+            </div>
+
+            <div class="fceb-field" style="margin-top: 12px;">
+              <label for="inputArtUrl" class="fceb-field__label" data-i18n="labelArtUrl">Or path / URL to art</label>
+              <div class="fceb-input-with-btn">
+                <input type="text" id="inputArtUrl" class="fceb-input" placeholder="./assets/bosses/chaos-armor.png" value="../../datamine/fce/assets/bosses/chaos-armor.png" />
+                <button id="btnClearArt" class="fceb-btn fceb-btn--ghost" data-i18n-title="titleBtnClearArt" title="Remove artwork">✕</button>
+              </div>
+            </div>
+
+            <!-- Auto-fit Art Position toggle switch (for boss art) -->
+            <div class="fceb-checkbox-wrap" id="wrapAutoFitArt">
+              <label class="fceb-toggle">
+                <input type="checkbox" id="chkAutoFitArt" checked />
+                <span class="fceb-toggle__slider"></span>
+                <span class="fceb-toggle__label" data-i18n="toggleAutoFitArt">Auto-fit art position (like on site)</span>
+              </label>
+            </div>
+
+            <!-- Image Position & Opacity Sliders -->
+            <div class="fceb-sliders">
+              <!-- Opacity slider -->
+              <div class="fceb-slider-row">
+                <div class="fceb-slider-row__header">
+                  <label for="rangeArtOpacity" data-i18n="labelArtOpacity">Opacity:</label>
+                  <span class="fceb-slider-val" id="valArtOpacity">100%</span>
+                </div>
+                <input type="range" id="rangeArtOpacity" min="0" max="100" step="1" value="100" class="fceb-range" />
+              </div>
+
+              <!-- Scale slider -->
+              <div class="fceb-slider-row">
+                <div class="fceb-slider-row__header">
+                  <label for="rangeArtScale" data-i18n="labelArtScale">Scale:</label>
+                  <span class="fceb-slider-val" id="valArtScale">1.00x</span>
+                </div>
+                <input type="range" id="rangeArtScale" min="0.1" max="4.0" step="0.01" value="1.0" class="fceb-range" />
+              </div>
+
+              <!-- X Offset -->
+              <div class="fceb-slider-row">
+                <div class="fceb-slider-row__header">
+                  <label for="rangeArtX" data-i18n="labelArtX">X Offset (px):</label>
+                  <span class="fceb-slider-val" id="valArtX">0px</span>
+                </div>
+                <input type="range" id="rangeArtX" min="-1200" max="1200" step="1" value="0" class="fceb-range" />
+              </div>
+
+              <!-- Y Offset -->
+              <div class="fceb-slider-row">
+                <div class="fceb-slider-row__header">
+                  <label for="rangeArtY" data-i18n="labelArtY">Y Offset (px):</label>
+                  <span class="fceb-slider-val" id="valArtY">0px</span>
+                </div>
+                <input type="range" id="rangeArtY" min="-1000" max="1000" step="1" value="0" class="fceb-range" />
+              </div>
+            </div>
+
+            <!-- Extra image action buttons (visible when extra image is selected) -->
+            <div class="fceb-extra-image-actions" id="extraImageActions" style="display: none; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-subtle); display: none; gap: 6px; flex-wrap: wrap;">
+              <button type="button" id="btnLayerForward" class="fceb-btn fceb-btn--ghost fceb-btn--xs" data-i18n="btnLayerForward">▲ Forward</button>
+              <button type="button" id="btnLayerBackward" class="fceb-btn fceb-btn--ghost fceb-btn--xs" data-i18n="btnLayerBackward">▼ Backward</button>
+              <button type="button" id="btnDeleteActiveImage" class="fceb-btn fceb-btn--danger fceb-btn--xs" data-i18n="btnDeleteImage">✕ Delete</button>
+              <button type="button" id="btnBackToBossArt" class="fceb-btn fceb-btn--ghost fceb-btn--xs" data-i18n="btnBackToBossArt">👑 Back to Boss Art</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 3: FINE-TUNING & LAYOUT ==================== -->
+        <section class="fceb-panel" data-panel="layout">
+          <div class="fceb-card-group">
+            <h2 class="fceb-panel__title" data-i18n="panelNameSettingsTitle">Boss Name Settings</h2>
+            
+            <div class="fceb-checkbox-wrap">
+              <label class="fceb-toggle">
+                <input type="checkbox" id="chkAutoFitName" checked />
+                <span class="fceb-toggle__slider"></span>
+                <span class="fceb-toggle__label" data-i18n="toggleAutoFitName">Auto-fit name width &amp; scale (like on site)</span>
+              </label>
+            </div>
+            
+            <div class="fceb-slider-row">
+              <div class="fceb-slider-row__header">
+                <label for="rangeNameY" data-i18n="labelNameY">Vertical offset (Y offset):</label>
+                <span class="fceb-slider-val" id="valNameY">38px</span>
+              </div>
+              <input type="range" id="rangeNameY" min="-200" max="300" step="1" value="38" class="fceb-range" />
+            </div>
+
+            <div class="fceb-slider-row">
+              <div class="fceb-slider-row__header">
+                <label for="rangeNameRight" data-i18n="labelNameRight">Right offset (Right offset):</label>
+                <span class="fceb-slider-val" id="valNameRight">0px</span>
+              </div>
+              <input type="range" id="rangeNameRight" min="-200" max="400" step="1" value="0" class="fceb-range" />
+            </div>
+
+            <div class="fceb-slider-row">
+              <div class="fceb-slider-row__header">
+                <label for="rangeNameWidth" data-i18n="labelNameWidth">Name block width:</label>
+                <span class="fceb-slider-val" id="valNameWidth">620px</span>
+              </div>
+              <input type="range" id="rangeNameWidth" min="200" max="1200" step="1" value="620" class="fceb-range" />
+            </div>
+          </div>
+
+          <div class="fceb-card-group">
+            <h2 class="fceb-panel__title" data-i18n="panelCopySettingsTitle">Mechanics Block Settings</h2>
+            
+            <div class="fceb-checkbox-wrap">
+              <label class="fceb-toggle">
+                <input type="checkbox" id="chkAutoFitCopy" checked />
+                <span class="fceb-toggle__slider"></span>
+                <span class="fceb-toggle__label" data-i18n="toggleAutoFitCopy">Auto-fit height &amp; scale (like on site)</span>
+              </label>
+            </div>
+
+            <div class="fceb-slider-row">
+              <div class="fceb-slider-row__header">
+                <label for="rangeCopyY" data-i18n="labelCopyY">Top offset (Y):</label>
+                <span class="fceb-slider-val" id="valCopyY">220px</span>
+              </div>
+              <input type="range" id="rangeCopyY" min="0" max="600" step="1" value="220" class="fceb-range" />
+            </div>
+
+            <div class="fceb-slider-row">
+              <div class="fceb-slider-row__header">
+                <label for="rangeCopyWidth" data-i18n="labelCopyWidth">Text block width:</label>
+                <span class="fceb-slider-val" id="valCopyWidth">1300px</span>
+              </div>
+              <input type="range" id="rangeCopyWidth" min="400" max="1800" step="1" value="1300" class="fceb-range" />
+            </div>
+
+            <div class="fceb-slider-row">
+              <div class="fceb-slider-row__header">
+                <label for="rangeCopyScale" data-i18n="labelCopyScale">Font scale:</label>
+                <span class="fceb-slider-val" id="valCopyScale">1.00x</span>
+              </div>
+              <input type="range" id="rangeCopyScale" min="0.4" max="2.0" step="0.01" value="1.0" class="fceb-range" />
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TAB 4: TYPOGRAPHY & STYLES (NEW CATEGORY) ==================== -->
+        <section class="fceb-panel" data-panel="typography">
+          <!-- 0. OFFICIAL FONT PACKAGE UPLOAD (TOP) -->
+          <div class="fceb-card-group">
+            <div class="fceb-card-group__header">
+              <h2 class="fceb-panel__title" data-i18n="panelFontPackageTitle">Official Font Package</h2>
+              <span class="fceb-badge" data-i18n="badgeZipAsset">ZIP Asset</span>
+            </div>
+            <div class="fceb-font-upload-wrap">
+              <button type="button" id="btnUploadFontFile" class="fceb-btn fceb-btn--ghost fceb-btn--sm fceb-btn--full">
+                <span>📁</span>
+                <span data-i18n="btnUploadFont">+ Upload official font file (.ttf, .otf, .woff, .woff2)</span>
+              </button>
+              <input type="file" id="inputFontFile" accept=".ttf,.otf,.woff,.woff2" style="display: none;" />
+              <p class="fceb-hint-text" data-i18n="hintFontPackage">📦 Uploaded font file will be automatically bundled into ZIP under /assets/fonts/.<code>/assets/fonts/</code>.
+              </p>
+            </div>
+          </div>
+
+          <!-- 1. BOSS NAME FONT -->
+          <div class="fceb-card-group">
+            <div class="fceb-card-group__header">
+              <h2 class="fceb-panel__title" data-i18n="panelNameTypographyTitle">Boss Name Font</h2>
+              <span class="fceb-badge fceb-badge--gold" id="nameFontStatusBadge">Haettenschweiler</span>
+            </div>
+
+            <div class="fceb-field">
+              <label for="selectNameFont" class="fceb-label" data-i18n="labelNameFontFamily">Boss Name Font:</label>
+              <select id="selectNameFont" class="fceb-select">
+                <option value="var(--fce-font-title)">Haettenschweiler (Boss Name Original)</option>
+                <option value="var(--fce-font-copy)">Franklin Gothic Medium Cond (Mechanics Original)</option>
+                <option value="'Manrope', sans-serif">Manrope (TOF Interface)</option>
+                <option value="'Spectral', serif">Spectral (Serif Stylistic)</option>
+                <option value="'Impact', sans-serif">Impact (Heavy Bold)</option>
+                <option value="'Arial Narrow', sans-serif">Arial Narrow (Condensed)</option>
+                <option value="'JetBrains Mono', monospace">JetBrains Mono (Monospace)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 2. MECHANIC TEXT FONT -->
+          <div class="fceb-card-group">
+            <div class="fceb-card-group__header">
+              <h2 class="fceb-panel__title" data-i18n="panelFontTitle">Mechanic Text Font</h2>
+              <span class="fceb-badge fceb-badge--gold" id="fontStatusBadge" data-i18n="badgeFontOfficial">FCE Original</span>
+            </div>
+            
+            <div class="fceb-field">
+              <label for="selectCopyFont" class="fceb-label" data-i18n="labelFontFamily">Font Family:</label>
+              <select id="selectCopyFont" class="fceb-select">
+                <option value="var(--fce-font-copy)">Franklin Gothic Medium Cond (Mechanics Original)</option>
+                <option value="'Haettenschweiler', 'Arial Narrow', Impact, sans-serif">Haettenschweiler (Boss Name Original)</option>
+                <option value="'Manrope', sans-serif">Manrope (TOF Interface)</option>
+                <option value="'Spectral', serif">Spectral (Serif Stylistic)</option>
+                <option value="'Impact', sans-serif">Impact (Heavy Bold)</option>
+                <option value="'Arial Narrow', sans-serif">Arial Narrow (Condensed)</option>
+                <option value="'JetBrains Mono', monospace">JetBrains Mono (Monospace)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 3. FONT SPECIMENS — one line per available font -->
+          <div class="fceb-card-group">
+            <div class="fceb-card-group__header">
+              <h2 class="fceb-panel__title" data-i18n="panelFontSpecimensTitle">Font Specimens</h2>
+              <span class="fceb-badge" id="fontSpecimenCount">7</span>
+            </div>
+            <div id="fontSpecimenList" class="fceb-font-specimens">
+              <!-- Populated dynamically; uploaded fonts are prepended to the top -->
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ==================== TAB 4: EXPORT & INTEGRATION ==================== -->
+        <section class="fceb-panel" data-panel="export">
+          <div class="fceb-card-group">
+            <h2 class="fceb-panel__title" data-i18n="panelExportTitle">Export for Website (EN + RU)</h2>
+            <p class="fceb-desc" data-i18n="panelExportDesc">Export both English and Russian boss definitions in a unified JSON or separate files.</p>
+
+            <div class="fceb-export-grid">
+              <button id="btnExportZipPackage" class="fceb-export-card fceb-export-card--featured">
+                <div class="fceb-export-card__icon">📦</div>
+                <div class="fceb-export-card__title" data-i18n="exportZipTitle">Download ZIP Package (JSON + Art)</div>
+                <div class="fceb-export-card__desc" data-i18n="exportZipDesc">Archive structure for datamine/fce: /assets/bosses/ and /data/</div>
+              </button>
+
+              <button id="btnExportCopyModal" class="fceb-export-card">
+                <div class="fceb-export-card__icon">📋</div>
+                <div class="fceb-export-card__title" data-i18n="exportModalBtnTitle">Open Export Menu</div>
+                <div class="fceb-export-card__desc" data-i18n="exportModalBtnDesc">Snippets for fce-bosses.json &amp; .ru.json</div>
+              </button>
+
+              <button id="btnExportDownloadPng" class="fceb-export-card">
+                <div class="fceb-export-card__icon">🖼️</div>
+                <div class="fceb-export-card__title" data-i18n="exportPngTitle">Download PNG (1920×1080)</div>
+                <div class="fceb-export-card__desc" data-i18n="exportPngDesc">Ultra high-resolution image ready for website</div>
+              </button>
+
+              <button id="btnExportCopyHtml" class="fceb-export-card">
+                <div class="fceb-export-card__icon">🌐</div>
+                <div class="fceb-export-card__title" data-i18n="exportHtmlTitle">Copy HTML Code</div>
+                <div class="fceb-export-card__desc" data-i18n="exportHtmlDesc">Clean HTML for page embedding</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="fceb-card-group">
+            <div class="fceb-preview-tabs">
+              <span class="fceb-preview-tabs__title" data-i18n="panelJsonPreviewTitle">Export Preview:</span>
+              <div class="fceb-mini-tabs">
+                <button class="fceb-mini-tab is-active" data-preview="dual">Dual (EN+RU)</button>
+                <button class="fceb-mini-tab" data-preview="en">EN</button>
+                <button class="fceb-mini-tab" data-preview="ru">RU</button>
+              </div>
+            </div>
+            <pre class="fceb-code-block" id="jsonPreviewBlock"></pre>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <!-- Right Area: Live Interactive Canvas Workspace -->
+    <div class="fceb-workspace" id="fcebWorkspace">
+      
+      <!-- Top info bar in workspace -->
+      <div class="fceb-workspace__bar">
+        <div class="fceb-canvas-status">
+          <span class="fceb-status-dot"></span>
+          <span id="canvasStatusText" data-i18n="canvasStatusText">Interactive Canvas (1920×1080) · Edit directly here</span>
+        </div>
+        <!-- Static Selection Formatting Toolbar (inline in the top bar) -->
+        <div class="fceb-selection-toolbar fceb-selection-toolbar--static" id="selectionToolbar">
+          <button id="btnSelBold" class="fceb-sel-btn fceb-sel-btn--icon" data-i18n-title="titleSelBold" title="Bold (Ctrl+B)"><b>B</b></button>
+          <button id="btnSelItalic" class="fceb-sel-btn fceb-sel-btn--icon" data-i18n-title="titleSelItalic" title="Italic (Ctrl+I)"><i>I</i></button>
+          <button id="btnSelUnderline" class="fceb-sel-btn fceb-sel-btn--icon" data-i18n-title="titleSelUnderline" title="Underline (Ctrl+U)"><u>U</u></button>
+          <button id="btnSelStrike" class="fceb-sel-btn fceb-sel-btn--icon" data-i18n-title="titleSelStrike" title="Strikethrough"><s>S</s></button>
+
+          <span class="fceb-sel-divider"></span>
+
+          <!-- Quick Font Selector for highlighted text -->
+          <select id="selTextFontFamily" class="fceb-sel-select" data-i18n-title="titleSelFont" title="Font of highlighted selection">
+            <option value="" selected>Font: Auto</option>
+            <option value="var(--fce-font-copy)">Franklin Gothic</option>
+            <option value="'Haettenschweiler', 'Arial Narrow', Impact, sans-serif">Haettenschweiler</option>
+            <option value="'Manrope', sans-serif">Manrope</option>
+            <option value="'Spectral', serif">Spectral</option>
+            <option value="'Impact', sans-serif">Impact</option>
+            <option value="'Arial Narrow', sans-serif">Arial Narrow</option>
+            <option value="'JetBrains Mono', monospace">JetBrains Mono</option>
+          </select>
+
+          <!-- Quick Font Size combobox (Google-Docs style): shows current size,
+               dropdown of presets, and free numeric entry for custom sizes -->
+          <input id="selTextFontSize" class="fceb-sel-select fceb-sel-select--size" type="text"
+                 inputmode="numeric" list="fcebSizeList" placeholder="Size"
+                 title="Font size — type a number or pick from the list (empty = auto)" />
+          <datalist id="fcebSizeList">
+            <option value="24"></option>
+            <option value="30"></option>
+            <option value="36"></option>
+            <option value="42"></option>
+            <option value="50"></option>
+            <option value="60"></option>
+            <option value="72"></option>
+            <option value="84"></option>
+            <option value="96"></option>
+            <option value="120"></option>
+          </datalist>
+
+          <!-- Quick Stroke / Outline for highlighted text (dropdown anchor) -->
+          <span class="fceb-sel-outline-wrap">
+            <button id="btnSelStroke" class="fceb-sel-btn fceb-sel-btn--icon" data-i18n-title="titleSelStroke" title="Outline highlighted text">⭕</button>
+            <!-- Outline/Stroke dropdown — drops down under the ⭕ button -->
+            <div class="fceb-outline-popover" id="outlinePopover" style="display:none;">
+              <!-- Mode tabs -->
+              <div class="fceb-outline-modes">
+                <button class="fceb-outline-mode-btn is-active" data-mode="stroke" title="Character stroke">⭕ Stroke</button>
+                <button class="fceb-outline-mode-btn" data-mode="pill" title="Pill badge">⬭ Pill</button>
+                <button class="fceb-outline-mode-btn" data-mode="rect" title="Rect badge">▭ Rect</button>
+              </div>
+              <!-- Width -->
+              <div class="fceb-outline-row" id="outlineWidthRow">
+                <label class="fceb-outline-label" id="outlineWidthLabel">Width</label>
+                <input type="range" id="rangeOutlineWidth" min="1" max="48" step="1" value="2" class="fceb-range" />
+                <span id="valOutlineWidth" class="fceb-slider-val" style="min-width:32px;font-size:11px;">2px</span>
+              </div>
+              <!-- Color -->
+              <div class="fceb-outline-row">
+                <label class="fceb-outline-label" id="outlineColorLabel">Color</label>
+                <input type="color" id="pickerOutlineColor" value="#ff0000" class="fceb-color-input fceb-color-input--sm" />
+                <input type="text" id="hexOutlineColor" value="#ff0000" maxlength="7" class="fceb-hex-input fceb-hex-input--sm" style="width:65px;font-size:11px;" />
+              </div>
+              <!-- Opacity (for pill/rect) -->
+              <div class="fceb-outline-row" id="outlineOpacityRow" style="display:none;">
+                <label class="fceb-outline-label">Opacity</label>
+                <input type="range" id="rangeOutlineOpacity" min="5" max="100" step="5" value="80" class="fceb-range" />
+                <span id="valOutlineOpacity" class="fceb-slider-val" style="min-width:32px;font-size:11px;">80%</span>
+              </div>
+              <!-- Text color (for pill/rect) -->
+              <div class="fceb-outline-row" id="outlineTextColorRow" style="display:none;">
+                <label class="fceb-outline-label">Text</label>
+                <input type="color" id="pickerOutlineTextColor" value="#ffffff" class="fceb-color-input fceb-color-input--sm" />
+                <input type="text" id="hexOutlineTextColor" value="#ffffff" maxlength="7" class="fceb-hex-input fceb-hex-input--sm" style="width:65px;font-size:11px;" />
+              </div>
+              <!-- Remove button -->
+              <button type="button" id="btnOutlineRemove" class="fceb-btn fceb-btn--ghost fceb-btn--sm fceb-btn--full" style="margin-top:4px;">✕ Remove</button>
+            </div>
+          </span>
+
+          <span class="fceb-sel-divider"></span>
+
+          <button class="fceb-sel-btn fceb-sel-btn--color" data-color="#ff0000" data-i18n-title="titleSelRed" title="Red accent (Ctrl+R)"><span class="fceb-sel-dot" style="background:#ff0000;"></span></button>
+          <button class="fceb-sel-btn fceb-sel-btn--color" data-color="#ebe154" data-i18n-title="titleSelGold" title="Gold accent"><span class="fceb-sel-dot" style="background:#ebe154;"></span></button>
+          <button class="fceb-sel-btn fceb-sel-btn--color" data-color="#4ec7d6" data-i18n-title="titleSelCyan" title="Cyan accent"><span class="fceb-sel-dot" style="background:#4ec7d6;"></span></button>
+          <button class="fceb-sel-btn fceb-sel-btn--color" data-color="#a46ae7" data-i18n-title="titleSelPurple" title="Purple accent"><span class="fceb-sel-dot" style="background:#a46ae7;"></span></button>
+          <button class="fceb-sel-btn fceb-sel-btn--color" data-color="#9adf3e" data-i18n-title="titleSelLime" title="Lime accent"><span class="fceb-sel-dot" style="background:#9adf3e;"></span></button>
+
+          <!-- Custom Color Picker from wheel -->
+          <label class="fceb-sel-colorpicker-wrap" data-i18n-title="titleSelColorPicker" title="Custom color from palette">
+            <span class="fceb-sel-icon">🎨</span>
+            <input type="color" id="textCustomColorPicker" value="#ff4d4f" class="fceb-sel-colorpicker-input" />
+          </label>
+
+          <span class="fceb-sel-divider"></span>
+
+          <!-- Clear Formatting Button (Google Docs icon) -->
+          <button id="btnSelectionClear" class="fceb-sel-btn fceb-sel-btn--clear" data-i18n-title="titleSelClear" title="Clear formatting">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3.27 5L2 6.27l6.97 6.97L6.5 19h3l1.57-3.66L16.73 21 18 19.73 3.27 5zM6 5v.18L8.82 8h2.4l-.72 1.68 2.1 2.1L14.21 8H20V5H6z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="fceb-workspace__actions">
+          <button id="btnToggleFullscreen" class="fceb-icon-btn" data-i18n-title="btnToggleFullscreenTitle" title="Fullscreen mode">⛶</button>
+        </div>
+      </div>
+
+      <!-- Canvas Viewport Wrapper (Handles responsive scaling) -->
+      <div class="fceb-canvas-stage" id="canvasStage">
+        <div class="fceb-card-viewport" id="cardViewport" style="--fce-scale: 0.65;">
+          
+          <!-- THE ACTUAL 1920x1080 FCE CARD -->
+          <article class="fce-card" id="fceCard">
+            <!-- Sky layer -->
+            <div class="fce-card__sky"></div>
+            <!-- Animated fog -->
+            <div class="fce-card__fog"></div>
+            <!-- Sci-fi grid -->
+            <div class="fce-card__grid"></div>
+            <!-- Lighting wash -->
+            <div class="fce-card__wash"></div>
+
+            <!-- Mechanics Copy Block (Contains all text lines) -->
+            <div class="fce-card__copy" id="cardCopy" style="--fce-copy-width: 1300px; --fce-copy-y: 220px; --fce-copy-scale: 1;">
+              <!-- Generated dynamically from lines -->
+            </div>
+
+            <!-- Visual Layer (Boss Art + Boss Name + Extra Images) -->
+            <div class="fce-card__visual" id="cardVisual" style="--fce-name-color: #f16937; --fce-art-scale: 1; --fce-art-x: 0px; --fce-art-y: 0px; --fce-art-opacity: 1; --fce-name-right: 0px; --fce-name-y: 38px; --fce-name-width: 620px; --fce-name-scale: 1;">
+              <img id="cardArtImg" class="fce-card__art" src="../../datamine/fce/assets/bosses/chaos-armor.png" alt="Chaos Armor" />
+              <!-- Container for Extra Images Layers -->
+              <div id="cardExtraImages" class="fce-card__extra-images"></div>
+              <div class="fce-card__name" id="cardNameText" contenteditable="true" spellcheck="false" data-i18n-title="cardNameTitle" title="Click to edit boss name directly on canvas">Chaos Armor</div>
+            </div>
+
+            <!-- INTERACTIVE IMAGE TRANSFORM GIZMO (BOUNDING BOX & 8 RESIZE HANDLES) -->
+            <div class="fceb-gizmo" id="imageTransformGizmo" style="display: none;">
+              <div class="fceb-gizmo__frame"></div>
+              <!-- Corner handles -->
+              <div class="fceb-gizmo__handle fceb-gizmo__handle--nw" data-handle="nw" title="Resize"></div>
+              <div class="fceb-gizmo__handle fceb-gizmo__handle--ne" data-handle="ne" title="Resize"></div>
+              <div class="fceb-gizmo__handle fceb-gizmo__handle--sw" data-handle="sw" title="Resize"></div>
+              <div class="fceb-gizmo__handle fceb-gizmo__handle--se" data-handle="se" title="Resize"></div>
+              <!-- Edge handles (Top/Bottom/Left/Right) -->
+              <div class="fceb-gizmo__handle fceb-gizmo__handle--n" data-handle="n" title="Stretch height"></div>
+              <div class="fceb-gizmo__handle fceb-gizmo__handle--s" data-handle="s" title="Stretch height"></div>
+              <div class="fceb-gizmo__handle fceb-gizmo__handle--w" data-handle="w" title="Stretch width"></div>
+              <div class="fceb-gizmo__handle fceb-gizmo__handle--e" data-handle="e" title="Stretch width"></div>
+              <div class="fceb-gizmo__badge" id="gizmoScaleBadge">1.00x</div>
+            </div>
+          </article>
+
+          <!-- FLOATING TOP-RIGHT BOSS NAME COLOR PALETTE (Shown when editing boss name) -->
+          <div class="fceb-floating-palette" id="floatingColorPalette" style="display: none;">
+            <div class="fceb-palette-header">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="fceb-palette-header__title" data-i18n="paletteTitle">Boss Name Color</span>
+                <div class="fceb-color-preview" id="colorPreviewDot" style="background-color: #f16937;"></div>
+              </div>
+              <button id="btnClosePalette" class="fceb-palette-close" data-i18n-title="titleSelClose" title="Close toolbar">✕</button>
+            </div>
+
+            <!-- Quick FCE Boss Preset Swatches (18 Distinct Boss Colors) -->
+            <div class="fceb-swatches" id="colorSwatches">
+              <button class="fceb-swatch is-active" data-color="#f16937" style="background-color: #f16937;" title="Chaos Orange (#f16937)"></button>
+              <button class="fceb-swatch" data-color="#ff5a4d" style="background-color: #ff5a4d;" title="Zhuyan Flame Red (#ff5a4d)"></button>
+              <button class="fceb-swatch" data-color="#bb313d" style="background-color: #bb313d;" title="Asurada Crimson (#bb313d)"></button>
+              <button class="fceb-swatch" data-color="#ef62bd" style="background-color: #ef62bd;" title="Frigg Pink (#ef62bd)"></button>
+              <button class="fceb-swatch" data-color="#cb60f1" style="background-color: #cb60f1;" title="Hive Mother Magenta (#cb60f1)"></button>
+              <button class="fceb-swatch" data-color="#a46ae7" style="background-color: #a46ae7;" title="Merbelle Royal Purple (#a46ae7)"></button>
+              <button class="fceb-swatch" data-color="#4e55df" style="background-color: #4e55df;" title="Jormungand Cobalt Blue (#4e55df)"></button>
+              <button class="fceb-swatch" data-color="#4b8fff" style="background-color: #4b8fff;" title="Frost Bot Azure (#4b8fff)"></button>
+              <button class="fceb-swatch" data-color="#73d9ee" style="background-color: #73d9ee;" title="Sphere Sky Blue (#73d9ee)"></button>
+              <button class="fceb-swatch" data-color="#4ec7d6" style="background-color: #4ec7d6;" title="Culton Cyan (#4ec7d6)"></button>
+              <button class="fceb-swatch" data-color="#2fa8c5" style="background-color: #2fa8c5;" title="Chiron Deep Teal (#2fa8c5)"></button>
+              <button class="fceb-swatch" data-color="#52d9d5" style="background-color: #52d9d5;" title="Singer Aqua (#52d9d5)"></button>
+              <button class="fceb-swatch" data-color="#9adf3e" style="background-color: #9adf3e;" title="Rudolph Lime Green (#9adf3e)"></button>
+              <button class="fceb-swatch" data-color="#b7e84a" style="background-color: #b7e84a;" title="Scorpion Acid Green (#b7e84a)"></button>
+              <button class="fceb-swatch" data-color="#ebe154" style="background-color: #ebe154;" title="Valkyrie Gold (#ebe154)"></button>
+              <button class="fceb-swatch" data-color="#e08c42" style="background-color: #e08c42;" title="Sweetie Amber (#e08c42)"></button>
+              <button class="fceb-swatch" data-color="#9f95c8" style="background-color: #9f95c8;" title="Gu Chen Lavender (#9f95c8)"></button>
+              <button class="fceb-swatch" data-color="#ffffff" style="background-color: #ffffff;" title="Pure White (#ffffff)"></button>
+            </div>
+
+            <!-- Dark Spectrum 2D Area (Saturation & Brightness) -->
+            <div class="fceb-picker-spectrum-wrap" id="pickerSpectrumWrap">
+              <div class="fceb-picker-spectrum" id="pickerSpectrum" data-i18n-title="titleSpectrum" title="Drag to pick saturation &amp; brightness">
+                <div class="fceb-picker-cursor" id="pickerCursor"></div>
+              </div>
+              <!-- Rainbow Hue Slider -->
+              <div class="fceb-picker-hue-bar" id="pickerHueBar" data-i18n-title="titleHue" title="Drag to pick hue spectrum">
+                <div class="fceb-picker-hue-thumb" id="pickerHueThumb"></div>
+              </div>
+            </div>
+
+            <!-- Custom Color Controls: EyeDropper + Preview + Hex -->
+            <div class="fceb-custom-color fceb-custom-color--dark">
+              <button type="button" class="fceb-eyedropper-btn" id="btnEyeDropper" data-i18n-title="titleEyeDropper" title="Eyedropper (pick color from screen)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2l4 4-8.5 8.5-4-4L14 2z"/>
+                  <path d="M5.5 10.5l4 4"/>
+                  <path d="M2 22l3-3-2-2-1 3z"/>
+                </svg>
+              </button>
+              <div class="fceb-color-preview-box" id="pickerPreviewBox" style="background-color: #f16937;"></div>
+              <input type="text" id="hexColorInput" value="#f16937" class="fceb-hex-input" maxlength="7" placeholder="#ffffff" />
+            </div>
+
+            <!-- Textual RGB Inputs Row -->
+            <div class="fceb-rgb-inputs-row">
+              <label class="fceb-rgb-field">
+                <span class="fceb-rgb-label">R</span>
+                <input type="number" id="inputRgbR" min="0" max="255" value="241" class="fceb-rgb-input" />
+              </label>
+              <label class="fceb-rgb-field">
+                <span class="fceb-rgb-label">G</span>
+                <input type="number" id="inputRgbG" min="0" max="255" value="105" class="fceb-rgb-input" />
+              </label>
+              <label class="fceb-rgb-field">
+                <span class="fceb-rgb-label">B</span>
+                <input type="number" id="inputRgbB" min="0" max="255" value="55" class="fceb-rgb-input" />
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Multi-Tab Export Modal (EN + RU + Dual) -->
+  <div class="fceb-modal" id="exportModal">
+    <div class="fceb-modal__backdrop" id="modalBackdrop"></div>
+    <div class="fceb-modal__dialog">
+      <div class="fceb-modal__header">
+        <h3 class="fceb-modal__title" id="modalTitle" data-i18n="modalTitle">Export Code (EN + RU)</h3>
+        <button class="fceb-modal__close" id="btnModalClose">✕</button>
+      </div>
+
+      <!-- Modal Tabs for Dual, EN, RU, HTML -->
+      <div class="fceb-modal-tabs">
+        <button class="fceb-modal-tab is-active" data-modaltab="dual">📦 Dual JSON (EN + RU)</button>
+        <button class="fceb-modal-tab" data-modaltab="en">🇺🇸 EN (fce-bosses.json)</button>
+        <button class="fceb-modal-tab" data-modaltab="ru">🇷🇺 RU (fce-bosses.ru.json)</button>
+        <button class="fceb-modal-tab" data-modaltab="html">🌐 HTML</button>
+      </div>
+
+      <div class="fceb-modal__body">
+        <p class="fceb-modal__instructions" id="modalInstructions">
+          Boss export snippet:
+        </p>
+        <div class="fceb-modal__code-wrap">
+          <textarea id="modalCodeArea" class="fceb-modal__textarea" readonly spellcheck="false"></textarea>
+        </div>
+      </div>
+      <div class="fceb-modal__footer">
+        <button id="btnModalCopy" class="fceb-btn fceb-btn--primary">
+          <span data-i18n="btnModalCopy">📋 Copy to clipboard</span>
+        </button>
+        <button id="btnModalDownload" class="fceb-btn fceb-btn--secondary">
+          <span data-i18n="btnModalDownload">💾 Download file</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="fceb-toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="./presets.js?v=4"></script>
+  <script src="./js/html2canvas.min.js"></script>
+  <script src="./js/jszip.min.js"></script>
+  <script src="./app.js?v=4"></script>
+</body>
+</html>

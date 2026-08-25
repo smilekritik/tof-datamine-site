@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tof.smilekritik.beer/datamine/sitemap.xml

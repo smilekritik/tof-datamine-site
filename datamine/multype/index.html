@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="dm-scrollbar dm-scrollbar--slim">
+<head>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Search 9,261 buff keys and see which effects add together or multiply in separate groups." />
+  <meta name="theme-color" content="#0c0812" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="TOF Datamine Archive" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://tof.smilekritik.beer/datamine/multype/" />
+  <meta property="og:title" content="TOF Buff Categories &amp; Stacking" />
+  <meta property="og:description" content="Search 9,261 buff keys and see which effects add together or multiply in separate groups." />
+  <meta property="og:image" content="https://tof.smilekritik.beer/datamine/social/datamine-social.png" />
+  <meta property="og:image:secure_url" content="https://tof.smilekritik.beer/datamine/social/datamine-social.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:image:alt" content="Tower of Fantasy buff categories and stacking groups" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TOF Buff Categories &amp; Stacking" />
+  <meta name="twitter:description" content="Search 9,261 buff keys and see which effects add together or multiply in separate groups." />
+  <meta name="twitter:image" content="https://tof.smilekritik.beer/datamine/social/datamine-social.png" />
+  <meta name="twitter:image:alt" content="Tower of Fantasy buff categories and stacking groups" />
+  <link rel="canonical" href="https://tof.smilekritik.beer/datamine/multype/" />
+  <title>TOF Buff Categories &amp; Stacking</title>
+  <script>
+    (function () {
+      const savedTheme = document.cookie
+        .split("; ")
+        .find((entry) => entry.startsWith("tof-multype-theme="))
+        ?.split("=")[1];
+      document.documentElement.dataset.multypeTheme = savedTheme === "dark" ? "dark" : "light";
+    })();
+  </script>
+  <link rel="stylesheet" href="../shared/fonts.css" />
+  <link rel="stylesheet" href="../shared/base.css" />
+  <link rel="stylesheet" href="../shared/shell.css" />
+  <link rel="stylesheet" href="../shared/header.css?v=2" />
+  <link rel="stylesheet" href="../shared/footer.css" />
+  <link rel="stylesheet" href="../shared/scrollbars.css?v=2" />
+  <link rel="stylesheet" href="./styles/datamine-multype.css?v=11" />
+</head>
+<body class="page page--datamine-multype">
+  <div class="noise-bg"></div>
+  <div data-datamine-header data-current="multype"></div>
+  <main class="layout multype-layout" data-multype-app>
+    <section class="hero multype-anchor" id="overview">
+      <div class="hero__content">
+        <p class="hero__eyebrow">MULTYPE</p>
+        <h1 class="hero__title">Multiplicative buffs</h1>
+        <p class="hero__subtitle">Buff grouping and multiplier data. Columns multiply with each other; values in the same column are additive.</p>
+      </div>
+      <div class="multype-hero__actions" data-multype-hero-actions>
+        <div class="multype-theme-bar">
+          <div class="multype-theme-control">
+            <span class="multype-theme-control__label" data-multype-theme-label>Table palette</span>
+            <div class="multype-theme-switch" role="group" aria-label="Table color theme" data-multype-theme-switch>
+              <button class="multype-theme-switch__button" type="button" data-multype-theme-value="light">
+                <svg class="multype-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3.5"></circle>
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+                </svg>
+                <span data-multype-theme-button-label>Light</span>
+              </button>
+              <button class="multype-theme-switch__button" type="button" data-multype-theme-value="dark">
+                <svg class="multype-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.2 15.2A8.6 8.6 0 0 1 8.8 3.8 8.6 8.6 0 1 0 20.2 15.2Z"></path>
+                </svg>
+                <span data-multype-theme-button-label>Dark</span>
+              </button>
+            </div>
+          </div>
+          <aside class="multype-version-card" aria-live="polite">
+            <span class="multype-version-card__label" data-multype-version-label>Dataset version</span>
+            <strong class="multype-version-card__text" data-multype-version>Loading version information…</strong>
+          </aside>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__inner">
+        <div class="multype-status-card">
+          <p class="multype-status-card__title">Loading datamine JSON...</p>
+          <p class="multype-status-card__body">Building the Main / Sub / Value model and rename dictionary.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="datamine-footer" data-datamine-footer data-base-path="../"></footer>
+
+  <script src="../shared/site-config.js"></script>
+  <script src="../shared/i18n.js"></script>
+  <script src="../shared/data-meta.js"></script>
+  <script src="../shared/version-status.js"></script>
+  <script src="../shared/url-state.js?v=1"></script>
+  <script src="../shared/header.js?server-cache=5"></script>
+  <script src="../shared/footer.js"></script>
+  <script src="./js/datamine-multype-theme.js"></script>
+  <script src="./js/multype-column-window.js?v=1"></script>
+  <script src="./js/datamine-multype-core.js?v=15"></script>
+  <script src="./js/datamine-multype.js?v=5"></script>
+  <script src="../shared/scroll-top.js"></script>
+</body>
+</html>

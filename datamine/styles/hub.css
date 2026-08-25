@@ -1,0 +1,580 @@
+.page--datamine-hub {
+  --hub-bg: var(--dm-bg, #0c0910);
+  --hub-surface: var(--dm-surface, #100d14);
+  --hub-surface-raised: var(--dm-surface-raised, #151119);
+  --hub-border: var(--dm-border, rgba(255, 255, 255, 0.08));
+  --hub-border-hover: var(--dm-border-hover, rgba(245, 217, 122, 0.28));
+  --hub-text: #ded8e6;
+  --hub-strong: var(--dm-text-strong, #f4f0f6);
+  --hub-muted: #b4abbf;
+  --hub-gold: var(--dm-gold, #f5d97a);
+  --hub-violet: var(--dm-violet, #a77add);
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--hub-text);
+  font-family: var(--font-sans);
+  background: var(--hub-bg);
+}
+
+.page--datamine-hub .noise-bg {
+  opacity: 0.25;
+}
+
+.datamine-hub-layout {
+  width: 100%;
+  max-width: 1440px;
+  flex: 1 0 auto;
+  margin: 0 auto;
+  padding: 24px 28px 32px;
+}
+
+/* Hero Section */
+.datamine-hub-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.datamine-hub-hero__eyebrow {
+  margin: 0 0 6px;
+  color: var(--hub-gold);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.datamine-hub-hero__title {
+  margin: 0;
+  color: var(--hub-strong);
+  font-family: "Spectral", Georgia, serif;
+  font-size: clamp(28px, 3.2vw, 36px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.datamine-hub-hero__subtitle {
+  max-width: 600px;
+  margin: 6px 0 0;
+  color: var(--hub-muted);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Hub Grid Layout */
+.datamine-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* Base Card */
+.datamine-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 220px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 20px;
+  border: 1px solid var(--hub-border);
+  border-radius: var(--dm-radius-md, 8px);
+  background: var(--hub-surface);
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.datamine-card:hover {
+  border-color: var(--hub-border-hover);
+  background: var(--hub-surface-raised);
+}
+
+.datamine-card__topline {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.datamine-card__code {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--hub-gold);
+  text-transform: uppercase;
+}
+
+.datamine-card__count {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 11.5px;
+  color: var(--hub-muted);
+}
+
+.datamine-card__count strong {
+  color: var(--hub-strong);
+  font-weight: 600;
+}
+
+.datamine-card__count span {
+  color: var(--hub-muted);
+}
+
+.datamine-card__heading-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.datamine-card__title {
+  margin: 0;
+  color: var(--hub-strong);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* FCE Showcase */
+.datamine-card__fce-showcase {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: var(--dm-radius-sm, 6px);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--hub-border);
+}
+
+.datamine-card__boss-thumb {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: var(--dm-radius-sm, 6px);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(245, 217, 122, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.datamine-card__boss-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.25s ease, opacity 0.3s ease;
+}
+
+.datamine-card:hover .datamine-card__boss-thumb img {
+  transform: scale(1.08);
+}
+
+.datamine-card__fce-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.datamine-card__fce-name {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--hub-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Sequential Sparkline Preview */
+.datamine-card__seq-graph {
+  width: 100%;
+  padding: 8px 10px 6px;
+  border-radius: var(--dm-radius-sm, 6px);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--hub-border);
+}
+
+.seq-sparkline {
+  width: 100%;
+  height: 48px;
+  display: block;
+}
+
+.seq-sparkline-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+  color: var(--hub-muted);
+}
+
+/* Multype Category Matrix Preview */
+.datamine-card__multype-matrix {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: var(--dm-radius-sm, 6px);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--hub-border);
+}
+
+.multype-mini-col {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.mini-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--mini-color);
+  background: color-mix(in srgb, var(--mini-color) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--mini-color) 35%, transparent);
+  border-radius: 3px;
+  padding: 1.5px 0;
+}
+
+.mini-bar {
+  background: color-mix(in srgb, var(--mini-color) 22%, rgba(255, 255, 255, 0.04));
+  border: 1px solid color-mix(in srgb, var(--mini-color) 40%, transparent);
+  border-radius: 2px;
+}
+
+/* Items Database Preview */
+.datamine-card__items-preview {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 7px 10px;
+  border-radius: var(--dm-radius-sm, 6px);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--hub-border);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.items-mini-row {
+  display: grid;
+  grid-template-columns: 30px 80px 1fr;
+  gap: 6px;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--hub-muted);
+}
+
+.items-mini-row--header {
+  color: var(--hub-gold);
+  font-weight: 700;
+  font-size: 8.5px;
+  border-bottom: 1px solid var(--hub-border);
+  padding-bottom: 2px;
+  margin-bottom: 1px;
+}
+
+.items-mini-row .col-id {
+  color: var(--hub-violet);
+  font-weight: 600;
+}
+
+.items-mini-row .col-key {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.75;
+}
+
+.items-mini-row .col-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--hub-strong);
+  opacity: 0.95;
+}
+
+.datamine-card__body {
+  margin: 0;
+  color: var(--hub-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.datamine-card__provenance {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: var(--hub-muted);
+  opacity: 0.9;
+}
+
+/* Lightweight Action Link */
+.datamine-hub-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  color: var(--hub-text);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 160ms ease;
+}
+
+.datamine-hub-link::after {
+  content: "→";
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--hub-gold);
+  transition: transform 160ms ease;
+}
+
+.datamine-hub-link:hover {
+  color: var(--hub-gold);
+}
+
+.datamine-hub-link:hover::after {
+  transform: translateX(3px);
+}
+
+/* Featured OOW Card */
+.datamine-card--oow {
+  position: relative;
+  overflow: hidden;
+  grid-column: 1 / -1;
+  min-height: 200px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(500px, 1.15fr);
+  grid-template-areas:
+    "top top"
+    "heading seasons"
+    "body seasons"
+    "summary seasons"
+    "action seasons";
+  gap: 8px 32px;
+  background: var(--hub-surface);
+}
+
+.datamine-card--oow:hover {
+  background: var(--hub-surface-raised);
+}
+
+.datamine-card__bg-art {
+  position: absolute;
+  right: 65px;
+  left: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 140%;
+  pointer-events: none;
+  opacity: 0.13;
+  mask-image: radial-gradient(circle at center, black 45%, transparent 82%);
+  -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 82%);
+  z-index: 0;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.datamine-card--oow:hover .datamine-card__bg-art {
+  opacity: 0.17;
+  transform: translateY(-50%) scale(1.02);
+}
+
+.datamine-card__bg-art img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.datamine-card--oow .datamine-card__topline,
+.datamine-card--oow .datamine-card__heading-row,
+.datamine-card--oow .datamine-card__body,
+.datamine-card--oow .oow-season-summary,
+.datamine-card--oow .oow-season-list,
+.datamine-card--oow .datamine-hub-link {
+  position: relative;
+  z-index: 1;
+}
+
+.datamine-card--oow .datamine-card__topline { grid-area: top; }
+.datamine-card--oow .datamine-card__heading-row { grid-area: heading; }
+.datamine-card--oow .datamine-card__body { grid-area: body; }
+.datamine-card--oow .oow-season-summary { grid-area: summary; }
+.datamine-card--oow .oow-season-list { grid-area: seasons; align-self: stretch; }
+.datamine-card--oow .datamine-hub-link { grid-area: action; justify-self: start; }
+
+.datamine-card--oow .datamine-card__title {
+  font-size: 20px;
+}
+
+.oow-season-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.oow-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1px solid var(--hub-border);
+  border-radius: var(--dm-radius-sm, 6px);
+  background: rgba(255, 255, 255, 0.02);
+  font-family: var(--font-sans);
+}
+
+.oow-stat strong {
+  color: var(--hub-strong);
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.oow-stat span {
+  color: var(--hub-muted);
+  font-size: 11px;
+}
+
+.oow-season-list {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.oow-season {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 12px;
+  min-height: 52px;
+  box-sizing: border-box;
+  border: 1px solid var(--hub-border);
+  border-radius: var(--dm-radius-sm, 6px);
+  background: var(--hub-surface);
+  color: var(--hub-text);
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.oow-season:hover {
+  border-color: rgba(245, 217, 122, 0.4);
+  background: rgba(245, 217, 122, 0.04);
+}
+
+.oow-season--current {
+  border-color: rgba(245, 217, 122, 0.6);
+  background: rgba(245, 217, 122, 0.06);
+}
+
+.oow-season__code {
+  color: var(--hub-gold);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.oow-season__dates {
+  color: var(--hub-muted);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.oow-season:focus-visible {
+  outline: 2px solid var(--hub-gold);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 1120px) {
+  .datamine-hub-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .datamine-card--oow {
+    grid-template-columns: minmax(0, 0.9fr) minmax(450px, 1.1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .datamine-hub-layout {
+    padding-inline: 16px;
+  }
+  .datamine-card--oow {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "top" "heading" "body" "summary" "seasons" "action";
+  }
+  .oow-season-list {
+    min-height: 72px;
+  }
+}
+
+@media (max-width: 640px) {
+  .datamine-hub-layout {
+    padding-top: 16px;
+  }
+  .datamine-hub-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .datamine-card {
+    min-height: 180px;
+  }
+  .datamine-card--oow {
+    grid-column: auto;
+  }
+  .oow-season-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .oow-season:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 420px) {
+  .oow-season-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .oow-season:last-child {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .datamine-card,
+  .oow-season {
+    transition: none;
+  }
+}
