@@ -86,8 +86,11 @@ test('2. Buff catalog is generated from GameplayEffectTipsDataTable and season f
   try {
     const rawDir = path.join(tmp, 'raw');
     const oowDir = path.join(tmp, 'datamine', 'oow', 'data');
+    const buffAssetsDir = path.join(tmp, 'datamine', 'oow', 'assets', 'buffs');
     fs.mkdirSync(rawDir, { recursive: true });
     fs.mkdirSync(oowDir, { recursive: true });
+    fs.mkdirSync(buffAssetsDir, { recursive: true });
+    fs.writeFileSync(path.join(buffAssetsDir, 'buff_fire.png'), 'existing-public-buff-icon');
 
     fs.writeFileSync(
       path.join(rawDir, 'DT_MonsterStaticData.json'),
@@ -156,6 +159,7 @@ test('2. Buff catalog is generated from GameplayEffectTipsDataTable and season f
     assert(generatedBuffs.buff_custom_fire, 'Expected buff_custom_fire in catalog');
     assert.equal(generatedBuffs.buff_custom_fire.nameEn, 'Fire Mastery');
     assert.equal(generatedBuffs.buff_custom_fire.nameRu, 'Мастерство огня');
+    assert.equal(generatedBuffs.buff_custom_fire.icon, 'assets/buffs/buff_fire.png');
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
   }

@@ -18,7 +18,7 @@
       // Tab 1: Regular
       regularTitle: "Regular Datamine update",
       regularBadge: "~10 minutes",
-      regularIntro: "Requires Windows, PowerShell, an installed Tower of Fantasy client, and Node.js. The portable package extracts game data and processes it automatically into Datamine files.",
+      regularIntro: "Requires Windows, PowerShell, and an installed Tower of Fantasy client. The portable package extracts game data and creates a validated raw export archive.",
       regularSteps: [
         {
           num: "1",
@@ -32,19 +32,13 @@
         {
           num: "2",
           title: "Create the raw export",
-          desc: "Run SMALL for a regular handoff, or RUN_EXPORT_FULL.bat when the complete configured image set is needed:",
+          desc: "Run <code>RUN_EXPORT_SMALL.bat</code> for a regular Datamine update. Use <code>RUN_EXPORT_FULL.bat</code> only when the complete configured image base is specifically needed:",
           code: "RUN_EXPORT_SMALL.bat"
         },
         {
           num: "3",
-          title: "Keep the validated raw archive",
-          desc: "SMALL creates <code>raw_exports_small.zip</code>. FULL creates <code>raw_exports_full.zip</code>. Archive creation stops if required source groups fail validation."
-        },
-        {
-          num: "4",
-          title: "Process the export",
-          desc: "With Node.js installed, run RUN_PROCESS.bat. The script validates the exported data and prepares the Datamine files in <code>dist_datamine_bundle</code> automatically. After a successful run, this folder contains a complete, ready-to-use copy of the Datamine data structure as it is arranged for the website:",
-          code: "RUN_PROCESS.bat"
+          title: "Keep and submit the validated raw archive",
+          desc: "SMALL creates <code>raw_exports_small.zip</code> (FULL creates <code>raw_exports_full.zip</code>). This raw archive is the handoff file to send to the maintainer for validation, processing, and publication — no local build or Node.js required. Archive creation stops automatically if required source groups fail validation."
         }
       ],
 
@@ -137,7 +131,7 @@
       // Tab 1: Regular
       regularTitle: "Обычное обновление Datamine",
       regularBadge: "~10 минут",
-      regularIntro: "Для работы требуются Windows PowerShell, установленный клиент Tower of Fantasy и Node.js. Переносимый пакет извлекает данные игры и автоматически подготавливает файлы Datamine.",
+      regularIntro: "Для работы требуются Windows, PowerShell и установленный клиент Tower of Fantasy. Переносимый пакет извлекает данные игры и создаёт проверенный архив исходного экспорта.",
       regularSteps: [
         {
           num: "1",
@@ -151,19 +145,13 @@
         {
           num: "2",
           title: "Создайте исходный экспорт",
-          desc: "Для обычной передачи запустите SMALL. Если нужен полный настроенный набор изображений, используйте RUN_EXPORT_FULL.bat:",
+          desc: "Запустите <code>RUN_EXPORT_SMALL.bat</code> для обычного обновления Datamine. Используйте <code>RUN_EXPORT_FULL.bat</code> только тогда, когда требуется полный настроенный набор изображений:",
           code: "RUN_EXPORT_SMALL.bat"
         },
         {
           num: "3",
-          title: "Сохраните проверенный исходный архив",
-          desc: "SMALL создаёт <code>raw_exports_small.zip</code>, FULL — <code>raw_exports_full.zip</code>. Если обязательные группы источников не прошли проверку, архив не создаётся."
-        },
-        {
-          num: "4",
-          title: "Обработайте экспорт",
-          desc: "При установленном Node.js запустите RUN_PROCESS.bat. Скрипт проверит выгруженные данные и автоматически подготовит файлы Datamine в <code>dist_datamine_bundle</code>. После успешной обработки создаётся полная готовая копия данных Datamine в той же структуре, в которой они размещаются на сайте:",
-          code: "RUN_PROCESS.bat"
+          title: "Сохраните и отправьте проверенный архив",
+          desc: "SMALL создаёт <code>raw_exports_small.zip</code> (FULL создаёт <code>raw_exports_full.zip</code>). Этот исходный архив является итоговым файлом для передачи сопровождающему на проверку, обработку и публикацию — установка Node.js или локальная сборка не требуются. Если обязательные группы источников не прошли проверку, архив не создаётся."
         }
       ],
 

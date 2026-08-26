@@ -1,0 +1,32 @@
+{
+  "korea1": {
+    "version": "6.3.6",
+    "lastChanged": "2026-08-26T09:36:37.216Z",
+    "lastChangedFormatted": "26.08.2026"
+  },
+  "korea2": {
+    "version": "6.2.19",
+    "lastChanged": "2026-08-21T08:55:33.877Z",
+    "lastChangedFormatted": "21.08.2026"
+  },
+  "taiwan1": {
+    "version": "6.3.1",
+    "lastChanged": "2026-08-26T09:36:37.216Z",
+    "lastChangedFormatted": "26.08.2026"
+  },
+  "taiwan2": {
+    "version": "6.2.6",
+    "lastChanged": "2026-08-21T08:55:33.877Z",
+    "lastChangedFormatted": "21.08.2026"
+  },
+  "global": {
+    "version": "6.2.0",
+    "lastChanged": "2026-08-21T08:55:33.877Z",
+    "lastChangedFormatted": "21.08.2026"
+  },
+  "cn": {
+    "version": "5.2.54",
+    "lastChanged": "2026-08-21T08:55:33.877Z",
+    "lastChangedFormatted": "21.08.2026"
+  }
+}

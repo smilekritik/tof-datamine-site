@@ -1,0 +1,603 @@
+/* ==========================================================================
+   TOF Datamine — 404 Error Page Styles
+   Design Language: Deep space dark theme, gold/violet accents, monospace telemetry
+   ========================================================================== */
+
+.page--datamine-404 {
+  --e404-bg: var(--dm-bg, #0c0910);
+  --e404-surface: var(--dm-surface, #100d14);
+  --e404-surface-raised: var(--dm-surface-raised, #151119);
+  --e404-border: var(--dm-border, rgba(255, 255, 255, 0.08));
+  --e404-border-hover: var(--dm-border-hover, rgba(245, 217, 122, 0.28));
+  --e404-text: var(--dm-text, #d7d0dd);
+  --e404-strong: var(--dm-text-strong, #f4f0f6);
+  --e404-muted: var(--dm-muted, #918899);
+  --e404-gold: var(--dm-gold, #f5d97a);
+  --e404-violet: var(--dm-violet, #a77add);
+  --e404-ice: #8ce8ff;
+  --e404-alert: var(--dm-negative, #df899b);
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--e404-text);
+  font-family: var(--font-sans);
+  background: var(--e404-bg);
+}
+
+.page--datamine-404 .noise-bg {
+  opacity: 0.28;
+}
+
+/* Layout Container */
+.error-404-layout {
+  width: 100%;
+  max-width: 1220px;
+  flex: 1 0 auto;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ==========================================================================
+   Hero Error Section
+   ========================================================================== */
+.error-404-hero {
+  position: relative;
+  background: linear-gradient(180deg, rgba(21, 17, 25, 0.92) 0%, rgba(16, 13, 20, 0.96) 100%);
+  border: 1px solid var(--e404-border);
+  border-radius: var(--dm-radius-lg, 10px);
+  padding: clamp(24px, 4vw, 44px);
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Subtle background glowing radial accent */
+.error-404-hero::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(167, 122, 221, 0.12) 0%, rgba(245, 217, 122, 0.04) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.error-404-hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Status Pill Badge */
+.error-404-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--dm-font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--e404-alert);
+  background: rgba(223, 137, 155, 0.12);
+  border: 1px solid rgba(223, 137, 155, 0.28);
+  border-radius: var(--dm-radius-xs, 4px);
+  padding: 5px 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.error-404-badge__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--e404-alert);
+  box-shadow: 0 0 8px var(--e404-alert);
+  animation: pulse404Dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse404Dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.8); }
+}
+
+/* Giant 404 Visual Readout */
+.error-404-glitch-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin: 6px 0 10px;
+}
+
+.error-404-glitch-num {
+  font-family: var(--dm-font-mono, monospace);
+  font-size: clamp(56px, 10vw, 96px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #f5d97a 0%, #c084fc 50%, #8ce8ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(245, 217, 122, 0.15);
+}
+
+.error-404-glitch-tag {
+  font-family: var(--dm-font-mono, monospace);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--e404-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Main Heading */
+.error-404-title {
+  margin: 0 0 12px;
+  color: var(--e404-strong);
+  font-family: var(--dm-font-display, "Spectral", Georgia, serif);
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* Subtitle */
+.error-404-desc {
+  max-width: 72ch;
+  margin: 0 0 24px;
+  color: var(--e404-muted);
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+/* Telemetry Diagnostic Terminal */
+.error-404-telemetry {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+  background: rgba(12, 9, 16, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--dm-radius-sm, 6px);
+  padding: 14px 18px;
+  margin-bottom: 28px;
+}
+
+.error-404-telemetry__item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.error-404-telemetry__key {
+  font-family: var(--dm-font-mono, monospace);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--e404-gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.error-404-telemetry__val {
+  font-family: var(--dm-font-mono, monospace);
+  font-size: 12.5px;
+  color: var(--e404-text);
+  word-break: break-all;
+}
+
+.error-404-telemetry__code {
+  color: var(--e404-alert);
+  font-weight: 700;
+}
+
+/* Hero Action Buttons */
+.error-404-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.dm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: var(--dm-radius-sm, 6px);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  border: 1px solid transparent;
+}
+
+.dm-btn--primary {
+  background: var(--e404-gold);
+  color: #0c0812;
+  border-color: var(--e404-gold);
+  box-shadow: 0 4px 14px rgba(245, 217, 122, 0.22);
+}
+
+.dm-btn--primary:hover {
+  background: #ffe87a;
+  border-color: #ffe87a;
+  box-shadow: 0 6px 20px rgba(245, 217, 122, 0.35);
+  transform: translateY(-1px);
+}
+
+.dm-btn--secondary {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--e404-strong);
+  border-color: var(--e404-border);
+}
+
+.dm-btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--e404-border-hover);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.dm-btn:focus-visible {
+  outline: 2px solid var(--e404-gold);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Quick Search / Filter Section
+   ========================================================================== */
+.error-404-search-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.error-404-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.error-404-search-icon {
+  position: absolute;
+  left: 16px;
+  width: 18px;
+  height: 18px;
+  color: var(--e404-muted);
+  pointer-events: none;
+}
+
+.error-404-search-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 54px 0 46px;
+  background: var(--e404-surface);
+  border: 1px solid var(--e404-border);
+  border-radius: var(--dm-radius-md, 8px);
+  color: var(--e404-strong);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  transition: border-color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+}
+
+.error-404-search-input:focus {
+  outline: none;
+  background: var(--e404-surface-raised);
+  border-color: var(--e404-gold);
+  box-shadow: 0 0 0 3px rgba(245, 217, 122, 0.12);
+}
+
+.error-404-search-input::placeholder {
+  color: var(--e404-muted);
+}
+
+.error-404-search-key {
+  position: absolute;
+  right: 14px;
+  padding: 3px 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  font-family: var(--dm-font-mono, monospace);
+  font-size: 11px;
+  color: var(--e404-muted);
+  pointer-events: none;
+}
+
+.error-404-search-status {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--e404-muted);
+  padding: 0 4px;
+  min-height: 18px;
+}
+
+/* ==========================================================================
+   Dataset Sectors Grid
+   ========================================================================== */
+.error-404-grid-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.error-404-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.error-404-section-eyebrow {
+  margin: 0;
+  font-family: var(--dm-font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--e404-gold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.error-404-section-title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--e404-strong);
+}
+
+.error-404-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 14px;
+}
+
+/* Individual Destination Card */
+.error-404-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 150px;
+  padding: 18px 20px;
+  background: var(--e404-surface);
+  border: 1px solid var(--e404-border);
+  border-radius: var(--dm-radius-md, 8px);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+}
+
+.error-404-card:hover {
+  transform: translateY(-2px);
+  background: var(--e404-surface-raised);
+  border-color: var(--e404-border-hover);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.error-404-card:focus-visible {
+  outline: 2px solid var(--e404-gold);
+  outline-offset: 2px;
+}
+
+.error-404-card.is-hidden {
+  display: none !important;
+}
+
+/* Card Topline */
+.error-404-card__topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.error-404-card__code {
+  font-family: var(--dm-font-mono, monospace);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: var(--dm-radius-xs, 4px);
+  text-transform: uppercase;
+}
+
+.error-404-card--oow .error-404-card__code {
+  background: rgba(245, 217, 122, 0.12);
+  color: var(--e404-gold);
+  border: 1px solid rgba(245, 217, 122, 0.25);
+}
+
+.error-404-card--fce .error-404-card__code {
+  background: rgba(192, 132, 252, 0.12);
+  color: #c084fc;
+  border: 1px solid rgba(192, 132, 252, 0.25);
+}
+
+.error-404-card--seq .error-404-card__code {
+  background: rgba(140, 232, 255, 0.12);
+  color: var(--e404-ice);
+  border: 1px solid rgba(140, 232, 255, 0.25);
+}
+
+.error-404-card--multype .error-404-card__code {
+  background: rgba(167, 122, 221, 0.12);
+  color: var(--e404-violet);
+  border: 1px solid rgba(167, 122, 221, 0.25);
+}
+
+.error-404-card--items .error-404-card__code {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.25);
+}
+
+.error-404-card--hub .error-404-card__code {
+  background: rgba(127, 210, 175, 0.12);
+  color: var(--dm-positive, #7fd2af);
+  border: 1px solid rgba(127, 210, 175, 0.25);
+}
+
+.error-404-card__arrow {
+  width: 16px;
+  height: 16px;
+  color: var(--e404-muted);
+  transition: transform 0.16s ease, color 0.16s ease;
+}
+
+.error-404-card:hover .error-404-card__arrow {
+  color: var(--e404-gold);
+  transform: translateX(3px);
+}
+
+/* Card Body */
+.error-404-card__main {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.error-404-card__title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--e404-strong);
+  line-height: 1.25;
+}
+
+.error-404-card__body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--e404-muted);
+  line-height: 1.45;
+}
+
+.error-404-card__path {
+  font-family: var(--dm-font-mono, monospace);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   Documentation & Auxiliary Links Strip
+   ========================================================================== */
+.error-404-docs-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--e404-border);
+}
+
+.error-404-docs-title {
+  margin: 0;
+  font-family: var(--dm-font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--e404-gold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.error-404-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.error-404-doc-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--e404-surface);
+  border: 1px solid var(--e404-border);
+  border-radius: var(--dm-radius-sm, 6px);
+  text-decoration: none;
+  color: var(--e404-text);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.error-404-doc-link:hover {
+  background: var(--e404-surface-raised);
+  border-color: var(--e404-border-hover);
+  color: var(--e404-gold);
+  transform: translateY(-1px);
+}
+
+.error-404-doc-link:focus-visible {
+  outline: 2px solid var(--e404-gold);
+  outline-offset: 2px;
+}
+
+.error-404-doc-link svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.6;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.error-404-doc-link:hover svg {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 768px) {
+  .error-404-layout {
+    padding: 20px 16px 48px;
+    gap: 24px;
+  }
+
+  .error-404-hero {
+    padding: 20px 18px;
+  }
+
+  .error-404-glitch-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .error-404-telemetry {
+    grid-template-columns: 1fr;
+    padding: 12px 14px;
+  }
+
+  .error-404-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .error-404-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dm-btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .error-404-badge__dot {
+    animation: none;
+  }
+  .error-404-card,
+  .error-404-doc-link,
+  .dm-btn {
+    transition: none;
+    transform: none !important;
+  }
+}

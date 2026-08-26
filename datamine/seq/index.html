@@ -62,17 +62,30 @@
       <div class="section__inner">
         <div class="section__header seq-charts-header">
           <h2 class="section__title" data-seq-ui="chartsTitle">Charts</h2>
-          <div class="seq-chart-theme-control">
-            <span class="seq-chart-theme-control__label" data-seq-ui="chartPalette">Chart palette</span>
-            <div class="seq-chart-theme-switch" role="group" data-chart-theme-switch aria-label="Chart palette">
-              <button class="seq-chart-theme-switch__button" type="button" data-action="set-chart-theme" data-chart-theme="light" aria-pressed="true">
-                <svg class="seq-chart-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
-                <span data-seq-ui="paletteLight">Light</span>
-              </button>
-              <button class="seq-chart-theme-switch__button" type="button" data-action="set-chart-theme" data-chart-theme="dark" aria-pressed="false">
-                <svg class="seq-chart-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
-                <span data-seq-ui="paletteDark">Dark</span>
-              </button>
+          <div class="seq-charts-controls">
+            <div class="seq-stage-view-control">
+              <span class="seq-chart-theme-control__label" data-seq-ui="stageViewLabel">Selection</span>
+              <div class="seq-chart-theme-switch seq-stage-view-switch" role="group" data-stage-view-switch aria-label="Selection">
+                <button class="seq-chart-theme-switch__button" type="button" data-action="set-stage-view" data-stage-view="all" aria-pressed="true">
+                  <span data-seq-ui="stageViewAll">All</span>
+                </button>
+                <button class="seq-chart-theme-switch__button" type="button" data-action="set-stage-view" data-stage-view="16plus" aria-pressed="false">
+                  <span data-seq-ui="stageView16Plus">16+</span>
+                </button>
+              </div>
+            </div>
+            <div class="seq-chart-theme-control">
+              <span class="seq-chart-theme-control__label" data-seq-ui="chartPalette">Chart palette</span>
+              <div class="seq-chart-theme-switch" role="group" data-chart-theme-switch aria-label="Chart palette">
+                <button class="seq-chart-theme-switch__button" type="button" data-action="set-chart-theme" data-chart-theme="light" aria-pressed="true">
+                  <svg class="seq-chart-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
+                  <span data-seq-ui="paletteLight">Light</span>
+                </button>
+                <button class="seq-chart-theme-switch__button" type="button" data-action="set-chart-theme" data-chart-theme="dark" aria-pressed="false">
+                  <svg class="seq-chart-theme-switch__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+                  <span data-seq-ui="paletteDark">Dark</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

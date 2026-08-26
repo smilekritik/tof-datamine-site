@@ -316,18 +316,18 @@ function extractOowDeepIntel() {
 
     let iconPath = null;
     const iconAsset = found?.Icon?.AssetPathName || found?.IconPath;
-    if (iconAsset && fs.existsSync(gameResDir)) {
+    if (iconAsset && iconAsset !== "None") {
       const cleanRel = iconAsset.replace("/Game/Resources/", "").split(".")[0] + ".png";
       const diskPath = path.join(gameResDir, cleanRel);
-      if (fs.existsSync(diskPath)) {
-        const iconBase = path.basename(cleanRel);
-        const destPath = path.join(buffsAssetDir, iconBase);
-        if (!fs.existsSync(destPath)) {
-          try {
-            fs.copyFileSync(diskPath, destPath);
-          } catch (e) {}
-        }
+      const iconBase = path.basename(cleanRel);
+      const destPath = path.join(buffsAssetDir, iconBase);
+      if (fs.existsSync(destPath)) {
         iconPath = `assets/buffs/${iconBase}`;
+      } else if (fs.existsSync(diskPath)) {
+        try {
+          fs.copyFileSync(diskPath, destPath);
+          iconPath = `assets/buffs/${iconBase}`;
+        } catch (e) {}
       }
     }
 

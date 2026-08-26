@@ -50,7 +50,7 @@
   }
 
   /**
-   * Fetch live Global version from server API (/api/version/global).
+   * Read the latest daily Global version from a static file.
    * Request is cached in-memory for the page lifecycle.
    * Resolves to version string (e.g. "6.2.0") or null on failure.
    */
@@ -65,11 +65,9 @@
 
     globalVersionPromise = (async () => {
       try {
-        const apiUrl = (typeof window !== "undefined" && window.location && window.location.origin)
-          ? `${window.location.origin}/api/version/global`
-          : "/api/version/global";
+        const versionUrl = "/datamine/data/live-global-version.json";
 
-        const response = await fetch(apiUrl, { cache: "no-store" });
+        const response = await fetch(versionUrl, { cache: "no-store" });
         if (!response.ok) {
           return null;
         }

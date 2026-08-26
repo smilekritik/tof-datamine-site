@@ -13,6 +13,7 @@ assert(!mainProcessScript.includes('tof-fast-datamine'), 'Main processing must n
 
 const portableProcessScript = fs.readFileSync(path.join(PACKAGE_ROOT, 'core/2-process-datamine.ps1'), 'utf8');
 assert(!/(?:\.\.\\|\.\.\/)(?:pipeline|scripts)|C:\\2026\\tof/i.test(portableProcessScript), 'Portable processing must not reference the main repository');
+assert(portableProcessScript.includes('fce-known-boss-text-ids.json'), 'Portable processing must persist the incremental FCE boss baseline after publication');
 
 const sharderSource = fs.readFileSync(path.join(CANONICAL_DIR, 'shard-oow-data.js'), 'utf8');
 assert(sharderSource.includes('standardSeasons.slice(-3)'), 'Canonical current summary must keep the latest 3 standard seasons');

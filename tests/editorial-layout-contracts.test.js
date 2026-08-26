@@ -140,9 +140,9 @@ test('7. Contribute page contains simplified Regular steps, Multype AES key, and
   assert.match(contributeJs, /2–5 h/);
   assert.match(contributeJs, /2–5 ч/);
 
-  // Step 4 explains the ready-to-use copy without claiming automatic production deployment
-  assert.match(contributeJs, /ready-to-use copy of the Datamine data structure/);
-  assert.match(contributeJs, /готовая копия данных Datamine/);
+  // Regular update flow focuses on raw archive handoff without requiring local build or Node.js
+  assert.match(contributeJs, /raw archive is the handoff file/);
+  assert.match(contributeJs, /исходный архив является итоговым файлом/);
 
   // Fix data notice and guidance
   assert.match(contributeJs, /contribute-notice-box/);

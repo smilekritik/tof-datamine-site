@@ -20,6 +20,7 @@ const STATIC_CORE = [
 ];
 const CURATED_INPUTS = [
   'datamine/fce/data/bosses',
+  'datamine/fce/data/fce-known-boss-text-ids.json',
   'datamine/seq/data/seq-mechanics-overrides.json',
   'datamine/items/curated/gacha-overrides.json',
   'datamine/items/curated/mmo-overrides.json',

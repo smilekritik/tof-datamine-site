@@ -95,6 +95,7 @@ const requiredStandaloneAssets = [
   "styles/hub.css",
   "data/datamine-summary.json",
   "data/export-version.json",
+  "data/live-global-version.json",
   "oow/js/support.js",
   "oow/js/oow-bootstrap.js",
   "oow/js/domain/oow-domain.js",
@@ -157,12 +158,17 @@ for (const token of expectedOrder) {
 
 const summaryPath = path.join(datamineRoot, "data", "datamine-summary.json");
 const summary = JSON.parse(fs.readFileSync(summaryPath, "utf8"));
+const liveGlobalVersion = JSON.parse(
+  fs.readFileSync(path.join(datamineRoot, "data", "live-global-version.json"), "utf8")
+);
 const releaseManifest = JSON.parse(fs.readFileSync(path.join(datamineRoot, "release-manifest.json"), "utf8"));
 assert(fs.statSync(summaryPath).size < 64 * 1024, "Datamine summary must stay below 64 KB.");
 assert(summary.snapshot?.version, "Snapshot version must be present in datamine summary.");
 assert(Array.isArray(summary.snapshot?.sources) && summary.snapshot.sources.length > 0, "Snapshot sources must be present in datamine summary.");
 assert(JSON.stringify(summary.snapshot) === JSON.stringify(releaseManifest.snapshot), "Datamine summary snapshot must project release manifest exactly.");
 assert(fs.existsSync(path.join(datamineRoot, "data", "export-version.json")), "datamine/data/export-version.json must exist.");
+assert(/^\d+(?:\.\d+)+$/.test(liveGlobalVersion.version), "Static live Global version must be valid.");
+assert(!Number.isNaN(Date.parse(liveGlobalVersion.checkedAt)), "Static live Global check time must be valid.");
 assert(summary.oow?.seasons?.length === summary.oow?.seasonCount, "OOW season summary is inconsistent.");
 assert(summary.sequential?.floorCount > 0, "Sequential cache metadata is missing.");
 assert(!fs.existsSync(path.join(datamineRoot, "user")), "Legacy datamine/user output must not be published.");
@@ -207,6 +213,16 @@ const fceMissing = JSON.parse(
 );
 assert(fceMissing.catalogSource, "FCE missing-text report must identify the in-game boss catalog.");
 assert(Array.isArray(fceMissing.bosses), "FCE missing-text report must contain a boss list.");
+const fceKnownTextIds = JSON.parse(
+  fs.readFileSync(path.join(datamineRoot, "fce", "data", "fce-known-boss-text-ids.json"), "utf8")
+);
+assert(fceKnownTextIds.schemaVersion === 1, "FCE known-boss text snapshot must use schema version 1.");
+assert(typeof fceKnownTextIds.initialized === "boolean", "FCE known-boss text snapshot must expose initialization state.");
+assert(Array.isArray(fceKnownTextIds.textIds), "FCE known-boss text snapshot must contain text IDs.");
+assert(
+  new Set(fceKnownTextIds.textIds).size === fceKnownTextIds.textIds.length,
+  "FCE known-boss text snapshot must not contain duplicate IDs."
+);
 
 const multypeHtml = fs.readFileSync(path.join(datamineRoot, "multype", "index.html"), "utf8");
 const multypeCss = fs.readFileSync(

@@ -87,31 +87,31 @@
       step6Desc: "A replacement bundle (dist_datamine_bundle) is generated; maintained deployments publish verified static assets to the production server.",
 
       secOowTitle: "Origin of War (OOW)",
-      oowPlain: "Origin of War is assembled from several game tables: OriginWarSeasonConfigDataTable_Overseas.json identifies active seasons, OriginWarRoundConfigDataTable_Overseas.json defines floors (F1..F30), OriginWarMonsterPoolDataTable_Overseas.json identifies wave monsters, and DT_MonsterStaticData_Overseas.json provides baseline stats such as health and defense. Those references are joined, scaled, and sharded for the site.",
-      oowCalcNote: "The current site calculates Effective HP from raw health and the manually maintained resistance value assigned to the selected season:",
-      oowCuratedNote: "Boss artwork is not guessed when an explicit mapping is unavailable. If a boss does not have a verified image mapping, the entry remains without artwork rather than displaying an incorrect portrait.",
+      oowPlain: "Origin of War combines season configuration, floor rounds (F1..F30), wave enemy composition, monster attributes, and localization into unified floor progression cards and difficulty curves.",
+      oowCalcNote: "Raw monster health is extracted from client tables. The archive then applies the resistance configured for each season to estimate Effective HP:",
+      oowCuratedNote: "Boss artwork uses explicit verified mappings. If no mapping is available, Datamine does not substitute an unrelated portrait.",
       oowDetailsTitle: "Technical details & data trace",
 
       secSeqTitle: "Sequential",
-      seqPlain: "Sequential reads boss health from sequential boss rows (endless_special_boss_<stage>) in DT_MonsterStaticData_Overseas.json. The site applies manually maintained stage overrides where present and displays its default calculated Effective HP as MaxHealth × 1.3471.",
-      seqCutoffPlain: "The game export can already contain stages that are not part of the currently released Global progression. Instead of hardcoding 'there are N floors', the build walks the stages in order (1..100) and looks for continuity. If the ratio between consecutive stages exceeds 3.0x (MaxHealth(next) / MaxHealth(previous) > 3.0), the anomalous jump is identified as the unscaled CN baseline, and the Global dataset ends cleanly at the previous stage.",
+      seqPlain: "Sequential Phantasm charts track boss HP growth, powercreep percentages, and effective damage estimates per stage.",
+      seqCutoffPlain: "The game table contains unreleased stages beyond the active Global progression. The build walks stages 1..100; if the ratio between consecutive stages exceeds 3.0x (MaxHealth(next) / MaxHealth(previous) > 3.0), the jump indicates unscaled CN baseline data, cleanly ending the Global dataset at the preceding stage.",
       seqDetailsTitle: "Technical details & stage cutoff",
 
       secFceTitle: "FCE Boss Mechanics",
-      fcePlain: "FCE cards combine the game's mechanic text with boss artwork. The parser links localization text to the game boss configuration; maintainers choose the final card composition.",
-      fceClarification: "The mechanic text comes directly from game localization (Game.json), not from old spreadsheets. Spreadsheets may have served as historical reference, but the canonical text on this site is extracted from the client.",
-      fceCandidatePlain: "A dedicated parser scans EN/RU localization keys, groups descriptions by phase, and compares them with VoidCloneBossConfigDataTable_Overseas.json. It writes review files for unregistered bosses and missing text. Manually maintained runtime cards remain in bosses/*.json.",
+      fcePlain: "Frontier Clash Evolution cards pair authoritative in-game mechanics descriptions with boss portraits, organized by phase.",
+      fceClarification: "Mechanic text comes directly from game localization (Game.json), not from historical spreadsheets. Canonical descriptions on this site are extracted directly from the client.",
+      fceCandidatePlain: "A dedicated parser scans EN/RU localization keys, groups descriptions by phase, and compares them with VoidCloneBossConfigDataTable_Overseas.json. Unregistered bosses and missing texts are written to review files, while verified runtime cards remain in bosses/*.json.",
       fceDetailsTitle: "Technical details & manifest rebuild",
 
       secItemsTitle: "Items",
-      itemsPlain: "Item data is assembled from several sources because IDs, names, rarity, and MMO-specific entries are not all stored in one table.",
-      itemsSourcesPlain: "MappingItemId.json is the authoritative source for developer numeric IDs. All items from MappingItemId.json appear first, sorted by their numeric ID ascending (1..N). Supplemental items (from ST_Item_Oversea.json or other sources) are appended strictly after the maximum developer numeric ID with consecutive synthetic IDs (maxDeveloperId + 1, maxDeveloperId + 2, ...).",
-      itemsRenamePlain: "Manual renames are attached strictly to stable string item IDs (e.g., stave_thunder), not to row positions or numeric indices. Re-running the pipeline updates game data while preserving all existing renames. If a game source provides an ID without localized text, the original name is not invented.",
+      itemsPlain: "The Items directory provides searchable catalog tables for Gacha and MMO modes, maintaining developer identity while supporting readable naming.",
+      itemsSourcesPlain: "MappingItemId.json is the authoritative source for developer numeric IDs (NUM 1..N). Supplemental items (from ST_Item_Oversea.json) are appended strictly after the maximum developer numeric ID with consecutive synthetic IDs (maxDeveloperId + 1, maxDeveloperId + 2, ...).",
+      itemsRenamePlain: "Where an English item name is unavailable in game resources, Datamine provides a maintained machine-translated fallback while preserving original game text separately. Curated renames attach strictly to stable string item IDs without altering original keys.",
       itemsDetailsTitle: "Technical details & identity contract",
 
       secMultypeTitle: "Multype (Research Pipeline)",
-      multypePlain: "Multype did not start from one obvious game table. The relevant multiplier fields had to be discovered across a much broader export of Tower of Fantasy's assets.",
-      multypeScannerPlain: "A full research export of game assets is processed by a separate offline Python scanner (Tower-of-fantasy-exporter-scanner). The scanner walks the exported JSON assets and records the files in which relevant modifier attributes actually occur: Properties.ModuleExtraModifierInfos, Properties.Modifiers (categorized under NoModule), and Properties.CustomApplicationRequirement[].GameplayModifierInfos.",
+      multypePlain: "Multype maps combat modifier attributes, multiplier tags, and ModuleExtraType relationships discovered through a broad scan of Tower of Fantasy assets.",
+      multypeScannerPlain: "A full research export of game assets is processed offline by Tower-of-fantasy-exporter-scanner. The scanner indexes files where modifier structures occur: Properties.ModuleExtraModifierInfos, Properties.Modifiers (categorized under NoModule), and Properties.CustomApplicationRequirement[].GameplayModifierInfos.",
       multypeExampleTitle: "Why ModuleExtraType matters (Real Example):",
       multypeExampleDesc: "The attribute PhyAtkExtraUpMult appears across multiple distinct systems. The scanner indexes both the attribute and its module context:",
       multypeExample1: "• NoModule: found in GE_BattleRobot_002_Passive, GE_Buff_Pet_CommonDamage...",
@@ -126,7 +126,7 @@
       multypeDetailsTitle: "Technical scanner outputs & patch diffing",
 
       secMetaTitle: "Release & Version Metadata",
-      metaPlain: "The archive tracks provenance metadata to ensure that users know exactly which game client version, branch, and export timestamp produced the current datasets.",
+      metaPlain: "The archive tracks provenance metadata so users know exactly which game client version, branch, and export timestamp produced the current datasets. The release manifest (datamine/release-manifest.json) serves as the single source of truth for snapshot versioning.",
       metaDetailsTitle: "Technical details & provenance lineage",
 
       secNotDoTitle: "What this archive does not do",
@@ -248,15 +248,15 @@
       twoWaysIntro: "В зависимости от того, где лежат нужные значения, архив использует два разных подхода:",
       way1Title: "Целевой экспорт",
       way1Tagline: "Когда исходные таблицы заранее известны",
-      way1Desc: "Используется для регулярных обновлений (OOW, Sequential, FCE, Items). Экспортёр выгружает только заданный список путей ресурсов, проверяет их и передаёт быстрым скриптам сборки.",
+      way1Desc: "Используется для регулярных обновлений (OOW, Sequential, FCE, Items). Экспортёр извлекает только заданные пути ресурсов, проверяет их и передаёт быстрым скриптам обработки.",
       way2Title: "Поисковое сканирование",
-      way2Tagline: "Когда поля модификаторов разбросаны по множеству ассетов",
-      way2Desc: "Используется для исследовательских задач (таких как Multype). Большой экспорт ассетов рекурсивно сканируется на наличие структур модификаторов для построения карт зависимостей.",
+      way2Tagline: "Когда модификаторы распределены по множеству ассетов",
+      way2Desc: "Используется для исследовательских задач (таких как Multype). Широкий экспорт ассетов рекурсивно сканируется для построения карт источников и поиска связей множителей.",
 
-      secPipelineTitle: "Регулярный пайплайн обновления",
-      secPipelineIntro: "Пакетный fast-export использует точный whitelist вместо выгрузки всей игры. Затем обработка идет по воспроизводимой многоступенчатой цепочке:",
+      secPipelineTitle: "Регулярный пайплайн обновлений",
+      secPipelineIntro: "Пакетный целевой экспорт использует строгий whitelist вместо выгрузки всей игры. Дальнейшая обработка следует воспроизводимому многоэтапному процессу:",
       step1Title: "КЛИЕНТ ИГРЫ",
-      step1Desc: "Установленные файлы Tower of Fantasy, конфигурация лаунчера и упакованные архивы PAK на игровом ПК.",
+      step1Desc: "Файлы установки Tower of Fantasy, конфигурация лаунчера и упакованные PAK-архивы Unreal Engine на компьютере с игрой.",
       step2Title: "ЦЕЛЕВОЙ ЭКСПОРТ (СКРИПТ 1)",
       step2Desc: "tof-fast-datamine запускает UnrealExporter с 27 точными правилами структурированных данных и набором изображений для выбранного режима (Small или Full).",
       step3Title: "ВАЛИДАЦИЯ ИСХОДНИКОВ",
@@ -269,26 +269,26 @@
       step6Desc: "Формируется готовый бандл dist_datamine_bundle; мейнтейнер выполняет публикацию проверенных статических файлов на рабочий сервер.",
 
       secOowTitle: "Истоки войны (OOW)",
-      oowPlain: "Истоки войны собираются из нескольких таблиц: OriginWarSeasonConfigDataTable_Overseas.json задает активные сезоны, OriginWarRoundConfigDataTable_Overseas.json определяет этажи (F1..F30), OriginWarMonsterPoolDataTable_Overseas.json задает состав волн, а DT_MonsterStaticData_Overseas.json предоставляет базовое здоровье и защиту. Эти данные объединяются, масштабируются и шардируются по сезонам.",
-      oowCalcNote: "Текущий сайт рассчитывает Effective HP из исходного здоровья и заданного для выбранного сезона значения сопротивления:",
-      oowCuratedNote: "Изображения боссов не подбираются 'наугад'. Если для босса нет явной проверенной привязки изображения, запись остаётся без портрета, чтобы не вводить в заблуждение.",
+      oowPlain: "Раздел «Истоки войны» объединяет конфигурацию сезонов, этажи (F1..F30), состав волн, базовые характеристики монстров и локализацию в наглядные карточки этажей и графики сложности.",
+      oowCalcNote: "Сырое здоровье монстров извлекается из таблиц клиента. Затем архив применяет сопротивление, установленное для выбранного сезона, для расчёта Effective HP:",
+      oowCuratedNote: "Изображения боссов используют строго проверенные сопоставления. При отсутствии проверенного арта портрет остаётся пустым, без случайных подстановок.",
       oowDetailsTitle: "Технические детали и цепочка данных",
 
       secSeqTitle: "Последовательность (Sequential)",
-      seqPlain: "Sequential считывает здоровье из строк боссов (endless_special_boss_<stage>) в таблице DT_MonsterStaticData_Overseas.json, применяет ручные поправки для указанных этапов и по умолчанию показывает Effective HP как MaxHealth × 1.3471.",
-      seqCutoffPlain: "В экспорте игры могут уже присутствовать этажи, которые ещё не вышли в Глобальной версии. Вместо захардкоженного числа этажей скрипт проходит этажи по порядку (1..100) и проверяет непрерывность. Если здоровье следующего этажа превышает предыдущий более чем в 3.0 раза (MaxHealth(next) / MaxHealth(prev) > 3.0), такой аномальный скачок трактуется как несмасштабированные данные CN, а набор данных Глобала завершается на предыдущем этапе.",
+      seqPlain: "Графики Последовательности отображают рост чистого HP боссов, процентный прирост (Powercreep) и примерный необходимый урон по этапам.",
+      seqCutoffPlain: "Таблица игры содержит невыпущенные этапы за пределами активной Global-версии. Скрипт сборки проверяет этапы 1..100: если отношение HP к предыдущему этапу превышает 3.0x (MaxHealth(next) / MaxHealth(prev) > 3.0), этот скачок указывает на неадаптированные данные CN-базы, и Global-набор завершается на предыдущем этапе.",
       seqDetailsTitle: "Технические детали и логика отсечки CN",
 
       secFceTitle: "Механики боссов FCE",
-      fcePlain: "Карточки FCE объединяют два типа исходных материалов: текст механик из игры и арт боссов. Текст извлекается из локализации и связывается с боссами через внутриигровую конфигурацию боссов. Финальная визуальная карточка составляется вручную, а не генерируется со скриншота.",
+      fcePlain: "Раздел Frontier Clash Evolution объединяет оригинальные описания механик боссов из клиента игры с проверенными портретами, сгруппированными по фазам.",
       fceClarification: "Текст механик берётся напрямую из локализации игры (Game.json), а не из старых таблиц. Старые материалы могли служить ориентиром, но канонический текст на сайте извлечен из клиента.",
       fceCandidatePlain: "Парсер ищет описания в локализациях EN/RU, группирует их по фазам и сверяет с VoidCloneBossConfigDataTable_Overseas.json. Он создает файлы для проверки незарегистрированных боссов и пропущенных текстов; runtime-карточки остаются в bosses/*.json.",
       fceDetailsTitle: "Технические детали и пересборка манифеста",
 
       secItemsTitle: "Предметы (Items)",
-      itemsPlain: "Данные предметов собираются из нескольких источников, поскольку идентификаторы, названия, редкость и записи MMO не хранятся в одной общей таблице.",
-      itemsSourcesPlain: "MappingItemId.json является единственным источником авторских числовых ID разработчиков. Все предметы из MappingItemId.json идут первыми, отсортированными по числовому ID по возрастанию (1..N). Дополнительные предметы (из ST_Item_Oversea.json) добавляются строго после максимального developer ID с последовательными синтетическими номерами (maxDeveloperId + 1, maxDeveloperId + 2, ...).",
-      itemsRenamePlain: "Понятные переименования привязываются строго к постоянным строковым идентификаторам предметов (например, stave_thunder), а не к номерам строк. Повторная сборка обновляет данные игры, не сдвигая старые переименования. Если игра не дает локализованного текста, оригинальное имя не выдумывается.",
+      itemsPlain: "Раздел «Предметы» содержит каталог предметов для режимов Gacha и MMO, сохраняя числовой порядок разработчиков и поддерживая понятные названия.",
+      itemsSourcesPlain: "MappingItemId.json является единственным источником авторских числовых ID разработчиков (NUM 1..N). Дополнительные предметы (из ST_Item_Oversea.json) добавляются строго после максимального developer ID с последовательными синтетическими номерами (maxDeveloperId + 1, maxDeveloperId + 2, ...).",
+      itemsRenamePlain: "Если английское название отсутствует в ресурсах игры, Datamine использует поддерживаемый машинный перевод, сохраняя оригинальный текст игры отдельно. Ручные переименования привязываются строго к строковым ID без перезаписи ключей.",
       itemsDetailsTitle: "Технические детали и контракт идентичности",
 
       secMultypeTitle: "Multype (Исследовательский пайплайн)",
@@ -363,6 +363,138 @@
         calc: "Рассчитанные поля",
         route: "Потребитель / Маршрут"
       }
+    }
+  };
+
+  const SECTION_SOURCES = {
+    oow: {
+      en: [
+        { label: "Season", file: "OriginWarSeasonConfigDataTable_Overseas.json", desc: "Season definitions, active schedule, and dates." },
+        { label: "Rounds", file: "OriginWarRoundConfigDataTable_Overseas.json", desc: "Floor configurations (F1..F30), round buffs, and drop items." },
+        { label: "Monster pools", file: "OriginWarMonsterPoolDataTable_Overseas.json", desc: "Wave enemy composition and spawn allocations." },
+        { label: "Monster stats", file: "DT_MonsterStaticData_Overseas.json", desc: "Base monster attributes: MaxHealth, PhyDefBase, CommonAtkBase." },
+        { label: "MMO mode", file: "OriginWar*DataTable_MMO.json", desc: "Dedicated MMO season/round/pool/stat tables (separate branch, no substitution)." },
+        { label: "Buff tips", file: "GameplayEffectTipsDataTable_Overseas.json", desc: "Seasonal buff descriptions and effect texts." },
+        { label: "Localization", file: "Game.json (EN / RU)", desc: "Localized monster names and buff titles." }
+      ],
+      ru: [
+        { label: "Сезоны", file: "OriginWarSeasonConfigDataTable_Overseas.json", desc: "Определение сезонов, расписание активности и даты." },
+        { label: "Этажи", file: "OriginWarRoundConfigDataTable_Overseas.json", desc: "Конфигурация этажей (F1..F30), параметры баффов и награды." },
+        { label: "Пулы волн", file: "OriginWarMonsterPoolDataTable_Overseas.json", desc: "Состав волн и распределение врагов." },
+        { label: "Характеристики", file: "DT_MonsterStaticData_Overseas.json", desc: "Базовые параметры монстров: MaxHealth, PhyDefBase, CommonAtkBase." },
+        { label: "MMO-режим", file: "OriginWar*DataTable_MMO.json", desc: "Выделенные таблицы MMO-режима (обрабатываются отдельно, без подмены)." },
+        { label: "Баффы", file: "GameplayEffectTipsDataTable_Overseas.json", desc: "Описания эффектов и подсказки сезонных баффов." },
+        { label: "Локализация", file: "Game.json (EN / RU)", desc: "Локализованные имена монстров и названия баффов." }
+      ]
+    },
+    sequential: {
+      en: [
+        { label: "Boss stats", file: "DT_MonsterStaticData_Overseas.json", desc: "Sequential boss rows: endless_special_boss_<stage> MaxHealth." },
+        { label: "Stage notes", file: "seq-mechanics-overrides.json", desc: "Verified floor mechanics notes and vulnerability adjustments." }
+      ],
+      ru: [
+        { label: "Статы боссов", file: "DT_MonsterStaticData_Overseas.json", desc: "Строки характеристик боссов: endless_special_boss_<stage> MaxHealth." },
+        { label: "Заметки этажей", file: "seq-mechanics-overrides.json", desc: "Проверенные описания механик этажей и заметки." }
+      ]
+    },
+    fce: {
+      en: [
+        { label: "Boss catalog", file: "VoidCloneBossConfigDataTable_Overseas.json", desc: "Ordered overseas boss catalog and phase configurations." },
+        { label: "Localization", file: "Game.json (EN / RU)", desc: "Canonical skill and mechanics text extracted directly from client localization." },
+        { label: "Artwork", file: "monster-image-mapping.json & fce-index.json", desc: "Verified boss portraits." }
+      ],
+      ru: [
+        { label: "Каталог боссов", file: "VoidCloneBossConfigDataTable_Overseas.json", desc: "Упорядоченный каталог боссов и конфигурация фаз." },
+        { label: "Локализация", file: "Game.json (EN / RU)", desc: "Оригинальный текст навыков и механик напрямую из локализации клиента." },
+        { label: "Портреты", file: "monster-image-mapping.json & fce-index.json", desc: "Проверенные привязки артов боссов." }
+      ]
+    },
+    items: {
+      en: [
+        { label: "ID mapping", file: "MappingItemId.json", desc: "Authoritative developer numeric IDs (NUM 1..N)." },
+        { label: "Names & Rarity", file: "MappingItemIdAndName.json, MappingItemIdAndColor.json", desc: "Game display titles and rarity color tiers." },
+        { label: "Supplemental", file: "ST_Item_Oversea.json", desc: "Global string table items (assigned synthetic IDs maxDeveloperId + 1..)." },
+        { label: "Translations", file: "curated/gacha-translations.json", desc: "Maintained machine translation fallback layer where English game text is missing." },
+        { label: "Renames", file: "curated/gacha-overrides.json", desc: "Curated renames attached to stable string IDs." }
+      ],
+      ru: [
+        { label: "ID и порядок", file: "MappingItemId.json", desc: "Авторитетный порядок числовых ID разработчиков (NUM 1..N)." },
+        { label: "Имена и редкость", file: "MappingItemIdAndName.json, MappingItemIdAndColor.json", desc: "Игровые названия и цвета редкости." },
+        { label: "Дополнительные", file: "ST_Item_Oversea.json", desc: "Строковая таблица Global-клиента (номера maxDeveloperId + 1..)." },
+        { label: "Переводы", file: "curated/gacha-translations.json", desc: "Слой переводов там, где английский текст отсутствует в игре." },
+        { label: "Переименования", file: "curated/gacha-overrides.json", desc: "Ручные уточнения названий, привязанные к строковым ID." }
+      ]
+    },
+    multype: {
+      en: [
+        { label: "Asset scan", file: "Tower-of-fantasy-exporter-scanner (Python)", desc: "Deep offline scan of ModuleExtraModifierInfos, Modifiers (NoModule), and GameplayModifierInfos." },
+        { label: "Rename layer", file: "renames.base.json", desc: "Community-maintained readable names attached to stable buff keys." }
+      ],
+      ru: [
+        { label: "Сканирование", file: "Tower-of-fantasy-exporter-scanner (Python)", desc: "Глубокое сканирование ModuleExtraModifierInfos, Modifiers (NoModule) и GameplayModifierInfos." },
+        { label: "Названия", file: "renames.base.json", desc: "Понятные названия сообщества, привязанные к ключам баффов." }
+      ]
+    }
+  };
+
+  const SECTION_PROVENANCE = {
+    oow: {
+      en: [
+        { type: "game", tag: "GAME DATA", text: "Raw monster HP, defense, attack, floor structure, wave spawns, and buff descriptions." },
+        { type: "calculated", tag: "CALCULATED", text: "Effective HP, S14+ base HP scaling (×100), difficulty curves (100%..2000%), wave HP shares." },
+        { type: "curated", tag: "MANUALLY MAINTAINED", text: "Verified boss artwork mappings (no guessed portraits) and seasonal resistance schedule." }
+      ],
+      ru: [
+        { type: "game", tag: "ИГРОВЫЕ ДАННЫЕ", text: "Сырое HP, защита, атака монстров, структура этажей, состав волн и тексты баффов." },
+        { type: "calculated", tag: "РАССЧИТАНО", text: "Effective HP, базовое масштабирование HP с S14 (×100), кривые сложности (100%..2000%), доли HP по волнам." },
+        { type: "curated", tag: "ПОДДЕРЖИВАЕТСЯ ВРУЧНУЮ", text: "Проверенные привязки артов боссов (без угадывания) и график сопротивлений сезонов." }
+      ]
+    },
+    sequential: {
+      en: [
+        { type: "game", tag: "GAME DATA", text: "Raw boss HP (MaxHealth) per stage." },
+        { type: "calculated", tag: "CALCULATED", text: "Effective HP (MaxHealth × 1.3471, base resistance 7500 / 34.71%) and stage-over-stage powercreep." },
+        { type: "curated", tag: "MANUALLY MAINTAINED", text: "Specific stage mechanics notes and vulnerability adjustments." }
+      ],
+      ru: [
+        { type: "game", tag: "ИГРОВЫЕ ДАННЫЕ", text: "Чистое HP боссов (MaxHealth) по этапам." },
+        { type: "calculated", tag: "РАССЧИТАНО", text: "Effective HP (MaxHealth × 1.3471, базовое сопротивление 7500 / 34.71%) и прирост к предыдущему этапу." },
+        { type: "curated", tag: "ПОДДЕРЖИВАЕТСЯ ВРУЧНУЮ", text: "Заметки по механикам этажей и ручные уточнения." }
+      ]
+    },
+    fce: {
+      en: [
+        { type: "game", tag: "GAME DATA", text: "Boss identifiers, phase structure, and localized mechanics text from Game.json (not historical spreadsheets)." },
+        { type: "output", tag: "GENERATED", text: "Structured per-boss mechanics extracted and grouped by phase." },
+        { type: "curated", tag: "MANUALLY MAINTAINED", text: "Verified portrait bindings and curated card compositions in bosses/*.json." }
+      ],
+      ru: [
+        { type: "game", tag: "ИГРОВЫЕ ДАННЫЕ", text: "Идентификаторы боссов, фазы и оригинальный текст навыков из Game.json (не из старых таблиц)." },
+        { type: "output", tag: "СГЕНЕРИРОВАНО", text: "Структурированные механики по боссам с группировкой по фазам." },
+        { type: "curated", tag: "ПОДДЕРЖИВАЕТСЯ ВРУЧНУЮ", text: "Проверенная привязка артов и финальная композиция карточек в bosses/*.json." }
+      ]
+    },
+    items: {
+      en: [
+        { type: "game", tag: "GAME DATA", text: "Developer IDs (NUM), raw item keys, original game names, and rarity tiers." },
+        { type: "calculated", tag: "TRANSLATION FALLBACK", text: "Maintained translation layer where English name is unavailable; original game text preserved separately." },
+        { type: "curated", tag: "MANUALLY MAINTAINED", text: "Curated renames attached strictly to stable string IDs without altering original keys." }
+      ],
+      ru: [
+        { type: "game", tag: "ИГРОВЫЕ ДАННЫЕ", text: "Числовые ID разработчиков (NUM), строковые ключи, оригинальные названия и редкость." },
+        { type: "calculated", tag: "РЕЗЕРВНЫЙ ПЕРЕВОД", text: "Слой переводов при отсутствии английского текста; оригинальный текст игры сохранён отдельно." },
+        { type: "curated", tag: "ПОДДЕРЖИВАЕТСЯ ВРУЧНУЮ", text: "Ручные переименования, привязанные строго к строковым ID без перезаписи ключей." }
+      ]
+    },
+    multype: {
+      en: [
+        { type: "game", tag: "GAME DATA", text: "Scanned attribute names, asset relationships, and ModuleExtraType multiplier categories." },
+        { type: "curated", tag: "MANUALLY MAINTAINED", text: "Human-readable community names for discovered buff structures." }
+      ],
+      ru: [
+        { type: "game", tag: "ИГРОВЫЕ ДАННЫЕ", text: "Найденные имена атрибутов, связи ассетов и категории ModuleExtraType." },
+        { type: "curated", tag: "ПОДДЕРЖИВАЕТСЯ ВРУЧНУЮ", text: "Понятные названия для найденных структур баффов." }
+      ]
     }
   };
 
@@ -586,7 +718,7 @@
           { file: "datamine/data/export-version.json", desc: "Compatibility projection for legacy consumers." },
           { file: "datamine/data/datamine-summary.json", desc: "Dataset summary metrics for Hub and metadata consumers." }
         ],
-        route: "Header Export Details, /datamine/about/, /datamine/changelog/, /datamine/ (Supplemental /api/version/global provides Live Global)"
+        route: "Header Export Details, /datamine/about/, /datamine/changelog/, /datamine/ (Supplemental /datamine/data/live-global-version.json provides the daily Global version)"
       },
       ru: {
         inputs: [
@@ -602,7 +734,7 @@
           { file: "datamine/data/export-version.json", desc: "Проекция совместимости для существующих потребителей." },
           { file: "datamine/data/datamine-summary.json", desc: "Сводные метрики датасетов для главного хаба и мета-потребителей." }
         ],
-        route: "Шапка Export Details, /datamine/about/, /datamine/changelog/, /datamine/ (эндпоинт /api/version/global отображает Live Global)"
+        route: "Шапка Export Details, /datamine/about/, /datamine/changelog/, /datamine/ (файл /datamine/data/live-global-version.json предоставляет ежедневную версию Global)"
       }
     }
   };
@@ -641,6 +773,37 @@
     return {
       version: "unavailable", sources: [], lastUpdate: "—", lastUpdateIso: "", available: false
     };
+  }
+
+  function renderSourceList(items) {
+    if (!items || !items.length) return "";
+    return `
+      <div class="about-source-list">
+        ${items.map((it) => `
+          <div class="about-source-row">
+            <span class="about-source-row__label">${it.label}</span>
+            <div class="about-source-row__content">
+              <span class="about-source-row__file">${it.file}</span>
+              <span class="about-source-row__desc">${it.desc}</span>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  function renderProvenanceGrid(items) {
+    if (!items || !items.length) return "";
+    return `
+      <div class="about-provenance-grid">
+        ${items.map((it) => `
+          <div class="about-provenance-col">
+            <span class="about-provenance-col__tag about-tag--${it.type}">${it.tag}</span>
+            <p class="about-provenance-col__text">${it.text}</p>
+          </div>
+        `).join("")}
+      </div>
+    `;
   }
 
   function renderDataTraceCard(key, lang, labels) {
@@ -1160,16 +1323,11 @@
             </div>
             <div class="about-prose">
               <p>${t.oowPlain}</p>
-              <div class="about-provenance-strip">
-                <span class="about-tag about-tag--game">Raw HP · DEF · Buffs</span>
-                <span class="about-tag-sep">·</span>
-                <span class="about-tag about-tag--calculated">Effective HP</span>
-                <span class="about-tag-sep">·</span>
-                <span class="about-tag about-tag--curated">${t.tagBossArtwork}</span>
-              </div>
+              ${renderSourceList(SECTION_SOURCES.oow[lang])}
+              ${renderProvenanceGrid(SECTION_PROVENANCE.oow[lang])}
               <p>${t.oowCalcNote}</p>
               <div class="about-formula">
-                Season resistance = manually maintained value for the selected season (0%..80%)<br>
+                Season resistance = verified schedule (40% in S1 to 85.01% in S14+ & MMO)<br>
                 Effective HP = Raw HP / (1 - Season resistance)
               </div>
               <p>${t.oowCuratedNote}</p>
@@ -1192,11 +1350,8 @@
             </div>
             <div class="about-prose">
               <p>${t.seqPlain}</p>
-              <div class="about-provenance-strip">
-                <span class="about-tag about-tag--game">MaxHealth (DT_MonsterStaticData)</span>
-                <span class="about-tag-sep">·</span>
-                <span class="about-tag about-tag--calculated">Effective HP · Powercreep Ratio</span>
-              </div>
+              ${renderSourceList(SECTION_SOURCES.sequential[lang])}
+              ${renderProvenanceGrid(SECTION_PROVENANCE.sequential[lang])}
               <p>${t.seqCutoffPlain}</p>
               <div class="about-formula">
                 Ratio = MaxHealth(Stage N) / MaxHealth(Stage N - 1)<br>
@@ -1221,11 +1376,8 @@
             </div>
             <div class="about-prose">
               <p>${t.fcePlain}</p>
-              <div class="about-provenance-strip">
-                <span class="about-tag about-tag--game">Localization Game.json · Boss Catalog</span>
-                <span class="about-tag-sep">·</span>
-                <span class="about-tag about-tag--curated">${t.tagBossComposition}</span>
-              </div>
+              ${renderSourceList(SECTION_SOURCES.fce[lang])}
+              ${renderProvenanceGrid(SECTION_PROVENANCE.fce[lang])}
               <p><strong>${t.fceClarification}</strong></p>
               <p>${t.fceCandidatePlain}</p>
             </div>
@@ -1247,12 +1399,9 @@
             </div>
             <div class="about-prose">
               <p>${t.itemsPlain}</p>
+              ${renderSourceList(SECTION_SOURCES.items[lang])}
+              ${renderProvenanceGrid(SECTION_PROVENANCE.items[lang])}
               <p>${t.itemsSourcesPlain}</p>
-              <div class="about-provenance-strip">
-                <span class="about-tag about-tag--game">MappingItemId (Developer NUM) · Name · Quality</span>
-                <span class="about-tag-sep">·</span>
-                <span class="about-tag about-tag--curated">${t.tagItemRenames}</span>
-              </div>
               <p>${t.itemsRenamePlain}</p>
             </div>
             <details class="about-details">
@@ -1273,12 +1422,9 @@
             </div>
             <div class="about-prose">
               <p>${t.multypePlain}</p>
+              ${renderSourceList(SECTION_SOURCES.multype[lang])}
+              ${renderProvenanceGrid(SECTION_PROVENANCE.multype[lang])}
               <p>${t.multypeScannerPlain}</p>
-              <div class="about-provenance-strip">
-                <span class="about-tag about-tag--game">Scanned AttributeName · ModuleExtraType</span>
-                <span class="about-tag-sep">·</span>
-                <span class="about-tag about-tag--curated">${t.tagMultypePresentation}</span>
-              </div>
               <p><strong>${t.multypeExampleTitle}</strong> ${t.multypeExampleDesc}</p>
               <div class="about-code-block">
                 <strong>Attribute: PhyAtkExtraUpMult</strong><br>

@@ -26,7 +26,8 @@
 }
 
 .seq-button:focus-visible,
-.seq-inline-link:focus-visible {
+.seq-inline-link:focus-visible,
+.seq-chart-theme-switch__button:focus-visible {
   outline: 2px solid var(--oow-gold);
   outline-offset: 2px;
 }
@@ -160,7 +161,7 @@
   border-color: var(--oow-gold) !important;
 }
 
-/* Charts Header & Palette Switch */
+/* Charts Header & Controls */
 .seq-charts-header {
   display: flex;
   flex-wrap: wrap;
@@ -168,6 +169,19 @@
   justify-content: space-between;
   gap: 8px;
   margin-bottom: 8px;
+}
+
+.seq-charts-controls {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.seq-stage-view-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .seq-chart-theme-control {

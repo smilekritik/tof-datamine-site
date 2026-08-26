@@ -126,6 +126,14 @@ try {
     Write-Host "Replacement ZIP: $zipPath" -ForegroundColor Green
   }
 
+  # Advance the incremental FCE baseline only after the replacement bundle and
+  # optional ZIP have both been created successfully.
+  $newBossBaseline = Join-Path $stageRoot 'datamine\fce\data\fce-known-boss-text-ids.json'
+  $curatedBossBaseline = Join-Path $CuratedInputDir 'fce\data\fce-known-boss-text-ids.json'
+  if (-not (Test-Path -LiteralPath $newBossBaseline)) { throw "FCE boss baseline missing: $newBossBaseline" }
+  New-Item -ItemType Directory -Path (Split-Path -Parent $curatedBossBaseline) -Force | Out-Null
+  Copy-Item -LiteralPath $newBossBaseline -Destination $curatedBossBaseline -Force
+
   if ($extractedRaw -and $CleanupExtractedRaw) {
     Assert-SafeChild $RawDir $packageRoot
     Remove-Item -LiteralPath $RawDir -Recurse -Force

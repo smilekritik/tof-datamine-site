@@ -15,6 +15,7 @@
     "check:datamine": "node scripts/check-datamine.js",
     "check:builder": "node scripts/check-builder.js",
     "check:versions": "node version-tracker.js",
+    "update:live-global-version": "node scripts/update-live-global-version.js",
     "lint": "eslint server.js version-tracker.js scripts pipeline tests datamine/shared datamine/**/*.js --no-warn-ignored",
     "build:fce-previews": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate-fce-previews.ps1",
     "build:items-gacha": "node scripts/build-items-gacha-json.js",

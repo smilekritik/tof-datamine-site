@@ -32,6 +32,7 @@ if (!stageCount) throw new Error('Sequential validation failed: zero stages.');
 const fce = read(requireFile(data('fce/data/fce-index.json')));
 if (!Array.isArray(fce.bosses) || !fce.bosses.length) throw new Error('FCE validation failed: zero bosses.');
 for (const boss of fce.bosses) requireFile(data('fce/data/bosses', `${boss.slug}.json`));
+requireFile(data('fce/docs/ALL_BOSSES_TEXTS.md'));
 requireFile(data('fce/docs/NEW_BOSSES_TEXTS.md'));
 
 const index = read(requireFile(data('oow/data/index.json')));

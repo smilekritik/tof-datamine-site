@@ -165,3 +165,67 @@ test('Hub Sequential preview labels use G unit for gigabytes', () => {
   assert.doesNotMatch(hubHtml, /<span>F15 · 2\.4B<\/span>/);
   assert.doesNotMatch(hubHtml, /<span>F30 · 27\.4B<\/span>/);
 });
+
+test('Sequential All / 16+ stage display filter conforms to presentation contract', () => {
+  const seqHtml = fs.readFileSync(path.join(ROOT, 'datamine/seq/index.html'), 'utf8');
+  const seqCss = fs.readFileSync(path.join(ROOT, 'datamine/seq/styles/datamine-seq.css'), 'utf8');
+  const seqJs = fs.readFileSync(path.join(ROOT, 'datamine/seq/js/datamine-seq.js'), 'utf8');
+
+  // 1. Placement in HTML: stage view switch is immediately to the left of chart palette
+  assert.match(seqHtml, /<div class="seq-charts-controls">[\s\S]*?<div class="seq-stage-view-control">[\s\S]*?<div class="seq-chart-theme-control">/);
+  assert.match(seqHtml, /data-seq-ui="stageViewLabel"/);
+  assert.match(seqHtml, /data-stage-view-switch/);
+  assert.match(seqHtml, /data-stage-view="all"/);
+  assert.match(seqHtml, /data-stage-view="16plus"/);
+
+  // 2. CSS: controls layout & focus-visible
+  assert.match(seqCss, /\.seq-charts-controls\s*\{[^}]*display:\s*inline-flex;/);
+  assert.match(seqCss, /\.seq-stage-view-control\s*\{[^}]*display:\s*inline-flex;/);
+  assert.match(seqCss, /\.seq-chart-theme-switch__button:focus-visible/);
+
+  // 3. Logic & semantics in datamine-seq.js
+  assert.match(seqJs, /stageView:\s*"all"/);
+  assert.match(seqJs, /function getVisibleSequentialRows\(/);
+  assert.match(seqJs, /function setStageView\(/);
+  assert.match(seqJs, /action === "set-stage-view"/);
+
+  // Test filter helper behavior directly
+  const filterHelperMatch = seqJs.match(/function getVisibleSequentialRows\([\s\S]*?\n\s{2}\}/);
+  assert.ok(filterHelperMatch, 'getVisibleSequentialRows function must be defined');
+  
+  // Extract and evaluate helper in isolated test context
+  const getVisibleSequentialRows = new Function(`
+    ${filterHelperMatch[0]}
+    return getVisibleSequentialRows;
+  `)();
+
+  const sampleRows = [
+    { stage: '14*', maxHealth: 1351518300 },
+    { stage: 15, maxHealth: 2413397000 },
+    { stage: 16, maxHealth: 3148018000 },
+    { stage: 35, maxHealth: 30000000000 }
+  ];
+  const originalCopy = JSON.parse(JSON.stringify(sampleRows));
+
+  // A. All: returns exact same input dataset
+  const allRows = getVisibleSequentialRows(sampleRows, 'all');
+  assert.deepEqual(allRows.map((r) => r.stage), ['14*', 15, 16, 35]);
+
+  // B. 16+: returns only stages >= 16 (excludes 14* and 15)
+  const filteredRows = getVisibleSequentialRows(sampleRows, '16plus');
+  assert.deepEqual(filteredRows.map((r) => r.stage), [16, 35]);
+
+  // C. Numeric parsing: '14*' parsed as 14, not included in 16+
+  assert.equal(filteredRows.some((r) => String(r.stage).includes('14') || r.stage === 15), false);
+
+  // D. No mutation: original sampleRows remains unchanged
+  assert.deepEqual(sampleRows, originalCopy);
+
+  // E. Switching: All -> 16+ -> All restores exact original series
+  const switchedBackRows = getVisibleSequentialRows(sampleRows, 'all');
+  assert.deepEqual(switchedBackRows.map((r) => r.stage), ['14*', 15, 16, 35]);
+
+  // F. renderCharts uses visibleRows for all 3 charts (pure, powercreep, effective)
+  assert.match(seqJs, /const visibleRows = getVisibleSequentialRows\(state\.dataset, state\.stageView\);/);
+});
+

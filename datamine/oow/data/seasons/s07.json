@@ -1326,7 +1326,7 @@
           "nameRu": "Усиление холода I",
           "descEn": "Deals additional Frost DMG equal to 4,000% of ATK when hit by Frost attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара атакой холода наносит дополнительный урон от холода в размере 4000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_012.png"
         },
         {
           "id": "buff_Origin_AtkFire_Level1",
@@ -1334,7 +1334,7 @@
           "nameRu": "Пировспышка I",
           "descEn": "Deals additional Flame DMG equal to 10,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от огня в размере 10 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_fire_001.png"
         },
         {
           "id": "Buff_Origin_PhyDMGUpForThunderIce",
@@ -1342,7 +1342,7 @@
           "nameRu": "Смертельное преследование I",
           "descEn": "Physical damage dealt to targets affected by Force Impact is increased by 15%.",
           "descRu": "Физический урон по целям, подверженным Силовому воздействию, увеличивается на 15%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_021.png"
         },
         {
           "id": "buff_War_PeriodWind_Level1",
@@ -1350,7 +1350,7 @@
           "nameRu": "Слабый ветер",
           "descEn": "Not Dropped: There are occasionally strong winds that blow units into the air, ignoring hyperbody.",
           "descRu": "Не выпадает: Редкие порывы сильного ветра подбрасывают врагов в воздух, игнорируя гипертело.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_player_007.png"
         }
       ],
       "dropBuffs": [
@@ -1360,7 +1360,7 @@
           "nameRu": "Усиление холода I",
           "descEn": "Deals additional Frost DMG equal to 4,000% of ATK when hit by Frost attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара атакой холода наносит дополнительный урон от холода в размере 4000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_012.png",
           "weight": 3334
         },
         {
@@ -1369,7 +1369,7 @@
           "nameRu": "Пировспышка I",
           "descEn": "Deals additional Flame DMG equal to 10,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от огня в размере 10 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_fire_001.png",
           "weight": 3334
         },
         {
@@ -1378,7 +1378,7 @@
           "nameRu": "Смертельное преследование I",
           "descEn": "Physical damage dealt to targets affected by Force Impact is increased by 15%.",
           "descRu": "Физический урон по целям, подверженным Силовому воздействию, увеличивается на 15%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_021.png",
           "weight": 3334
         }
       ],
@@ -1470,7 +1470,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -1546,7 +1546,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -1622,7 +1622,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -1698,7 +1698,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -1774,7 +1774,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -1850,7 +1850,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -1926,7 +1926,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -2002,7 +2002,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -2078,7 +2078,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -2154,7 +2154,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         }
@@ -2179,7 +2179,7 @@
           "nameRu": "Физическое усиление I",
           "descEn": "Deals additional Physical DMG equal to 4,000% of ATK when hit by physical attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара физической атакой наносит дополнительный физический урон в размере 4000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_015.png"
         },
         {
           "id": "Buff_War_HealUp_Level1",
@@ -2187,7 +2187,7 @@
           "nameRu": "Ангел исцеления I",
           "descEn": "Outgoing healing is increased by 15%.",
           "descRu": "Эффект лечения увеличен на 15%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_025.png"
         },
         {
           "id": "Buff_War_FanShang_Level1",
@@ -2195,7 +2195,7 @@
           "nameRu": "Антиброня",
           "descEn": "Apply a damage reflection effect every 30 seconds, gaining 200% damage reflection for 15 seconds.",
           "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 200% отражения урона на 15 секунд.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_002.png"
         },
         {
           "id": "Buff_Origin_FireDMGUpForThunderIce",
@@ -2203,7 +2203,7 @@
           "nameRu": "Разжигание ярости I",
           "descEn": "Flame damage dealt to targets affected by Force Impact is increased by 15%.",
           "descRu": "Урон от огня по целям, подверженным Силовому воздействию, увеличивается на 15%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_019.png"
         }
       ],
       "dropBuffs": [
@@ -2213,7 +2213,7 @@
           "nameRu": "Физическое усиление I",
           "descEn": "Deals additional Physical DMG equal to 4,000% of ATK when hit by physical attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара физической атакой наносит дополнительный физический урон в размере 4000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_015.png",
           "weight": 2500
         },
         {
@@ -2222,7 +2222,7 @@
           "nameRu": "Ангел исцеления I",
           "descEn": "Outgoing healing is increased by 15%.",
           "descRu": "Эффект лечения увеличен на 15%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_025.png",
           "weight": 2500
         },
         {
@@ -2231,7 +2231,7 @@
           "nameRu": "Антиброня",
           "descEn": "Apply a damage reflection effect every 30 seconds, gaining 200% damage reflection for 15 seconds.",
           "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 200% отражения урона на 15 секунд.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_002.png",
           "weight": 2500
         },
         {
@@ -2240,7 +2240,7 @@
           "nameRu": "Разжигание ярости I",
           "descEn": "Flame damage dealt to targets affected by Force Impact is increased by 15%.",
           "descRu": "Урон от огня по целям, подверженным Силовому воздействию, увеличивается на 15%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_019.png",
           "weight": 2500
         }
       ],
@@ -2332,7 +2332,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level1",
@@ -2340,7 +2340,7 @@
               "nameRu": "Ангел исцеления I",
               "descEn": "Outgoing healing is increased by 15%.",
               "descRu": "Эффект лечения увеличен на 15%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "Buff_War_MonFanShang_Level1",
@@ -2348,7 +2348,7 @@
               "nameRu": "Антиброня",
               "descEn": "Apply a damage reflection effect every 30 seconds, gaining 5% damage reflection for 15 seconds.",
               "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 5% отражения урона на 15 секунд.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_002.png"
             }
           ]
         },
@@ -2424,7 +2424,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level1",
@@ -2432,7 +2432,7 @@
               "nameRu": "Ангел исцеления I",
               "descEn": "Outgoing healing is increased by 15%.",
               "descRu": "Эффект лечения увеличен на 15%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "Buff_War_MonFanShang_Level1",
@@ -2440,7 +2440,7 @@
               "nameRu": "Антиброня",
               "descEn": "Apply a damage reflection effect every 30 seconds, gaining 5% damage reflection for 15 seconds.",
               "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 5% отражения урона на 15 секунд.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_002.png"
             }
           ]
         },
@@ -2516,7 +2516,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level1",
@@ -2524,7 +2524,7 @@
               "nameRu": "Ангел исцеления I",
               "descEn": "Outgoing healing is increased by 15%.",
               "descRu": "Эффект лечения увеличен на 15%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "Buff_War_MonFanShang_Level1",
@@ -2532,7 +2532,7 @@
               "nameRu": "Антиброня",
               "descEn": "Apply a damage reflection effect every 30 seconds, gaining 5% damage reflection for 15 seconds.",
               "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 5% отражения урона на 15 секунд.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_002.png"
             }
           ]
         },
@@ -2608,7 +2608,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level1",
@@ -2616,7 +2616,7 @@
               "nameRu": "Ангел исцеления I",
               "descEn": "Outgoing healing is increased by 15%.",
               "descRu": "Эффект лечения увеличен на 15%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "Buff_War_MonFanShang_Level1",
@@ -2624,7 +2624,7 @@
               "nameRu": "Антиброня",
               "descEn": "Apply a damage reflection effect every 30 seconds, gaining 5% damage reflection for 15 seconds.",
               "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 5% отражения урона на 15 секунд.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_002.png"
             }
           ]
         },
@@ -2700,7 +2700,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level1",
@@ -2708,7 +2708,7 @@
               "nameRu": "Ангел исцеления I",
               "descEn": "Outgoing healing is increased by 15%.",
               "descRu": "Эффект лечения увеличен на 15%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "Buff_War_MonFanShang_Level1",
@@ -2716,7 +2716,7 @@
               "nameRu": "Антиброня",
               "descEn": "Apply a damage reflection effect every 30 seconds, gaining 5% damage reflection for 15 seconds.",
               "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 5% отражения урона на 15 секунд.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_002.png"
             }
           ]
         },
@@ -2792,7 +2792,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level1",
@@ -2800,7 +2800,7 @@
               "nameRu": "Ангел исцеления I",
               "descEn": "Outgoing healing is increased by 15%.",
               "descRu": "Эффект лечения увеличен на 15%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "Buff_War_MonFanShang_Level1",
@@ -2808,7 +2808,7 @@
               "nameRu": "Антиброня",
               "descEn": "Apply a damage reflection effect every 30 seconds, gaining 5% damage reflection for 15 seconds.",
               "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 5% отражения урона на 15 секунд.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_002.png"
             }
           ]
         },
@@ -2884,7 +2884,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level1",
@@ -2892,7 +2892,7 @@
               "nameRu": "Ангел исцеления I",
               "descEn": "Outgoing healing is increased by 15%.",
               "descRu": "Эффект лечения увеличен на 15%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "Buff_War_MonFanShang_Level1",
@@ -2900,7 +2900,7 @@
               "nameRu": "Антиброня",
               "descEn": "Apply a damage reflection effect every 30 seconds, gaining 5% damage reflection for 15 seconds.",
               "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 5% отражения урона на 15 секунд.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_002.png"
             }
           ]
         },
@@ -2976,7 +2976,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level1",
@@ -2984,7 +2984,7 @@
               "nameRu": "Ангел исцеления I",
               "descEn": "Outgoing healing is increased by 15%.",
               "descRu": "Эффект лечения увеличен на 15%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "Buff_War_MonFanShang_Level1",
@@ -2992,7 +2992,7 @@
               "nameRu": "Антиброня",
               "descEn": "Apply a damage reflection effect every 30 seconds, gaining 5% damage reflection for 15 seconds.",
               "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 5% отражения урона на 15 секунд.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_002.png"
             }
           ]
         },
@@ -3068,7 +3068,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level1",
@@ -3076,7 +3076,7 @@
               "nameRu": "Ангел исцеления I",
               "descEn": "Outgoing healing is increased by 15%.",
               "descRu": "Эффект лечения увеличен на 15%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "Buff_War_MonFanShang_Level1",
@@ -3084,7 +3084,7 @@
               "nameRu": "Антиброня",
               "descEn": "Apply a damage reflection effect every 30 seconds, gaining 5% damage reflection for 15 seconds.",
               "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 5% отражения урона на 15 секунд.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_002.png"
             }
           ]
         },
@@ -3160,7 +3160,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level1",
@@ -3168,7 +3168,7 @@
               "nameRu": "Ангел исцеления I",
               "descEn": "Outgoing healing is increased by 15%.",
               "descRu": "Эффект лечения увеличен на 15%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "Buff_War_MonFanShang_Level1",
@@ -3176,7 +3176,7 @@
               "nameRu": "Антиброня",
               "descEn": "Apply a damage reflection effect every 30 seconds, gaining 5% damage reflection for 15 seconds.",
               "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 5% отражения урона на 15 секунд.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_002.png"
             }
           ]
         },
@@ -3252,7 +3252,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level1",
@@ -3260,7 +3260,7 @@
               "nameRu": "Ангел исцеления I",
               "descEn": "Outgoing healing is increased by 15%.",
               "descRu": "Эффект лечения увеличен на 15%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "Buff_War_MonFanShang_Level1",
@@ -3268,7 +3268,7 @@
               "nameRu": "Антиброня",
               "descEn": "Apply a damage reflection effect every 30 seconds, gaining 5% damage reflection for 15 seconds.",
               "descRu": "Применяет эффект отражения урона каждые 30 секунд, получая 5% отражения урона на 15 секунд.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_002.png"
             }
           ]
         }
@@ -3293,7 +3293,7 @@
           "nameRu": "Усиление огня I",
           "descEn": "Deals additional Flame DMG equal to 4,000% of ATK when hit by Flame attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара огненной атакой наносит дополнительный урон от огня в размере 4000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_13.png"
         },
         {
           "id": "buff_Origin_AtkIce_Level1",
@@ -3301,7 +3301,7 @@
           "nameRu": "Морозная наледь I",
           "descEn": "Deals additional Frost DMG equal to 10,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от холода в размере 10 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_ice_001.png"
         },
         {
           "id": "Buff_Origin_IceDMGUpForPhysicFlame",
@@ -3309,7 +3309,7 @@
           "nameRu": "Крах брони I",
           "descEn": "Frost damage dealt to targets affected by Armor Dissolve is increased by 15%.",
           "descRu": "Урон от холода по целям, подверженным растворению брони, увеличивается на 15%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_018.png"
         },
         {
           "id": "buff_War_MonAddZhuoShao_Level1",
@@ -3317,7 +3317,7 @@
           "nameRu": "Выжженная земля",
           "descEn": "Not Dropped: The Wanderer gets burned over time, losing 1% of Max HP every second.",
           "descRu": "Не выпадает: Странник горит, теряя 1% от макс. ОЗ каждую секунду.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_002.png"
         }
       ],
       "dropBuffs": [
@@ -3327,7 +3327,7 @@
           "nameRu": "Усиление огня I",
           "descEn": "Deals additional Flame DMG equal to 4,000% of ATK when hit by Flame attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара огненной атакой наносит дополнительный урон от огня в размере 4000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_13.png",
           "weight": 3334
         },
         {
@@ -3336,7 +3336,7 @@
           "nameRu": "Морозная наледь I",
           "descEn": "Deals additional Frost DMG equal to 10,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от холода в размере 10 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_ice_001.png",
           "weight": 3334
         },
         {
@@ -3345,7 +3345,7 @@
           "nameRu": "Крах брони I",
           "descEn": "Frost damage dealt to targets affected by Armor Dissolve is increased by 15%.",
           "descRu": "Урон от холода по целям, подверженным растворению брони, увеличивается на 15%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_018.png",
           "weight": 3334
         }
       ],
@@ -3437,7 +3437,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -3513,7 +3513,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -3589,7 +3589,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -3665,7 +3665,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -3741,7 +3741,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -3817,7 +3817,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -3893,7 +3893,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -3969,7 +3969,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -4045,7 +4045,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -4121,7 +4121,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -4197,7 +4197,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         }
@@ -4222,7 +4222,7 @@
           "nameRu": "Усиление электричества I",
           "descEn": "When dealing volt damage, triggers additional volt damage equal to 4,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении урона от электричества вызывает дополнительный урон от электричества в размере 4000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_014.png"
         },
         {
           "id": "buff_Origin_AtkThu_Level1",
@@ -4230,7 +4230,7 @@
           "nameRu": "Электрический удар I",
           "descEn": "Deals additional Volt DMG equal to 10,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от электричества в размере 10 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_elehujia_001.png"
         },
         {
           "id": "buff_War_ChenZhong_Level1",
@@ -4238,7 +4238,7 @@
           "nameRu": "Тяжелое",
           "descEn": "Become heavier and cannot be blown into the air.",
           "descRu": "Становится тяжелее, невозможно подбросить в воздух.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_player_021.png"
         },
         {
           "id": "Buff_Origin_ThuDMGUpForPhysicFlame",
@@ -4246,7 +4246,7 @@
           "nameRu": "Синтез электричества и огня I",
           "descEn": "Volt damage dealt to targets affected by Armor Dissolve is increased by 15%.",
           "descRu": "Урон от электричества по целям, подверженным растворению брони, увеличивается на 15%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_020.png"
         }
       ],
       "dropBuffs": [
@@ -4256,7 +4256,7 @@
           "nameRu": "Усиление электричества I",
           "descEn": "When dealing volt damage, triggers additional volt damage equal to 4,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении урона от электричества вызывает дополнительный урон от электричества в размере 4000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_014.png",
           "weight": 2500
         },
         {
@@ -4265,7 +4265,7 @@
           "nameRu": "Электрический удар I",
           "descEn": "Deals additional Volt DMG equal to 10,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от электричества в размере 10 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_elehujia_001.png",
           "weight": 2500
         },
         {
@@ -4274,7 +4274,7 @@
           "nameRu": "Тяжелое",
           "descEn": "Become heavier and cannot be blown into the air.",
           "descRu": "Становится тяжелее, невозможно подбросить в воздух.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_player_021.png",
           "weight": 2500
         },
         {
@@ -4283,7 +4283,7 @@
           "nameRu": "Синтез электричества и огня I",
           "descEn": "Volt damage dealt to targets affected by Armor Dissolve is increased by 15%.",
           "descRu": "Урон от электричества по целям, подверженным растворению брони, увеличивается на 15%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_020.png",
           "weight": 2500
         }
       ],
@@ -4382,7 +4382,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -4458,7 +4458,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -4534,7 +4534,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -4610,7 +4610,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -4686,7 +4686,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -4762,7 +4762,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -4838,7 +4838,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -4914,7 +4914,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -4990,7 +4990,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -5066,7 +5066,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -5142,7 +5142,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         }
@@ -5167,7 +5167,7 @@
           "nameRu": "Усиление холода II",
           "descEn": "Deals additional Frost DMG equal to 8,000% of ATK when hit by Frost attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара атакой холода наносит дополнительный урон от холода в размере 8000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_012.png"
         },
         {
           "id": "buff_Origin_AtkPhy_Level1",
@@ -5175,7 +5175,7 @@
           "nameRu": "Избиение I",
           "descEn": "Deals additional Physical DMG equal to 10,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный физический урон в размере 10 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_AddPhyAtkFoodBase.png"
         },
         {
           "id": "buff_War_RecoveryHp_Level1",
@@ -5183,7 +5183,7 @@
           "nameRu": "Отважное сердце I",
           "descEn": "Recover 1.2% HP every second.\r\nNote: Affected by healing buffs and debuffs.",
           "descRu": "Восстанавливает 1,2% ОЗ каждую секунду.\r\nПримечание: зависит от лечащих баффов и дебаффов.",
-          "icon": null
+          "icon": "assets/buffs/buff_assisatnt.png"
         },
         {
           "id": "buff_War_PeriodWind_Level2",
@@ -5191,7 +5191,7 @@
           "nameRu": "Сильный ветер",
           "descEn": "Not Dropped: There are frequent strong winds that blow units into the air, ignoring hyperbody.",
           "descRu": "Не выпадает: Частые порывы сильного ветра подбрасывают врагов в воздух, игнорируя гипертело.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_player_007.png"
         }
       ],
       "dropBuffs": [
@@ -5201,7 +5201,7 @@
           "nameRu": "Усиление холода II",
           "descEn": "Deals additional Frost DMG equal to 8,000% of ATK when hit by Frost attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара атакой холода наносит дополнительный урон от холода в размере 8000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_012.png",
           "weight": 3334
         },
         {
@@ -5210,7 +5210,7 @@
           "nameRu": "Избиение I",
           "descEn": "Deals additional Physical DMG equal to 10,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный физический урон в размере 10 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_AddPhyAtkFoodBase.png",
           "weight": 3334
         },
         {
@@ -5219,7 +5219,7 @@
           "nameRu": "Отважное сердце I",
           "descEn": "Recover 1.2% HP every second.\r\nNote: Affected by healing buffs and debuffs.",
           "descRu": "Восстанавливает 1,2% ОЗ каждую секунду.\r\nПримечание: зависит от лечащих баффов и дебаффов.",
-          "icon": null,
+          "icon": "assets/buffs/buff_assisatnt.png",
           "weight": 3334
         }
       ],
@@ -5318,7 +5318,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_RecoveryHp_Level1",
@@ -5326,7 +5326,7 @@
               "nameRu": "Отважное сердце I",
               "descEn": "Recover 1.2% HP every second.\r\nNote: Affected by healing buffs and debuffs.",
               "descRu": "Восстанавливает 1,2% ОЗ каждую секунду.\r\nПримечание: зависит от лечащих баффов и дебаффов.",
-              "icon": null
+              "icon": "assets/buffs/buff_assisatnt.png"
             }
           ]
         },
@@ -5402,7 +5402,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_RecoveryHp_Level1",
@@ -5410,7 +5410,7 @@
               "nameRu": "Отважное сердце I",
               "descEn": "Recover 1.2% HP every second.\r\nNote: Affected by healing buffs and debuffs.",
               "descRu": "Восстанавливает 1,2% ОЗ каждую секунду.\r\nПримечание: зависит от лечащих баффов и дебаффов.",
-              "icon": null
+              "icon": "assets/buffs/buff_assisatnt.png"
             }
           ]
         },
@@ -5486,7 +5486,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_RecoveryHp_Level1",
@@ -5494,7 +5494,7 @@
               "nameRu": "Отважное сердце I",
               "descEn": "Recover 1.2% HP every second.\r\nNote: Affected by healing buffs and debuffs.",
               "descRu": "Восстанавливает 1,2% ОЗ каждую секунду.\r\nПримечание: зависит от лечащих баффов и дебаффов.",
-              "icon": null
+              "icon": "assets/buffs/buff_assisatnt.png"
             }
           ]
         }
@@ -5519,7 +5519,7 @@
           "nameRu": "Физическое усиление II",
           "descEn": "Deals additional Physical DMG equal to 8,000% of ATK when hit by physical attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара физической атакой наносит дополнительный физический урон в размере 8000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_015.png"
         },
         {
           "id": "buff_War_Atk_Level1",
@@ -5527,7 +5527,7 @@
           "nameRu": "Сильный боец I",
           "descEn": "After battle begins, ATK increases by 10%.",
           "descRu": "После начала боя АТК увеличивается на 10%.",
-          "icon": null
+          "icon": "assets/buffs/Buff_WeaponPas_008.png"
         },
         {
           "id": "Buff_Origin_MakeTargetDMGDown",
@@ -5535,7 +5535,7 @@
           "nameRu": "Уничтожение оружия I",
           "descEn": "Reduce target's final damage by 10% for 10 seconds.",
           "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-          "icon": null
+          "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
         },
         {
           "id": "buff_War_HealPro_Level1",
@@ -5543,7 +5543,7 @@
           "nameRu": "Подавление лечения",
           "descEn": "Healing Suppression",
           "descRu": "Подавление лечения",
-          "icon": null
+          "icon": "assets/buffs/Buff_WeaponPas_011.png"
         }
       ],
       "dropBuffs": [
@@ -5553,7 +5553,7 @@
           "nameRu": "Физическое усиление II",
           "descEn": "Deals additional Physical DMG equal to 8,000% of ATK when hit by physical attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара физической атакой наносит дополнительный физический урон в размере 8000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_015.png",
           "weight": 3334
         },
         {
@@ -5562,7 +5562,7 @@
           "nameRu": "Сильный боец I",
           "descEn": "After battle begins, ATK increases by 10%.",
           "descRu": "После начала боя АТК увеличивается на 10%.",
-          "icon": null,
+          "icon": "assets/buffs/Buff_WeaponPas_008.png",
           "weight": 3334
         },
         {
@@ -5571,7 +5571,7 @@
           "nameRu": "Уничтожение оружия I",
           "descEn": "Reduce target's final damage by 10% for 10 seconds.",
           "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-          "icon": null,
+          "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png",
           "weight": 3334
         }
       ],
@@ -5670,7 +5670,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -5678,7 +5678,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -5686,7 +5686,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         },
@@ -5762,7 +5762,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -5770,7 +5770,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -5778,7 +5778,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         },
@@ -5854,7 +5854,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -5862,7 +5862,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -5870,7 +5870,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         },
@@ -5946,7 +5946,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -5954,7 +5954,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -5962,7 +5962,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         },
@@ -6038,7 +6038,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -6046,7 +6046,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -6054,7 +6054,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         },
@@ -6130,7 +6130,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -6138,7 +6138,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -6146,7 +6146,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         },
@@ -6222,7 +6222,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -6230,7 +6230,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -6238,7 +6238,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         },
@@ -6314,7 +6314,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -6322,7 +6322,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -6330,7 +6330,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         },
@@ -6406,7 +6406,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -6414,7 +6414,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -6422,7 +6422,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         },
@@ -6498,7 +6498,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -6506,7 +6506,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -6514,7 +6514,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         },
@@ -6590,7 +6590,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -6598,7 +6598,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -6606,7 +6606,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         },
@@ -6682,7 +6682,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level1",
@@ -6690,7 +6690,7 @@
               "nameRu": "Сильный боец I",
               "descEn": "After battle begins, ATK increases by 10%.",
               "descRu": "После начала боя АТК увеличивается на 10%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown",
@@ -6698,7 +6698,7 @@
               "nameRu": "Уничтожение оружия I",
               "descEn": "Reduce target's final damage by 10% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 10% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             }
           ]
         }
@@ -6723,7 +6723,7 @@
           "nameRu": "Усиление огня II",
           "descEn": "Deals additional Flame DMG equal to 8,000% of ATK when hit by Flame attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара огненной атакой наносит дополнительный урон от огня в размере 8000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_13.png"
         },
         {
           "id": "buff_Origin_AtkSuper_Level1",
@@ -6731,7 +6731,7 @@
           "nameRu": "Концентрация энергии I",
           "descEn": "Deals additional Altered DMG equal to 10,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный измененный урон в размере 10 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_JDWC_yn.png"
         },
         {
           "id": "Buff_War_CreateBlackHole_Level1",
@@ -6739,7 +6739,7 @@
           "nameRu": "Черная дыра",
           "descEn": "Every 40 seconds, cast a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 200% of ATK every second.",
           "descRu": "Каждые 40 секунд на фиксированную цель на 20 секунд накладывается Черная дыра, которая каждую секунду наносит урон в размере 200% от АТК.",
-          "icon": null
+          "icon": "assets/buffs/buff_cubeshield_001.png"
         },
         {
           "id": "buff_Origin_BeDamDown_Level1",
@@ -6747,7 +6747,7 @@
           "nameRu": "Надежная защита I",
           "descEn": "Damage received by self and nearby allies is reduced by 10%.",
           "descRu": "Урон, который получаете вы и ближайшие союзники, снижается на 10%.",
-          "icon": null
+          "icon": "assets/buffs/buff_kill_shield_001.png"
         }
       ],
       "dropBuffs": [
@@ -6757,7 +6757,7 @@
           "nameRu": "Усиление огня II",
           "descEn": "Deals additional Flame DMG equal to 8,000% of ATK when hit by Flame attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара огненной атакой наносит дополнительный урон от огня в размере 8000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_13.png",
           "weight": 2500
         },
         {
@@ -6766,7 +6766,7 @@
           "nameRu": "Концентрация энергии I",
           "descEn": "Deals additional Altered DMG equal to 10,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный измененный урон в размере 10 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_JDWC_yn.png",
           "weight": 2500
         },
         {
@@ -6775,7 +6775,7 @@
           "nameRu": "Черная дыра",
           "descEn": "Every 40 seconds, cast a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 200% of ATK every second.",
           "descRu": "Каждые 40 секунд на фиксированную цель на 20 секунд накладывается Черная дыра, которая каждую секунду наносит урон в размере 200% от АТК.",
-          "icon": null,
+          "icon": "assets/buffs/buff_cubeshield_001.png",
           "weight": 2500
         },
         {
@@ -6784,7 +6784,7 @@
           "nameRu": "Надежная защита I",
           "descEn": "Damage received by self and nearby allies is reduced by 10%.",
           "descRu": "Урон, который получаете вы и ближайшие союзники, снижается на 10%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_kill_shield_001.png",
           "weight": 2500
         }
       ],
@@ -6890,7 +6890,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -6898,7 +6898,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level1_Mon",
@@ -6982,7 +6982,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -6990,7 +6990,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level1_Mon",
@@ -7074,7 +7074,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -7082,7 +7082,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level1_Mon",
@@ -7166,7 +7166,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -7174,7 +7174,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level1_Mon",
@@ -7258,7 +7258,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -7266,7 +7266,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level1_Mon",
@@ -7350,7 +7350,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -7358,7 +7358,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level1_Mon",
@@ -7442,7 +7442,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -7450,7 +7450,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level1_Mon",
@@ -7534,7 +7534,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -7542,7 +7542,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level1_Mon",
@@ -7626,7 +7626,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -7634,7 +7634,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level1_Mon",
@@ -7718,7 +7718,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -7726,7 +7726,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level1_Mon",
@@ -7810,7 +7810,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -7818,7 +7818,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level1_Mon",
@@ -7851,7 +7851,7 @@
           "nameRu": "Усиление электричества II",
           "descEn": "When dealing volt damage, triggers additional volt damage equal to 8,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении урона от электричества вызывает дополнительный урон от электричества в размере 8000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_014.png"
         },
         {
           "id": "buff_Origin_AtkFire_Level2",
@@ -7859,7 +7859,7 @@
           "nameRu": "Пировспышка II",
           "descEn": "Deals additional Flame DMG equal to 15,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от огня в размере 15 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_fire_001.png"
         },
         {
           "id": "buff_War_IronMan_Level1",
@@ -7867,7 +7867,7 @@
           "nameRu": "Железный человек",
           "descEn": "Reduce endurance consumption by 30% and increase movement speed by 20%.",
           "descRu": "Снижает расход выносливости на 30% и увеличивает скорость передвижения на 20%.",
-          "icon": null
+          "icon": "assets/buffs/Buff_WeaponPas_004.png"
         },
         {
           "id": "Buff_War_Disturb",
@@ -7875,7 +7875,7 @@
           "nameRu": "Помехи",
           "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
           "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-          "icon": null
+          "icon": "assets/buffs/buff_Blend_001.png"
         }
       ],
       "dropBuffs": [
@@ -7885,7 +7885,7 @@
           "nameRu": "Усиление электричества II",
           "descEn": "When dealing volt damage, triggers additional volt damage equal to 8,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении урона от электричества вызывает дополнительный урон от электричества в размере 8000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_014.png",
           "weight": 3334
         },
         {
@@ -7894,7 +7894,7 @@
           "nameRu": "Пировспышка II",
           "descEn": "Deals additional Flame DMG equal to 15,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от огня в размере 15 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_fire_001.png",
           "weight": 3334
         },
         {
@@ -7903,7 +7903,7 @@
           "nameRu": "Железный человек",
           "descEn": "Reduce endurance consumption by 30% and increase movement speed by 20%.",
           "descRu": "Снижает расход выносливости на 30% и увеличивает скорость передвижения на 20%.",
-          "icon": null,
+          "icon": "assets/buffs/Buff_WeaponPas_004.png",
           "weight": 3334
         }
       ],
@@ -8009,7 +8009,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_Disturb",
@@ -8017,7 +8017,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -8093,7 +8093,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_Disturb",
@@ -8101,7 +8101,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -8177,7 +8177,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_Disturb",
@@ -8185,7 +8185,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -8261,7 +8261,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_Disturb",
@@ -8269,7 +8269,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -8345,7 +8345,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_Disturb",
@@ -8353,7 +8353,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -8429,7 +8429,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_Disturb",
@@ -8437,7 +8437,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -8513,7 +8513,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_Disturb",
@@ -8521,7 +8521,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -8597,7 +8597,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_Disturb",
@@ -8605,7 +8605,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -8681,7 +8681,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_Disturb",
@@ -8689,7 +8689,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -8765,7 +8765,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_Disturb",
@@ -8773,7 +8773,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -8849,7 +8849,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_Disturb",
@@ -8857,7 +8857,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         }
@@ -8882,7 +8882,7 @@
           "nameRu": "Усиление холода III",
           "descEn": "Deals additional Frost DMG equal to 12,000% of ATK when hit by Frost attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара атакой холода наносит дополнительный урон от холода в размере 12 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_012.png"
         },
         {
           "id": "buff_Origin_AtkIce_Level2",
@@ -8890,7 +8890,7 @@
           "nameRu": "Морозная наледь II",
           "descEn": "Deals additional Frost DMG equal to 15,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от холода в размере 15 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_ice_001.png"
         },
         {
           "id": "Buff_War_JinJI_Level1",
@@ -8898,7 +8898,7 @@
           "nameRu": "Преследование",
           "descEn": "Increase damage received by 30%, and increase shatter by 100%.",
           "descRu": "Увеличивает получаемый урон на 30% и раскол на 100%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_022.png"
         },
         {
           "id": "buff_War_PeriodWind_Level2",
@@ -8906,7 +8906,7 @@
           "nameRu": "Сильный ветер",
           "descEn": "Not Dropped: There are frequent strong winds that blow units into the air, ignoring hyperbody.",
           "descRu": "Не выпадает: Частые порывы сильного ветра подбрасывают врагов в воздух, игнорируя гипертело.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_player_007.png"
         }
       ],
       "dropBuffs": [
@@ -8916,7 +8916,7 @@
           "nameRu": "Усиление холода III",
           "descEn": "Deals additional Frost DMG equal to 12,000% of ATK when hit by Frost attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара атакой холода наносит дополнительный урон от холода в размере 12 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_012.png",
           "weight": 3334
         },
         {
@@ -8925,7 +8925,7 @@
           "nameRu": "Морозная наледь II",
           "descEn": "Deals additional Frost DMG equal to 15,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от холода в размере 15 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_ice_001.png",
           "weight": 3334
         },
         {
@@ -8934,7 +8934,7 @@
           "nameRu": "Преследование",
           "descEn": "Increase damage received by 30%, and increase shatter by 100%.",
           "descRu": "Увеличивает получаемый урон на 30% и раскол на 100%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_022.png",
           "weight": 3334
         }
       ],
@@ -9040,7 +9040,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -9116,7 +9116,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -9192,7 +9192,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -9268,7 +9268,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -9344,7 +9344,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -9420,7 +9420,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -9496,7 +9496,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -9572,7 +9572,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -9648,7 +9648,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -9724,7 +9724,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -9800,7 +9800,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         }
@@ -9825,7 +9825,7 @@
           "nameRu": "Физическое усиление III",
           "descEn": "When dealing physical damage, triggers additional physical damage equal to 12,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении физического урона вызывает дополнительный физический урон в размере 12 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_015.png"
         },
         {
           "id": "buff_Origin_AtkThu_Level2",
@@ -9833,7 +9833,7 @@
           "nameRu": "Электрический удар II",
           "descEn": "Deals additional Volt DMG equal to 15,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от электричества в размере 15 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_elehujia_001.png"
         },
         {
           "id": "Buff_JinZu_Level1",
@@ -9841,7 +9841,7 @@
           "nameRu": "Заточение",
           "descEn": "Upon hit, confine the target for 5 seconds. For every 1 meter the target moves, the target takes damage equal to 200% of your ATK. Damage dealt every second will not exceed 400%.",
           "descRu": "При попадании в цель заточает ее на 5 секунд. За каждый 1 метр, на который перемещается цель, она получает урон в размере 200% от вашей АТК. За одну секунду урон не может превышать 400%.",
-          "icon": null
+          "icon": "assets/buffs/debuff_speed_down.png"
         },
         {
           "id": "Buff_Origin_BeDMGDownAndTaunt",
@@ -9849,7 +9849,7 @@
           "nameRu": "Укрепление I",
           "descEn": "Reduce the Wanderer's damage taken by 10%. Every 10 seconds, forcefully taunt targets within a 10-meter radius, lasting for 3 seconds.",
           "descRu": "Снижает получаемый странником урон на 10%. Каждые 10 сек. принудительно провоцирует цели в радиусе 10 метров на 3 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_006.png"
         }
       ],
       "dropBuffs": [
@@ -9859,7 +9859,7 @@
           "nameRu": "Физическое усиление III",
           "descEn": "When dealing physical damage, triggers additional physical damage equal to 12,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении физического урона вызывает дополнительный физический урон в размере 12 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_015.png",
           "weight": 2500
         },
         {
@@ -9868,7 +9868,7 @@
           "nameRu": "Электрический удар II",
           "descEn": "Deals additional Volt DMG equal to 15,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный урон от электричества в размере 15 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_elehujia_001.png",
           "weight": 2500
         },
         {
@@ -9877,7 +9877,7 @@
           "nameRu": "Заточение",
           "descEn": "Upon hit, confine the target for 5 seconds. For every 1 meter the target moves, the target takes damage equal to 200% of your ATK. Damage dealt every second will not exceed 400%.",
           "descRu": "При попадании в цель заточает ее на 5 секунд. За каждый 1 метр, на который перемещается цель, она получает урон в размере 200% от вашей АТК. За одну секунду урон не может превышать 400%.",
-          "icon": null,
+          "icon": "assets/buffs/debuff_speed_down.png",
           "weight": 2500
         },
         {
@@ -9886,7 +9886,7 @@
           "nameRu": "Укрепление I",
           "descEn": "Reduce the Wanderer's damage taken by 10%. Every 10 seconds, forcefully taunt targets within a 10-meter radius, lasting for 3 seconds.",
           "descRu": "Снижает получаемый странником урон на 10%. Каждые 10 сек. принудительно провоцирует цели в радиусе 10 метров на 3 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_006.png",
           "weight": 2500
         }
       ],
@@ -9992,7 +9992,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_MonJinZu_Level1",
@@ -10000,7 +10000,7 @@
               "nameRu": "Заточение",
               "descEn": "Confines the target for 5s upon hit. The target takes damage equal to 2% of your Attack + 30,000 for every 1 meter they move. Damage dealt every second will not exceed 200,000.",
               "descRu": "При попадании по цели накладывает на нее Заточение на 5 сек. За каждый 1 метр перемещения цель получает урон в размере 2% от вашей атаки + 30 000. Урон в секунду не может превышает 200 000.",
-              "icon": null
+              "icon": "assets/buffs/debuff_speed_down.png"
             },
             {
               "id": "Buff_Origin_BeDMGDownAndTaunt",
@@ -10008,7 +10008,7 @@
               "nameRu": "Укрепление I",
               "descEn": "Reduce the Wanderer's damage taken by 10%. Every 10 seconds, forcefully taunt targets within a 10-meter radius, lasting for 3 seconds.",
               "descRu": "Снижает получаемый странником урон на 10%. Каждые 10 сек. принудительно провоцирует цели в радиусе 10 метров на 3 сек.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_006.png"
             }
           ]
         },
@@ -10084,7 +10084,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_MonJinZu_Level1",
@@ -10092,7 +10092,7 @@
               "nameRu": "Заточение",
               "descEn": "Confines the target for 5s upon hit. The target takes damage equal to 2% of your Attack + 30,000 for every 1 meter they move. Damage dealt every second will not exceed 200,000.",
               "descRu": "При попадании по цели накладывает на нее Заточение на 5 сек. За каждый 1 метр перемещения цель получает урон в размере 2% от вашей атаки + 30 000. Урон в секунду не может превышает 200 000.",
-              "icon": null
+              "icon": "assets/buffs/debuff_speed_down.png"
             },
             {
               "id": "Buff_Origin_BeDMGDownAndTaunt",
@@ -10100,7 +10100,7 @@
               "nameRu": "Укрепление I",
               "descEn": "Reduce the Wanderer's damage taken by 10%. Every 10 seconds, forcefully taunt targets within a 10-meter radius, lasting for 3 seconds.",
               "descRu": "Снижает получаемый странником урон на 10%. Каждые 10 сек. принудительно провоцирует цели в радиусе 10 метров на 3 сек.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_006.png"
             }
           ]
         },
@@ -10176,7 +10176,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_MonJinZu_Level1",
@@ -10184,7 +10184,7 @@
               "nameRu": "Заточение",
               "descEn": "Confines the target for 5s upon hit. The target takes damage equal to 2% of your Attack + 30,000 for every 1 meter they move. Damage dealt every second will not exceed 200,000.",
               "descRu": "При попадании по цели накладывает на нее Заточение на 5 сек. За каждый 1 метр перемещения цель получает урон в размере 2% от вашей атаки + 30 000. Урон в секунду не может превышает 200 000.",
-              "icon": null
+              "icon": "assets/buffs/debuff_speed_down.png"
             },
             {
               "id": "Buff_Origin_BeDMGDownAndTaunt",
@@ -10192,7 +10192,7 @@
               "nameRu": "Укрепление I",
               "descEn": "Reduce the Wanderer's damage taken by 10%. Every 10 seconds, forcefully taunt targets within a 10-meter radius, lasting for 3 seconds.",
               "descRu": "Снижает получаемый странником урон на 10%. Каждые 10 сек. принудительно провоцирует цели в радиусе 10 метров на 3 сек.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_006.png"
             }
           ]
         }
@@ -10217,7 +10217,7 @@
           "nameRu": "Усиление огня III",
           "descEn": "Deals additional Flame DMG equal to 12,000% of ATK when hit by Flame attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара огненной атакой наносит дополнительный урон от огня в размере 12 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_13.png"
         },
         {
           "id": "Buff_War_HealUp_Level2",
@@ -10225,7 +10225,7 @@
           "nameRu": "Ангел исцеления II",
           "descEn": "Outgoing healing is increased by 30%.",
           "descRu": "Эффект лечения увеличен на 30%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_025.png"
         },
         {
           "id": "buff_Origin_BePhy",
@@ -10233,7 +10233,7 @@
           "nameRu": "Физический страх",
           "descEn": "Physical damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый физический урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/buff_AddPowerImm.png"
         },
         {
           "id": "buff_War_PeriodWind_Level2",
@@ -10241,7 +10241,7 @@
           "nameRu": "Сильный ветер",
           "descEn": "Not Dropped: There are frequent strong winds that blow units into the air, ignoring hyperbody.",
           "descRu": "Не выпадает: Частые порывы сильного ветра подбрасывают врагов в воздух, игнорируя гипертело.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_player_007.png"
         }
       ],
       "dropBuffs": [
@@ -10251,7 +10251,7 @@
           "nameRu": "Усиление огня III",
           "descEn": "Deals additional Flame DMG equal to 12,000% of ATK when hit by Flame attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара огненной атакой наносит дополнительный урон от огня в размере 12 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_13.png",
           "weight": 3334
         },
         {
@@ -10260,7 +10260,7 @@
           "nameRu": "Ангел исцеления II",
           "descEn": "Outgoing healing is increased by 30%.",
           "descRu": "Эффект лечения увеличен на 30%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_025.png",
           "weight": 3334
         },
         {
@@ -10269,7 +10269,7 @@
           "nameRu": "Физический страх",
           "descEn": "Physical damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый физический урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_AddPowerImm.png",
           "weight": 3334
         }
       ],
@@ -10389,7 +10389,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level2",
@@ -10397,7 +10397,7 @@
               "nameRu": "Ангел исцеления II",
               "descEn": "Outgoing healing is increased by 30%.",
               "descRu": "Эффект лечения увеличен на 30%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "buff_Origin_BePhy_Mon",
@@ -10481,7 +10481,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level2",
@@ -10489,7 +10489,7 @@
               "nameRu": "Ангел исцеления II",
               "descEn": "Outgoing healing is increased by 30%.",
               "descRu": "Эффект лечения увеличен на 30%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "buff_Origin_BePhy_Mon",
@@ -10573,7 +10573,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level2",
@@ -10581,7 +10581,7 @@
               "nameRu": "Ангел исцеления II",
               "descEn": "Outgoing healing is increased by 30%.",
               "descRu": "Эффект лечения увеличен на 30%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "buff_Origin_BePhy_Mon",
@@ -10614,7 +10614,7 @@
           "nameRu": "Усиление электричества III",
           "descEn": "When dealing volt damage, triggers additional volt damage equal to 12,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении урона от электричества вызывает дополнительный урон от электричества в размере 12 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_014.png"
         },
         {
           "id": "buff_Origin_AtkPhy_Level2",
@@ -10622,7 +10622,7 @@
           "nameRu": "Избиение II",
           "descEn": "Deals additional Physical DMG equal to 15,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный физический урон в размере 15 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_AddPhyAtkFoodBase.png"
         },
         {
           "id": "Buff_War_Halo",
@@ -10630,7 +10630,7 @@
           "nameRu": "Радиация",
           "descEn": "Deal damage equal to100% of ATK to nearby targets every second.",
           "descRu": "Каждую секунду наносит ближайшим целям урон в размере 100% от АТК.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_player_015.png"
         },
         {
           "id": "buff_Origin_BeThu",
@@ -10638,7 +10638,7 @@
           "nameRu": "Страх электричества",
           "descEn": "Volt damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от электричества увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/AddThunderImm.png"
         }
       ],
       "dropBuffs": [
@@ -10648,7 +10648,7 @@
           "nameRu": "Усиление электричества III",
           "descEn": "When dealing volt damage, triggers additional volt damage equal to 12,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении урона от электричества вызывает дополнительный урон от электричества в размере 12 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_014.png",
           "weight": 2500
         },
         {
@@ -10657,7 +10657,7 @@
           "nameRu": "Избиение II",
           "descEn": "Deals additional Physical DMG equal to 15,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный физический урон в размере 15 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_AddPhyAtkFoodBase.png",
           "weight": 2500
         },
         {
@@ -10666,7 +10666,7 @@
           "nameRu": "Радиация",
           "descEn": "Deal damage equal to100% of ATK to nearby targets every second.",
           "descRu": "Каждую секунду наносит ближайшим целям урон в размере 100% от АТК.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_player_015.png",
           "weight": 2500
         },
         {
@@ -10675,7 +10675,7 @@
           "nameRu": "Страх электричества",
           "descEn": "Volt damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от электричества увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/AddThunderImm.png",
           "weight": 2500
         }
       ],
@@ -10809,7 +10809,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonHalo",
@@ -10901,7 +10901,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonHalo",
@@ -10993,7 +10993,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_MonHalo",
@@ -11034,7 +11034,7 @@
           "nameRu": "Усиление холода IV",
           "descEn": "Deals additional Frost DMG equal to 16,000% of ATK when hit by Frost attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара атакой холода наносит дополнительный урон от холода в размере 16 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_012.png"
         },
         {
           "id": "buff_Origin_AtkSuper_Level2",
@@ -11042,7 +11042,7 @@
           "nameRu": "Концентрация энергии II",
           "descEn": "Deals additional Altered DMG equal to 15,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный измененный урон в размере 15 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_JDWC_yn.png"
         },
         {
           "id": "buff_Origin_BeFire",
@@ -11050,7 +11050,7 @@
           "nameRu": "Страх огня",
           "descEn": "Flame damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от огня увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/AddFireImm.png"
         },
         {
           "id": "buff_War_HealPro_Level1",
@@ -11058,7 +11058,7 @@
           "nameRu": "Подавление лечения",
           "descEn": "Healing Suppression",
           "descRu": "Подавление лечения",
-          "icon": null
+          "icon": "assets/buffs/Buff_WeaponPas_011.png"
         }
       ],
       "dropBuffs": [
@@ -11068,7 +11068,7 @@
           "nameRu": "Усиление холода IV",
           "descEn": "Deals additional Frost DMG equal to 16,000% of ATK when hit by Frost attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара атакой холода наносит дополнительный урон от холода в размере 16 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_012.png",
           "weight": 3334
         },
         {
@@ -11077,7 +11077,7 @@
           "nameRu": "Концентрация энергии II",
           "descEn": "Deals additional Altered DMG equal to 15,000% of ATK upon hitting the target. Unaffected by buffs or debuffs. Cooldown: 2s.",
           "descRu": "При попадании по цели наносит дополнительный измененный урон в размере 15 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 2 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_JDWC_yn.png",
           "weight": 3334
         },
         {
@@ -11086,7 +11086,7 @@
           "nameRu": "Страх огня",
           "descEn": "Flame damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от огня увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/AddFireImm.png",
           "weight": 3334
         }
       ],
@@ -11234,7 +11234,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeFire_Mon",
@@ -11318,7 +11318,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeFire_Mon",
@@ -11402,7 +11402,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeFire_Mon",
@@ -11435,7 +11435,7 @@
           "nameRu": "Физическое усиление IV",
           "descEn": "When dealing physical damage, triggers additional physical damage equal to 16,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении физического урона вызывает дополнительный физический урон в размере 16 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_015.png"
         },
         {
           "id": "buff_Origin_BeIce",
@@ -11443,7 +11443,7 @@
           "nameRu": "Страх холода",
           "descEn": "Frost damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от холода увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/AddIceImm.png"
         },
         {
           "id": "buff_War_PeriodWind_Level2",
@@ -11451,7 +11451,7 @@
           "nameRu": "Сильный ветер",
           "descEn": "Not Dropped: There are frequent strong winds that blow units into the air, ignoring hyperbody.",
           "descRu": "Не выпадает: Частые порывы сильного ветра подбрасывают врагов в воздух, игнорируя гипертело.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_player_007.png"
         },
         {
           "id": "Buff_War_Disturb",
@@ -11459,7 +11459,7 @@
           "nameRu": "Помехи",
           "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
           "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-          "icon": null
+          "icon": "assets/buffs/buff_Blend_001.png"
         }
       ],
       "dropBuffs": [
@@ -11469,7 +11469,7 @@
           "nameRu": "Физическое усиление IV",
           "descEn": "When dealing physical damage, triggers additional physical damage equal to 16,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении физического урона вызывает дополнительный физический урон в размере 16 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_015.png",
           "weight": 5000
         },
         {
@@ -11478,7 +11478,7 @@
           "nameRu": "Страх холода",
           "descEn": "Frost damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от холода увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/AddIceImm.png",
           "weight": 5000
         }
       ],
@@ -11640,7 +11640,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeIce_Mon",
@@ -11656,7 +11656,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -11732,7 +11732,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeIce_Mon",
@@ -11748,7 +11748,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         },
@@ -11824,7 +11824,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeIce_Mon",
@@ -11840,7 +11840,7 @@
               "nameRu": "Помехи",
               "descEn": "Not Dropped: Decrease the damage of non-Fortitude units targeted by enemies.",
               "descRu": "Не выпадает: уменьшает урон, наносимый бойцами без силы духа, которые стали целью врагов.",
-              "icon": null
+              "icon": "assets/buffs/buff_Blend_001.png"
             }
           ]
         }
@@ -11865,7 +11865,7 @@
           "nameRu": "Усиление огня IV",
           "descEn": "Deals additional Flame DMG equal to 16,000% of ATK when hit by Flame attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара огненной атакой наносит дополнительный урон от огня в размере 16 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_13.png"
         },
         {
           "id": "buff_War_Atk_Level2",
@@ -11873,7 +11873,7 @@
           "nameRu": "Сильный боец II",
           "descEn": "After battle begins, ATK increases by 15%.",
           "descRu": "После начала боя АТК увеличивается на 15%.",
-          "icon": null
+          "icon": "assets/buffs/Buff_WeaponPas_008.png"
         },
         {
           "id": "Buff_War_CreateBlackHole_Level1",
@@ -11881,7 +11881,7 @@
           "nameRu": "Черная дыра",
           "descEn": "Every 40 seconds, cast a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 200% of ATK every second.",
           "descRu": "Каждые 40 секунд на фиксированную цель на 20 секунд накладывается Черная дыра, которая каждую секунду наносит урон в размере 200% от АТК.",
-          "icon": null
+          "icon": "assets/buffs/buff_cubeshield_001.png"
         },
         {
           "id": "buff_Origin_BeSuper",
@@ -11889,7 +11889,7 @@
           "nameRu": "Измененный страх",
           "descEn": "Altered damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый измененный урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/buff_yineng.png"
         }
       ],
       "dropBuffs": [
@@ -11899,7 +11899,7 @@
           "nameRu": "Усиление огня IV",
           "descEn": "Deals additional Flame DMG equal to 16,000% of ATK when hit by Flame attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара огненной атакой наносит дополнительный урон от огня в размере 16 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_13.png",
           "weight": 2500
         },
         {
@@ -11908,7 +11908,7 @@
           "nameRu": "Сильный боец II",
           "descEn": "After battle begins, ATK increases by 15%.",
           "descRu": "После начала боя АТК увеличивается на 15%.",
-          "icon": null,
+          "icon": "assets/buffs/Buff_WeaponPas_008.png",
           "weight": 2500
         },
         {
@@ -11917,7 +11917,7 @@
           "nameRu": "Черная дыра",
           "descEn": "Every 40 seconds, cast a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 200% of ATK every second.",
           "descRu": "Каждые 40 секунд на фиксированную цель на 20 секунд накладывается Черная дыра, которая каждую секунду наносит урон в размере 200% от АТК.",
-          "icon": null,
+          "icon": "assets/buffs/buff_cubeshield_001.png",
           "weight": 2500
         },
         {
@@ -11926,7 +11926,7 @@
           "nameRu": "Измененный страх",
           "descEn": "Altered damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый измененный урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_yineng.png",
           "weight": 2500
         }
       ],
@@ -12074,7 +12074,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level2",
@@ -12082,7 +12082,7 @@
               "nameRu": "Сильный боец II",
               "descEn": "After battle begins, ATK increases by 15%.",
               "descRu": "После начала боя АТК увеличивается на 15%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -12090,7 +12090,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeSuper_Mon",
@@ -12174,7 +12174,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level2",
@@ -12182,7 +12182,7 @@
               "nameRu": "Сильный боец II",
               "descEn": "After battle begins, ATK increases by 15%.",
               "descRu": "После начала боя АТК увеличивается на 15%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -12190,7 +12190,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeSuper_Mon",
@@ -12274,7 +12274,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level2",
@@ -12282,7 +12282,7 @@
               "nameRu": "Сильный боец II",
               "descEn": "After battle begins, ATK increases by 15%.",
               "descRu": "После начала боя АТК увеличивается на 15%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -12290,7 +12290,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BeSuper_Mon",
@@ -12323,7 +12323,7 @@
           "nameRu": "Усиление электричества IV",
           "descEn": "When dealing volt damage, triggers additional volt damage equal to 16,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении урона от электричества вызывает дополнительный урон от электричества в размере 16 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_014.png"
         },
         {
           "id": "buff_Origin_BeDamDown_Level2",
@@ -12331,7 +12331,7 @@
           "nameRu": "Надежная защита II",
           "descEn": "Damage received by self and nearby allies is reduced by 15%.",
           "descRu": "Урон, который получаете вы и ближайшие союзники, снижается на 15%.",
-          "icon": null
+          "icon": "assets/buffs/buff_kill_shield_001.png"
         },
         {
           "id": "Buff_Origin_PhyDMGUpForThunderIce_Level2",
@@ -12339,7 +12339,7 @@
           "nameRu": "Смертельное преследование II",
           "descEn": "Physical damage dealt to targets affected by Force Impact is increased by 30%.",
           "descRu": "Физический урон по целям, подверженным Силовому воздействию, увеличивается на 30%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_021.png"
         },
         {
           "id": "buff_Origin_BePhy",
@@ -12347,7 +12347,7 @@
           "nameRu": "Физический страх",
           "descEn": "Physical damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый физический урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/buff_AddPowerImm.png"
         }
       ],
       "dropBuffs": [
@@ -12357,7 +12357,7 @@
           "nameRu": "Усиление электричества IV",
           "descEn": "When dealing volt damage, triggers additional volt damage equal to 16,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении урона от электричества вызывает дополнительный урон от электричества в размере 16 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_014.png",
           "weight": 2500
         },
         {
@@ -12366,7 +12366,7 @@
           "nameRu": "Надежная защита II",
           "descEn": "Damage received by self and nearby allies is reduced by 15%.",
           "descRu": "Урон, который получаете вы и ближайшие союзники, снижается на 15%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_kill_shield_001.png",
           "weight": 2500
         },
         {
@@ -12375,7 +12375,7 @@
           "nameRu": "Смертельное преследование II",
           "descEn": "Physical damage dealt to targets affected by Force Impact is increased by 30%.",
           "descRu": "Физический урон по целям, подверженным Силовому воздействию, увеличивается на 30%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_021.png",
           "weight": 2500
         },
         {
@@ -12384,7 +12384,7 @@
           "nameRu": "Физический страх",
           "descEn": "Physical damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый физический урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_AddPowerImm.png",
           "weight": 2500
         }
       ],
@@ -12532,7 +12532,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level2_Mon",
@@ -12624,7 +12624,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level2_Mon",
@@ -12716,7 +12716,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeDamDown_Level2_Mon",
@@ -12757,7 +12757,7 @@
           "nameRu": "Усиление холода V",
           "descEn": "Deals additional Frost DMG equal to 20,000% of ATK when hit by Frost attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара атакой холода наносит дополнительный урон от холода в размере 20 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_012.png"
         },
         {
           "id": "Buff_War_HealUp_Level3",
@@ -12765,7 +12765,7 @@
           "nameRu": "Ангел исцеления III",
           "descEn": "Outgoing healing is increased by 50%.",
           "descRu": "Эффект лечения увеличен на 50%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_025.png"
         },
         {
           "id": "Buff_Origin_FireDMGUpForThunderIce_Level2",
@@ -12773,7 +12773,7 @@
           "nameRu": "Разжигание ярости II",
           "descEn": "Flame damage dealt to targets affected by Force Impact is increased by 30%.",
           "descRu": "Урон от огня по целям, подверженным Силовому воздействию, увеличивается на 30%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_019.png"
         },
         {
           "id": "buff_Origin_BeFire",
@@ -12781,7 +12781,7 @@
           "nameRu": "Страх огня",
           "descEn": "Flame damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от огня увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/AddFireImm.png"
         }
       ],
       "dropBuffs": [
@@ -12791,7 +12791,7 @@
           "nameRu": "Усиление холода V",
           "descEn": "Deals additional Frost DMG equal to 20,000% of ATK when hit by Frost attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара атакой холода наносит дополнительный урон от холода в размере 20 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_012.png",
           "weight": 2500
         },
         {
@@ -12800,7 +12800,7 @@
           "nameRu": "Ангел исцеления III",
           "descEn": "Outgoing healing is increased by 50%.",
           "descRu": "Эффект лечения увеличен на 50%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_025.png",
           "weight": 2500
         },
         {
@@ -12809,7 +12809,7 @@
           "nameRu": "Разжигание ярости II",
           "descEn": "Flame damage dealt to targets affected by Force Impact is increased by 30%.",
           "descRu": "Урон от огня по целям, подверженным Силовому воздействию, увеличивается на 30%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_019.png",
           "weight": 2500
         },
         {
@@ -12818,7 +12818,7 @@
           "nameRu": "Страх огня",
           "descEn": "Flame damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от огня увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/AddFireImm.png",
           "weight": 2500
         }
       ],
@@ -12966,7 +12966,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level3",
@@ -12974,7 +12974,7 @@
               "nameRu": "Ангел исцеления III",
               "descEn": "Outgoing healing is increased by 50%.",
               "descRu": "Эффект лечения увеличен на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "buff_Origin_BeFire_Mon",
@@ -13058,7 +13058,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level3",
@@ -13066,7 +13066,7 @@
               "nameRu": "Ангел исцеления III",
               "descEn": "Outgoing healing is increased by 50%.",
               "descRu": "Эффект лечения увеличен на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "buff_Origin_BeFire_Mon",
@@ -13150,7 +13150,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "Buff_War_HealUp_Level3",
@@ -13158,7 +13158,7 @@
               "nameRu": "Ангел исцеления III",
               "descEn": "Outgoing healing is increased by 50%.",
               "descRu": "Эффект лечения увеличен на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_025.png"
             },
             {
               "id": "buff_Origin_BeFire_Mon",
@@ -13191,7 +13191,7 @@
           "nameRu": "Физическое усиление V",
           "descEn": "When dealing physical damage, triggers additional physical damage equal to 20,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении физического урона вызывает дополнительный физический урон в размере 20 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_015.png"
         },
         {
           "id": "Buff_Origin_IceDMGUpForPhysicFlame_Level2",
@@ -13199,7 +13199,7 @@
           "nameRu": "Крах брони II",
           "descEn": "Frost damage dealt to targets affected by Armor Dissolve is increased by 30%.",
           "descRu": "Урон от холода по целям, подверженным растворению брони, увеличивается на 30%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_018.png"
         },
         {
           "id": "buff_Origin_BeIce",
@@ -13207,7 +13207,7 @@
           "nameRu": "Страх холода",
           "descEn": "Frost damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от холода увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/AddIceImm.png"
         },
         {
           "id": "buff_War_HealPro_Level1",
@@ -13215,7 +13215,7 @@
           "nameRu": "Подавление лечения",
           "descEn": "Healing Suppression",
           "descRu": "Подавление лечения",
-          "icon": null
+          "icon": "assets/buffs/Buff_WeaponPas_011.png"
         }
       ],
       "dropBuffs": [
@@ -13225,7 +13225,7 @@
           "nameRu": "Физическое усиление V",
           "descEn": "When dealing physical damage, triggers additional physical damage equal to 20,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении физического урона вызывает дополнительный физический урон в размере 20 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_015.png",
           "weight": 3334
         },
         {
@@ -13234,7 +13234,7 @@
           "nameRu": "Крах брони II",
           "descEn": "Frost damage dealt to targets affected by Armor Dissolve is increased by 30%.",
           "descRu": "Урон от холода по целям, подверженным растворению брони, увеличивается на 30%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_018.png",
           "weight": 3334
         },
         {
@@ -13243,7 +13243,7 @@
           "nameRu": "Страх холода",
           "descEn": "Frost damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от холода увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/AddIceImm.png",
           "weight": 3334
         }
       ],
@@ -13391,7 +13391,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeIce_Mon",
@@ -13475,7 +13475,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeIce_Mon",
@@ -13559,7 +13559,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_Origin_BeIce_Mon",
@@ -13592,7 +13592,7 @@
           "nameRu": "Усиление огня V",
           "descEn": "Deals additional Flame DMG equal to 20,000% of ATK when hit by Flame attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара огненной атакой наносит дополнительный урон от огня в размере 20 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_13.png"
         },
         {
           "id": "buff_War_ImmuneDamageCD_Level1",
@@ -13600,7 +13600,7 @@
           "nameRu": "Небытие",
           "descEn": "Become immune to damage once every 2.5 seconds.",
           "descRu": "Раз в 2,5 секунды дает невосприимчивость к урону.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_001.png"
         },
         {
           "id": "Buff_Origin_ThuDMGUpForPhysicFlame_Level2",
@@ -13608,7 +13608,7 @@
           "nameRu": "Синтез электричества и огня II",
           "descEn": "Volt damage dealt to targets affected by Armor Dissolve is increased by 30%.",
           "descRu": "Урон от электричества по целям, подверженным растворению брони, увеличивается на 30%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_020.png"
         },
         {
           "id": "buff_Origin_BeThu",
@@ -13616,7 +13616,7 @@
           "nameRu": "Страх электричества",
           "descEn": "Volt damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от электричества увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/AddThunderImm.png"
         }
       ],
       "dropBuffs": [
@@ -13626,7 +13626,7 @@
           "nameRu": "Усиление огня V",
           "descEn": "Deals additional Flame DMG equal to 20,000% of ATK when hit by Flame attacks. Unaffected by buffs or debuffs. Cooldown: 1s.",
           "descRu": "При получении удара огненной атакой наносит дополнительный урон от огня в размере 20 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_13.png",
           "weight": 2500
         },
         {
@@ -13635,7 +13635,7 @@
           "nameRu": "Небытие",
           "descEn": "Become immune to damage once every 2.5 seconds.",
           "descRu": "Раз в 2,5 секунды дает невосприимчивость к урону.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_001.png",
           "weight": 2500
         },
         {
@@ -13644,7 +13644,7 @@
           "nameRu": "Синтез электричества и огня II",
           "descEn": "Volt damage dealt to targets affected by Armor Dissolve is increased by 30%.",
           "descRu": "Урон от электричества по целям, подверженным растворению брони, увеличивается на 30%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_020.png",
           "weight": 2500
         },
         {
@@ -13653,7 +13653,7 @@
           "nameRu": "Страх электричества",
           "descEn": "Volt damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от электричества увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/AddThunderImm.png",
           "weight": 2500
         }
       ],
@@ -13801,7 +13801,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_ImmuneDamageCD_Level1",
@@ -13809,7 +13809,7 @@
               "nameRu": "Небытие",
               "descEn": "Become immune to damage once every 2.5 seconds.",
               "descRu": "Раз в 2,5 секунды дает невосприимчивость к урону.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_001.png"
             },
             {
               "id": "buff_Origin_BeThu_Mon",
@@ -13893,7 +13893,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_ImmuneDamageCD_Level1",
@@ -13901,7 +13901,7 @@
               "nameRu": "Небытие",
               "descEn": "Become immune to damage once every 2.5 seconds.",
               "descRu": "Раз в 2,5 секунды дает невосприимчивость к урону.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_001.png"
             },
             {
               "id": "buff_Origin_BeThu_Mon",
@@ -13985,7 +13985,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_ImmuneDamageCD_Level1",
@@ -13993,7 +13993,7 @@
               "nameRu": "Небытие",
               "descEn": "Become immune to damage once every 2.5 seconds.",
               "descRu": "Раз в 2,5 секунды дает невосприимчивость к урону.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_monster_001.png"
             },
             {
               "id": "buff_Origin_BeThu_Mon",
@@ -14026,7 +14026,7 @@
           "nameRu": "Усиление электричества V",
           "descEn": "When dealing volt damage, triggers additional volt damage equal to 20,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении урона от электричества вызывает дополнительный урон от электричества в размере 20 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_014.png"
         },
         {
           "id": "buff_Origin_Break",
@@ -14034,7 +14034,7 @@
           "nameRu": "Прорыв защиты",
           "descEn": "Increase shatter by 150%, while reduce damage by 35%.",
           "descRu": "Увеличивает раскол на 150%, а урон снижает на 35%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_player_019.png"
         },
         {
           "id": "buff_Origin_BeSuper",
@@ -14042,7 +14042,7 @@
           "nameRu": "Измененный страх",
           "descEn": "Altered damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый измененный урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/buff_yineng.png"
         },
         {
           "id": "buff_War_HealPro_Level1",
@@ -14050,7 +14050,7 @@
           "nameRu": "Подавление лечения",
           "descEn": "Healing Suppression",
           "descRu": "Подавление лечения",
-          "icon": null
+          "icon": "assets/buffs/Buff_WeaponPas_011.png"
         }
       ],
       "dropBuffs": [
@@ -14060,7 +14060,7 @@
           "nameRu": "Усиление электричества V",
           "descEn": "When dealing volt damage, triggers additional volt damage equal to 20,000% of ATK, unaffected by any buffs or debuffs. Cooldown: 1 second.",
           "descRu": "При нанесении урона от электричества вызывает дополнительный урон от электричества в размере 20 000% от АТК, на который не влияют никакие баффы и дебаффы. Перезарядка: 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_014.png",
           "weight": 3334
         },
         {
@@ -14069,7 +14069,7 @@
           "nameRu": "Прорыв защиты",
           "descEn": "Increase shatter by 150%, while reduce damage by 35%.",
           "descRu": "Увеличивает раскол на 150%, а урон снижает на 35%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_player_019.png",
           "weight": 3334
         },
         {
@@ -14078,7 +14078,7 @@
           "nameRu": "Измененный страх",
           "descEn": "Altered damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый измененный урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_yineng.png",
           "weight": 3334
         }
       ],
@@ -14226,7 +14226,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -14302,7 +14302,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         },
@@ -14378,7 +14378,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             }
           ]
         }
@@ -14403,7 +14403,7 @@
           "nameRu": "Усиление холода II",
           "descEn": "Frost damage dealt is increased by 20%.",
           "descRu": "Нанесенный холодом урон увеличивается на 20%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_012.png"
         },
         {
           "id": "buff_TeamAssist_level1",
@@ -14411,7 +14411,7 @@
           "nameRu": "Поддержка отряда I",
           "descEn": "Final damage of allies within a radius of 10 meters (excluding yourself) is increased by 5%.",
           "descRu": "Конечный урон союзников в радиусе 10 метров (исключая вас) увеличен на 5%.",
-          "icon": null
+          "icon": "assets/buffs/buff_WeaponAttack_002.png"
         },
         {
           "id": "Buff_Origin_BeDMGDownAndTaunt_Level2",
@@ -14419,7 +14419,7 @@
           "nameRu": "Укрепление II",
           "descEn": "Reduce the Wanderer's damage taken by 15%. Every 8 seconds, forcefully taunt targets within a 10-meter radius, lasting for 3 seconds.",
           "descRu": "Снижает получаемый странником урон на 15%. Каждые 8 сек. принудительно провоцирует цели в радиусе 10 метров на 3 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_mijing_006.png"
         },
         {
           "id": "buff_Origin_BeIce",
@@ -14427,7 +14427,7 @@
           "nameRu": "Страх холода",
           "descEn": "Frost damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от холода увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/AddIceImm.png"
         }
       ],
       "dropBuffs": [
@@ -14437,7 +14437,7 @@
           "nameRu": "Усиление холода II",
           "descEn": "Frost damage dealt is increased by 20%.",
           "descRu": "Нанесенный холодом урон увеличивается на 20%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_012.png",
           "weight": 2500
         },
         {
@@ -14446,7 +14446,7 @@
           "nameRu": "Поддержка отряда I",
           "descEn": "Final damage of allies within a radius of 10 meters (excluding yourself) is increased by 5%.",
           "descRu": "Конечный урон союзников в радиусе 10 метров (исключая вас) увеличен на 5%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_WeaponAttack_002.png",
           "weight": 2500
         },
         {
@@ -14455,7 +14455,7 @@
           "nameRu": "Укрепление II",
           "descEn": "Reduce the Wanderer's damage taken by 15%. Every 8 seconds, forcefully taunt targets within a 10-meter radius, lasting for 3 seconds.",
           "descRu": "Снижает получаемый странником урон на 15%. Каждые 8 сек. принудительно провоцирует цели в радиусе 10 метров на 3 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_mijing_006.png",
           "weight": 2500
         },
         {
@@ -14464,7 +14464,7 @@
           "nameRu": "Страх холода",
           "descEn": "Frost damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от холода увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/AddIceImm.png",
           "weight": 2500
         }
       ],
@@ -14612,7 +14612,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_TeamAssist_level1",
@@ -14620,7 +14620,7 @@
               "nameRu": "Поддержка отряда I",
               "descEn": "Final damage of allies within a radius of 10 meters (excluding yourself) is increased by 5%.",
               "descRu": "Конечный урон союзников в радиусе 10 метров (исключая вас) увеличен на 5%.",
-              "icon": null
+              "icon": "assets/buffs/buff_WeaponAttack_002.png"
             },
             {
               "id": "Buff_Origin_BeDMGDownAndTaunt_Level2",
@@ -14628,7 +14628,7 @@
               "nameRu": "Укрепление II",
               "descEn": "Reduce the Wanderer's damage taken by 15%. Every 8 seconds, forcefully taunt targets within a 10-meter radius, lasting for 3 seconds.",
               "descRu": "Снижает получаемый странником урон на 15%. Каждые 8 сек. принудительно провоцирует цели в радиусе 10 метров на 3 сек.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_006.png"
             },
             {
               "id": "buff_Origin_BeIce_Mon",
@@ -14712,7 +14712,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_TeamAssist_level1",
@@ -14720,7 +14720,7 @@
               "nameRu": "Поддержка отряда I",
               "descEn": "Final damage of allies within a radius of 10 meters (excluding yourself) is increased by 5%.",
               "descRu": "Конечный урон союзников в радиусе 10 метров (исключая вас) увеличен на 5%.",
-              "icon": null
+              "icon": "assets/buffs/buff_WeaponAttack_002.png"
             },
             {
               "id": "Buff_Origin_BeDMGDownAndTaunt_Level2",
@@ -14728,7 +14728,7 @@
               "nameRu": "Укрепление II",
               "descEn": "Reduce the Wanderer's damage taken by 15%. Every 8 seconds, forcefully taunt targets within a 10-meter radius, lasting for 3 seconds.",
               "descRu": "Снижает получаемый странником урон на 15%. Каждые 8 сек. принудительно провоцирует цели в радиусе 10 метров на 3 сек.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_006.png"
             },
             {
               "id": "buff_Origin_BeIce_Mon",
@@ -14812,7 +14812,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_TeamAssist_level1",
@@ -14820,7 +14820,7 @@
               "nameRu": "Поддержка отряда I",
               "descEn": "Final damage of allies within a radius of 10 meters (excluding yourself) is increased by 5%.",
               "descRu": "Конечный урон союзников в радиусе 10 метров (исключая вас) увеличен на 5%.",
-              "icon": null
+              "icon": "assets/buffs/buff_WeaponAttack_002.png"
             },
             {
               "id": "Buff_Origin_BeDMGDownAndTaunt_Level2",
@@ -14828,7 +14828,7 @@
               "nameRu": "Укрепление II",
               "descEn": "Reduce the Wanderer's damage taken by 15%. Every 8 seconds, forcefully taunt targets within a 10-meter radius, lasting for 3 seconds.",
               "descRu": "Снижает получаемый странником урон на 15%. Каждые 8 сек. принудительно провоцирует цели в радиусе 10 метров на 3 сек.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_mijing_006.png"
             },
             {
               "id": "buff_Origin_BeIce_Mon",
@@ -14861,7 +14861,7 @@
           "nameRu": "Физическое усиление II",
           "descEn": "Physical damage dealt is increased by 20%.",
           "descRu": "Нанесенный физический урон увеличивается на 20%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_015.png"
         },
         {
           "id": "buff_War_Atk_Level3",
@@ -14869,7 +14869,7 @@
           "nameRu": "Сильный боец III",
           "descEn": "After battle begins, ATK increases by 20%.",
           "descRu": "После начала боя АТК увеличивается на 20%.",
-          "icon": null
+          "icon": "assets/buffs/Buff_WeaponPas_008.png"
         },
         {
           "id": "Buff_War_CreateBlackHole_Level1",
@@ -14877,7 +14877,7 @@
           "nameRu": "Черная дыра",
           "descEn": "Every 40 seconds, cast a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 200% of ATK every second.",
           "descRu": "Каждые 40 секунд на фиксированную цель на 20 секунд накладывается Черная дыра, которая каждую секунду наносит урон в размере 200% от АТК.",
-          "icon": null
+          "icon": "assets/buffs/buff_cubeshield_001.png"
         },
         {
           "id": "buff_Origin_BePhy",
@@ -14885,7 +14885,7 @@
           "nameRu": "Физический страх",
           "descEn": "Physical damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый физический урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/buff_AddPowerImm.png"
         }
       ],
       "dropBuffs": [
@@ -14895,7 +14895,7 @@
           "nameRu": "Физическое усиление II",
           "descEn": "Physical damage dealt is increased by 20%.",
           "descRu": "Нанесенный физический урон увеличивается на 20%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_015.png",
           "weight": 2500
         },
         {
@@ -14904,7 +14904,7 @@
           "nameRu": "Сильный боец III",
           "descEn": "After battle begins, ATK increases by 20%.",
           "descRu": "После начала боя АТК увеличивается на 20%.",
-          "icon": null,
+          "icon": "assets/buffs/Buff_WeaponPas_008.png",
           "weight": 2500
         },
         {
@@ -14913,7 +14913,7 @@
           "nameRu": "Черная дыра",
           "descEn": "Every 40 seconds, cast a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 200% of ATK every second.",
           "descRu": "Каждые 40 секунд на фиксированную цель на 20 секунд накладывается Черная дыра, которая каждую секунду наносит урон в размере 200% от АТК.",
-          "icon": null,
+          "icon": "assets/buffs/buff_cubeshield_001.png",
           "weight": 2500
         },
         {
@@ -14922,7 +14922,7 @@
           "nameRu": "Физический страх",
           "descEn": "Physical damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый физический урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_AddPowerImm.png",
           "weight": 2500
         }
       ],
@@ -15070,7 +15070,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level3",
@@ -15078,7 +15078,7 @@
               "nameRu": "Сильный боец III",
               "descEn": "After battle begins, ATK increases by 20%.",
               "descRu": "После начала боя АТК увеличивается на 20%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -15086,7 +15086,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BePhy_Mon",
@@ -15170,7 +15170,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level3",
@@ -15178,7 +15178,7 @@
               "nameRu": "Сильный боец III",
               "descEn": "After battle begins, ATK increases by 20%.",
               "descRu": "После начала боя АТК увеличивается на 20%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -15186,7 +15186,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BePhy_Mon",
@@ -15270,7 +15270,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Atk_Level3",
@@ -15278,7 +15278,7 @@
               "nameRu": "Сильный боец III",
               "descEn": "After battle begins, ATK increases by 20%.",
               "descRu": "После начала боя АТК увеличивается на 20%.",
-              "icon": null
+              "icon": "assets/buffs/Buff_WeaponPas_008.png"
             },
             {
               "id": "Buff_War_MonCreateBlackHole_Level1",
@@ -15286,7 +15286,7 @@
               "nameRu": "Черная дыра",
               "descEn": "Every 40 seconds, create a Black Hole at the locked-on target for 20 seconds, dealing damage equal to 3% of ATK plus 30,000 every second.",
               "descRu": "Каждые 40 секунд вокруг фиксированной цели на 20 секунд образуется черная дыра, которая каждую секунду наносит урон в размере 3% от АТК + 30 000.",
-              "icon": null
+              "icon": "assets/buffs/buff_cubeshield_001.png"
             },
             {
               "id": "buff_Origin_BePhy_Mon",
@@ -15319,7 +15319,7 @@
           "nameRu": "Усиление электричества II",
           "descEn": "Volt damage dealt is increased by 20%.",
           "descRu": "Нанесенный электричеством урон увеличивается на 20%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_014.png"
         },
         {
           "id": "buff_TeamAssist_level2",
@@ -15327,7 +15327,7 @@
           "nameRu": "Поддержка отряда II",
           "descEn": "Final damage of allies within a radius of 10 meters (excluding yourself) is increased by 10%.",
           "descRu": "Конечный урон союзников в радиусе 10 метров (исключая вас) увеличен на 10%.",
-          "icon": null
+          "icon": "assets/buffs/buff_WeaponAttack_002.png"
         },
         {
           "id": "buff_Origin_BeThu",
@@ -15335,7 +15335,7 @@
           "nameRu": "Страх электричества",
           "descEn": "Volt damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от электричества увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/AddThunderImm.png"
         },
         {
           "id": "buff_War_HealPro_Level1",
@@ -15343,7 +15343,7 @@
           "nameRu": "Подавление лечения",
           "descEn": "Healing Suppression",
           "descRu": "Подавление лечения",
-          "icon": null
+          "icon": "assets/buffs/Buff_WeaponPas_011.png"
         }
       ],
       "dropBuffs": [
@@ -15353,7 +15353,7 @@
           "nameRu": "Усиление электричества II",
           "descEn": "Volt damage dealt is increased by 20%.",
           "descRu": "Нанесенный электричеством урон увеличивается на 20%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_014.png",
           "weight": 3334
         },
         {
@@ -15362,7 +15362,7 @@
           "nameRu": "Поддержка отряда II",
           "descEn": "Final damage of allies within a radius of 10 meters (excluding yourself) is increased by 10%.",
           "descRu": "Конечный урон союзников в радиусе 10 метров (исключая вас) увеличен на 10%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_WeaponAttack_002.png",
           "weight": 3334
         },
         {
@@ -15371,7 +15371,7 @@
           "nameRu": "Страх электричества",
           "descEn": "Volt damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от электричества увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/AddThunderImm.png",
           "weight": 3334
         }
       ],
@@ -15519,7 +15519,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_TeamAssist_level2",
@@ -15527,7 +15527,7 @@
               "nameRu": "Поддержка отряда II",
               "descEn": "Final damage of allies within a radius of 10 meters (excluding yourself) is increased by 10%.",
               "descRu": "Конечный урон союзников в радиусе 10 метров (исключая вас) увеличен на 10%.",
-              "icon": null
+              "icon": "assets/buffs/buff_WeaponAttack_002.png"
             },
             {
               "id": "buff_Origin_BeThu_Mon",
@@ -15611,7 +15611,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_TeamAssist_level2",
@@ -15619,7 +15619,7 @@
               "nameRu": "Поддержка отряда II",
               "descEn": "Final damage of allies within a radius of 10 meters (excluding yourself) is increased by 10%.",
               "descRu": "Конечный урон союзников в радиусе 10 метров (исключая вас) увеличен на 10%.",
-              "icon": null
+              "icon": "assets/buffs/buff_WeaponAttack_002.png"
             },
             {
               "id": "buff_Origin_BeThu_Mon",
@@ -15703,7 +15703,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_TeamAssist_level2",
@@ -15711,7 +15711,7 @@
               "nameRu": "Поддержка отряда II",
               "descEn": "Final damage of allies within a radius of 10 meters (excluding yourself) is increased by 10%.",
               "descRu": "Конечный урон союзников в радиусе 10 метров (исключая вас) увеличен на 10%.",
-              "icon": null
+              "icon": "assets/buffs/buff_WeaponAttack_002.png"
             },
             {
               "id": "buff_Origin_BeThu_Mon",
@@ -15744,7 +15744,7 @@
           "nameRu": "Усиление огня II",
           "descEn": "Flame damage dealt is increased by 20%.",
           "descRu": "Нанесенный огнем урон увеличивается на 20%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_monster_13.png"
         },
         {
           "id": "buff_War_ImmuneFrozen_Level1",
@@ -15752,7 +15752,7 @@
           "nameRu": "Антизаморозка",
           "descEn": "Can't be frozen.",
           "descRu": "Невозможно заморозить.",
-          "icon": null
+          "icon": "assets/buffs/buff_frigg_icestack.png"
         },
         {
           "id": "Buff_Origin_MakeTargetDMGDown_Level2",
@@ -15760,7 +15760,7 @@
           "nameRu": "Уничтожение оружия II",
           "descEn": "Reduce target's final damage by 20% for 10 seconds.",
           "descRu": "Снижает конечный урон цели на 20% на 10 сек.",
-          "icon": null
+          "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
         },
         {
           "id": "buff_Origin_BeFire",
@@ -15768,7 +15768,7 @@
           "nameRu": "Страх огня",
           "descEn": "Flame damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от огня увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/AddFireImm.png"
         }
       ],
       "dropBuffs": [
@@ -15778,7 +15778,7 @@
           "nameRu": "Усиление огня II",
           "descEn": "Flame damage dealt is increased by 20%.",
           "descRu": "Нанесенный огнем урон увеличивается на 20%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_monster_13.png",
           "weight": 2500
         },
         {
@@ -15787,7 +15787,7 @@
           "nameRu": "Антизаморозка",
           "descEn": "Can't be frozen.",
           "descRu": "Невозможно заморозить.",
-          "icon": null,
+          "icon": "assets/buffs/buff_frigg_icestack.png",
           "weight": 2500
         },
         {
@@ -15796,7 +15796,7 @@
           "nameRu": "Уничтожение оружия II",
           "descEn": "Reduce target's final damage by 20% for 10 seconds.",
           "descRu": "Снижает конечный урон цели на 20% на 10 сек.",
-          "icon": null,
+          "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png",
           "weight": 2500
         },
         {
@@ -15805,7 +15805,7 @@
           "nameRu": "Страх огня",
           "descEn": "Flame damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый урон от огня увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/AddFireImm.png",
           "weight": 2500
         }
       ],
@@ -15953,7 +15953,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_ImmuneFrozen_Level1",
@@ -15961,7 +15961,7 @@
               "nameRu": "Антизаморозка",
               "descEn": "Can't be frozen.",
               "descRu": "Невозможно заморозить.",
-              "icon": null
+              "icon": "assets/buffs/buff_frigg_icestack.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown_Level2",
@@ -15969,7 +15969,7 @@
               "nameRu": "Уничтожение оружия II",
               "descEn": "Reduce target's final damage by 20% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 20% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             },
             {
               "id": "buff_Origin_BeFire_Mon",
@@ -16053,7 +16053,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_ImmuneFrozen_Level1",
@@ -16061,7 +16061,7 @@
               "nameRu": "Антизаморозка",
               "descEn": "Can't be frozen.",
               "descRu": "Невозможно заморозить.",
-              "icon": null
+              "icon": "assets/buffs/buff_frigg_icestack.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown_Level2",
@@ -16069,7 +16069,7 @@
               "nameRu": "Уничтожение оружия II",
               "descEn": "Reduce target's final damage by 20% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 20% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             },
             {
               "id": "buff_Origin_BeFire_Mon",
@@ -16153,7 +16153,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_ImmuneFrozen_Level1",
@@ -16161,7 +16161,7 @@
               "nameRu": "Антизаморозка",
               "descEn": "Can't be frozen.",
               "descRu": "Невозможно заморозить.",
-              "icon": null
+              "icon": "assets/buffs/buff_frigg_icestack.png"
             },
             {
               "id": "Buff_Origin_MakeTargetDMGDown_Level2",
@@ -16169,7 +16169,7 @@
               "nameRu": "Уничтожение оружия II",
               "descEn": "Reduce target's final damage by 20% for 10 seconds.",
               "descRu": "Снижает конечный урон цели на 20% на 10 сек.",
-              "icon": null
+              "icon": "assets/buffs/Buff_EMBY_BrokenWeak.png"
             },
             {
               "id": "buff_Origin_BeFire_Mon",
@@ -16202,7 +16202,7 @@
           "nameRu": "Добиватель",
           "descEn": "Instantly finish a target when its health is less than 10%.",
           "descRu": "Мгновенно добивает цель, когда ее здоровье меньше 10%.",
-          "icon": null
+          "icon": "assets/buffs/buff_chongdong_player_008.png"
         },
         {
           "id": "buff_War_Frozen_Player_Level1",
@@ -16210,7 +16210,7 @@
           "nameRu": "Морозное гало",
           "descEn": "Creates a freezing halo. Any enemies inside the freezing halo for 5 seconds will be frozen for 1 second.",
           "descRu": "Создает морозное гало. Любые враги, оказавшиеся внутри морозного гало на 5 сек., будут заморожены на 1 сек.",
-          "icon": null
+          "icon": "assets/buffs/buff_cubeshield_001.png"
         },
         {
           "id": "buff_Origin_BeSuper",
@@ -16218,7 +16218,7 @@
           "nameRu": "Измененный страх",
           "descEn": "Altered damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый измененный урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null
+          "icon": "assets/buffs/buff_yineng.png"
         },
         {
           "id": "buff_War_HealPro_Level1",
@@ -16226,7 +16226,7 @@
           "nameRu": "Подавление лечения",
           "descEn": "Healing Suppression",
           "descRu": "Подавление лечения",
-          "icon": null
+          "icon": "assets/buffs/Buff_WeaponPas_011.png"
         }
       ],
       "dropBuffs": [
@@ -16236,7 +16236,7 @@
           "nameRu": "Добиватель",
           "descEn": "Instantly finish a target when its health is less than 10%.",
           "descRu": "Мгновенно добивает цель, когда ее здоровье меньше 10%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_chongdong_player_008.png",
           "weight": 3334
         },
         {
@@ -16245,7 +16245,7 @@
           "nameRu": "Морозное гало",
           "descEn": "Creates a freezing halo. Any enemies inside the freezing halo for 5 seconds will be frozen for 1 second.",
           "descRu": "Создает морозное гало. Любые враги, оказавшиеся внутри морозного гало на 5 сек., будут заморожены на 1 сек.",
-          "icon": null,
+          "icon": "assets/buffs/buff_cubeshield_001.png",
           "weight": 3334
         },
         {
@@ -16254,7 +16254,7 @@
           "nameRu": "Измененный страх",
           "descEn": "Altered damage received is increased by 40%, while other damage received is reduced by 40%.",
           "descRu": "Получаемый измененный урон увеличивается на 40%, а получаемый урон всех остальных типов уменьшается на 40%.",
-          "icon": null,
+          "icon": "assets/buffs/buff_yineng.png",
           "weight": 3334
         }
       ],
@@ -16402,7 +16402,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Kill_Level1",
@@ -16410,7 +16410,7 @@
               "nameRu": "Добиватель",
               "descEn": "Instantly finish a target when its health is less than 10%.",
               "descRu": "Мгновенно добивает цель, когда ее здоровье меньше 10%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_player_008.png"
             },
             {
               "id": "buff_War_Frozen_Mon_Level1",
@@ -16494,7 +16494,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Kill_Level1",
@@ -16502,7 +16502,7 @@
               "nameRu": "Добиватель",
               "descEn": "Instantly finish a target when its health is less than 10%.",
               "descRu": "Мгновенно добивает цель, когда ее здоровье меньше 10%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_player_008.png"
             },
             {
               "id": "buff_War_Frozen_Mon_Level1",
@@ -16586,7 +16586,7 @@
               "nameRu": "Шум прибоя",
               "descEn": "Damage dealt by Fortitude Resonance is reduced by 50%.",
               "descRu": "Урон, наносимый резонансом силы духа, уменьшается на 50%.",
-              "icon": null
+              "icon": "assets/buffs/buff_AddElementDefFoodBase.png"
             },
             {
               "id": "buff_War_Kill_Level1",
@@ -16594,7 +16594,7 @@
               "nameRu": "Добиватель",
               "descEn": "Instantly finish a target when its health is less than 10%.",
               "descRu": "Мгновенно добивает цель, когда ее здоровье меньше 10%.",
-              "icon": null
+              "icon": "assets/buffs/buff_chongdong_player_008.png"
             },
             {
               "id": "buff_War_Frozen_Mon_Level1",

@@ -4,13 +4,17 @@ const path = require("path");
 const fs = require("fs");
 
 const {
+  processFceMechanics,
   extractMatchingBossEntries,
   extractBossNumber,
   parseBossKeyFamily,
   groupMechanicsByBoss,
   formatMechanics,
   buildAllBossesCatalog,
-  generateBossReportMarkdown
+  generateBossReportMarkdown,
+  collectBossTextIds,
+  findNewBosses,
+  generateNewBossReportMarkdown
 } = require("../pipeline/processors/parse-fce-mechanics.js");
 
 test("FCE Boss Report: 4-phase bosses first and deterministically sorted by bossNum ascending", () => {
@@ -73,9 +77,10 @@ test("FCE Boss Report: 4-phase bosses first and deterministically sorted by boss
   const markdown = generateBossReportMarkdown(result);
 
   // Assert markdown layout
-  assert.match(markdown, /Всего боссов: \*\*4\*\* \(с 4 фазами: \*\*2\*\*, остальные: \*\*2\*\*\)/);
-  assert.match(markdown, /## 4-phase bosses \(2 боссов\)/);
-  assert.match(markdown, /## Other bosses \(2 боссов\)/);
+  assert.match(markdown, /Total bosses: \*\*4\*\* \(with at least 4 mechanics: \*\*2\*\*, others: \*\*2\*\*\)/);
+  assert.match(markdown, /## Bosses with at least 4 mechanics \(2\)/);
+  assert.match(markdown, /## Other bosses \(2\)/);
+  assert.doesNotMatch(markdown, /Босс|Фаза|Босс 100 Фаза|\*\*RU:\*\*/);
 
   const pos200 = markdown.indexOf("boss_200");
   const pos300 = markdown.indexOf("boss_300");
@@ -122,8 +127,8 @@ test("FCE Boss Report: boss with missing text or missing localization is preserv
   assert.equal(boss99.mechanics.length, 0);
 
   const markdown = generateBossReportMarkdown(result);
-  assert.match(markdown, /Босс: `boss_099` \(0 фаз\)/);
-  assert.match(markdown, /Тексты механик боя отсутствуют в выгрузке локализации/);
+  assert.match(markdown, /Boss: `boss_099` \(0 mechanics\)/);
+  assert.match(markdown, /No combat mechanic text was found in the English localization export/);
 });
 
 test("FCE Boss Report: duplicate phase keys do not artificially inflate phaseCount", () => {
@@ -178,4 +183,113 @@ test("FCE Boss Report: deterministic ordering regardless of input insertion orde
   const mdB = generateBossReportMarkdown(resB);
 
   assert.equal(mdA, mdB, "Different input insertion order must yield byte-equivalent markdown");
+});
+
+test("FCE new-boss report uses the text-ID baseline and requires at least 4 mechanics", () => {
+  const fixtureEn = {
+    Boss_hum_100_1_des: "Known boss mechanic 1",
+    Boss_hum_100_2_des: "Known boss mechanic 2",
+    Boss_hum_100_3_des: "Known boss mechanic 3",
+    Boss_hum_100_4_des: "Known boss mechanic 4 added later",
+    Boss_hum_200_1_des: "New boss mechanic 1",
+    Boss_hum_200_2_des: "New boss mechanic 2",
+    Boss_hum_200_3_des: "New boss mechanic 3",
+    Boss_hum_200_4_des: "New boss mechanic 4",
+    Boss_hum_300_1_des: "Incomplete boss mechanic 1",
+    Boss_hum_300_2_des: "Incomplete boss mechanic 2",
+    Boss_hum_300_3_des: "Incomplete boss mechanic 3"
+  };
+  const catalog = buildAllBossesCatalog(groupMechanicsByBoss(fixtureEn), {}, []);
+  const knownState = {
+    initialized: true,
+    textIds: new Set([
+      "Boss_hum_100_1_des",
+      "Boss_hum_100_2_des",
+      "Boss_hum_100_3_des"
+    ])
+  };
+
+  const newBosses = findNewBosses(catalog, knownState);
+  assert.deepEqual(newBosses.map((boss) => boss.bossId), ["boss_200"]);
+  assert.equal(collectBossTextIds(catalog.allBosses).length, 11);
+
+  const markdown = generateNewBossReportMarkdown(newBosses, true);
+  assert.match(markdown, /New bosses: \*\*1\*\*/);
+  assert.match(markdown, /boss_200/);
+  assert.doesNotMatch(markdown, /boss_100|boss_300|\*\*RU:\*\*/);
+});
+
+test("FCE first run initializes the baseline without reporting the current catalog as new", () => {
+  const fixtureEn = {
+    Boss_hum_200_1_des: "Mechanic 1",
+    Boss_hum_200_2_des: "Mechanic 2",
+    Boss_hum_200_3_des: "Mechanic 3",
+    Boss_hum_200_4_des: "Mechanic 4"
+  };
+  const catalog = buildAllBossesCatalog(groupMechanicsByBoss(fixtureEn), {}, []);
+  const newBosses = findNewBosses(catalog, { initialized: false, textIds: new Set() });
+
+  assert.deepEqual(newBosses, []);
+  assert.match(generateNewBossReportMarkdown(newBosses, false), /baseline was initialized/i);
+});
+
+test("FCE processing writes a full English report and advances the new-boss snapshot", () => {
+  const root = fs.mkdtempSync(path.join(require("os").tmpdir(), "tof-fce-report-"));
+  const raw = path.join(root, "raw");
+  const enPath = path.join(raw, "Hotta/Content/Localization/Game/en/Game.json");
+  const catalogPath = path.join(
+    raw,
+    "Hotta/Content/ResourcesOverSea/CoreBlueprints/DataTable/Dungeon/VoidCloneBossConfigDataTable_Overseas.json"
+  );
+  const curatedBossDir = path.join(root, "datamine/fce/data/bosses");
+
+  const writeJson = (filePath, value) => {
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.writeFileSync(filePath, JSON.stringify(value), "utf8");
+  };
+  const mechanicsFor = (number, count) => Object.fromEntries(
+    Array.from({ length: count }, (_, index) => [
+      `Boss_hum_${number}_${index + 1}_des`,
+      `Boss ${number} mechanic ${index + 1}`
+    ])
+  );
+
+  try {
+    writeJson(path.join(curatedBossDir, "existing.json"), { boss_id: "boss_999" });
+    writeJson(enPath, mechanicsFor(200, 4));
+    writeJson(catalogPath, {
+      Rows: {
+        boss200: { BossNameText: { Key: "Boss_200_name", SourceString: "Boss 200" } }
+      }
+    });
+
+    const first = processFceMechanics(raw, root);
+    assert.equal(first.newBosses, 0);
+    const firstNewReport = fs.readFileSync(path.join(root, "datamine/fce/docs/NEW_BOSSES_TEXTS.md"), "utf8");
+    const fullReport = fs.readFileSync(path.join(root, "datamine/fce/docs/ALL_BOSSES_TEXTS.md"), "utf8");
+    assert.match(firstNewReport, /baseline was initialized/i);
+    assert.match(fullReport, /Boss 200 mechanic 1/);
+    assert.doesNotMatch(fullReport, /\*\*RU:\*\*|Фаза|Босс:/);
+
+    writeJson(enPath, { ...mechanicsFor(200, 4), ...mechanicsFor(300, 4), ...mechanicsFor(400, 3) });
+    writeJson(catalogPath, {
+      Rows: {
+        boss200: { BossNameText: { Key: "Boss_200_name", SourceString: "Boss 200" } },
+        boss300: { BossNameText: { Key: "Boss_300_name", SourceString: "Boss 300" } },
+        boss400: { BossNameText: { Key: "Boss_400_name", SourceString: "Boss 400" } }
+      }
+    });
+
+    const second = processFceMechanics(raw, root);
+    assert.equal(second.newBosses, 1);
+    const secondNewReport = fs.readFileSync(path.join(root, "datamine/fce/docs/NEW_BOSSES_TEXTS.md"), "utf8");
+    assert.match(secondNewReport, /boss_300/);
+    assert.doesNotMatch(secondNewReport, /boss_200|boss_400/);
+
+    const state = JSON.parse(fs.readFileSync(path.join(root, "datamine/fce/data/fce-known-boss-text-ids.json"), "utf8"));
+    assert.equal(state.initialized, true);
+    assert.equal(state.textIds.length, 11);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });

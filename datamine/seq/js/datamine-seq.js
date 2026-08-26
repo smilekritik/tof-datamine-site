@@ -41,7 +41,11 @@
       close: "Close",
       chartPalette: "Chart palette",
       paletteLight: "Light",
-      paletteDark: "Dark"
+      paletteDark: "Dark",
+      stageViewLabel: "Selection",
+      stageViewAria: "Selection",
+      stageViewAll: "All",
+      stageView16Plus: "16+"
     },
     ru: {
       pageTitle: "TOF — графики Последовательности",
@@ -78,7 +82,11 @@
       close: "Закрыть",
       chartPalette: "Палитра графиков",
       paletteLight: "Светлая",
-      paletteDark: "Тёмная"
+      paletteDark: "Тёмная",
+      stageViewLabel: "Выборка",
+      stageViewAria: "Выборка",
+      stageViewAll: "Все",
+      stageView16Plus: "16+"
     }
   };
 
@@ -146,6 +154,7 @@
     mechanicsOverrides: DEFAULT_MECHANICS_OVERRIDES,
     chartExports: {},
     chartGeometry: {},
+    stageView: "all",
     language: resolveInitialLanguage(),
     chartTheme: resolveInitialChartTheme(),
     zoom: {
@@ -305,6 +314,7 @@
     applyChartThemeAttribute();
     renderStaticUi();
     renderChartThemeControl();
+    renderStageViewControl();
     bindActions();
     bindChartFrames();
     bindZoomInteractions();
@@ -333,6 +343,7 @@
     const zoomDialog = document.querySelector("[data-seq-zoom-dialog]");
     zoomDialog?.setAttribute("aria-label", getUiText("zoomAria"));
     document.querySelector("[data-chart-theme-switch]")?.setAttribute("aria-label", getUiText("chartPalette"));
+    document.querySelector("[data-stage-view-switch]")?.setAttribute("aria-label", getUiText("stageViewAria"));
   }
 
   function resolveInitialLanguage() {
@@ -392,6 +403,44 @@
     });
   }
 
+  function getVisibleSequentialRows(rows, stageView = state.stageView) {
+    if (!Array.isArray(rows)) return [];
+    if (stageView === "16plus") {
+      return rows.filter((entry) => {
+        const stageNum = typeof entry.stage === "number"
+          ? entry.stage
+          : Number.parseInt(String(entry.stage).replace(/\D+/g, ""), 10);
+        return Number.isFinite(stageNum) && stageNum >= 16;
+      });
+    }
+    return rows;
+  }
+
+  function setStageView(view) {
+    const normalized = view === "16plus" ? "16plus" : "all";
+    if (normalized === state.stageView) return;
+    state.stageView = normalized;
+    renderStageViewControl();
+    renderCharts();
+    if (state.zoom.chartKey && !document.querySelector("[data-zoom-modal]")?.hidden) {
+      const chartExport = state.chartExports[state.zoom.chartKey];
+      if (chartExport) {
+        const canvas = document.querySelector("[data-zoom-canvas]");
+        if (canvas) {
+          canvas.innerHTML = chartExport.svgMarkup;
+          bindPointTooltips(canvas, true);
+        }
+      }
+    }
+  }
+
+  function renderStageViewControl() {
+    document.querySelectorAll("[data-stage-view-switch] [data-stage-view]").forEach((button) => {
+      const active = button.getAttribute("data-stage-view") === state.stageView;
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+
   function getMechanicsNote(entry) {
     if (!entry?.isMechanicsAdjusted) {
       return "";
@@ -404,6 +453,11 @@
       button.addEventListener("click", async () => {
         const action = button.getAttribute("data-action");
         const chartKey = button.getAttribute("data-chart-key");
+
+        if (action === "set-stage-view") {
+          setStageView(button.getAttribute("data-stage-view"));
+          return;
+        }
 
         if (action === "set-chart-theme") {
           setChartTheme(button.getAttribute("data-chart-theme"));
@@ -827,6 +881,20 @@
       return;
     }
 
+    const visibleRows = getVisibleSequentialRows(state.dataset, state.stageView);
+
+    if (visibleRows.length === 0) {
+      ["pure", "powercreep", "effective"].forEach((key) => {
+        const root = document.querySelector(`[data-chart="${key}"]`);
+        if (root) {
+          root.innerHTML =
+            `<p style="padding: 24px; margin: 0; color: #444444; font: 14px sans-serif;">${escapeHtml(getUiText("noChart"))}</p>`;
+        }
+        state.chartExports[key] = "";
+      });
+      return;
+    }
+
     const chartConfigs = {
       pure: {
         title: getUiText("chartPure"),
@@ -836,7 +904,7 @@
         mode: "linear",
         forceZero: true,
         tickFormatter: (value) => formatAxisCompact(value),
-        values: state.dataset.map((entry) => ({
+        values: visibleRows.map((entry) => ({
           stage: entry.stage,
           value: entry.maxHealth,
           tooltip: `${getUiText("stage")} ${entry.stage}: ${formatInteger(entry.maxHealth)}`,
@@ -852,7 +920,7 @@
         mode: "linear",
         forceZero: false,
         tickFormatter: (value) => `${value.toFixed(0)}%`,
-        values: state.dataset.map((entry) => ({
+        values: visibleRows.map((entry) => ({
           stage: entry.stage,
           value: entry.powercreep,
           tooltip: `${getUiText("stage")} ${entry.stage}${entry.isMechanicsAdjusted ? "*" : ""}: ${formatPercent(entry.powercreep)}${entry.isMechanicsAdjusted ? ` (${getMechanicsNote(entry)})` : ""}`,
@@ -868,7 +936,7 @@
         mode: "linear",
         forceZero: true,
         tickFormatter: (value) => formatAxisCompact(value),
-        values: state.dataset.map((entry) => ({
+        values: visibleRows.map((entry) => ({
           stage: entry.stage,
           value: entry.effectiveHp,
           tooltip: `${getUiText("stage")} ${entry.stage}${entry.isMechanicsAdjusted ? "*" : ""}: ${formatCompact(entry.effectiveHp)}${entry.isMechanicsAdjusted ? ` (${getMechanicsNote(entry)})` : ""}`,

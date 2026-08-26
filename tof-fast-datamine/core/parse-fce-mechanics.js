@@ -277,74 +277,108 @@ function buildAllBossesCatalog(enGrouped, ruGrouped, catalogBosses) {
   }
 
   const allBosses = Array.from(bossMap.values());
-  const fourPhaseBosses = sortBossesDeterministically(allBosses.filter((b) => b.phaseCount === 4));
-  const otherBosses = sortBossesDeterministically(allBosses.filter((b) => b.phaseCount !== 4));
+  const fourPlusMechanicsBosses = sortBossesDeterministically(allBosses.filter((b) => b.phaseCount >= 4));
+  // Kept as an API alias for existing consumers; eligibility is now explicitly 4+.
+  const fourPhaseBosses = fourPlusMechanicsBosses;
+  const otherBosses = sortBossesDeterministically(allBosses.filter((b) => b.phaseCount < 4));
 
   return {
     allBosses,
     fourPhaseBosses,
+    fourPlusMechanicsBosses,
     otherBosses
   };
 }
 
-function formatPhaseCountRu(count) {
-  if (count === 1) return "1 фаза";
-  if (count >= 2 && count <= 4) return `${count} фазы`;
-  return `${count} фаз`;
+function formatMechanicsCount(count) {
+  return `${count} ${count === 1 ? "mechanic" : "mechanics"}`;
 }
 
-function generateBossReportMarkdown(catalogResult) {
-  const { allBosses, fourPhaseBosses, otherBosses } = catalogResult;
-  const lines = [
-    "# 📋 Тексты механик боссов (полный каталог экспорта)",
-    "",
-    `Всего боссов: **${allBosses.length}** (с 4 фазами: **${fourPhaseBosses.length}**, остальные: **${otherBosses.length}**)`,
-    "Полный отчет по текстам механик боссов из текущего экспорта игровых данных.",
-    "",
-    "---",
-    "",
-    `## 4-phase bosses (${fourPhaseBosses.length} боссов)`,
-    ""
-  ];
-
-  let entryIndex = 1;
-
-  for (const boss of fourPhaseBosses) {
+function appendBossMarkdown(lines, bosses, startIndex = 1) {
+  let entryIndex = startIndex;
+  for (const boss of bosses) {
     const nameSuffix = boss.sourceName ? ` — ${boss.sourceName}` : "";
-    lines.push(`### ${entryIndex}. Босс: \`${boss.bossId}\` (${formatPhaseCountRu(boss.phaseCount)})${nameSuffix}`);
-    lines.push("");
-    for (const mech of boss.mechanics) {
-      lines.push(`* **Фаза ${mech.index}** (\`${mech.key}\`):`);
-      lines.push(`  * **EN:** ${mech.en || "*(текст отсутствует)*"}`);
-      lines.push(`  * **RU:** ${mech.ru || "*(текст отсутствует)*"}`);
-      lines.push("");
-    }
-    lines.push("---");
-    lines.push("");
-    entryIndex++;
-  }
-
-  lines.push(`## Other bosses (${otherBosses.length} боссов)`);
-  lines.push("");
-
-  for (const boss of otherBosses) {
-    const nameSuffix = boss.sourceName ? ` — ${boss.sourceName}` : "";
-    lines.push(`### ${entryIndex}. Босс: \`${boss.bossId}\` (${formatPhaseCountRu(boss.phaseCount)})${nameSuffix}`);
+    lines.push(`### ${entryIndex}. Boss: \`${boss.bossId}\` (${formatMechanicsCount(boss.phaseCount)})${nameSuffix}`);
     lines.push("");
     if (boss.mechanics.length === 0) {
-      lines.push("*(Тексты механик боя отсутствуют в выгрузке локализации)*");
+      lines.push("*(No combat mechanic text was found in the English localization export.)*");
       lines.push("");
     } else {
-      for (const mech of boss.mechanics) {
-        lines.push(`* **Фаза ${mech.index}** (\`${mech.key}\`):`);
-        lines.push(`  * **EN:** ${mech.en || "*(текст отсутствует)*"}`);
-        lines.push(`  * **RU:** ${mech.ru || "*(текст отсутствует)*"}`);
+      for (const mechanic of boss.mechanics) {
+        lines.push(`* **Mechanic ${mechanic.index}** (\`${mechanic.key}\`): ${mechanic.en || "*(text missing)*"}`);
         lines.push("");
       }
     }
     lines.push("---");
     lines.push("");
     entryIndex++;
+  }
+  return entryIndex;
+}
+
+function generateBossReportMarkdown(catalogResult) {
+  const { allBosses, fourPlusMechanicsBosses, otherBosses } = catalogResult;
+  const lines = [
+    "# FCE boss mechanic texts (full export catalog)",
+    "",
+    `Total bosses: **${allBosses.length}** (with at least 4 mechanics: **${fourPlusMechanicsBosses.length}**, others: **${otherBosses.length}**).`,
+    "This report contains English boss mechanic text from the current game-data export.",
+    "",
+    "---",
+    "",
+    `## Bosses with at least 4 mechanics (${fourPlusMechanicsBosses.length})`,
+    ""
+  ];
+
+  const entryIndex = appendBossMarkdown(lines, fourPlusMechanicsBosses);
+  lines.push(`## Other bosses (${otherBosses.length})`);
+  lines.push("");
+  appendBossMarkdown(lines, otherBosses, entryIndex);
+
+  return lines.join("\n");
+}
+
+function readKnownBossTextState(filePath) {
+  const state = readJsonFile(filePath);
+  return {
+    initialized: state?.initialized === true,
+    textIds: new Set(Array.isArray(state?.textIds) ? state.textIds.filter((id) => typeof id === "string") : [])
+  };
+}
+
+function collectBossTextIds(bosses) {
+  return Array.from(new Set(
+    bosses.flatMap((boss) => boss.mechanics.map((mechanic) => mechanic.key).filter(Boolean))
+  )).sort((a, b) => a.localeCompare(b, "en"));
+}
+
+function findNewBosses(catalogResult, knownState) {
+  if (!knownState.initialized) return [];
+  return catalogResult.fourPlusMechanicsBosses.filter((boss) =>
+    boss.mechanics.length >= 4 && boss.mechanics.every((mechanic) => !knownState.textIds.has(mechanic.key))
+  );
+}
+
+function generateNewBossReportMarkdown(newBosses, baselineInitialized) {
+  const lines = [
+    "# New FCE boss mechanic texts",
+    "",
+    "This report contains only bosses first seen after the previous snapshot and only when at least 4 English mechanics are available.",
+    "",
+    `New bosses: **${newBosses.length}**.`,
+    ""
+  ];
+
+  if (!baselineInitialized) {
+    lines.push("The baseline was initialized during this run. Existing bosses are not reported as new.");
+    lines.push("");
+  } else if (newBosses.length === 0) {
+    lines.push("No new bosses with at least 4 mechanics were found.");
+    lines.push("");
+  } else {
+    lines.push("---");
+    lines.push("");
+    appendBossMarkdown(lines, newBosses);
   }
 
   return lines.join("\n");
@@ -553,26 +587,42 @@ function processFceMechanics(rawDir, projectRoot) {
     "utf8"
   );
 
-  // 5. Generate and save complete NEW_BOSSES_TEXTS.md
+  // 5. Generate the full English report, the incremental new-boss report,
+  // and a compact cumulative snapshot of localization text IDs.
   const completeCatalog = buildAllBossesCatalog(enGrouped, ruGrouped, bossCatalog.bosses);
-  const reportMarkdown = generateBossReportMarkdown(completeCatalog);
+  const knownTextStatePath = path.join(fceDir, "fce-known-boss-text-ids.json");
+  const knownTextState = readKnownBossTextState(knownTextStatePath);
+  const newBosses = findNewBosses(completeCatalog, knownTextState);
+  const allTextIds = Array.from(new Set([
+    ...knownTextState.textIds,
+    ...collectBossTextIds(completeCatalog.allBosses)
+  ])).sort((a, b) => a.localeCompare(b, "en"));
 
   const docsDir = path.join(projectRoot, "datamine", "fce", "docs");
   fs.mkdirSync(docsDir, { recursive: true });
-  const reportMdPath = path.join(docsDir, "NEW_BOSSES_TEXTS.md");
-  fs.writeFileSync(reportMdPath, reportMarkdown, "utf8");
+  const allReportPath = path.join(docsDir, "ALL_BOSSES_TEXTS.md");
+  const newReportPath = path.join(docsDir, "NEW_BOSSES_TEXTS.md");
+  fs.writeFileSync(allReportPath, generateBossReportMarkdown(completeCatalog), "utf8");
+  fs.writeFileSync(newReportPath, generateNewBossReportMarkdown(newBosses, knownTextState.initialized), "utf8");
+  fs.writeFileSync(
+    knownTextStatePath,
+    `${JSON.stringify({ schemaVersion: 1, initialized: true, textIds: allTextIds }, null, 2)}\n`,
+    "utf8"
+  );
 
   console.log(`[fce-mechanics] Saved Filtered_Game.json (${Object.keys(enEntries).length} combat boss keys)`);
   console.log(`[fce-mechanics] Saved Filtered_Game_Unregistered.json (${Object.keys(unregisteredFlatEn).length} keys across ${unregisteredBosses.length} bosses sorted by the in-game catalog)`);
   console.log(`[fce-mechanics] Saved fce-missing-boss-texts.json (${missingBosses.length} catalog bosses missing from the curated page)`);
-  console.log(`[fce-mechanics] Saved NEW_BOSSES_TEXTS.md (${completeCatalog.allBosses.length} total bosses: ${completeCatalog.fourPhaseBosses.length} 4-phase, ${completeCatalog.otherBosses.length} other)`);
+  console.log(`[fce-mechanics] Saved ALL_BOSSES_TEXTS.md (${completeCatalog.allBosses.length} total bosses)`);
+  console.log(`[fce-mechanics] Saved NEW_BOSSES_TEXTS.md (${newBosses.length} new bosses with at least 4 mechanics${knownTextState.initialized ? "" : "; baseline initialized"})`);
 
   return {
     totalKeys: Object.keys(enEntries).length,
     unregisteredBosses: unregisteredBosses.length,
     totalBosses: completeCatalog.allBosses.length,
     fourPhaseBosses: completeCatalog.fourPhaseBosses.length,
-    otherBosses: completeCatalog.otherBosses.length
+    otherBosses: completeCatalog.otherBosses.length,
+    newBosses: newBosses.length
   };
 }
 
@@ -607,5 +657,9 @@ module.exports = {
   groupMechanicsByBoss,
   formatMechanics,
   buildAllBossesCatalog,
-  generateBossReportMarkdown
+  generateBossReportMarkdown,
+  readKnownBossTextState,
+  collectBossTextIds,
+  findNewBosses,
+  generateNewBossReportMarkdown
 };

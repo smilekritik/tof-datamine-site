@@ -304,6 +304,7 @@
       "boss_num": 18,
       "name": "Habaka",
       "name_ru": "Хабака",
+      "name_color": "#7d51a4",
       "art": "./assets/bosses/habaka.png",
       "mechanics_count": 4
     },
@@ -379,6 +380,7 @@
       "boss_num": 59,
       "name": "Black Crow",
       "name_ru": "Чёрный ворон",
+      "name_color": "#d55939",
       "art": "./assets/bosses/black-crow.png",
       "mechanics_count": 4
     },
@@ -389,6 +391,7 @@
       "boss_num": 6,
       "name": "Robarg",
       "name_ru": "Робарг",
+      "name_color": "#de7e3e",
       "art": "./assets/bosses/robarg.png",
       "mechanics_count": 4
     },

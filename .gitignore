@@ -1,0 +1,10 @@
+node_modules/
+raw_exports/
+raw_exports_*.zip
+dist_datamine_bundle/
+dist_datamine_bundle.zip
+_work/
+.pipeline-work/
+GAME_PATH.txt
+*.log
+*.tmp

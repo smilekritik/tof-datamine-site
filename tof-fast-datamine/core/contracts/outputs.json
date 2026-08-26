@@ -19,6 +19,7 @@
     { "path": "fce/data/fce-unregistered-bosses.json", "producer": "parse-fce-mechanics.js", "required": true },
     { "path": "fce/data/fce-missing-boss-texts.json", "producer": "parse-fce-mechanics.js", "required": true },
     { "path": "fce/data/fce-game-boss-catalog.json", "producer": "parse-fce-mechanics.js", "required": true },
+    { "path": "fce/docs/ALL_BOSSES_TEXTS.md", "producer": "parse-fce-mechanics.js", "required": true },
     { "path": "fce/docs/NEW_BOSSES_TEXTS.md", "producer": "parse-fce-mechanics.js", "required": true },
     { "path": "fce/data/fce-index.json", "producer": "build-fce-index.js", "required": true },
     { "path": "oow/data/season_dates.json", "producer": "build-user-stats.js", "required": true },
@@ -34,6 +35,7 @@
   "curatedPreserve": [
     "items/curated/gacha-overrides.json", "items/curated/mmo-overrides.json",
     "items/curated/gacha-translations.json", "items/curated/mmo-translations.json",
-    "seq/data/seq-mechanics-overrides.json", "fce/data/bosses"
+    "seq/data/seq-mechanics-overrides.json", "fce/data/bosses",
+    "fce/data/fce-known-boss-text-ids.json"
   ]
 }

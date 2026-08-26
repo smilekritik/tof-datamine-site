@@ -1,5 +1,6 @@
 const assert = require('assert');
 const DatamineVersionStatus = require('../datamine/shared/version-status.js');
+const { parseResVersion } = require('../scripts/update-live-global-version.js');
 
 console.log('--- Running Version Status & Comparison Tests ---');
 
@@ -35,8 +36,35 @@ assert.strictEqual(DatamineVersionStatus.compareVersions('invalid', '6.3.0'), nu
 assert.strictEqual(DatamineVersionStatus.compareVersions('6.3.0', 'unknown'), null);
 console.log('✓ compareVersions tests passed.');
 
-// 3. getStatus with mock
+// 3. Daily static Global version source
+assert.strictEqual(
+  parseResVersion('<Config><ResVersion>6.2.0</ResVersion></Config>'),
+  '6.2.0'
+);
+assert.throws(
+  () => parseResVersion('<Config><ResVersion>invalid</ResVersion></Config>'),
+  /valid ResVersion/
+);
+console.log('✓ static Global version parser tests passed.');
+
+// 4. getStatus with mock
 (async () => {
+  const originalFetch = global.fetch;
+  let requestedUrl = '';
+  global.fetch = async (url, options) => {
+    requestedUrl = url;
+    assert.deepStrictEqual(options, { cache: 'no-store' });
+    return {
+      ok: true,
+      json: async () => ({ version: '6.4.0', checkedAt: '2026-08-25T00:00:00.000Z' })
+    };
+  };
+
+  DatamineVersionStatus._resetCache();
+  assert.strictEqual(await DatamineVersionStatus.getGlobalVersion(), '6.4.0');
+  assert.strictEqual(requestedUrl, '/datamine/data/live-global-version.json');
+  global.fetch = originalFetch;
+
   // Test update available logic
   const mockGlobal = '6.4.0';
   const cmp1 = DatamineVersionStatus.compareVersions(mockGlobal, '6.3.0');

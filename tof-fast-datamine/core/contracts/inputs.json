@@ -14,6 +14,7 @@
     { "id": "fce-ru-game", "dataset": "FCE mechanics", "class": "optional", "paths": ["Game/ru/Game.json"], "rationale": "Russian localization enriches English results; EN remains a valid fallback." },
     { "id": "fce-game-boss-catalog", "dataset": "FCE mechanics", "class": "required", "oneOf": ["VoidCloneBossConfigDataTable_Overseas.json", "VoidCloneBossConfigDataTable.json"], "rationale": "The public review/catalog outputs require a non-empty in-game boss catalog." },
     { "id": "fce-boss-cards", "dataset": "FCE index", "class": "curated-preserve", "paths": ["datamine/fce/data/bosses/*.json"], "rationale": "Human-maintained boss cards are the index source and must be non-empty and valid." },
+    { "id": "fce-known-boss-text-ids", "dataset": "FCE mechanics", "class": "curated-preserve", "paths": ["datamine/fce/data/fce-known-boss-text-ids.json"], "rationale": "Compact cumulative localization-key snapshot used to distinguish genuinely new bosses from the existing catalog." },
     { "id": "seq-overrides", "dataset": "Sequential", "class": "curated-preserve", "paths": ["datamine/seq/data/seq-mechanics-overrides.json"], "rationale": "Human-maintained mechanics annotations are not generated runtime fallback." }
   ]
 }

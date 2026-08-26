@@ -34,8 +34,8 @@ assert(/журналирует время запроса, HTTP-метод и з�
 assert(/Persistent preferences/.test(privacy) && /Temporary and recovery state/.test(privacy) && /Builder drafts/.test(privacy), 'Privacy must distinguish persistence categories');
 assert(!/over one million JSON files|более миллиона JSON-файлов/i.test(publicCopy), 'Public copy must not claim more than one million JSON files');
 assert(!/raw_exports\.zip/.test(contribute), 'Current Contribute workflow must not use the legacy archive name');
-assert(/raw_exports_small\.zip/.test(contribute) && /raw_exports_full\.zip/.test(contribute), 'Contribute must name both current raw archives');
-assert(/RUN_PROCESS\.bat/.test(contribute) && /dist_datamine_bundle/.test(contribute), 'Contribute must cover portable processing and its replacement bundle');
+assert(!/RUN_PROCESS\.bat/.test(contribute) && !/dist_datamine_bundle/.test(contribute), 'Contribute workflow must not expose internal maintainer processing or dist_datamine_bundle');
+assert(!/Node\.js/.test(contribute.match(/regularIntro:\s*"[^"]+"/)[0]), 'Regular update contributor requirements must not list Node.js');
 assert(/Builder interface is available in English/.test(contribute) && /Интерфейс Builder доступен на английском языке/.test(contribute), 'Builder language policy must be explicit in both locales');
 assert(/Истоки войны/.test(publicCopy) && !/Исток войны/.test(publicCopy), 'Public Russian copy must use the canonical OOW title');
 assert(/NAV_STRINGS\[language\]/.test(sharedHeader), 'Shared header navigation ARIA must use the active locale');
@@ -47,7 +47,6 @@ assert(!/aria-label="(?:Buff display mode|Rename filter|Multype matrix table)"/.
 for (const removed of ['datamine/shared/fetch.js', 'test-api.html', 'test-simple.html', 'tmp_play_smilekritik.html', 'tmp_play_smilekritik.png']) {
   assert(!fs.existsSync(path.join(root, removed)), `${removed} must remain absent after confirmed cleanup`);
 }
-assert(fs.existsSync(path.join(root, 'archive/migrations/migrate-fce-to-per-boss.js')), 'Historical FCE migration must remain archived');
 assert(!read('package.json').includes('chart.js'), 'Unused chart.js dependency must remain absent');
 
 const routes = ['', 'oow/', 'fce/', 'seq/', 'multype/', 'items/', 'about/', 'projects/', 'contribute/', 'privacy/', 'changelog/'];

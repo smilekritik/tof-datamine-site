@@ -1,19 +1,246 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex">
-  <title>Page not found | TOF Datamine</title>
-  <link rel="stylesheet" href="/datamine/shared/fonts.css">
-  <link rel="stylesheet" href="/datamine/shared/base.css">
+  <link rel="icon" type="image/svg+xml" href="/datamine/favicon.svg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, follow" />
+  <meta name="theme-color" content="#0c0812" />
+  <title>Page not found — TOF Datamine Archive</title>
+  <link rel="stylesheet" href="/datamine/shared/fonts.css" />
+  <link rel="stylesheet" href="/datamine/shared/base.css" />
+  <link rel="stylesheet" href="/datamine/shared/shell.css" />
+  <link rel="stylesheet" href="/datamine/shared/header.css" />
+  <link rel="stylesheet" href="/datamine/shared/footer.css" />
+  <link rel="stylesheet" href="/datamine/styles/datamine-404.css" />
 </head>
-<body class="page">
-  <main class="section" style="max-width:720px;margin:12vh auto;padding:24px;">
-    <p>404</p>
-    <h1>Page not found</h1>
-    <p>The requested Datamine page does not exist.</p>
-    <p><a href="/datamine/">Return to Datamine</a></p>
+<body class="page page--datamine-404">
+  <div class="noise-bg"></div>
+
+  <!-- Shared Datamine Header -->
+  <div data-datamine-header data-current="hub" data-base-path="/datamine/"></div>
+
+  <main id="main-content" class="error-404-layout" tabindex="-1">
+    <!-- Hero Diagnostic Section -->
+    <section class="error-404-hero" aria-labelledby="error-404-heading">
+      <div class="error-404-hero__content">
+        <div class="error-404-badge">
+          <span class="error-404-badge__dot" aria-hidden="true"></span>
+          <span data-404-copy="badge">SECTOR ERROR // 404_DATA_CORRUPTED</span>
+        </div>
+
+        <div class="error-404-glitch-row" aria-hidden="true">
+          <span class="error-404-glitch-num">404</span>
+          <span class="error-404-glitch-tag">ARCHIVE_MISSING_ENTRY</span>
+        </div>
+
+        <h1 id="error-404-heading" class="error-404-title" data-404-copy="title">Page not found</h1>
+        <p class="error-404-desc" data-404-copy="desc">
+          The requested coordinate or resource does not exist in the current Datamine archive. It may have been relocated across game client versions, or the link may be outdated.
+        </p>
+
+        <!-- Live Telemetry Box -->
+        <div class="error-404-telemetry" aria-label="Diagnostic telemetry">
+          <div class="error-404-telemetry__item">
+            <span class="error-404-telemetry__key" data-404-copy="telemetryPath">REQUEST_URI</span>
+            <code class="error-404-telemetry__val" id="telemetry-path">/datamine/404.html</code>
+          </div>
+          <div class="error-404-telemetry__item">
+            <span class="error-404-telemetry__key" data-404-copy="telemetryStatus">STATUS_CODE</span>
+            <span class="error-404-telemetry__val error-404-telemetry__code" id="telemetry-status-val">404 Not Found (UNRESOLVED_RECORD)</span>
+          </div>
+          <div class="error-404-telemetry__item">
+            <span class="error-404-telemetry__key" data-404-copy="telemetryDataset">DATASET_VERSION</span>
+            <span class="error-404-telemetry__val" id="telemetry-version" data-404-copy="telemetryLoading">Connecting to archive...</span>
+          </div>
+          <div class="error-404-telemetry__item">
+            <span class="error-404-telemetry__key" data-404-copy="telemetryTime">TIMESTAMP_UTC</span>
+            <span class="error-404-telemetry__val" id="telemetry-time">—</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="error-404-actions">
+          <a href="/datamine/" class="dm-btn dm-btn--primary">
+            <span data-404-copy="returnHub">Return to Datamine Archive</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+          <button type="button" class="dm-btn dm-btn--secondary" id="btn-history-back">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span data-404-copy="goBack">Go Back to Previous Page</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Search / Filter Section -->
+    <section class="error-404-search-section" aria-label="Dataset search">
+      <div class="error-404-search-box">
+        <svg class="error-404-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="search"
+          id="error-404-search"
+          class="error-404-search-input"
+          placeholder="Quick search datasets (e.g. OOW, Bosses, Sequential, Items, Multype)..."
+          aria-label="Quick search Datamine datasets"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <kbd class="error-404-search-key" aria-hidden="true">/</kbd>
+      </div>
+      <div id="error-404-search-status" class="error-404-search-status" aria-live="polite"></div>
+    </section>
+
+    <!-- Datamine Sectors Grid -->
+    <section class="error-404-grid-section" aria-labelledby="error-404-sectors-heading">
+      <div class="error-404-section-header">
+        <span class="error-404-section-eyebrow" data-404-copy="sectorsEyebrow">ARCHIVE SECTORS</span>
+        <h2 id="error-404-sectors-heading" class="error-404-section-title" data-404-copy="sectorsTitle">Active Datamine Datasets</h2>
+      </div>
+
+      <div class="error-404-grid">
+        <!-- OOW Card -->
+        <a href="/datamine/oow/" class="error-404-card error-404-card--oow" data-404-card="oow">
+          <div class="error-404-card__topline">
+            <span class="error-404-card__code">OOW</span>
+            <svg class="error-404-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+          <div class="error-404-card__main">
+            <h3 class="error-404-card__title">Origin of War</h3>
+            <p class="error-404-card__body">Enemy stats, floor health, wave distribution, defenses and seasonal scaling schedules.</p>
+          </div>
+          <span class="error-404-card__path">/datamine/oow/</span>
+        </a>
+
+        <!-- FCE Card -->
+        <a href="/datamine/fce/" class="error-404-card error-404-card--fce" data-404-card="fce">
+          <div class="error-404-card__topline">
+            <span class="error-404-card__code">FCE</span>
+            <svg class="error-404-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+          <div class="error-404-card__main">
+            <h3 class="error-404-card__title">Boss Mechanics (FCE)</h3>
+            <p class="error-404-card__body">Combat cards, boss phases, skill behaviors, and visual reference guides.</p>
+          </div>
+          <span class="error-404-card__path">/datamine/fce/</span>
+        </a>
+
+        <!-- Sequential Card -->
+        <a href="/datamine/seq/" class="error-404-card error-404-card--seq" data-404-card="seq">
+          <div class="error-404-card__topline">
+            <span class="error-404-card__code">SEQ</span>
+            <svg class="error-404-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+          <div class="error-404-card__main">
+            <h3 class="error-404-card__title">Sequential Analysis</h3>
+            <p class="error-404-card__body">Sequential Phantasm floor HP scaling, effective health formulas, and Global progression cutoff.</p>
+          </div>
+          <span class="error-404-card__path">/datamine/seq/</span>
+        </a>
+
+        <!-- Multype Card -->
+        <a href="/datamine/multype/" class="error-404-card error-404-card--multype" data-404-card="multype">
+          <div class="error-404-card__topline">
+            <span class="error-404-card__code">MULTYPE</span>
+            <svg class="error-404-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+          <div class="error-404-card__main">
+            <h3 class="error-404-card__title">Multiplicative Buffs</h3>
+            <p class="error-404-card__body">Additive vs multiplicative category classifications and weapon modifier matrices.</p>
+          </div>
+          <span class="error-404-card__path">/datamine/multype/</span>
+        </a>
+
+        <!-- Items Card -->
+        <a href="/datamine/items/" class="error-404-card error-404-card--items" data-404-card="items">
+          <div class="error-404-card__topline">
+            <span class="error-404-card__code">ITEMS</span>
+            <svg class="error-404-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+          <div class="error-404-card__main">
+            <h3 class="error-404-card__title">Item Identifiers</h3>
+            <p class="error-404-card__body">Searchable table of item IDs, internal resource keys, and English/Russian display names.</p>
+          </div>
+          <span class="error-404-card__path">/datamine/items/</span>
+        </a>
+
+        <!-- Archive Hub Card -->
+        <a href="/datamine/" class="error-404-card error-404-card--hub" data-404-card="hub">
+          <div class="error-404-card__topline">
+            <span class="error-404-card__code">HUB</span>
+            <svg class="error-404-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+          <div class="error-404-card__main">
+            <h3 class="error-404-card__title">Datamine Archive Hub</h3>
+            <p class="error-404-card__body">Return to the main datamine entrance with live dataset statistics and season overview.</p>
+          </div>
+          <span class="error-404-card__path">/datamine/</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Documentation & Community Tools Strip -->
+    <section class="error-404-docs-section" aria-labelledby="error-404-docs-heading">
+      <h2 id="error-404-docs-heading" class="error-404-docs-title" data-404-copy="docsTitle">DOCUMENTATION & PIPELINE</h2>
+      <div class="error-404-docs-grid">
+        <a href="/datamine/about/" class="error-404-doc-link">
+          <span data-404-copy="aboutLink">About Data Pipeline & Extraction</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+        <a href="/datamine/contribute/" class="error-404-doc-link">
+          <span data-404-copy="contributeLink">How to Help Update Data</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+        <a href="/datamine/projects/" class="error-404-doc-link">
+          <span data-404-copy="projectsLink">TOF Community Resources & Wikis</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+        <a href="/datamine/changelog/" class="error-404-doc-link">
+          <span data-404-copy="changelogLink">Changelog & Updates</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+    </section>
   </main>
+
+  <!-- Shared Datamine Footer -->
+  <footer class="datamine-footer" data-datamine-footer data-base-path="/datamine/"></footer>
+
+  <!-- Scripts -->
+  <script src="/datamine/shared/site-config.js"></script>
+  <script src="/datamine/shared/i18n.js"></script>
+  <script src="/datamine/shared/data-meta.js"></script>
+  <script src="/datamine/shared/version-status.js"></script>
+  <script src="/datamine/shared/header.js?server-cache=5"></script>
+  <script src="/datamine/shared/footer.js"></script>
+  <script src="/datamine/js/datamine-404.js"></script>
+  <script src="/datamine/shared/scroll-top.js"></script>
 </body>
 </html>
